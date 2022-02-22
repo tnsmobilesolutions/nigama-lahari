@@ -107,7 +107,7 @@ class _SignUpState extends State<SignUp> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     final save = Material(
-      color: Colors.redAccent,
+      color: Colors.green,
       elevation: 5,
       borderRadius: BorderRadius.circular(18),
       child: MaterialButton(

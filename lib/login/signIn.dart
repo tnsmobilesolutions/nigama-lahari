@@ -15,13 +15,14 @@ class _SignInState extends State<SignIn> {
   final TextEditingController passswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    const logo = CircleAvatar(
-      radius: 50,
-      child: Padding(
-        padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
-        child: Text('LOGO'),
-      ),
-    );
+    // const logo =
+    // CircleAvatar(
+    //   radius: 50,
+    //   child: Padding(
+    //     padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+    //     child: Text('LOGO'),
+    //   ),
+    // );
 
     //email field
     final emailField = TextFormField(
@@ -73,16 +74,19 @@ class _SignInState extends State<SignIn> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     final loginbutton = Material(
-      color: Colors.redAccent,
+      color: Colors.green,
       elevation: 5,
       borderRadius: BorderRadius.circular(18),
       child: MaterialButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return HomePage();
-            },
-          ));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            ),
+          );
         },
         child: const Text(
           'SignIn',
@@ -108,31 +112,42 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      logo,
+                    children: [
+                      // logo
+                      const Image(
+                        image: AssetImage('assets/image/pic.jpg'),
+                      ),
                       const SizedBox(height: 20),
                       emailField,
                       const SizedBox(height: 20),
                       passwordField,
                       const SizedBox(height: 20),
                       loginbutton,
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           const Text('Don\'t have an account?'),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUp()));
-                              },
-                              child: const Text('SignUp',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  )))
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUp(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'SignUp',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ],
                       )
                     ],
