@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homePage.dart';
+//import 'package:flutter_application_1/homePage.dart';
 import 'package:flutter_application_1/login/signUp.dart';
+import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class _SignInState extends State<SignIn> {
       obscureText: true,
       autofocus: false,
       controller: passswordController,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.phone,
       validator: (value) {
         RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
@@ -83,7 +84,7 @@ class _SignInState extends State<SignIn> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return HomePage();
+                return const NigamLahari();
               },
             ),
           );
