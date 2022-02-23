@@ -16,15 +16,6 @@ class _SignInState extends State<SignIn> {
   final TextEditingController passswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // const logo =
-    // CircleAvatar(
-    //   radius: 50,
-    //   child: Padding(
-    //     padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
-    //     child: Text('LOGO'),
-    //   ),
-    // );
-
     //email field
     final emailField = TextFormField(
       autofocus: false,
