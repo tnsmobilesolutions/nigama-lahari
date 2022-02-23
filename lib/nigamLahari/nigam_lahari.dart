@@ -56,19 +56,20 @@ class _NigamLahariState extends State<NigamLahari> {
             children: [
               const SizedBox(height: 24),
               GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ଜାଗରଣ',
-                      style: CommonStyle.myStyle,
-                    ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'ଜାଗରଣ',
+                    style: CommonStyle.myStyle,
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Jagarana()));
-                  }),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Jagarana()));
+                },
+              ),
               const SizedBox(height: 8),
               const Divider(
                 thickness: 2,

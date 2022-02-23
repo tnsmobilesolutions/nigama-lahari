@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common_widgets/common_style.dart';
+import 'package:flutter_application_1/music_player.dart';
 
 class Jagarana extends StatefulWidget {
   const Jagarana({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _JagaranaState extends State<Jagarana> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.fromLTRB(0, 20, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +92,254 @@ class _JagaranaState extends State<Jagarana> {
                   ],
                 ),
                 Column(
-                  children: [],
+                  children: [
+                    SizedBox(height: 20),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ଉଠ ଉଠ ନିଶି ହେଲା ପରଭାତ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ଅନାଅରେ ଅନାଅରେ ଅନାଅ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ଘନ ଅନ୍ଧାରେ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ନବ ରବି ଆସେ ଉଇଁ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ବାଉଳା ! ଅଳସ ପହୁଡ଼ ତେଜ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.yellowAccent[700]),
+                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ନିଶି ହେଲା ଆସି ଅବସାନରେ',
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          GestureDetector(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.play_circle_sharp,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MusicPlayer(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                  ],
                 )
               ],
             ),
