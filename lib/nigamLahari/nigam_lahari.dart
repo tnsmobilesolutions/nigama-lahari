@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/add_new_song.dart';
+
+import 'package:flutter_application_1/add_song_lyrics.dart';
 import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/nigamLahari/pratikhya.dart';
@@ -207,7 +208,7 @@ class _NigamLahariState extends State<NigamLahari> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddNewSong(),
+              builder: (context) => AddSongLyrics(),
             ),
           );
         },
