@@ -28,7 +28,7 @@ class _AddSongLyricsState extends State<AddSongLyrics> {
       autofocus: false,
       maxLines: height ~/ 6,
       keyboardType: TextInputType.name,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.newline,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Song Lyrics',
