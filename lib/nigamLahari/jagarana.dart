@@ -268,77 +268,77 @@ class _JagaranaState extends State<Jagarana> {
                       ),
                       width: double.infinity,
                     ),
-                    SizedBox(height: 12),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.yellowAccent[700]),
-                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'ବାଉଳା ! ଅଳସ ପହୁଡ଼ ତେଜ',
-                            style: TextStyle(fontSize: 22),
-                          ),
-                          GestureDetector(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.play_circle_sharp,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MusicPlayer(),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      width: double.infinity,
-                    ),
-                    SizedBox(height: 12),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.yellowAccent[700]),
-                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'ନିଶି ହେଲା ଆସି ଅବସାନରେ',
-                            style: TextStyle(fontSize: 22),
-                          ),
-                          GestureDetector(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.play_circle_sharp,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MusicPlayer(),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      width: double.infinity,
-                    ),
-                    SizedBox(height: 12),
+                    // SizedBox(height: 12),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(12.0),
+                    //       color: Colors.yellowAccent[700]),
+                    //   padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         'ବାଉଳା ! ଅଳସ ପହୁଡ଼ ତେଜ',
+                    //         style: TextStyle(fontSize: 22),
+                    //       ),
+                    //       GestureDetector(
+                    //         child: Align(
+                    //           alignment: Alignment.center,
+                    //           child: Icon(
+                    //             Icons.play_circle_sharp,
+                    //             size: 30,
+                    //             color: Colors.white,
+                    //           ),
+                    //         ),
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //               builder: (context) => const MusicPlayer(),
+                    //             ),
+                    //           );
+                    //         },
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   width: double.infinity,
+                    // ),
+                    // SizedBox(height: 12),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(12.0),
+                    //       color: Colors.yellowAccent[700]),
+                    //   padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         'ନିଶି ହେଲା ଆସି ଅବସାନରେ',
+                    //         style: TextStyle(fontSize: 22),
+                    //       ),
+                    //       GestureDetector(
+                    //         child: Align(
+                    //           alignment: Alignment.center,
+                    //           child: Icon(
+                    //             Icons.play_circle_sharp,
+                    //             size: 30,
+                    //             color: Colors.white,
+                    //           ),
+                    //         ),
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //               builder: (context) => const MusicPlayer(),
+                    //             ),
+                    //           );
+                    //         },
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   width: double.infinity,
+                    // ),
+                    // SizedBox(height: 12),
                   ],
                 )
               ],
