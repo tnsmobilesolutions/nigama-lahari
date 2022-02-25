@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "215900493540",
+    "project_id": "nigama-lahari",
+    "storage_bucket": "nigama-lahari.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215900493540:android:5c0640fa348f3a8f287ef1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215900493540-jqglhlmg9e8ad6lsi37a9vjfapp3sp59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDhwO7bKKbYkzUoadT8P4mUmj7IRdU2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215900493540-jqglhlmg9e8ad6lsi37a9vjfapp3sp59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

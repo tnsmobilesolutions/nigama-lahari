@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/homePage.dart';
 //import 'package:flutter_application_1/homePage.dart';
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -11,6 +14,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
@@ -71,14 +75,7 @@ class _SignInState extends State<SignIn> {
       borderRadius: BorderRadius.circular(18),
       child: MaterialButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const NigamLahari();
-              },
-            ),
-          );
+          signIn(emailController.text, passswordController.text);
         },
         child: const Text(
           'SignIn',
@@ -149,5 +146,20 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  void signIn(String email, String password) async {
+    if (_formkey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => NigamLahari()))
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e.message);
+      });
+    }
   }
 }
