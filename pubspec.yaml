@@ -21,6 +21,7 @@ dependencies:
   firebase_core: ^1.12.0
   fluttertoast: ^8.0.8
   audioplayers: ^0.20.1
+  audio_service: ^0.18.3
 
 dev_dependencies:
   flutter_test:
@@ -41,5 +42,6 @@ flutter:
   
   assets:
     - assets/image/pic.jpg
+    - assets/music2.mp3
     - assets/music.mp3
 

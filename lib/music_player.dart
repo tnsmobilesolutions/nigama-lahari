@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:audio_service/audio_service.dart';
 
 class MusicPlayer extends StatefulWidget {
   const MusicPlayer({Key? key}) : super(key: key);
@@ -15,13 +14,15 @@ class _MusicPlayerState extends State<MusicPlayer> {
   Duration _duration = new Duration();
   Duration _position = new Duration();
 
+  bool nextDone = true;
+  bool prevDone = true;
   bool isRepeat = false;
   Color color = Colors.green;
 
   AudioPlayer? audioPlayer = AudioPlayer();
   PlayerState audioPlayerState = PlayerState.PAUSED;
   AudioCache? audioCache;
-  String path = 'music.mp3';
+  String path = 'music2.mp3';
 
   @override
   void initState() {
@@ -117,7 +118,47 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  Widget buttonLoop() {
+  //next song
+  Widget nextSong() {
+    return IconButton(
+      icon: Icon(
+        Icons.skip_next_rounded,
+        size: 40,
+        color: Colors.green,
+      ),
+      onPressed: () {
+        // setState(
+        //   () {
+        //     void next() async {
+        //       if (nextDone) {
+        //         nextDone = false;
+        //         await audioPlayer?.skipToNext();
+        //         nextDone = true;
+        //       }
+        //     }
+        //   },
+        // );
+
+        // audioPlayer?.setPlaybackRate(1.5);
+      },
+    );
+  }
+
+  //previous song
+  Widget previousSong() {
+    return IconButton(
+      icon: Icon(
+        Icons.skip_previous_rounded,
+        size: 40,
+        color: Colors.green,
+      ),
+      onPressed: () {
+        // audioPlayer?.setPlaybackRate(1.5);
+      },
+    );
+  }
+
+  Widget buttonShuffle() {
     return IconButton(
       icon: Icon(
         Icons.shuffle,
@@ -130,10 +171,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  Widget buttonRepeat() {
+  //to loop a song
+  Widget buttonLoop() {
     return IconButton(
       icon: Icon(
-        Icons.loop,
+        Icons.loop_rounded,
         size: 40,
         color: color,
       ),
@@ -178,117 +220,121 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 700,
-            child: Container(
-              color: Colors.green,
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {},
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            top: 600,
-            left: 0,
-            right: 0,
-            height: 350,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(48),
-                color: Colors.yellowAccent[700],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 700,
+              child: Container(
+                color: Colors.green,
               ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
-                    style: TextStyle(
-                      fontSize: 30,
-                      //fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  slider(),
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        _position.toString().split('.')[0],
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        _duration.toString().split('.')[0],
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buttonRepeat(),
-                      buttonSlow(),
-                      IconButton(
-                        icon: Icon(
-                          audioPlayerState == PlayerState.PLAYING
-                              ? Icons.pause_circle_filled_rounded
-                              : Icons.play_circle_filled_rounded,
-                        ),
-                        iconSize: 60,
-                        color: Colors.green,
-                        onPressed: () {
-                          audioPlayerState == PlayerState.PLAYING
-                              ? pauseMusic()
-                              : playMusic();
-                        },
-                      ),
-                      buttonFast(),
-                      buttonLoop(),
-                    ],
-                  ),
-                  //AudioFile(advancedPlayer: advancedPlayer),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),
-          ),
-        ],
+            Positioned(
+              top: 600,
+              left: 0,
+              right: 0,
+              height: 350,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(48),
+                  color: Colors.yellowAccent[700],
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+                      style: TextStyle(
+                        fontSize: 30,
+                        //fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    slider(),
+                    // SizedBox(
+                    //   height: 15,
+                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          _position.toString().split('.')[0],
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          _duration.toString().split('.')[0],
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buttonLoop(),
+                        buttonSlow(),
+                        previousSong(),
+                        IconButton(
+                          icon: Icon(
+                            audioPlayerState == PlayerState.PLAYING
+                                ? Icons.pause_circle_filled_rounded
+                                : Icons.play_circle_filled_rounded,
+                          ),
+                          iconSize: 60,
+                          color: Colors.green,
+                          onPressed: () {
+                            audioPlayerState == PlayerState.PLAYING
+                                ? pauseMusic()
+                                : playMusic();
+                          },
+                        ),
+                        nextSong(),
+                        buttonFast(),
+                        buttonShuffle(),
+                      ],
+                    ),
+                    //AudioFile(advancedPlayer: advancedPlayer),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
