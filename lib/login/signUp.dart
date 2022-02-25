@@ -1,6 +1,11 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/login/usermodel.dart';
+import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../homePage.dart';
 
@@ -12,13 +17,18 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  // final AuthService _auth = AuthService();
-  final _formkey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final mobileController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+
+  var email = "";
+  var password = "";
+  var confirmPassword = "";
+  // Create a text controller and use it to retrieve the current value of the TextField.
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final nameController = TextEditingController();
+  final mobileController = TextEditingController();
 
   // bool loading = false;
 
@@ -115,7 +125,7 @@ class _SignUpState extends State<SignUp> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => NigamLahari(),
               ));
         },
         child: const Text(
@@ -142,7 +152,7 @@ class _SignUpState extends State<SignUp> {
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Form(
-                  key: _formkey,
+                  key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,5 +177,44 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
+  }
+
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our data
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? users = _auth.currentUser;
+
+    AppUser data = AppUser();
+
+    // writing all the values
+    data.email = users!.email;
+    data.uid = users.uid;
+    data.name = nameController.text;
+    data.phonenumber = mobileController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(users.uid)
+        .set(data.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => NigamLahari()),
+        (route) => false);
   }
 }
