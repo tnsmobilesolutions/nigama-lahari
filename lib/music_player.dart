@@ -219,122 +219,123 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 700,
-              child: Container(
-                color: Colors.green,
-              ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: height / 1.3,
+            child: Container(
+              color: Colors.green,
             ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {},
-                  )
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            top: 600,
+            left: 0,
+            right: 0,
+            height: height / 2,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(48),
+                color: Colors.yellowAccent[700],
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+                    style: TextStyle(
+                      fontSize: 30,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  slider(),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        _position.toString().split('.')[0],
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        _duration.toString().split('.')[0],
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buttonLoop(),
+                      buttonSlow(),
+                      previousSong(),
+                      IconButton(
+                        icon: Icon(
+                          audioPlayerState == PlayerState.PLAYING
+                              ? Icons.pause_circle_filled_rounded
+                              : Icons.play_circle_filled_rounded,
+                        ),
+                        iconSize: 60,
+                        color: Colors.green,
+                        onPressed: () {
+                          audioPlayerState == PlayerState.PLAYING
+                              ? pauseMusic()
+                              : playMusic();
+                        },
+                      ),
+                      nextSong(),
+                      buttonFast(),
+                      buttonShuffle(),
+                    ],
+                  ),
+                  //AudioFile(advancedPlayer: advancedPlayer),
                 ],
               ),
             ),
-            Positioned(
-              top: 600,
-              left: 0,
-              right: 0,
-              height: 350,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(48),
-                  color: Colors.yellowAccent[700],
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
-                      style: TextStyle(
-                        fontSize: 30,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    slider(),
-                    // SizedBox(
-                    //   height: 15,
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          _position.toString().split('.')[0],
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          _duration.toString().split('.')[0],
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        buttonLoop(),
-                        buttonSlow(),
-                        previousSong(),
-                        IconButton(
-                          icon: Icon(
-                            audioPlayerState == PlayerState.PLAYING
-                                ? Icons.pause_circle_filled_rounded
-                                : Icons.play_circle_filled_rounded,
-                          ),
-                          iconSize: 60,
-                          color: Colors.green,
-                          onPressed: () {
-                            audioPlayerState == PlayerState.PLAYING
-                                ? pauseMusic()
-                                : playMusic();
-                          },
-                        ),
-                        nextSong(),
-                        buttonFast(),
-                        buttonShuffle(),
-                      ],
-                    ),
-                    //AudioFile(advancedPlayer: advancedPlayer),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
