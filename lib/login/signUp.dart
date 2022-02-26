@@ -109,11 +109,11 @@ class _SignUpState extends State<SignUp> {
         obscureText: true,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{8}$');
-          if (value!.isEmpty) {
-            return ("Password is required for login");
+          if (value!.isEmpty || value.length < 8) {
+            return ("Password length must be atleast 8 characters");
           }
           if (!regex.hasMatch(value)) {
-            return ("Enter Valid Password(Min. 6 Character)");
+            return ("Enter Valid Password (min 8 character)");
           }
         },
         onSaved: (value) {
