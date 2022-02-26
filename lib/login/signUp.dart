@@ -18,7 +18,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _auth = FirebaseAuth.instance;
-  final _formKey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
   // Create a text controller and use it to retrieve the current value of the TextField.
   final emailController = TextEditingController();
@@ -182,7 +182,7 @@ class _SignUpState extends State<SignUp> {
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Form(
-                  key: _formKey,
+                  key: _formkey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,7 +210,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
+    if (_formkey.currentState!.validate()) {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore()})
