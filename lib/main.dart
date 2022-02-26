@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
-
+//import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';import 'package:audio_service/audio_service.dart';
 import 'login/signIn.dart';
 
 Future<void> main() async {
@@ -18,15 +17,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ନିଗମ ଲହରୀ',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
       home: SignIn(),
     );
   }
 }
-
-
 
 
 
