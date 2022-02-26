@@ -298,14 +298,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            buttonLoop(),
-                            buttonSlow(),
-                            previousSong(),
-                            IconButton(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(child: buttonLoop()),
+                          Expanded(child: buttonSlow()),
+                          Expanded(child: previousSong()),
+                          Expanded(
+                            child: IconButton(
                               icon: Icon(
                                 audioPlayerState == PlayerState.PLAYING
                                     ? Icons.pause_circle_filled_rounded
@@ -319,11 +319,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
                                     : playMusic();
                               },
                             ),
-                            nextSong(),
-                            buttonFast(),
-                            buttonShuffle(),
-                          ],
-                        ),
+                          ),
+                          Expanded(child: nextSong()),
+                          Expanded(child: buttonFast()),
+                          Expanded(child: buttonShuffle()),
+                        ],
                       ),
                     ],
                   ),
