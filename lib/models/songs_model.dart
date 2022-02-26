@@ -1,25 +1,25 @@
 import 'dart:convert';
 
 class SongsModel {
-  final String songId;
-  final String songTitle;
-  final String songText;
-  final String songCategory;
-  final String songAttribute;
-  final String songURL;
-  final String singerName;
-  final bool isEditable;
-  final double songDuration;
+  final String? songId;
+  final String? songTitle;
+  final String? songText;
+  final String? songCategory;
+  final String? songAttribute;
+  final String? songURL;
+  final String? singerName;
+  final bool? isEditable;
+  final double? songDuration;
   SongsModel({
-    required this.songId,
-    required this.songTitle,
-    required this.songText,
-    required this.songCategory,
-    required this.songAttribute,
-    required this.songURL,
-    required this.singerName,
-    required this.isEditable,
-    required this.songDuration,
+    this.songId,
+    this.songTitle,
+    this.songText,
+    this.songCategory,
+    this.songAttribute,
+    this.songURL,
+    this.singerName,
+    this.isEditable,
+    this.songDuration,
   });
 
   SongsModel copyWith({
@@ -62,15 +62,15 @@ class SongsModel {
 
   factory SongsModel.fromMap(Map<String, dynamic> map) {
     return SongsModel(
-      songId: map['songId'] ?? '',
-      songTitle: map['songTitle'] ?? '',
-      songText: map['songText'] ?? '',
-      songCategory: map['songCategory'] ?? '',
-      songAttribute: map['songAttribute'] ?? '',
-      songURL: map['songURL'] ?? '',
-      singerName: map['singerName'] ?? '',
-      isEditable: map['isEditable'] ?? false,
-      songDuration: map['songDuration']?.toDouble() ?? 0.0,
+      songId: map['songId'],
+      songTitle: map['songTitle'],
+      songText: map['songText'],
+      songCategory: map['songCategory'],
+      songAttribute: map['songAttribute'],
+      songURL: map['songURL'],
+      singerName: map['singerName'],
+      isEditable: map['isEditable'],
+      songDuration: map['songDuration']?.toDouble(),
     );
   }
 
