@@ -53,158 +53,160 @@ class _NigamLahariState extends State<NigamLahari> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 24),
-              GestureDetector(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'ଜାଗରଣ',
-                    style: CommonStyle.myStyle,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 24),
+                GestureDetector(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ଜାଗରଣ',
+                      style: CommonStyle.myStyle,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Jagarana()));
+                  },
                 ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Jagarana()));
-                },
-              ),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ପ୍ରତୀକ୍ଷା',
-                      style: CommonStyle.myStyle,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Pratikhya(),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ପ୍ରତୀକ୍ଷା',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ଆବାହନ',
-                      style: CommonStyle.myStyle,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Abahana(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Pratikhya(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ଆବାହନ',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ଆରତୀ',
-                      style: CommonStyle.myStyle,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Aarti(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Abahana(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ଆରତୀ',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ବନ୍ଦନା',
-                      style: CommonStyle.myStyle,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Bandana(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Aarti(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ବନ୍ଦନା',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ପ୍ରାର୍ଥନା',
-                      style: CommonStyle.myStyle,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Prarthana(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Bandana(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ପ୍ରାର୍ଥନା',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-              const SizedBox(height: 24),
-              GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ବିଦାୟ ପ୍ରାର୍ଥନା',
-                      style: CommonStyle.myStyle,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BidayaPrarthana(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Prarthana(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(height: 24),
+                GestureDetector(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ବିଦାୟ ପ୍ରାର୍ଥନା',
+                        style: CommonStyle.myStyle,
                       ),
-                    );
-                  }),
-              const SizedBox(height: 8),
-              const Divider(
-                thickness: 2,
-              ),
-            ],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BidayaPrarthana(),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 8),
+                const Divider(
+                  thickness: 2,
+                ),
+              ],
+            ),
           ),
         ),
       ),
