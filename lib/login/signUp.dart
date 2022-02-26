@@ -57,7 +57,7 @@ class _SignUpState extends State<SignUp> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.account_circle),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "First Name",
+          hintText: "Name",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -71,6 +71,7 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+          prefixIcon: Icon(Icons.phone_android_rounded),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Phone Number',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -107,7 +108,7 @@ class _SignUpState extends State<SignUp> {
         controller: passwordController,
         obscureText: true,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{6,}$');
+          RegExp regex = new RegExp(r'^.{8}$');
           if (value!.isEmpty) {
             return ("Password is required for login");
           }
@@ -133,8 +134,7 @@ class _SignUpState extends State<SignUp> {
         controller: confirmPasswordController,
         obscureText: true,
         validator: (value) {
-          if (confirmPasswordController.text !=
-              confirmPasswordController.text) {
+          if (confirmPasswordController.text != passwordController.text) {
             return "Password don't match";
           }
           return null;
@@ -214,9 +214,11 @@ class _SignUpState extends State<SignUp> {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore()})
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
+          .catchError(
+        (e) {
+          Fluttertoast.showToast(msg: e!.message);
+        },
+      );
     }
   }
 

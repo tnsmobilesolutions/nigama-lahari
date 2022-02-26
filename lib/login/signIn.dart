@@ -51,7 +51,7 @@ class _SignInState extends State<SignIn> {
       controller: passswordController,
       keyboardType: TextInputType.phone,
       validator: (value) {
-        RegExp regex = RegExp(r'^.{6,}$');
+        RegExp regex = RegExp(r'^.{8}$');
         if (value!.isEmpty) {
           return "ନିଜ ପାସୱାଡ଼ ଲେଖନ୍ତୁ";
         }
@@ -156,6 +156,8 @@ class _SignInState extends State<SignIn> {
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => NigamLahari())),
               });
+    } else if (!_formkey.currentState!.validate()) {
+      Text('Wrong email or password');
     }
   }
 }
