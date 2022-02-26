@@ -27,10 +27,10 @@ class _SignInState extends State<SignIn> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value!.isEmpty) {
-          return "ଦୟା କରି ନିଜ email ଲେଖନ୍ତୁ";
+          return "ନିଜ ଇମେଲ ଲେଖନ୍ତୁ";
         }
         if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("ଦୟା କରି ନିଜ  ଠିକ email ଲେଖନ୍ତୁ");
+          return ("ଦୟା କରି ନିଜ ସଠିକ ଇମେଲ ଲେଖନ୍ତୁ");
         }
       },
       onSaved: (value) {
@@ -53,10 +53,10 @@ class _SignInState extends State<SignIn> {
       validator: (value) {
         RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
-          return "ଦୟା କରି ନିଜ password ଲେଖନ୍ତୁ";
+          return "ନିଜ ପାସୱାଡ଼ ଲେଖନ୍ତୁ";
         }
         if (!regex.hasMatch(value)) {
-          return "ଦୟା କରି ନିଜ  password  ଲେଖନ୍ତୁ";
+          return "ଦୟା କରି ନିଜ ସଠିକ ପାସୱାଡ଼  ଲେଖନ୍ତୁ";
         }
       },
       onSaved: (value) {
