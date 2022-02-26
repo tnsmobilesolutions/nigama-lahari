@@ -298,30 +298,32 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          buttonLoop(),
-                          buttonSlow(),
-                          previousSong(),
-                          IconButton(
-                            icon: Icon(
-                              audioPlayerState == PlayerState.PLAYING
-                                  ? Icons.pause_circle_filled_rounded
-                                  : Icons.play_circle_filled_rounded,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            buttonLoop(),
+                            buttonSlow(),
+                            previousSong(),
+                            IconButton(
+                              icon: Icon(
+                                audioPlayerState == PlayerState.PLAYING
+                                    ? Icons.pause_circle_filled_rounded
+                                    : Icons.play_circle_filled_rounded,
+                              ),
+                              iconSize: 60,
+                              color: Colors.green,
+                              onPressed: () {
+                                audioPlayerState == PlayerState.PLAYING
+                                    ? pauseMusic()
+                                    : playMusic();
+                              },
                             ),
-                            iconSize: 60,
-                            color: Colors.green,
-                            onPressed: () {
-                              audioPlayerState == PlayerState.PLAYING
-                                  ? pauseMusic()
-                                  : playMusic();
-                            },
-                          ),
-                          nextSong(),
-                          buttonFast(),
-                          buttonShuffle(),
-                        ],
+                            nextSong(),
+                            buttonFast(),
+                            buttonShuffle(),
+                          ],
+                        ),
                       ),
                     ],
                   ),
