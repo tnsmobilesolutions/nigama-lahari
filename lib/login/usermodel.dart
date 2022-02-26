@@ -2,31 +2,45 @@ import 'dart:convert';
 
 class AppUser {
   String? uid;
-  String? name;
-  String? phonenumber;
   String? email;
+  String? mobile;
+  String? name;
   AppUser({
     this.uid,
-    this.name,
-    this.phonenumber,
     this.email,
+    this.mobile,
+    this.name,
   });
+
+  AppUser copyWith({
+    String? uid,
+    String? email,
+    String? mobile,
+    String? name,
+  }) {
+    return AppUser(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      mobile: mobile ?? this.mobile,
+      name: name ?? this.name,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
-      'name': name,
-      'phonenumber': phonenumber,
       'email': email,
+      'mobile': mobile,
+      'name': name,
     };
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
       uid: map['uid'],
-      name: map['name'],
-      phonenumber: map['phonenumber'],
       email: map['email'],
+      mobile: map['mobile'],
+      name: map['name'],
     );
   }
 
@@ -35,23 +49,9 @@ class AppUser {
   factory AppUser.fromJson(String source) =>
       AppUser.fromMap(json.decode(source));
 
-  AppUser copyWith({
-    String? uid,
-    String? name,
-    String? phonenumber,
-    String? email,
-  }) {
-    return AppUser(
-      uid: uid ?? this.uid,
-      name: name ?? this.name,
-      phonenumber: phonenumber ?? this.phonenumber,
-      email: email ?? this.email,
-    );
-  }
-
   @override
   String toString() {
-    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email)';
+    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name)';
   }
 
   @override
@@ -60,13 +60,13 @@ class AppUser {
 
     return other is AppUser &&
         other.uid == uid &&
-        other.name == name &&
-        other.phonenumber == phonenumber &&
-        other.email == email;
+        other.email == email &&
+        other.mobile == mobile &&
+        other.name == name;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ name.hashCode ^ phonenumber.hashCode ^ email.hashCode;
+    return uid.hashCode ^ email.hashCode ^ mobile.hashCode ^ name.hashCode;
   }
 }

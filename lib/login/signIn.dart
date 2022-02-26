@@ -69,23 +69,22 @@ class _SignInState extends State<SignIn> {
           hintText: 'Password',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
-    final loginbutton = Material(
-      color: Colors.green,
+    final loginButton = Material(
       elevation: 5,
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
       child: MaterialButton(
-        onPressed: () {
-          signIn(emailController.text, passswordController.text);
-        },
-        child: const Text(
-          'SignIn',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        padding: const EdgeInsets.all(8),
-        minWidth: MediaQuery.of(context).size.width,
-      ),
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            signIn(emailController.text, passswordController.text);
+          },
+          child: Text(
+            "Login",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
     );
 
     return Scaffold(
@@ -111,7 +110,7 @@ class _SignInState extends State<SignIn> {
                       const SizedBox(height: 20),
                       passwordField,
                       const SizedBox(height: 20),
-                      loginbutton,
+                      loginButton,
                       const SizedBox(
                         height: 10,
                       ),
@@ -155,11 +154,8 @@ class _SignInState extends State<SignIn> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => NigamLahari()))
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e.message);
-      });
+                    MaterialPageRoute(builder: (context) => NigamLahari())),
+              });
     }
   }
 }

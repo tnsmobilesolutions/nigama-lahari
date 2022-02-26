@@ -20,25 +20,12 @@ class _SignUpState extends State<SignUp> {
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
 
-  var email = "";
-  var password = "";
-  var confirmPassword = "";
   // Create a text controller and use it to retrieve the current value of the TextField.
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final nameController = TextEditingController();
   final mobileController = TextEditingController();
-
-  // bool loading = false;
-
-  // String? _email;
-
-  // String? _password;
-
-  // final _auth = FirebaseAuth.instance;
-
-  // final _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +36,32 @@ class _SignUpState extends State<SignUp> {
         child: Text('Add Your Photo'),
       ),
     );
-    final Name = TextFormField(
-      autofocus: false,
-      controller: nameController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        value = nameController.text;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Full Name',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-    );
+    final name = TextFormField(
+        autofocus: false,
+        controller: nameController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{3,}$');
+          if (value!.isEmpty) {
+            return ("First Name cannot be Empty");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid name(Min. 3 Character)");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          nameController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.account_circle),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "First Name",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
     final mobileNum = TextFormField(
       autofocus: false,
       controller: mobileController,
@@ -76,67 +76,97 @@ class _SignUpState extends State<SignUp> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     final email = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        value = emailController.text;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Email Id',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-    );
-    final password = TextFormField(
-      obscureText: true,
-      autofocus: false,
-      controller: passwordController,
-      keyboardType: TextInputType.number,
-      onSaved: (value) {
-        value = passwordController.text;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Password',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-    );
-    final confirmPassword = TextFormField(
-      obscureText: true,
-      autofocus: false,
-      controller: confirmPasswordController,
-      keyboardType: TextInputType.number,
-      onSaved: (value) {
-        value = confirmPasswordController.text;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Confirm Password',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-    );
-    final save = Material(
-      color: Colors.green,
-      elevation: 5,
-      borderRadius: BorderRadius.circular(18),
-      child: MaterialButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NigamLahari(),
-              ));
+        autofocus: false,
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
         },
-        child: const Text(
-          'Save',
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        padding: const EdgeInsets.all(8),
-        minWidth: MediaQuery.of(context).size.width,
-      ),
+        onSaved: (value) {
+          emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+    final password = TextFormField(
+        autofocus: false,
+        controller: passwordController,
+        obscureText: true,
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.vpn_key),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    final confirmPassword = TextFormField(
+        autofocus: false,
+        controller: confirmPasswordController,
+        obscureText: true,
+        validator: (value) {
+          if (confirmPasswordController.text !=
+              confirmPasswordController.text) {
+            return "Password don't match";
+          }
+          return null;
+        },
+        onSaved: (value) {
+          confirmPasswordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.vpn_key),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Confirm Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+    final signUpButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            signUp(emailController.text, passwordController.text);
+          },
+          child: Text(
+            "SignUp",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
     );
 
     return Scaffold(
@@ -159,7 +189,7 @@ class _SignUpState extends State<SignUp> {
                     children: <Widget>[
                       photo,
                       const SizedBox(height: 20),
-                      Name,
+                      name,
                       const SizedBox(height: 20),
                       mobileNum,
                       const SizedBox(height: 20),
@@ -169,7 +199,7 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 20),
                       confirmPassword,
                       const SizedBox(height: 20),
-                      save
+                      signUpButton
                     ],
                   )),
             ),
@@ -196,20 +226,19 @@ class _SignUpState extends State<SignUp> {
     // sedning these values
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? users = _auth.currentUser;
+    User? user = _auth.currentUser;
 
     AppUser data = AppUser();
 
     // writing all the values
-    data.email = users!.email;
-    data.uid = users.uid;
+    data.email = user!.email;
+    data.uid = user.uid;
     data.name = nameController.text;
-    data.phonenumber = mobileController.text;
+    data.mobile = mobileController.text;
 
-    await firebaseFirestore
-        .collection("users")
-        .doc(users.uid)
-        .set(data.toMap());
+    await firebaseFirestore.collection("users").doc(user.uid).set(
+          data.toMap(),
+        );
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 
     Navigator.pushAndRemoveUntil(

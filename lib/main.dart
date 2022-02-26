@@ -7,12 +7,12 @@ import 'login/signIn.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,40 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   runApp(NigamLahari());
-// }
-
-// class NigamLahari extends StatelessWidget {
-//   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder(
-//         future: _initialization,
-//         builder: (context, snapshot) {
-//           // Check for Errors
-//           if (snapshot.hasError) {
-//             print("Something Went Wrong");
-//           }
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return Center(child: CircularProgressIndicator());
-//           }
-//           return MaterialApp(
-//             title: 'ନିଗମ ଲହରୀ',
-//             theme: ThemeData(
-//               primarySwatch: Colors.deepPurple,
-//             ),
-//             debugShowCheckedModeBanner: false,
-//             home: SignIn(),
-//           );
-//         });
-//   }
-// }
