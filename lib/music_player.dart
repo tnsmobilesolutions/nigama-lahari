@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter_application_1/scrollable_screen.dart';
 
 class MusicPlayer extends StatefulWidget {
   const MusicPlayer({Key? key}) : super(key: key);
@@ -228,12 +229,23 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_downward),
+          onPressed: () {},
+        ),
         backgroundColor: Colors.yellowAccent[700],
         elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScrollableScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),
