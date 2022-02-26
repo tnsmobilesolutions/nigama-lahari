@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
       obscureText: true,
       autofocus: false,
       controller: passswordController,
-      keyboardType: TextInputType.phone,
+      //keyboardType: TextInputType.phone,
       validator: (value) {
         RegExp regex = RegExp(r'^.{8}$');
         if (value!.isEmpty) {

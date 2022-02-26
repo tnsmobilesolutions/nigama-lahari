@@ -68,10 +68,12 @@ class _NigamLahariState extends State<NigamLahari> {
                   ),
                 ),
                 onTap: () {
+                  //TODO  call firebase API to get the list of jagarana songs
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Jagarana()));
+                          builder: (context) =>
+                              const Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
                 },
               ),
               const SizedBox(height: 8),

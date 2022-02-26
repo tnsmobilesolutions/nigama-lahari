@@ -5,7 +5,7 @@ class CommonStyle {
       {String labelTextStr = "", String hintTextStr = ""}) {
     return InputDecoration(
       // prefixText: prefixText,
-      // prefixIcon: Icon(icon),
+      //prefixIcon: Icon(Icons.vpn_key_rounded),
       // prefixStyle: Theme.of(context).textTheme.bodyText1,
       // prefixStyle: textStyle,
       // fillColor: Colors.white.withOpacity(0.6),
