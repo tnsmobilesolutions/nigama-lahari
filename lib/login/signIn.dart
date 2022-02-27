@@ -14,10 +14,19 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  //bool? _passwordVisible;
+
   final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _passwordVisible = false;
+  // }
+
   @override
   Widget build(BuildContext context) {
     //email field
@@ -51,7 +60,7 @@ class _SignInState extends State<SignIn> {
       controller: passswordController,
       //keyboardType: TextInputType.phone,
       validator: (value) {
-        RegExp regex = RegExp(r'^.{8}$');
+        RegExp regex = RegExp(r'^.{6}$');
         if (value!.isEmpty) {
           return "ନିଜ ପାସୱାଡ଼ ଲେଖନ୍ତୁ";
         }
@@ -65,6 +74,21 @@ class _SignInState extends State<SignIn> {
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
           prefixIcon: const Icon(Icons.vpn_key),
+          // suffixIcon: IconButton(
+          //   icon: Icon(
+          //     _passwordVisible! ? Icons.visibility : Icons.visibility_off,
+          //     color: Colors.green,
+          //   ),
+          //   onPressed: () {
+          //     if (_passwordVisible != null) {
+          //       setState(
+          //         () {
+          //           _passwordVisible = !_passwordVisible!;
+          //         },
+          //       );
+          //     }
+          //   },
+          // ),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Password',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
