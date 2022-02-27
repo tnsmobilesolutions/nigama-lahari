@@ -23,6 +23,7 @@ class _AddSongState extends State<AddSong> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
+  List<String> _attribute = [];
 
   UploadTask? task;
   File? file;
@@ -141,7 +142,7 @@ class _AddSongState extends State<AddSong> {
                             print(_selectedOption.toString());
                           });
                         },
-                        items: _catagory.map(
+                        items: _attribute.map(
                           (val) {
                             return DropdownMenuItem(
                               child: new Text(val),
