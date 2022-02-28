@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/login/usermodel.dart';
 import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -25,6 +26,28 @@ class _SignUpState extends State<SignUp> {
   final _confirmPasswordController = TextEditingController();
   final _nameController = TextEditingController();
   final _mobileController = TextEditingController();
+
+//  // Returns true if email address is in use.
+// Future<bool> checkIfEmailInUse(String emailAddress) async {
+//   try {
+//     // Fetch sign-in methods for the email address
+//     final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(emailAddress);
+
+//     // In case list is not empty
+//     if (list.isNotEmpty) {
+//       // Return true because there is an existing
+//       // user using the email address
+//       return true;
+//     } else {
+//       // Return false because email adress is not in use
+//       return false;
+//     }
+//   } catch (error) {
+//     // Handle error
+//     // ...
+//     return true;
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -81,70 +104,39 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         initialCountryCode: 'IN',
-        onChanged: (phone) {
-          // print(phone.completeNumber);
-        });
+        onChanged: (phone) {});
 
-    // TextFormField(
-    //   autofocus: false,
-    //   controller: _mobileController,
-    //   keyboardType: TextInputType.phone,
-    //   maxLength: 10,
-    //   inputFormatters: [
-    //     FilteringTextInputFormatter.allow(
-    //         RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')),
-    //     //FilteringTextInputFormatter.deny(RegExp('[N()+-]')),
-    //   ],
-    //   validator: (value) {
-    //     if (value == null || value.isEmpty) {
-    //       return 'Please enter your number';
-    //     } else if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
-    //       return 'Please enter correct number';
-    //     } else if (value.length < 10) {
-    //       return 'Enter atleast 10 digits';
-    //     }
-    //     return null;
-    //   },
-    //   onSaved: (value) {
-    //     value = _mobileController.text;
-    //   },
-    //   textInputAction: TextInputAction.next,
-    //   decoration: InputDecoration(
-    //     prefixIcon: Icon(Icons.phone_android_rounded),
-    //     contentPadding: const EdgeInsets.all(15),
-    //     hintText: 'Phone Number',
-    //     border: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(15),
-    //     ),
-    //   ),
-    // );
     final email = TextFormField(
-        autofocus: false,
-        controller: _emailController,
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return ("Please enter Your Email");
-          }
-          // reg expression for email validation
-          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-              .hasMatch(value)) {
-            return ("Please enter a valid email");
-          }
-          return null;
-        },
-        onSaved: (value) {
-          _emailController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Email",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+      autofocus: false,
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        // Returns true if email address is in use.
+
+        if (value == null || value.isEmpty) {
+          return ("Please enter Your Email");
+        }
+        // reg expression for email validation
+        else if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+            .hasMatch(value)) {
+          return ("Please enter a valid email");
+        }
+        //else if () {}
+        return null;
+      },
+      onSaved: (value) {
+        _emailController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.mail),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Email",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
     final password = TextFormField(
         autofocus: false,
         controller: _passwordController,
