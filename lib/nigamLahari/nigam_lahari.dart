@@ -34,21 +34,34 @@ class _NigamLahariState extends State<NigamLahari> {
         title: const Text('ନିଗମ  ଲହରୀ'),
         actions: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: EdgeInsets.only(right: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Search(),
-                      ),
-                    );
-                  },
-                  child: Icon(Icons.search),
-                ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Search(),
+                    ),
+                  );
+                },
+                child: Icon(Icons.search),
               ),
+              SizedBox(width: 30),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignIn(),
+                    ),
+                  );
+                },
+                child: Icon(Icons.logout_rounded),
+              ),
+              SizedBox(
+                width: 20,
+              )
             ],
           )
         ],
