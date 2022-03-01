@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/login/usermodel.dart';
 import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
 
@@ -85,11 +84,11 @@ class _SignUpState extends State<SignUp> {
     final mobileNum = IntlPhoneField(
         validator: (value) {
           RegExp regex = new RegExp(r'^.{10,}$');
-          if (value!.isEmpty) {
-            return ("phone number cannot be Empty");
+          if (value == null || value.isEmpty) {
+            return ("Please enter your phone number");
           }
           if (!regex.hasMatch(value)) {
-            return ("Enter Valid name(Min. 10 Character)");
+            return ("Enter a valid number(Min. 10 Character)");
           }
           return null;
         },
@@ -195,7 +194,7 @@ class _SignUpState extends State<SignUp> {
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.green,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -266,7 +265,7 @@ class _SignUpState extends State<SignUp> {
   postDetailsToFirestore() async {
     // calling our firestore
     // calling our data
-    // sedning these values
+    // sending these values
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;

@@ -1,7 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart';
 import 'API/firebaseAPI.dart';
@@ -14,6 +14,8 @@ class AddSong extends StatefulWidget {
 }
 
 class _AddSongState extends State<AddSong> {
+  final _titleController = TextEditingController();
+
   List<String> _catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
@@ -30,20 +32,15 @@ class _AddSongState extends State<AddSong> {
   String? _selectedOption;
   String? value;
   final height = 100;
-  Duration _duration = new Duration();
+  Duration duration = new Duration();
+  AudioPlayer? audioPlayer = AudioPlayer();
+  String destination = '';
+  var newPath;
+  //audioPlayer.setUrl(audioFilePath, isLocal:true);
+  //var selectedSongDuration;
 
   void initState() {
     super.initState();
-  }
-
-  String totalDuration() {
-    var audioPlayer;
-    return audioPlayer?.onDurationChanged.listen(
-      (Duration d) {
-        //print('Max duration: $d');
-        setState(() => _duration = d);
-      },
-    );
   }
 
   // select file from device
@@ -51,15 +48,21 @@ class _AddSongState extends State<AddSong> {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
+    // final file = File(path);
+    // String dir = path.dirname(file.path);
+    //print(path);
+    // var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    // newPath = path.substring(0, lastSeparator + 1) + _titleController.text;
     setState(() => file = File(path));
   }
 
   //upload selected file to firebase storage
   Future uploadFile() async {
-    if (file == null) return;
-
-    //final fileName = basename(file!.path);
-    final destination = 'Pratikhya/${basename(file!.path)}';
+    if (file == null) {
+      return;
+    } else {}
+    final fileName = basename(file!.path);
+    destination = '$_selectedOption/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
@@ -106,7 +109,7 @@ class _AddSongState extends State<AddSong> {
           child: SafeArea(
             child: Container(
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,10 +120,12 @@ class _AddSongState extends State<AddSong> {
                         value: _selectedOption,
                         dropdownColor: Colors.yellowAccent[700],
                         onChanged: (value) {
-                          setState(() {
-                            _selectedOption = value as String?;
-                            print(_selectedOption.toString());
-                          });
+                          setState(
+                            () {
+                              _selectedOption = value as String?;
+                              print(_selectedOption.toString());
+                            },
+                          );
                         },
                         items: _catagory.map(
                           (val) {
@@ -150,13 +155,14 @@ class _AddSongState extends State<AddSong> {
                             );
                           },
                         ).toList(),
-                      )
+                      ),
                     ],
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   TextFormField(
+                    controller: _titleController,
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
@@ -171,7 +177,20 @@ class _AddSongState extends State<AddSong> {
                   ),
                   TextFormField(
                     autofocus: false,
-                    maxLines: height ~/ 10,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(15),
+                        hintText: 'Singer',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    autofocus: false,
+                    maxLines: height ~/ 6,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.newline,
                     decoration: InputDecoration(
@@ -211,7 +230,6 @@ class _AddSongState extends State<AddSong> {
                     ),
                     width: double.infinity,
                   ),
-
                   SizedBox(height: 20),
                   Container(
                     height: 50,
@@ -221,7 +239,7 @@ class _AddSongState extends State<AddSong> {
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     width: double.infinity,
                     child: Text(
-                      _duration.toString().split('.')[0],
+                      duration.toString().split('.')[0],
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -239,29 +257,35 @@ class _AddSongState extends State<AddSong> {
                         GestureDetector(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Icon(
-                              Icons.cloud_upload_rounded,
-                              size: 30,
-                              color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.cloud_upload_rounded,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Upload',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           onTap: uploadFile,
                         ),
                         task != null ? buildUploadStatus(task!) : Container(),
+                        // Fluttertoast.showToast(msg: "Login Successful")
                       ],
                     ),
                     width: double.infinity,
                   ),
-                  // FloatingActionButton.extended(
-                  //   heroTag: "btn2",
-                  //   label: const Text('Upload File'),
-                  //   icon: const Icon(Icons.cloud_upload_rounded),
-                  //   backgroundColor: Colors.blueGrey,
-                  //   onPressed: uploadFile,
-                  // ),
-                  // SizedBox(height: 30),
-                  // task != null ? buildUploadStatus(task!) : Container(),
-                  // SizedBox(height: 30),
                 ],
               ),
             ),

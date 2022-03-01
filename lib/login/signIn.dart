@@ -41,6 +41,7 @@ class _SignInState extends State<SignIn> {
         if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
           return ("ଦୟା କରି ନିଜ ସଠିକ ଇମେଲ ଲେଖନ୍ତୁ");
         }
+        return null;
       },
       onSaved: (value) {
         value = emailController.text;
@@ -67,6 +68,7 @@ class _SignInState extends State<SignIn> {
         if (!regex.hasMatch(value)) {
           return "ଦୟା କରି ନିଜ ସଠିକ ପାସୱାଡ଼  ଲେଖନ୍ତୁ";
         }
+        return null;
       },
       onSaved: (value) {
         value = passswordController.text;
@@ -96,7 +98,7 @@ class _SignInState extends State<SignIn> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.green,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
