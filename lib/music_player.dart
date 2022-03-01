@@ -298,32 +298,34 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(child: buttonLoop()),
-                          Expanded(child: buttonSlow()),
-                          Expanded(child: previousSong()),
-                          Expanded(
-                            child: IconButton(
-                              icon: Icon(
-                                audioPlayerState == PlayerState.PLAYING
-                                    ? Icons.pause_circle_filled_rounded
-                                    : Icons.play_circle_filled_rounded,
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(child: buttonLoop()),
+                            Expanded(child: buttonSlow()),
+                            Expanded(child: previousSong()),
+                            Expanded(
+                              child: IconButton(
+                                icon: Icon(
+                                  audioPlayerState == PlayerState.PLAYING
+                                      ? Icons.pause_circle_filled_rounded
+                                      : Icons.play_circle_filled_rounded,
+                                ),
+                                iconSize: 60,
+                                color: Colors.green,
+                                onPressed: () {
+                                  audioPlayerState == PlayerState.PLAYING
+                                      ? pauseMusic()
+                                      : playMusic();
+                                },
                               ),
-                              iconSize: 60,
-                              color: Colors.green,
-                              onPressed: () {
-                                audioPlayerState == PlayerState.PLAYING
-                                    ? pauseMusic()
-                                    : playMusic();
-                              },
                             ),
-                          ),
-                          Expanded(child: nextSong()),
-                          Expanded(child: buttonFast()),
-                          Expanded(child: buttonShuffle()),
-                        ],
+                            Expanded(child: nextSong()),
+                            Expanded(child: buttonFast()),
+                            Expanded(child: buttonShuffle()),
+                          ],
+                        ),
                       ),
                     ],
                   ),
