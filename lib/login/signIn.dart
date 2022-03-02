@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homePage.dart';
-//import 'package:flutter_application_1/homePage.dart';
+
 import 'package:flutter_application_1/login/signUp.dart';
-import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
+//import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../nigam_lahari.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _SignInState extends State<SignIn> {
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
+  final storage = FlutterSecureStorage();
 
   // @override
   // void initState() {
@@ -175,13 +178,13 @@ class _SignInState extends State<SignIn> {
 
   void signIn(String email, String password) async {
     if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => NigamLahari())),
-              });
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      //print(userCredential.user?.uid);
+      await storage.write(key: 'uid', value: userCredential.user?.uid);
+      Fluttertoast.showToast(msg: "Login Successful");
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => NigamLahari()));
     } else if (!_formkey.currentState!.validate()) {
       Text('Wrong email or password');
     }

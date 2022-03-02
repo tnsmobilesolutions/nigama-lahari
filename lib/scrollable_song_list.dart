@@ -1,38 +1,36 @@
 import 'package:flutter/material.dart';
-
 import 'music_player.dart';
 
 class ScrollableSongList extends StatefulWidget {
   ScrollableSongList(
       {Key? key,
       required this.listName,
-      required this.items,
+      required this.song,
       required this.singer})
       : super(key: key);
 
   final String? listName;
-  final List<String>? items;
-  final List<String>? singer;
+  final List<String>? song, singer;
 
   @override
   _ScrollableSongListState createState() => _ScrollableSongListState();
 }
 
 class _ScrollableSongListState extends State<ScrollableSongList> {
-  bool _folded = true;
+  //bool _folded = true;
   @override
   Widget build(BuildContext context) {
     //final title = 'Long List';
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         title: Text('${widget.listName} ତାଲିକା'),
       ),
       body: ListView.builder(
-        itemCount: widget.items?.length,
+        itemCount: widget.song?.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             child: ListTile(
@@ -40,9 +38,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.items![index],
+                    widget.song![index],
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.green,
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
@@ -50,7 +48,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   Text(
                     widget.singer![index],
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.green,
                       //fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
@@ -65,7 +63,10 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MusicPlayer(),
+                  builder: (context) => MusicPlayer(
+                    songName: widget.song![index],
+                    singerName: widget.singer![index],
+                  ),
                 ),
               );
             },
@@ -75,24 +76,3 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
     );
   }
 }
-
-// ListView.builder(
-//         itemCount: widget.items?.length,
-//         itemBuilder: (context, index) {
-//           return ListTile(
-//             title: Text(widget.items![index]),
-//           );
-//         },
-//       ),
-
-
-//  Align(
-//                     alignment: Alignment.center,
-//                     child: Icon(
-//                       Icons.play_circle_sharp,
-//                       size: 30,
-//                       color: Colors.yellowAccent[700],
-//                     ),
-//                   ),
-
- 

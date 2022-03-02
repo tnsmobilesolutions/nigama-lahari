@@ -1,10 +1,12 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
-import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 
 class MusicPlayer extends StatefulWidget {
-  const MusicPlayer({Key? key}) : super(key: key);
+  MusicPlayer({Key? key, required this.songName, required this.singerName})
+      : super(key: key);
+
+  final String songName, singerName;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -228,16 +230,17 @@ class _MusicPlayerState extends State<MusicPlayer> {
     // double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_downward),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Jagarana(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => ScrollableSongList(),
+            //   ),
+            // );
           },
         ),
         backgroundColor: Colors.yellowAccent[700],
@@ -258,14 +261,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
               Column(
                 children: [
                   Text(
-                    'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+                    '${widget.songName}',
                     style: TextStyle(
                       fontSize: 30,
                       //fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
+                    '${widget.singerName}',
                     style: TextStyle(
                       fontSize: 20,
                     ),

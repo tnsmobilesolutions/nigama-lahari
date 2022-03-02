@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import 'package:flutter_application_1/login/usermodel.dart';
-import 'package:flutter_application_1/nigamLahari/nigam_lahari.dart';
+import 'package:flutter_application_1/nigam_lahari.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

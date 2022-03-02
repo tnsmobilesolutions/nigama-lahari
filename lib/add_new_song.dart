@@ -96,7 +96,6 @@ class _AddSongState extends State<AddSong> {
     final fileName = file != null ? basename(file!.path) : 'No File Selected';
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Add Song'),
@@ -112,13 +111,11 @@ class _AddSongState extends State<AddSong> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      //Text('Catagory'),
                       DropdownButton(
                         hint: Text(
                           'Catagory',
                           style: TextStyle(
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold,
+                            color: Colors.black,
                             fontSize: 15,
                           ),
                         ),
@@ -141,13 +138,11 @@ class _AddSongState extends State<AddSong> {
                           },
                         ).toList(),
                       ),
-                      //Text('Atribute'),
                       DropdownButton(
                         hint: Text(
                           'Atribute',
                           style: TextStyle(
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold,
+                            color: Colors.black,
                             fontSize: 15,
                           ),
                         ),
@@ -174,23 +169,16 @@ class _AddSongState extends State<AddSong> {
                     height: 20,
                   ),
                   TextField(
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     controller: _titleController,
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 2.0,
-                          ),
-                        ),
                         contentPadding: const EdgeInsets.all(15),
                         hintText: 'Title',
                         hintStyle:
-                            TextStyle(fontSize: 15.0, color: Colors.white),
+                            TextStyle(fontSize: 15.0, color: Colors.black),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -198,22 +186,15 @@ class _AddSongState extends State<AddSong> {
                     height: 20,
                   ),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 2.0,
-                          ),
-                        ),
                         contentPadding: const EdgeInsets.all(15),
                         hintText: 'Singer',
                         hintStyle:
-                            TextStyle(fontSize: 15.0, color: Colors.white),
+                            TextStyle(fontSize: 15.0, color: Colors.black),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -221,28 +202,17 @@ class _AddSongState extends State<AddSong> {
                     height: 20,
                   ),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     autofocus: false,
                     maxLines: height ~/ 6,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.newline,
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                          width: 2.0,
-                        ),
-                      ),
                       contentPadding: const EdgeInsets.all(15),
                       hintText: 'Song Lyrics',
-                      hintStyle: TextStyle(fontSize: 15.0, color: Colors.white),
+                      hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                          width: 2,
-                        ),
                       ),
                     ),
                   ),
@@ -263,7 +233,7 @@ class _AddSongState extends State<AddSong> {
                             child: Icon(
                               Icons.attach_file_rounded,
                               size: 30,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                           onTap: selectFile,
@@ -310,7 +280,7 @@ class _AddSongState extends State<AddSong> {
                                 Icon(
                                   Icons.cloud_upload_rounded,
                                   size: 30,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                                 SizedBox(
                                   width: 10,

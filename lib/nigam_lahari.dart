@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
-import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
-import '../add_new_song.dart';
-import '../search.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'add_new_song.dart';
+import 'search.dart';
 
 class NigamLahari extends StatefulWidget {
   NigamLahari({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class NigamLahari extends StatefulWidget {
   _NigamLahariState createState() => _NigamLahariState();
 }
 
+final storage = FlutterSecureStorage();
 //ଆବାହନ  ବନ୍ଦନା  ଆରତୀ  ବିଦାୟ ପ୍ରାର୍ଥନା
 final List<String> items = [
   'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
@@ -41,9 +42,8 @@ class _NigamLahariState extends State<NigamLahari> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text('ନିଗମ  ଲହରୀ'),
         actions: [
@@ -61,6 +61,24 @@ class _NigamLahariState extends State<NigamLahari> {
                     );
                   },
                   child: Icon(Icons.search),
+                ),
+              ),
+
+              //SignOut implemented
+              Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: GestureDetector(
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    await storage.delete(key: 'uid');
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
+                        ((route) => false));
+                  },
+                  child: Icon(Icons.logout_rounded),
                 ),
               ),
             ],
@@ -85,10 +103,15 @@ class _NigamLahariState extends State<NigamLahari> {
                   onTap: () {
                     //TODO  call firebase API to get the list of jagarana songs
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ScrollableSongList(
+                          listName: 'ପ୍ରତୀକ୍ଷା',
+                          song: items,
+                          singer: singer,
+                        ),
+                      ),
+                    ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
                   },
                 ),
                 SizedBox(height: 8),
@@ -110,7 +133,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ପ୍ରତୀକ୍ଷା',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
@@ -135,7 +158,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ଆବାହନ',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
@@ -160,7 +183,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ଆରତୀ',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
@@ -185,7 +208,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ବନ୍ଦନା',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
@@ -210,7 +233,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ପ୍ରାର୍ଥନା',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
@@ -235,7 +258,7 @@ class _NigamLahariState extends State<NigamLahari> {
                         MaterialPageRoute(
                           builder: (context) => ScrollableSongList(
                             listName: 'ବିଦାୟ ପ୍ରାର୍ଥନା',
-                            items: items,
+                            song: items,
                             singer: singer,
                           ),
                         ),
