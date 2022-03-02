@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
-import 'package:flutter_application_1/scrollable_screen.dart';
+import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 
 class MusicPlayer extends StatefulWidget {
   const MusicPlayer({Key? key}) : super(key: key);
@@ -231,21 +231,21 @@ class _MusicPlayerState extends State<MusicPlayer> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_downward),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Jagarana(),
+              ),
+            );
+          },
         ),
         backgroundColor: Colors.yellowAccent[700],
         elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ScrollableScreen(),
-                ),
-              );
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -298,30 +298,44 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          buttonLoop(),
-                          buttonSlow(),
-                          previousSong(),
-                          IconButton(
-                            icon: Icon(
-                              audioPlayerState == PlayerState.PLAYING
-                                  ? Icons.pause_circle_filled_rounded
-                                  : Icons.play_circle_filled_rounded,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(32.0),
+                            color: Colors.yellowAccent[700]),
+                        padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(child: buttonLoop()),
+                            //Expanded(child: buttonSlow()),
+                            Expanded(child: previousSong()),
+                            Expanded(
+                              child: IconButton(
+                                icon: Icon(
+                                  audioPlayerState == PlayerState.PLAYING
+                                      ? Icons.pause_circle_filled_rounded
+                                      : Icons.play_circle_filled_rounded,
+                                ),
+                                iconSize: 60,
+                                color: Colors.green,
+                                onPressed: () {
+                                  audioPlayerState == PlayerState.PLAYING
+                                      ? pauseMusic()
+                                      : playMusic();
+                                },
+                              ),
                             ),
-                            iconSize: 60,
-                            color: Colors.green,
-                            onPressed: () {
-                              audioPlayerState == PlayerState.PLAYING
-                                  ? pauseMusic()
-                                  : playMusic();
-                            },
-                          ),
-                          nextSong(),
-                          buttonFast(),
-                          buttonShuffle(),
-                        ],
+                            // SizedBox(
+                            //   width: 20,
+                            // ),
+                            Expanded(child: nextSong()),
+                            //Expanded(child: buttonFast()),
+                            Expanded(child: buttonShuffle()),
+                          ],
+                        ),
                       ),
                     ],
                   ),

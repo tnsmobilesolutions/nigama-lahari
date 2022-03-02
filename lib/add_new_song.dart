@@ -36,6 +36,7 @@ class _AddSongState extends State<AddSong> {
   AudioPlayer? audioPlayer = AudioPlayer();
   String destination = '';
   var newPath;
+
   //audioPlayer.setUrl(audioFilePath, isLocal:true);
   //var selectedSongDuration;
 
@@ -48,11 +49,7 @@ class _AddSongState extends State<AddSong> {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
-    // final file = File(path);
-    // String dir = path.dirname(file.path);
-    //print(path);
-    // var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
-    // newPath = path.substring(0, lastSeparator + 1) + _titleController.text;
+
     setState(() => file = File(path));
   }
 
@@ -70,9 +67,9 @@ class _AddSongState extends State<AddSong> {
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {});
-    final urlDownload = await snapshot.ref.getDownloadURL();
+    final songUrl = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $urlDownload');
+    print('Download-Link: $songUrl');
   }
 
   //upload status
@@ -99,6 +96,7 @@ class _AddSongState extends State<AddSong> {
     final fileName = file != null ? basename(file!.path) : 'No File Selected';
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Add Song'),
@@ -116,7 +114,14 @@ class _AddSongState extends State<AddSong> {
                     children: [
                       //Text('Catagory'),
                       DropdownButton(
-                        hint: Text('Catagory'),
+                        hint: Text(
+                          'Catagory',
+                          style: TextStyle(
+                            color: Colors.white,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                         value: _selectedOption,
                         dropdownColor: Colors.yellowAccent[700],
                         onChanged: (value) {
@@ -138,7 +143,14 @@ class _AddSongState extends State<AddSong> {
                       ),
                       //Text('Atribute'),
                       DropdownButton(
-                        hint: Text('Atribute'),
+                        hint: Text(
+                          'Atribute',
+                          style: TextStyle(
+                            color: Colors.white,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                         value: _selectedOption,
                         dropdownColor: Colors.yellowAccent[700],
                         onChanged: (value) {
@@ -161,14 +173,24 @@ class _AddSongState extends State<AddSong> {
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
+                  TextField(
+                    style: TextStyle(color: Colors.white),
                     controller: _titleController,
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                            width: 2.0,
+                          ),
+                        ),
                         contentPadding: const EdgeInsets.all(15),
                         hintText: 'Title',
+                        hintStyle:
+                            TextStyle(fontSize: 15.0, color: Colors.white),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -176,12 +198,22 @@ class _AddSongState extends State<AddSong> {
                     height: 20,
                   ),
                   TextFormField(
+                    style: TextStyle(color: Colors.white),
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                            width: 2.0,
+                          ),
+                        ),
                         contentPadding: const EdgeInsets.all(15),
                         hintText: 'Singer',
+                        hintStyle:
+                            TextStyle(fontSize: 15.0, color: Colors.white),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -189,15 +221,30 @@ class _AddSongState extends State<AddSong> {
                     height: 20,
                   ),
                   TextFormField(
+                    style: TextStyle(color: Colors.white),
                     autofocus: false,
                     maxLines: height ~/ 6,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.newline,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(15),
-                        hintText: 'Song Lyrics',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.all(15),
+                      hintText: 'Song Lyrics',
+                      hintStyle: TextStyle(fontSize: 15.0, color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                          width: 2,
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -281,6 +328,7 @@ class _AddSongState extends State<AddSong> {
                           onTap: uploadFile,
                         ),
                         task != null ? buildUploadStatus(task!) : Container(),
+                        // percentage == 100 ? print('Uploaded Successfully') : null;
                         // Fluttertoast.showToast(msg: "Login Successful")
                       ],
                     ),

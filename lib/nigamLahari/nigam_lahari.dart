@@ -4,32 +4,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/nigamLahari/pratikhya.dart';
-import 'package:flutter_application_1/nigamLahari/abahana.dart';
-import 'package:flutter_application_1/nigamLahari/aarti.dart';
-import 'package:flutter_application_1/nigamLahari/bandana.dart';
-import 'package:flutter_application_1/nigamLahari/prarthana.dart';
-import 'package:flutter_application_1/nigamLahari/bidaya_prarthana.dart';
-
+import 'package:flutter_application_1/scrollable_song_list.dart';
 import '../add_new_song.dart';
 import '../search.dart';
 
 class NigamLahari extends StatefulWidget {
-  const NigamLahari({Key? key}) : super(key: key);
+  NigamLahari({Key? key}) : super(key: key);
 
   @override
   _NigamLahariState createState() => _NigamLahariState();
 }
 
 //ଆବାହନ  ବନ୍ଦନା  ଆରତୀ  ବିଦାୟ ପ୍ରାର୍ଥନା
+final List<String> items = [
+  'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+  'ଉଠ ଉଠ ନିଶି ହେଲା ପରଭାତ',
+  'ଅନାଅରେ ଅନାଅରେ ଅନାଅ',
+  'ଘନ ଅନ୍ଧାରେ',
+  'ନବ ରବି ଆସେ ଉଇଁ',
+  'ବାଉଳା ! ଅଳସ ପହୁଡ଼ ତେଜ',
+  'ନିଶି ହେଲା ଆସି ଅବସାନରେ',
+];
+
+final List<String> singer = [
+  'ଅଭୟ କୁମାର ଜେନା',
+  'ନବକିଶୋର ନାୟକ',
+  'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
+  'ନଳିନୀକାନ୍ତ ନାୟକ',
+  'ଗୌରୀଶଙ୍କର ପଣ୍ଡା',
+  'ନିରାକାର ରାଉତ',
+  'ଅତନୁ ସବ୍ୟସାଚୀ ଜେନା',
+  'ରବି ମିଶ୍ର',
+];
 
 class _NigamLahariState extends State<NigamLahari> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: const Text('ନିଗମ  ଲହରୀ'),
+        title: Text('ନିଗମ  ଲହରୀ'),
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -70,7 +86,7 @@ class _NigamLahariState extends State<NigamLahari> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                   child: Align(
                     alignment: Alignment.center,
@@ -85,14 +101,14 @@ class _NigamLahariState extends State<NigamLahari> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                                Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
                   },
                 ),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -105,15 +121,19 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Pratikhya(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ପ୍ରତୀକ୍ଷା',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -126,15 +146,19 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Abahana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ଆବାହନ',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -147,15 +171,19 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Aarti(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ଆରତୀ',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -168,15 +196,19 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Bandana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ବନ୍ଦନା',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -189,15 +221,19 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Prarthana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ପ୍ରାର୍ଥନା',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -210,12 +246,16 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const BidayaPrarthana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ବିଦାୟ ପ୍ରାର୍ଥନା',
+                            items: items,
+                            singer: singer,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
               ],
