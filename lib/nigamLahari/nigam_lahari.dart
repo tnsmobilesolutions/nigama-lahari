@@ -17,33 +17,33 @@ class NigamLahari extends StatefulWidget {
 
 //ଆବାହନ  ବନ୍ଦନା  ଆରତୀ  ବିଦାୟ ପ୍ରାର୍ଥନା
 final List<String> items = [
-  'song 1',
-  'song 2',
-  'song 3',
-  'song 4',
-  'song 5',
-  'song 6',
-  'song 7',
-  'song 8',
-  'song 9',
-  'song 10',
-  'song 11',
-  'song 12',
-  'song 13',
-  'song 14',
-  'song 15',
-  'song 16',
-  'song 17',
-  'song 18',
-  'song 19',
-  'song 20',
+  'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
+  'ଉଠ ଉଠ ନିଶି ହେଲା ପରଭାତ',
+  'ଅନାଅରେ ଅନାଅରେ ଅନାଅ',
+  'ଘନ ଅନ୍ଧାରେ',
+  'ନବ ରବି ଆସେ ଉଇଁ',
+  'ବାଉଳା ! ଅଳସ ପହୁଡ଼ ତେଜ',
+  'ନିଶି ହେଲା ଆସି ଅବସାନରେ',
+];
+
+final List<String> singer = [
+  'ଅଭୟ କୁମାର ଜେନା',
+  'ନବକିଶୋର ନାୟକ',
+  'ପ୍ରେମାନନ୍ଦ ମିଶ୍ର',
+  'ନଳିନୀକାନ୍ତ ନାୟକ',
+  'ଗୌରୀଶଙ୍କର ପଣ୍ଡା',
+  'ନିରାକାର ରାଉତ',
+  'ଅତନୁ ସବ୍ୟସାଚୀ ଜେନା',
+  'ରବି ମିଶ୍ର',
 ];
 
 class _NigamLahariState extends State<NigamLahari> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text('ନିଗମ  ଲହରୀ'),
         actions: [
@@ -111,6 +111,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ପ୍ରତୀକ୍ଷା',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
@@ -135,6 +136,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ଆବାହନ',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
@@ -159,6 +161,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ଆରତୀ',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
@@ -183,6 +186,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ବନ୍ଦନା',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
@@ -207,6 +211,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ପ୍ରାର୍ଥନା',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
@@ -231,6 +236,7 @@ class _NigamLahariState extends State<NigamLahari> {
                           builder: (context) => ScrollableSongList(
                             listName: 'ବିଦାୟ ପ୍ରାର୍ଥନା',
                             items: items,
+                            singer: singer,
                           ),
                         ),
                       );
