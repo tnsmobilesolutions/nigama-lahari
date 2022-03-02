@@ -36,6 +36,7 @@ class _AddSongState extends State<AddSong> {
   AudioPlayer? audioPlayer = AudioPlayer();
   String destination = '';
   var newPath;
+
   //audioPlayer.setUrl(audioFilePath, isLocal:true);
   //var selectedSongDuration;
 
@@ -48,11 +49,7 @@ class _AddSongState extends State<AddSong> {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
-    // final file = File(path);
-    // String dir = path.dirname(file.path);
-    //print(path);
-    // var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
-    // newPath = path.substring(0, lastSeparator + 1) + _titleController.text;
+
     setState(() => file = File(path));
   }
 
@@ -70,9 +67,9 @@ class _AddSongState extends State<AddSong> {
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {});
-    final urlDownload = await snapshot.ref.getDownloadURL();
+    final songUrl = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $urlDownload');
+    print('Download-Link: $songUrl');
   }
 
   //upload status
@@ -281,6 +278,7 @@ class _AddSongState extends State<AddSong> {
                           onTap: uploadFile,
                         ),
                         task != null ? buildUploadStatus(task!) : Container(),
+                        // percentage == 100 ? print('Uploaded Successfully') : null;
                         // Fluttertoast.showToast(msg: "Login Successful")
                       ],
                     ),

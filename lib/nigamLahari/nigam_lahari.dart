@@ -4,24 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/nigamLahari/jagarana.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/nigamLahari/pratikhya.dart';
-import 'package:flutter_application_1/nigamLahari/abahana.dart';
-import 'package:flutter_application_1/nigamLahari/aarti.dart';
-import 'package:flutter_application_1/nigamLahari/bandana.dart';
-import 'package:flutter_application_1/nigamLahari/prarthana.dart';
-import 'package:flutter_application_1/nigamLahari/bidaya_prarthana.dart';
-
+import 'package:flutter_application_1/scrollable_song_list.dart';
 import '../add_new_song.dart';
 import '../search.dart';
 
 class NigamLahari extends StatefulWidget {
-  const NigamLahari({Key? key}) : super(key: key);
+  NigamLahari({Key? key}) : super(key: key);
 
   @override
   _NigamLahariState createState() => _NigamLahariState();
 }
 
 //ଆବାହନ  ବନ୍ଦନା  ଆରତୀ  ବିଦାୟ ପ୍ରାର୍ଥନା
+final List<String> items = [
+  'song 1',
+  'song 2',
+  'song 3',
+  'song 4',
+  'song 5',
+  'song 6',
+  'song 7',
+  'song 8',
+  'song 9',
+  'song 10',
+  'song 11',
+  'song 12',
+  'song 13',
+  'song 14',
+  'song 15',
+  'song 16',
+  'song 17',
+  'song 18',
+  'song 19',
+  'song 20',
+];
 
 class _NigamLahariState extends State<NigamLahari> {
   @override
@@ -29,7 +45,7 @@ class _NigamLahariState extends State<NigamLahari> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('ନିଗମ  ଲହରୀ'),
+        title: Text('ନିଗମ  ଲହରୀ'),
         actions: [
           Row(
             children: [
@@ -57,7 +73,7 @@ class _NigamLahariState extends State<NigamLahari> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                   child: Align(
                     alignment: Alignment.center,
@@ -72,14 +88,14 @@ class _NigamLahariState extends State<NigamLahari> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                                Jagarana())); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
                   },
                 ),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -92,15 +108,18 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Pratikhya(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ପ୍ରତୀକ୍ଷା',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -113,15 +132,18 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Abahana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ଆବାହନ',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -134,15 +156,18 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Aarti(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ଆରତୀ',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -155,15 +180,18 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Bandana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ବନ୍ଦନା',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -176,15 +204,18 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Prarthana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ପ୍ରାର୍ଥନା',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 GestureDetector(
                     child: Align(
                       alignment: Alignment.center,
@@ -197,12 +228,15 @@ class _NigamLahariState extends State<NigamLahari> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const BidayaPrarthana(),
+                          builder: (context) => ScrollableSongList(
+                            listName: 'ବିଦାୟ ପ୍ରାର୍ଥନା',
+                            items: items,
+                          ),
                         ),
                       );
                     }),
-                const SizedBox(height: 8),
-                const Divider(
+                SizedBox(height: 8),
+                Divider(
                   thickness: 2,
                 ),
               ],
