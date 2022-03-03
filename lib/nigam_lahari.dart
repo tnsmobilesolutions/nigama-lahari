@@ -6,7 +6,7 @@ import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'add_new_song.dart';
-import 'search.dart';
+import 'search_functionality.dart/search.dart';
 
 class NigamLahari extends StatefulWidget {
   NigamLahari({Key? key}) : super(key: key);
