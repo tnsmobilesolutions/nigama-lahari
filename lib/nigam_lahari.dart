@@ -39,6 +39,55 @@ final List<String> singer = [
 ];
 
 class _NigamLahariState extends State<NigamLahari> {
+  //Alert Dialog for signout
+  Future<void> showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Are you sure ?'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Do you want to sign out ?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  child: const Text('No'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                // SizedBox(
+                //   width: 30,
+                // ),
+                TextButton(
+                  child: const Text('Yes'),
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    await storage.delete(key: 'uid');
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
+                        ((route) => false));
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +110,9 @@ class _NigamLahariState extends State<NigamLahari> {
                       ),
                     );
                   },
-                  child: Icon(Icons.search),
+                  child: Image(
+                    image: AssetImage('assets/image/search_icon.gif'),
+                  ),
                 ),
               ),
 
@@ -69,16 +120,7 @@ class _NigamLahariState extends State<NigamLahari> {
               Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: GestureDetector(
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
-                    await storage.delete(key: 'uid');
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignIn(),
-                        ),
-                        ((route) => false));
-                  },
+                  onTap: showMyDialog,
                   child: Icon(Icons.logout_rounded),
                 ),
               ),
@@ -275,6 +317,9 @@ class _NigamLahariState extends State<NigamLahari> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        highlightElevation: 0,
         onPressed: () {
           Navigator.push(
             context,
@@ -283,7 +328,9 @@ class _NigamLahariState extends State<NigamLahari> {
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: Image(
+          image: AssetImage('assets/image/add_song.gif'),
+        ),
       ),
     );
   }

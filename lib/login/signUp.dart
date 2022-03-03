@@ -26,37 +26,14 @@ class _SignUpState extends State<SignUp> {
   final _nameController = TextEditingController();
   final _mobileController = TextEditingController();
 
-//  // Returns true if email address is in use.
-// Future<bool> checkIfEmailInUse(String emailAddress) async {
-//   try {
-//     // Fetch sign-in methods for the email address
-//     final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(emailAddress);
-
-//     // In case list is not empty
-//     if (list.isNotEmpty) {
-//       // Return true because there is an existing
-//       // user using the email address
-//       return true;
-//     } else {
-//       // Return false because email adress is not in use
-//       return false;
-//     }
-//   } catch (error) {
-//     // Handle error
-//     // ...
-//     return true;
-//   }
-// }
-
   @override
   Widget build(BuildContext context) {
-    const photo = CircleAvatar(
-      radius: 50,
-      child: Padding(
-        padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
-        child: Text('Add Your Photo'),
-      ),
+    const photo = Image(
+      image: AssetImage('assets/image/circle_avatar.gif'),
+      height: 100,
+      width: 100,
     );
+
     final name = TextFormField(
       autofocus: false,
       controller: _nameController,

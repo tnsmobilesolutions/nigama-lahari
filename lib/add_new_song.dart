@@ -222,7 +222,7 @@ class _AddSongState extends State<AddSong> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
-                        color: Colors.green),
+                        color: Colors.white),
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -252,7 +252,7 @@ class _AddSongState extends State<AddSong> {
                     height: 50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
-                        color: Colors.green),
+                        color: Colors.white),
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     width: double.infinity,
                     child: Text(
@@ -266,7 +266,7 @@ class _AddSongState extends State<AddSong> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
-                        color: Colors.green),
+                        color: Colors.white),
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,20 +278,20 @@ class _AddSongState extends State<AddSong> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Icon(
-                                  Icons.cloud_upload_rounded,
+                                  Icons.cloud_upload_outlined,
                                   size: 30,
                                   color: Colors.black,
                                 ),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  'Upload',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                // Text(
+                                //   'Upload',
+                                //   style: TextStyle(
+                                //     fontSize: 18,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

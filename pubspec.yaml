@@ -48,7 +48,8 @@ flutter:
 
   
   assets:
-    - assets/image/pic.jpg
+    - assets/image/
+   
     - assets/music2.mp3
     - assets/music.mp3
 
