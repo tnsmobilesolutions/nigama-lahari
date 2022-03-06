@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 import 'API/firebaseAPI.dart';
 
@@ -15,6 +16,8 @@ class AddSong extends StatefulWidget {
 
 class _AddSongState extends State<AddSong> {
   final _titleController = TextEditingController();
+  final _singerController = TextEditingController();
+  final _lyricsController = TextEditingController();
 
   List<String> _catagory = [
     'ଜାଗରଣ',
@@ -33,6 +36,7 @@ class _AddSongState extends State<AddSong> {
   String? value;
   final height = 100;
   Duration duration = new Duration();
+  var time;
   AudioPlayer? audioPlayer = AudioPlayer();
   String destination = '';
   var newPath;
@@ -42,6 +46,12 @@ class _AddSongState extends State<AddSong> {
 
   void initState() {
     super.initState();
+    // audioPlayer?.onDurationChanged.listen(
+    //   (Duration d) {
+    //     //print('Max duration: $d');
+    //     setState(() => duration = d);
+    //   },
+    // );
   }
 
   // select file from device
@@ -49,7 +59,13 @@ class _AddSongState extends State<AddSong> {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
-
+    time = audioPlayer?.onDurationChanged.listen(
+      (Duration path) {
+        //print('Max duration: $d');
+        setState(() => duration = path);
+      },
+    );
+    print(time);
     setState(() => file = File(path));
   }
 
@@ -57,7 +73,7 @@ class _AddSongState extends State<AddSong> {
   Future uploadFile() async {
     if (file == null) {
       return;
-    } else {}
+    }
     final fileName = basename(file!.path);
     destination = '$_selectedOption/$fileName';
 
@@ -69,7 +85,7 @@ class _AddSongState extends State<AddSong> {
     final snapshot = await task!.whenComplete(() {});
     final songUrl = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $songUrl');
+    //print('Download-Link: $songUrl');
   }
 
   //upload status
@@ -79,10 +95,11 @@ class _AddSongState extends State<AddSong> {
           if (snapshot.hasData) {
             final snap = snapshot.data!;
             final progress = snap.bytesTransferred / snap.totalBytes;
-            final percentage = (progress * 100).toStringAsFixed(0);
-
+            final percentage = (progress * 100).toStringAsFixed(2);
+            print(percentage);
             return Text(
-              '$percentage %',
+              percentage == 100 ? 'Uploaded Successfully' : '$percentage %',
+              //'$percentage %',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             );
           } else {
@@ -93,7 +110,7 @@ class _AddSongState extends State<AddSong> {
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    final fileName = file != null ? basename(file!.path) : '';
 
     return Scaffold(
       appBar: AppBar(
@@ -112,6 +129,8 @@ class _AddSongState extends State<AddSong> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       DropdownButton(
+                        // validator: (value) =>
+                        //     value == null ? 'Please select a catagory' : null,
                         hint: Text(
                           'Catagory',
                           style: TextStyle(
@@ -187,6 +206,7 @@ class _AddSongState extends State<AddSong> {
                   ),
                   TextFormField(
                     style: TextStyle(color: Colors.black),
+                    controller: _singerController,
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
@@ -203,6 +223,7 @@ class _AddSongState extends State<AddSong> {
                   ),
                   TextFormField(
                     style: TextStyle(color: Colors.black),
+                    controller: _lyricsController,
                     autofocus: false,
                     maxLines: height ~/ 6,
                     keyboardType: TextInputType.name,
@@ -225,7 +246,7 @@ class _AddSongState extends State<AddSong> {
                         color: Colors.white),
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GestureDetector(
                           child: Align(
@@ -238,10 +259,15 @@ class _AddSongState extends State<AddSong> {
                           ),
                           onTap: selectFile,
                         ),
-                        Text(
-                          fileName,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        Flexible(
+                          child: Text(
+                            fileName,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ],
                     ),
@@ -255,11 +281,27 @@ class _AddSongState extends State<AddSong> {
                         color: Colors.white),
                     padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                     width: double.infinity,
-                    child: Text(
-                      duration.toString().split('.')[0],
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.timelapse,
+                          size: 30,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        // Flexible(
+                        //   child: Text(
+                        //     file != null ? time.toString().split('.')[0] : '',
+                        //     style: TextStyle(
+                        //       fontSize: 16,
+                        //       fontWeight: FontWeight.w500,
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 20),
@@ -295,10 +337,17 @@ class _AddSongState extends State<AddSong> {
                               ],
                             ),
                           ),
-                          onTap: uploadFile,
+                          //onTap: uploadFile
+                          onTap: () {
+                            _selectedOption == null
+                                ? Fluttertoast.showToast(
+                                    msg: "Please select a catagory")
+                                : uploadFile();
+                          },
                         ),
+
                         task != null ? buildUploadStatus(task!) : Container(),
-                        // percentage == 100 ? print('Uploaded Successfully') : null;
+                        //widget.percentage == 100 ? print('Uploaded Successfully') : null;
                         // Fluttertoast.showToast(msg: "Login Successful")
                       ],
                     ),
