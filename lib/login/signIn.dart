@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
 //import 'package:flutter_application_1/nigam_lahari.dart';
@@ -79,21 +80,6 @@ class _SignInState extends State<SignIn> {
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
           prefixIcon: const Icon(Icons.vpn_key),
-          // suffixIcon: IconButton(
-          //   icon: Icon(
-          //     _passwordVisible! ? Icons.visibility : Icons.visibility_off,
-          //     color: Colors.green,
-          //   ),
-          //   onPressed: () {
-          //     if (_passwordVisible != null) {
-          //       setState(
-          //         () {
-          //           _passwordVisible = !_passwordVisible!;
-          //         },
-          //       );
-          //     }
-          //   },
-          // ),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Password',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -115,60 +101,83 @@ class _SignInState extends State<SignIn> {
                 fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
           )),
     );
+    final resetPassword = TextButton(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ResetPassword()));
+      },
+      child: const Text(
+        'Forgot Password?',
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // logo
-                      const Image(
-                        image: AssetImage('assets/image/pic.jpg'),
-                      ),
-                      const SizedBox(height: 20),
-                      emailField,
-                      const SizedBox(height: 20),
-                      passwordField,
-                      const SizedBox(height: 20),
-                      loginButton,
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          const Text('Don\'t have an account?'),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignUp(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // logo
+                        const Image(
+                          image: AssetImage('assets/image/pic.jpg'),
+                        ),
+                        const SizedBox(height: 20),
+                        emailField,
+                        const SizedBox(height: 20),
+                        passwordField,
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 140),
+                          child: resetPassword,
+                        ),
+                        const SizedBox(height: 10),
+                        loginButton,
+                        // const SizedBox(height: 10),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            FittedBox(
+                                child: const Text('Don\'t have an account?')),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUp(),
+                                  ),
+                                );
+                              },
+                              child: FittedBox(
+                                child: const Text(
+                                  'SignUp',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              );
-                            },
-                            child: const Text(
-                              'SignUp',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  )),
+                          ],
+                        )
+                      ],
+                    )),
+              ),
             ),
           ),
         ),
