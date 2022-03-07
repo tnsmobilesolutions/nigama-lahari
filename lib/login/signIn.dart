@@ -24,11 +24,15 @@ class _SignInState extends State<SignIn> {
   final TextEditingController passswordController = TextEditingController();
   final storage = FlutterSecureStorage();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _passwordVisible = false;
-  // }
+  bool _passwordVisible = false;
+  bool _encryptedPassword = true;
+  String _password = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +62,8 @@ class _SignInState extends State<SignIn> {
     );
 
     //password field
+
     final passwordField = TextFormField(
-      obscureText: true,
       autofocus: false,
       controller: passswordController,
       //keyboardType: TextInputType.phone,
@@ -78,25 +82,61 @@ class _SignInState extends State<SignIn> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
-          // suffixIcon: IconButton(
-          //   icon: Icon(
-          //     _passwordVisible! ? Icons.visibility : Icons.visibility_off,
-          //     color: Colors.green,
-          //   ),
-          //   onPressed: () {
-          //     if (_passwordVisible != null) {
-          //       setState(
-          //         () {
-          //           _passwordVisible = !_passwordVisible!;
-          //         },
-          //       );
-          //     }
-          //   },
-          // ),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Password',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        prefixIcon: const Icon(Icons.vpn_key),
+
+        //eye icon for password field
+        suffixIcon: _passwordVisible
+            ? GestureDetector(
+                child: _encryptedPassword
+                    ? Container(
+                        width: 25,
+                        height: 25,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.visibility_off_rounded,
+                        ),
+                      )
+                    : Container(
+                        width: 25,
+                        height: 25,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.visibility_rounded,
+                        ),
+                      ),
+                onTap: () {
+                  setState(() {
+                    _encryptedPassword = !_encryptedPassword;
+                  });
+                },
+              )
+            : null,
+
+        contentPadding: const EdgeInsets.all(15),
+        hintText: 'Password',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      obscureText: _passwordVisible ? _encryptedPassword : true,
+      onChanged: (value) {
+        // _password = value;
+        if (value.isEmpty) {
+          setState(() {
+            _passwordVisible = false;
+          });
+        } else {
+          if (!_passwordVisible) {
+            setState(
+              () {
+                _passwordVisible = !_passwordVisible;
+              },
+            );
+          }
+        }
+      },
     );
     final loginButton = Material(
       elevation: 5,
