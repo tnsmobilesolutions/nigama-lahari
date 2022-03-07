@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 import 'API/firebaseAPI.dart';
@@ -278,13 +279,13 @@ class _AddSongState extends State<AddSong> {
                       width: double.infinity,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
                         } else {
-                          uploadFile();
-                          //progressIndicator();
+                          await uploadFile();
+                          Navigator.pop(context); //progressIndicator();
                           //buildUploadStatus(task!);
 
                         }
