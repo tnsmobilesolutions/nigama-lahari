@@ -43,7 +43,10 @@ class _AddSongState extends State<AddSong> {
 
   // select file from device
   Future selectFile() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    final result = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.audio,
+    );
     if (result == null) return;
     final path = result.files.single.path!;
 
