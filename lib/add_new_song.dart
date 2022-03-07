@@ -31,7 +31,7 @@ class _AddSongState extends State<AddSong> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
-  List<String> _attribute = [];
+  List<String> _attribute = ['Saddnes', 'Happiness', 'Distance'];
 
   UploadTask? task;
   File? file;
@@ -50,9 +50,12 @@ class _AddSongState extends State<AddSong> {
     super.initState();
   }
 
-  // select file from device
+  //TODO select file from device
   Future selectFile() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    final result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ['mp3']);
     if (result == null) return;
     final path = result.files.single.path!;
 
@@ -318,6 +321,7 @@ class _AddSongState extends State<AddSong> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
+                          uploadFile();
                           SongsModel songsModel = SongsModel(
                             songCategory: 'ଜାଗରଣ',
                             songAttribute: '',
