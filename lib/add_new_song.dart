@@ -50,7 +50,7 @@ class _AddSongState extends State<AddSong> {
     super.initState();
   }
 
-  //TODO select file from device
+  // select file from device
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(
         allowMultiple: false,
@@ -319,9 +319,9 @@ class _AddSongState extends State<AddSong> {
                       width: double.infinity,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          uploadFile();
+                          await uploadFile();
                           SongsModel songsModel = SongsModel(
                             songCategory: 'ଜାଗରଣ',
                             songAttribute: '',
