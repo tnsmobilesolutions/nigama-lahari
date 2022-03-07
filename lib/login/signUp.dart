@@ -117,17 +117,15 @@ class _SignUpState extends State<SignUp> {
         autofocus: false,
         controller: _passwordController,
         //keyboardType: TextInputType.number,
-        //obscureText: true,
-        maxLength: 6,
+        obscureText: true,
         validator: (value) {
-          //RegExp regex = new RegExp(r'^{6}$');
+          RegExp regex = new RegExp(r'^{6}$');
           if (value == null || value.isEmpty) {
             return ("Password length must be atleast 6 characters");
           }
-          //   if (!regex.hasMatch(value)) {
-          //     return ("Enter Valid Password (min 6 character)");
-          //   } else
-          else if (value.length < 6) {
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password (min 6 character)");
+          } else if (value.length < 6) {
             return 'Password length must be atleast 6 characters';
           }
           return null;
@@ -148,7 +146,7 @@ class _SignUpState extends State<SignUp> {
     final confirmPassword = TextFormField(
       autofocus: false,
       controller: _confirmPasswordController,
-      //obscureText: true,
+      obscureText: true,
       validator: (value) {
         if (_confirmPasswordController.text != _passwordController.text) {
           return "Password don't match";

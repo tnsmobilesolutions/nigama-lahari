@@ -16,7 +16,7 @@ class NigamLahari extends StatefulWidget {
 }
 
 final storage = FlutterSecureStorage();
-//ଆବାହନ  ବନ୍ଦନା  ଆରତୀ  ବିଦାୟ ପ୍ରାର୍ଥନା
+
 final List<String> items = [
   'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
   'ଉଠ ଉଠ ନିଶି ହେଲା ପରଭାତ',
@@ -46,11 +46,11 @@ class _NigamLahariState extends State<NigamLahari> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Are you sure ?'),
+          title: Center(child: const Text('Sign Out')),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
-                Text('Do you want to sign out ?'),
+                Center(child: Text('Do you want to sign out ?')),
               ],
             ),
           ),
@@ -64,9 +64,6 @@ class _NigamLahariState extends State<NigamLahari> {
                     Navigator.of(context).pop();
                   },
                 ),
-                // SizedBox(
-                //   width: 30,
-                // ),
                 TextButton(
                   child: const Text('Yes'),
                   onPressed: () async {
