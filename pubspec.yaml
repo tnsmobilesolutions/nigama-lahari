@@ -28,6 +28,7 @@ dependencies:
   file_picker: ^4.4.0
   flutter_ffmpeg: ^0.4.2
   flutter_secure_storage: ^5.0.2
+  path_provider: ^2.0.9
   # open_file: ^3.2.1
 
 dev_dependencies:
@@ -49,7 +50,5 @@ flutter:
   
   assets:
     - assets/image/
-   
-    - assets/music2.mp3
-    - assets/music.mp3
+    
 
