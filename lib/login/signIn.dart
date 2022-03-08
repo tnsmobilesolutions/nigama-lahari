@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
+import 'package:flutter_application_1/login/userAPI.dart';
 //import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -86,7 +87,14 @@ class _SignInState extends State<SignIn> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            signIn(emailController.text, passswordController.text);
+            if (_formkey.currentState!.validate()) {
+              userAPI().signIn(emailController.text, passswordController.text);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NigamLahari(),
+                  ));
+            }
           },
           child: Text(
             "Login",
@@ -179,17 +187,17 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  void signIn(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      //print(userCredential.user?.uid);
-      await storage.write(key: 'uid', value: userCredential.user?.uid);
-      Fluttertoast.showToast(msg: "Login Successful");
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => NigamLahari()));
-    } else if (!_formkey.currentState!.validate()) {
-      Text('Wrong email or password');
-    }
-  }
+  // void signIn(String email, String password) async {
+  //   if (_formkey.currentState!.validate()) {
+  //     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+  //     //print(userCredential.user?.uid);
+  //     await storage.write(key: 'uid', value: userCredential.user?.uid);
+  //     Fluttertoast.showToast(msg: "Login Successful");
+  //     Navigator.of(context).pushReplacement(
+  //         MaterialPageRoute(builder: (context) => NigamLahari()));
+  //   } else if (!_formkey.currentState!.validate()) {
+  //     Text('Wrong email or password');
+  //   }
+  // }
 }

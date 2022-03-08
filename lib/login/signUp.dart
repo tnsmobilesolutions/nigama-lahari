@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/homePage.dart';
+import 'package:flutter_application_1/login/userAPI.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -116,7 +118,6 @@ class _SignUpState extends State<SignUp> {
     final password = TextFormField(
         autofocus: false,
         controller: _passwordController,
-        //keyboardType: TextInputType.number,
         obscureText: true,
         validator: (value) {
           RegExp regex = new RegExp(r'^{6}$');
@@ -173,8 +174,16 @@ class _SignUpState extends State<SignUp> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {
-            signUp(_emailController.text, _passwordController.text);
+          onPressed: () async {
+            if (_formkey.currentState!.validate()) {
+              await userAPI()
+                  .signUp(_emailController.text, _passwordController.text);
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => HomePage(),
+              //     ));
+            }
           },
           child: Text(
             "SignUp",
@@ -224,43 +233,43 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void signUp(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
-          .catchError(
-        (e) {
-          Fluttertoast.showToast(msg: e!.message);
-        },
-      );
-    }
-  }
+  // void signUp(String email, String password) async {
+  //   if (_formkey.currentState!.validate()) {
+  //     await _auth
+  //         .createUserWithEmailAndPassword(email: email, password: password)
+  //         .then((value) => {postDetailsToFirestore()})
+  //         .catchError(
+  //       (e) {
+  //         Fluttertoast.showToast(msg: e!.message);
+  //       },
+  //     );
+  //   }
+  // }
 
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our data
-    // sending these values
+  // postDetailsToFirestore() async {
+  // calling our firestore
+  // calling our data
+  // sending these values
 
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   User? user = _auth.currentUser;
 
-    AppUser data = AppUser();
+  //   AppUser data = AppUser();
 
-    // writing all the values
-    data.email = user!.email;
-    data.uid = user.uid;
-    data.name = _nameController.text;
-    data.mobile = _mobileController.text;
+  //   // writing all the values
+  //   data.email = user!.email;
+  //   data.uid = user.uid;
+  //   data.name = _nameController.text;
+  //   data.mobile = _mobileController.text;
 
-    await firebaseFirestore.collection("users").doc(user.uid).set(
-          data.toMap(),
-        );
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
+  //   await firebaseFirestore.collection("users").doc(user.uid).set(
+  //         data.toMap(),
+  //       );
+  //   Fluttertoast.showToast(msg: "Account created successfully :) ");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => NigamLahari()),
-        (route) => false);
-  }
+  //   Navigator.pushAndRemoveUntil(
+  //       (context),
+  //       MaterialPageRoute(builder: (context) => NigamLahari()),
+  //       (route) => false);
+  // }
 }
