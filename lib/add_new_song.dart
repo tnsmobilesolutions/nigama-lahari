@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -6,6 +7,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
 import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:uuid/uuid.dart';
+import 'API/song_api.dart';
+import 'models/songs_model.dart';
 
 class AddSong extends StatefulWidget {
   const AddSong({Key? key}) : super(key: key);
@@ -20,6 +24,7 @@ class _AddSongState extends State<AddSong> {
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
+  final _lyricsController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -39,7 +44,8 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
-
+  String? songURL;
+  String duration = '';
   double? sizeInMb;
   var file1;
 
@@ -71,14 +77,19 @@ class _AddSongState extends State<AddSong> {
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
-    showMyDialog();
 
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {});
-    final songUrl = await snapshot.ref.getDownloadURL();
+    songURL = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $songUrl');
+    //autodetects audio duration
+    final player = AudioPlayer();
+    await player.setUrl(songURL!);
+    duration = player.getDuration().toString();
+
+    print('Download-Link: $songURL');
+    print(duration);
   }
 
   //upload status
@@ -112,24 +123,25 @@ class _AddSongState extends State<AddSong> {
         },
       );
 
+  // Alert Dialog to show the progress
   Future<void> showMyDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Center(
-            child: val == 100.0
-                ? Text('Uploaded Successfully')
-                : Text('Uploading...'),
-          ),
+          // title: Center(
+          //   child: val == 100.0
+          //       ? Text('Uploaded Successfully')
+          //       : Text('Uploading...'),
+          // ),
           content: buildUploadStatus(task!),
           actions: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: val == 100.0 ? Text('Done') : Text(''),
+                  child: Text('Done'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -141,6 +153,16 @@ class _AddSongState extends State<AddSong> {
       },
     );
   }
+
+  // final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
+
+  // Future<int> lenghOfAudio(File audio) async {
+  //   MediaInformation info =
+  //       await _flutterFFprobe.getMediaInformation(file!.path);
+  //   print(info);
+
+  //   return 1;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -249,6 +271,7 @@ class _AddSongState extends State<AddSong> {
                       height: 20,
                     ),
                     TextFormField(
+                      controller: _lyricsController,
                       style: TextStyle(color: Colors.black),
                       autofocus: false,
                       maxLines: height ~/ 8,
@@ -312,20 +335,24 @@ class _AddSongState extends State<AddSong> {
                               msg: "Select an audio file of max size 10 MB");
                         } else {
                           uploadFile();
+                          showMyDialog();
                         }
 
-                        // if (_formKey.currentState!.validate()) {
-                        //   SongsModel songsModel = SongsModel(
-                        //     songCategory: 'ଜାଗରଣ',
-                        //     songAttribute: '',
-                        //     songTitle: _titleController.text,
-                        //     singerName: _singerNameController.text,
-                        //     songId: '12345',
-                        //   );
+                        if (_formKey.currentState!.validate()) {
+                          SongsModel songsModel = SongsModel(
+                            songCategory: _selectedOption,
+                            songAttribute: _attributeController.text,
+                            songTitle: _titleController.text,
+                            singerName: _singerNameController.text,
+                            songText: _lyricsController.text,
+                            songURL: songURL,
+                            songId: Uuid().v1(),
+                            songDuration: double.tryParse(duration),
+                          );
 
-                        //   final songDetails =
-                        //       SongAPI().createNewSong(songsModel);
-                        // }
+                          final songDetails =
+                              SongAPI().createNewSong(songsModel);
+                        }
                       },
                       child: Text('Submit'),
                     ),
