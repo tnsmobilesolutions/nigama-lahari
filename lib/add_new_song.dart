@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
 import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+
+import 'API/song_api.dart';
 
 class AddSong extends StatefulWidget {
   const AddSong({Key? key}) : super(key: key);
@@ -20,6 +23,7 @@ class _AddSongState extends State<AddSong> {
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
+  final _songLyrics = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -249,6 +253,7 @@ class _AddSongState extends State<AddSong> {
                       height: 20,
                     ),
                     TextFormField(
+                      controller: _songLyrics,
                       style: TextStyle(color: Colors.black),
                       autofocus: false,
                       maxLines: height ~/ 8,
@@ -314,18 +319,18 @@ class _AddSongState extends State<AddSong> {
                           uploadFile();
                         }
 
-                        // if (_formKey.currentState!.validate()) {
-                        //   SongsModel songsModel = SongsModel(
-                        //     songCategory: 'ଜାଗରଣ',
-                        //     songAttribute: '',
-                        //     songTitle: _titleController.text,
-                        //     singerName: _singerNameController.text,
-                        //     songId: '12345',
-                        //   );
+                        if (_formKey.currentState!.validate()) {
+                          SongsModel songsModel = SongsModel(
+                            songCategory: _selectedOption,
+                            songAttribute: _attributeController.text,
+                            songTitle: _titleController.text,
+                            singerName: _singerNameController.text,
+                            songId: '12345',
+                          );
 
-                        //   final songDetails =
-                        //       SongAPI().createNewSong(songsModel);
-                        // }
+                          final songDetails =
+                              SongAPI().createNewSong(songsModel);
+                        }
                       },
                       child: Text('Submit'),
                     ),
