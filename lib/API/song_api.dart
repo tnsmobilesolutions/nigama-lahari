@@ -6,12 +6,15 @@ class SongAPI {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
     final Reference = await songs.add({
-      "isEditable": songsModel.isEditable,
-      "singerName": songsModel.singerName,
+      "songId": songsModel.songId,
+      "songcatageory": songsModel.songCategory,
       "songAttributes": songsModel.songAttribute,
+      "songTitle": songsModel.songTitle,
+      "singerName": songsModel.singerName,
+      "songText": songsModel.songText,
+      "isEditable": songsModel.isEditable,
       "songDration": songsModel.songDuration,
       "songUrl": songsModel.songURL,
-      "songcatageory": songsModel.songCategory,
     });
     return Reference.id;
   }
