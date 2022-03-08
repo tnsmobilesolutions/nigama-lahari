@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:flutter_application_1/login/signIn.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -25,6 +24,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
     final emailField = TextFormField(
+      controller: emailController,
       autofocus: false,
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
@@ -46,6 +46,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Reset Password'),
       ),
       body: Center(
