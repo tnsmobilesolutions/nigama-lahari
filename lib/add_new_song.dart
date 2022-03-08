@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
 import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -15,6 +15,8 @@ class AddSong extends StatefulWidget {
 }
 
 class _AddSongState extends State<AddSong> {
+  var val;
+
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
@@ -30,14 +32,14 @@ class _AddSongState extends State<AddSong> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
-  List<String> _attribute = [];
+
   UploadTask? task;
   File? file;
   String? _selectedOption;
   final height = 100;
   String destination = '';
   double percentage = 0;
-  //var fileSize;
+
   double? sizeInMb;
   var file1;
 
@@ -64,12 +66,12 @@ class _AddSongState extends State<AddSong> {
     if (file == null) {
       return;
     } else {}
-    final fileName = basename(file!.path);
+    final fileName = path.basename(file!.path);
     destination = '$_selectedOption/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
-    buildUploadStatus(task!);
+    showMyDialog();
 
     if (task == null) return;
 
@@ -88,12 +90,13 @@ class _AddSongState extends State<AddSong> {
             final progress = snap.bytesTransferred / snap.totalBytes;
             percentage =
                 double.parse((progress * 100).toStringAsFixed(0)) / 100;
-            //String str = percentage.toString();
 
+            val = percentage * 100.toInt();
+            print(val);
             return CircularPercentIndicator(
               animation: true,
-              radius: 50,
-              lineWidth: 5,
+              radius: 55,
+              lineWidth: 15,
               percent: percentage,
               progressColor: Colors.green,
               backgroundColor: Colors.green.shade200,
@@ -108,9 +111,41 @@ class _AddSongState extends State<AddSong> {
           }
         },
       );
+
+  Future<void> showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: val == 100.0
+                ? Text('Uploaded Successfully')
+                : Text('Uploading...'),
+          ),
+          content: buildUploadStatus(task!),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  child: val == 100.0 ? Text('Done') : Text(''),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    final fileName =
+        file != null ? path.basename(file!.path) : 'No File Selected';
 
     return Scaffold(
       appBar: AppBar(
@@ -263,20 +298,7 @@ class _AddSongState extends State<AddSong> {
                       ),
                       width: double.infinity,
                     ),
-                    SizedBox(height: 10),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.white),
-                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                      margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                      child: Flexible(
-                        child: task != null
-                            ? buildUploadStatus(task!)
-                            : Container(),
-                      ),
-                      width: double.infinity,
-                    ),
+                    SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: () {
                         if (_selectedOption == null) {
