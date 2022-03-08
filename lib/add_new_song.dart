@@ -36,6 +36,8 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
+  //var fileSize;
+  double? sizeInMb;
 
   void initState() {
     super.initState();
@@ -47,7 +49,20 @@ class _AddSongState extends State<AddSong> {
       allowMultiple: false,
       type: FileType.audio,
     );
-    if (result == null) return;
+    final file1 = result!.files.first;
+    sizeInMb = file1.size / 1048576;
+    //print('size: ${file1.size / 1048576}');
+
+    //print(FilePickerResult(result));
+    // if (result != null) {
+    //   final file = result.files.first;
+    //   final f = File('$file');
+    //   int sizeInBytes = f.lengthSync();
+    //   sizeInMb = sizeInBytes / (1024 * 1024);
+    // } else {
+    //   return;
+    // }
+
     final path = result.files.single.path!;
 
     setState(() => file = File(path));
@@ -282,11 +297,11 @@ class _AddSongState extends State<AddSong> {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
+                        } else if (sizeInMb! > 10) {
+                          Fluttertoast.showToast(
+                              msg: "Select an audio file of max size 10 MB");
                         } else {
                           uploadFile();
-                          //progressIndicator();
-                          //buildUploadStatus(task!);
-
                         }
 
                         // if (_formKey.currentState!.validate()) {
