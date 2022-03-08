@@ -17,6 +17,7 @@ class AddSong extends StatefulWidget {
 class _AddSongState extends State<AddSong> {
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
+  final _attributeController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,6 +39,7 @@ class _AddSongState extends State<AddSong> {
   double percentage = 0;
   //var fileSize;
   double? sizeInMb;
+  var file1;
 
   void initState() {
     super.initState();
@@ -49,22 +51,11 @@ class _AddSongState extends State<AddSong> {
       allowMultiple: false,
       type: FileType.audio,
     );
-    final file1 = result!.files.first;
-    sizeInMb = file1.size / 1048576;
-    //print('size: ${file1.size / 1048576}');
 
-    //print(FilePickerResult(result));
-    // if (result != null) {
-    //   final file = result.files.first;
-    //   final f = File('$file');
-    //   int sizeInBytes = f.lengthSync();
-    //   sizeInMb = sizeInBytes / (1024 * 1024);
-    // } else {
-    //   return;
-    // }
+    file1 = result!.files.first;
+    sizeInMb = file1.size / 1048576;
 
     final path = result.files.single.path!;
-
     setState(() => file = File(path));
   }
 
@@ -97,10 +88,12 @@ class _AddSongState extends State<AddSong> {
             final progress = snap.bytesTransferred / snap.totalBytes;
             percentage =
                 double.parse((progress * 100).toStringAsFixed(0)) / 100;
+            //String str = percentage.toString();
 
             return CircularPercentIndicator(
+              animation: true,
               radius: 50,
-              lineWidth: 20,
+              lineWidth: 5,
               percent: percentage,
               progressColor: Colors.green,
               backgroundColor: Colors.green.shade200,
@@ -164,31 +157,6 @@ class _AddSongState extends State<AddSong> {
                             },
                           ).toList(),
                         ),
-                        DropdownButton(
-                          hint: Text(
-                            'Atribute',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                            ),
-                          ),
-                          value: _selectedOption,
-                          dropdownColor: Colors.yellowAccent[700],
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedOption = value as String?;
-                              print(_selectedOption.toString());
-                            });
-                          },
-                          items: _attribute.map(
-                            (val) {
-                              return DropdownMenuItem(
-                                child: new Text(val),
-                                value: val,
-                              );
-                            },
-                          ).toList(),
-                        ),
                       ],
                     ),
                     SizedBox(
@@ -202,7 +170,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          hintText: 'Title',
+                          labelText: 'Title',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -219,7 +187,24 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          hintText: 'Singer',
+                          labelText: 'Singer',
+                          hintStyle:
+                              TextStyle(fontSize: 15.0, color: Colors.black),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _attributeController,
+                      style: TextStyle(color: Colors.black),
+                      autofocus: false,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'Attributes',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -231,12 +216,12 @@ class _AddSongState extends State<AddSong> {
                     TextFormField(
                       style: TextStyle(color: Colors.black),
                       autofocus: false,
-                      maxLines: height ~/ 6,
+                      maxLines: height ~/ 8,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.newline,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(15),
-                        hintText: 'Song Lyrics',
+                        labelText: 'Song Lyrics',
                         hintStyle:
                             TextStyle(fontSize: 15.0, color: Colors.black),
                         border: OutlineInputBorder(
@@ -297,6 +282,9 @@ class _AddSongState extends State<AddSong> {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
+                        } else if (file1 == null) {
+                          Fluttertoast.showToast(
+                              msg: "Select an audio file to upload");
                         } else if (sizeInMb! > 10) {
                           Fluttertoast.showToast(
                               msg: "Select an audio file of max size 10 MB");
