@@ -7,24 +7,25 @@ import 'package:flutter_application_1/models/usermodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final _auth = FirebaseAuth.instance;
-final _formkey = GlobalKey<FormState>();
+// final _formkey = GlobalKey<FormState>();
 final TextEditingController emailController = TextEditingController();
-final TextEditingController passswordController = TextEditingController();
 
 // Create a text controller and use it to retrieve the current value of the TextField.
 
-final passwordController = TextEditingController();
-final confirmPasswordController = TextEditingController();
 final nameController = TextEditingController();
 final mobileController = TextEditingController();
 
 class userAPI {
+// SignIn
+
   void signIn(String email, String password) async {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((uid) => {});
     await Fluttertoast.showToast(msg: "LogIn successfull :) ");
   }
+
+  // SignUp
 
   dynamic signUp(String email, String password) async {
     await _auth
@@ -58,4 +59,28 @@ class userAPI {
         );
     await Fluttertoast.showToast(msg: "Account created successfully :) ");
   }
+
+  // Reset Password
+
+  Future resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+
+      await Fluttertoast.showToast(
+          msg: "Password Reset Email has been sent  :) ");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        await Fluttertoast.showToast(msg: "No user found for that email.:) ");
+      }
+    }
+  }
 }
+
+//  void signIn(String email, String password) async {
+//     await _auth
+//         .signInWithEmailAndPassword(email: email, password: password)
+//         .then((uid) => {});
+//     await Fluttertoast.showToast(msg: "LogIn successfull :) ");
+//   }
+

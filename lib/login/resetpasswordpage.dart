@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/API/userAPI.dart';
 import 'package:flutter_application_1/login/signIn.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key? key}) : super(key: key);
@@ -62,13 +64,16 @@ class _ResetPasswordState extends State<ResetPassword> {
               SizedBox(height: 20),
               ElevatedButton(
                 child: Text('Send Request'),
-                onPressed: () {
+                onPressed: () async {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formkey.currentState!.validate()) {
                     setState(() {
                       email = emailController.text;
                     });
-                    resetPassword();
+                    await userAPI().resetPassword(email);
+                    await Fluttertoast.showToast(
+                        msg: 'Password Sent successfull');
+                    Navigator.pop(context);
                   }
                 },
               ),
@@ -77,34 +82,5 @@ class _ResetPasswordState extends State<ResetPassword> {
         ),
       ),
     );
-  }
-
-  Future resetPassword() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailController.text.trim());
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.orangeAccent,
-          content: Text(
-            'Password Reset Email has been sent !',
-            style: TextStyle(fontSize: 18.0),
-          ),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              'No user found for that email.',
-              style: TextStyle(fontSize: 18.0),
-            ),
-          ),
-        );
-      }
-    }
   }
 }
