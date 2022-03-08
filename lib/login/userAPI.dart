@@ -57,6 +57,5 @@ class userAPI {
           data.toMap(),
         );
     await Fluttertoast.showToast(msg: "Account created successfully :) ");
-    return NigamLahari();
   }
 }

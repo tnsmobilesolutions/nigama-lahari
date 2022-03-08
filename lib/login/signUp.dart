@@ -120,7 +120,7 @@ class _SignUpState extends State<SignUp> {
         controller: _passwordController,
         obscureText: true,
         validator: (value) {
-          RegExp regex = new RegExp(r'^{6}$');
+          RegExp regex = new RegExp(r'^.{6,}$');
           if (value == null || value.isEmpty) {
             return ("Password length must be atleast 6 characters");
           }
@@ -178,11 +178,11 @@ class _SignUpState extends State<SignUp> {
             if (_formkey.currentState!.validate()) {
               await userAPI()
                   .signUp(_emailController.text, _passwordController.text);
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => HomePage(),
-              //     ));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NigamLahari(),
+                  ));
             }
           },
           child: Text(
@@ -232,44 +232,4 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-
-  // void signUp(String email, String password) async {
-  //   if (_formkey.currentState!.validate()) {
-  //     await _auth
-  //         .createUserWithEmailAndPassword(email: email, password: password)
-  //         .then((value) => {postDetailsToFirestore()})
-  //         .catchError(
-  //       (e) {
-  //         Fluttertoast.showToast(msg: e!.message);
-  //       },
-  //     );
-  //   }
-  // }
-
-  // postDetailsToFirestore() async {
-  // calling our firestore
-  // calling our data
-  // sending these values
-
-  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  //   User? user = _auth.currentUser;
-
-  //   AppUser data = AppUser();
-
-  //   // writing all the values
-  //   data.email = user!.email;
-  //   data.uid = user.uid;
-  //   data.name = _nameController.text;
-  //   data.mobile = _mobileController.text;
-
-  //   await firebaseFirestore.collection("users").doc(user.uid).set(
-  //         data.toMap(),
-  //       );
-  //   Fluttertoast.showToast(msg: "Account created successfully :) ");
-
-  //   Navigator.pushAndRemoveUntil(
-  //       (context),
-  //       MaterialPageRoute(builder: (context) => NigamLahari()),
-  //       (route) => false);
-  // }
 }
