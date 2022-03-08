@@ -5,7 +5,6 @@ import 'package:flutter_application_1/login/resetpasswordpage.dart';
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 //import 'package:flutter_application_1/nigam_lahari.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../nigam_lahari.dart';
@@ -111,7 +110,7 @@ class _SignInState extends State<SignIn> {
       child: const Text(
         'Forgot Password?',
         style: TextStyle(
-          color: Colors.blue,
+          color: Colors.orange,
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
@@ -141,11 +140,8 @@ class _SignInState extends State<SignIn> {
                         emailField,
                         const SizedBox(height: 20),
                         passwordField,
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 140),
-                          child: resetPassword,
-                        ),
+                        const SizedBox(height: 20),
+                        resetPassword,
                         const SizedBox(height: 10),
                         loginButton,
                         // const SizedBox(height: 10),
