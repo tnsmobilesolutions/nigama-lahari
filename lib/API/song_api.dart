@@ -13,7 +13,7 @@ class SongAPI {
       "singerName": songsModel.singerName,
       "songText": songsModel.songText,
       "isEditable": songsModel.isEditable,
-      "songDration": songsModel.songDuration,
+      "songDuration": songsModel.songDuration,
       "songUrl": songsModel.songURL,
     });
     return Reference.id;

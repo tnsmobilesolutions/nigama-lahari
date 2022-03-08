@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
 import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-import 'API/song_api.dart';
 
 class AddSong extends StatefulWidget {
   const AddSong({Key? key}) : super(key: key);
@@ -19,9 +15,11 @@ class AddSong extends StatefulWidget {
 }
 
 class _AddSongState extends State<AddSong> {
+  var val;
+
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
-  final _songLyrics = TextEditingController();
+  final _attributeController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -34,13 +32,16 @@ class _AddSongState extends State<AddSong> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
-  List<String> _attribute = [];
+
   UploadTask? task;
   File? file;
   String? _selectedOption;
   final height = 100;
   String destination = '';
   double percentage = 0;
+
+  double? sizeInMb;
+  var file1;
 
   void initState() {
     super.initState();
@@ -52,9 +53,11 @@ class _AddSongState extends State<AddSong> {
       allowMultiple: false,
       type: FileType.audio,
     );
-    if (result == null) return;
-    final path = result.files.single.path!;
 
+    file1 = result!.files.first;
+    sizeInMb = file1.size / 1048576;
+
+    final path = result.files.single.path!;
     setState(() => file = File(path));
   }
 
@@ -63,12 +66,12 @@ class _AddSongState extends State<AddSong> {
     if (file == null) {
       return;
     } else {}
-    final fileName = basename(file!.path);
+    final fileName = path.basename(file!.path);
     destination = '$_selectedOption/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
-    buildUploadStatus(task!);
+    showMyDialog();
 
     if (task == null) return;
 
@@ -88,9 +91,12 @@ class _AddSongState extends State<AddSong> {
             percentage =
                 double.parse((progress * 100).toStringAsFixed(0)) / 100;
 
+            val = percentage * 100.toInt();
+            print(val);
             return CircularPercentIndicator(
-              radius: 50,
-              lineWidth: 20,
+              animation: true,
+              radius: 55,
+              lineWidth: 15,
               percent: percentage,
               progressColor: Colors.green,
               backgroundColor: Colors.green.shade200,
@@ -105,9 +111,41 @@ class _AddSongState extends State<AddSong> {
           }
         },
       );
+
+  Future<void> showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: val == 100.0
+                ? Text('Uploaded Successfully')
+                : Text('Uploading...'),
+          ),
+          content: buildUploadStatus(task!),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  child: val == 100.0 ? Text('Done') : Text(''),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    final fileName =
+        file != null ? path.basename(file!.path) : 'No File Selected';
 
     return Scaffold(
       appBar: AppBar(
@@ -154,31 +192,6 @@ class _AddSongState extends State<AddSong> {
                             },
                           ).toList(),
                         ),
-                        DropdownButton(
-                          hint: Text(
-                            'Atribute',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                            ),
-                          ),
-                          value: _selectedOption,
-                          dropdownColor: Colors.yellowAccent[700],
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedOption = value as String?;
-                              print(_selectedOption.toString());
-                            });
-                          },
-                          items: _attribute.map(
-                            (val) {
-                              return DropdownMenuItem(
-                                child: new Text(val),
-                                value: val,
-                              );
-                            },
-                          ).toList(),
-                        ),
                       ],
                     ),
                     SizedBox(
@@ -192,7 +205,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          hintText: 'Title',
+                          labelText: 'Title',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -209,7 +222,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          hintText: 'Singer',
+                          labelText: 'Singer',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -219,15 +232,31 @@ class _AddSongState extends State<AddSong> {
                       height: 20,
                     ),
                     TextFormField(
-                      controller: _songLyrics,
+                      controller: _attributeController,
                       style: TextStyle(color: Colors.black),
                       autofocus: false,
-                      maxLines: height ~/ 6,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'Attributes',
+                          hintStyle:
+                              TextStyle(fontSize: 15.0, color: Colors.black),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.black),
+                      autofocus: false,
+                      maxLines: height ~/ 8,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.newline,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(15),
-                        hintText: 'Song Lyrics',
+                        labelText: 'Song Lyrics',
                         hintStyle:
                             TextStyle(fontSize: 15.0, color: Colors.black),
                         border: OutlineInputBorder(
@@ -269,31 +298,21 @@ class _AddSongState extends State<AddSong> {
                       ),
                       width: double.infinity,
                     ),
-                    SizedBox(height: 10),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.white),
-                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                      margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                      child: Flexible(
-                        child: task != null
-                            ? buildUploadStatus(task!)
-                            : Container(),
-                      ),
-                      width: double.infinity,
-                    ),
+                    SizedBox(height: 30),
                     ElevatedButton(
-                      onPressed: () async {
-                        // if (_selectedOption == null) {
-                        //   Fluttertoast.showToast(
-                        //       msg: "Please select a catagory");
-                        // } else {
-                        //   await uploadFile();
-                        //   Navigator.pop(context); //progressIndicator();
-                        //   //buildUploadStatus(task!);
-
-                        // }
+                      onPressed: () {
+                        if (_selectedOption == null) {
+                          Fluttertoast.showToast(
+                              msg: "Please select a catagory");
+                        } else if (file1 == null) {
+                          Fluttertoast.showToast(
+                              msg: "Select an audio file to upload");
+                        } else if (sizeInMb! > 10) {
+                          Fluttertoast.showToast(
+                              msg: "Select an audio file of max size 10 MB");
+                        } else {
+                          uploadFile();
+                        }
 
                         // if (_formKey.currentState!.validate()) {
                         //   SongsModel songsModel = SongsModel(
@@ -302,7 +321,6 @@ class _AddSongState extends State<AddSong> {
                         //     songTitle: _titleController.text,
                         //     singerName: _singerNameController.text,
                         //     songId: '12345',
-                        //     songText: _songLyrics.text,
                         //   );
 
                         //   final songDetails =
