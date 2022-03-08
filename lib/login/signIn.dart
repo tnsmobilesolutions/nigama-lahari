@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
-import 'package:flutter_application_1/login/userAPI.dart';
+import 'package:flutter_application_1/API/userAPI.dart';
 //import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

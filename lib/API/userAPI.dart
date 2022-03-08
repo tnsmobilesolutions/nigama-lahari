@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homePage.dart';
-import 'package:flutter_application_1/login/usermodel.dart';
-import 'package:flutter_application_1/nigam_lahari.dart';
+
+import 'package:flutter_application_1/models/usermodel.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -24,6 +23,7 @@ class userAPI {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((uid) => {});
+    await Fluttertoast.showToast(msg: "LogIn successfull :) ");
   }
 
   dynamic signUp(String email, String password) async {

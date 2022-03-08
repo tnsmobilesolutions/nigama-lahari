@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/homePage.dart';
-import 'package:flutter_application_1/login/userAPI.dart';
+import 'package:flutter_application_1/API/userAPI.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-import 'package:flutter_application_1/login/usermodel.dart';
+import 'package:flutter_application_1/models/usermodel.dart';
 import 'package:flutter_application_1/nigam_lahari.dart';
 
 class SignUp extends StatefulWidget {
