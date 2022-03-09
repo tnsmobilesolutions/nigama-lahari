@@ -14,23 +14,11 @@ class DataStore {
     return _instance;
   }
 
-  // All fields or methods to be accessible from outside
+  // All fields or getters to be accessible from outside
   List<Song>? allSongs;
-  List<String>? allCategories;
-  bool get isUserLoggedIn {
-    return FirebaseAuth.instance.currentUser != null;
-  }
 
-  // All Private methods
-  loadAllData() async {
-    // Load all songs
-    allSongs = await SearchSongAPI().getAllSongs();
-    getAllCategories();
-    print(allCategories);
-  }
-
-  getAllCategories() {
-    print('calling getAllCategories');
+  List<String>? get allCategories {
+    print('calling getter of allCategories');
     List<String>? result;
     if (allSongs != null) {
       var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
@@ -41,6 +29,16 @@ class DataStore {
         }
       });
     }
-    allCategories = result;
+    return result;
+  }
+
+  bool get isUserLoggedIn {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  // All public methods
+  Future<void> loadAllData() async {
+    // Load all songs
+    allSongs = await SearchSongAPI().getAllSongs();
   }
 }

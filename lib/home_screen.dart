@@ -91,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('home screen loading...');
-    print(DataStore().allCategories);
+    final categories = DataStore().allCategories;
+    print(categories?.length);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -131,193 +132,48 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 24),
-                GestureDetector(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ଜାଗରଣ',
-                      style: CommonStyle.myStyle,
-                    ),
-                  ),
-                  onTap: () {
-                    //TODO  call firebase API to get the list of jagarana songs
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ScrollableSongList(
-                          listName: 'ପ୍ରତୀକ୍ଷା',
-                          song: items,
-                          singer: singer,
-                        ),
-                      ),
-                    ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
-                  },
-                ),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ପ୍ରତୀକ୍ଷା',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ପ୍ରତୀକ୍ଷା',
-                            song: items,
-                            singer: singer,
+      body: FutureBuilder<List<String>?>(
+        future: SearchSongAPI().getAllCategories(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.done:
+              if (snapshot.hasError)
+                return Text(snapshot.error.toString());
+              else
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Center(
+                          child: Text(
+                            snapshot.data![index],
+                            style: CommonStyle.myStyle,
                           ),
                         ),
+                        onTap: () {
+                          //TODO  call firebase API to get the list of jagarana songs
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ScrollableSongList(
+                                listName: snapshot.data![index],
+                                song: items,
+                                singer: singer,
+                              ),
+                            ),
+                          ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                        },
                       );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ଆବାହନ',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ଆବାହନ',
-                            song: items,
-                            singer: singer,
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ଆରତୀ',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ଆରତୀ',
-                            song: items,
-                            singer: singer,
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ବନ୍ଦନା',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ବନ୍ଦନା',
-                            song: items,
-                            singer: singer,
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ପ୍ରାର୍ଥନା',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ପ୍ରାର୍ଥନା',
-                            song: items,
-                            singer: singer,
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(height: 24),
-                GestureDetector(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ବିଦାୟ ପ୍ରାର୍ଥନା',
-                        style: CommonStyle.myStyle,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScrollableSongList(
-                            listName: 'ବିଦାୟ ପ୍ରାର୍ଥନା',
-                            song: items,
-                            singer: singer,
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(height: 8),
-                Divider(
-                  thickness: 2,
-                ),
-              ],
-            ),
-          ),
-        ),
+                    });
+
+            default:
+              return Text('Unhandle State');
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.transparent,

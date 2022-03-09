@@ -18,6 +18,43 @@ class SearchSongAPI {
     return lstSongs;
   }
 
+  Future<List<String>?> getAllCategories() {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+
+    final lstResult = songs.get().then((querySnapshot) {
+      List<String>? lstCategories = [];
+      querySnapshot.docs.forEach((element) {
+        final songMap = element.data() as Map<String, dynamic>;
+        // print(songMap);
+        final song = Song.fromMap(songMap);
+        if (song.songCategory != null &&
+            !lstCategories.contains(song.songCategory)) {
+          lstCategories.add(song.songCategory ?? "No Category");
+        }
+      });
+      return lstCategories;
+    });
+    return lstResult;
+  }
+
+  Future<List<Song>?> getAllSongsInCategory(String categoryName) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+
+    final lstResult = songs.get().then((querySnapshot) {
+      List<Song>? lstSongs = [];
+      querySnapshot.docs.forEach((element) {
+        final songMap = element.data() as Map<String, dynamic>;
+        // print(songMap);
+        final song = Song.fromMap(songMap);
+        if (song.songCategory == categoryName) {
+          lstSongs.add(song);
+        }
+      });
+      return lstSongs;
+    });
+    return lstResult;
+  }
+
   Future<List<Song>?> getSongByName(String name) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
