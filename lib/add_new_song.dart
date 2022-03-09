@@ -332,7 +332,7 @@ class _AddSongState extends State<AddSong> {
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );
-                          print(songURL);
+
                           final songDetails =
                               SongAPI().createNewSong(songsModel);
                         }
