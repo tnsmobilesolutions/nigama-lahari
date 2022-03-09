@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'music_player.dart';
 
 class ScrollableSongList extends StatefulWidget {
-  ScrollableSongList(
-      {Key? key,
-      required this.listName,
-      required this.song,
-      required this.singer})
-      : super(key: key);
+  ScrollableSongList({
+    Key? key,
+    required this.listName,
+    required this.song,
+    required this.singer,
+  }) : super(key: key);
 
   final String? listName;
   final List<String>? song, singer;
@@ -66,6 +66,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   builder: (context) => MusicPlayer(
                     songName: widget.song![index],
                     singerName: widget.singer![index],
+                    //url: widget.url!,
                   ),
                 ),
               );

@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
 
 class MusicPlayer extends StatefulWidget {
-  MusicPlayer({Key? key, required this.songName, required this.singerName})
-      : super(key: key);
+  MusicPlayer({
+    Key? key,
+    required this.songName,
+    required this.singerName,
+  }) : super(key: key);
 
   final String songName, singerName;
 
@@ -24,13 +27,20 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   AudioService? audioService = AudioService();
   AudioPlayer? audioPlayer = AudioPlayer();
-  PlayerState audioPlayerState = PlayerState.PAUSED;
+  PlayerState playerState = PlayerState.PAUSED;
   AudioCache? audioCache;
-  String path = 'music2.mp3';
-
+  String path = 'audio.mp3';
+  String url =
+      'https://firebasestorage.googleapis.com/v0/b/nigama-lahari.appspot.com/o/%E0%AC%AC%E0%AC%A8%E0%AD%8D%E0%AC%A6%E0%AC%A8%E0%AC%BE%2F%5BLyric%5D%20Togetsukyou%20_Kimi%20Omofu_%20-%20Mai%20Kuraki(MP3_160K).mp3?alt=media&token=a312903a-5889-4852-b688-2da0a358292e';
   @override
   void initState() {
     super.initState();
+
+    audioPlayer!.onPlayerStateChanged.listen((PlayerState s) {
+      setState(() {
+        playerState = s;
+      });
+    });
 
     //max duration of mp3 file
     audioPlayer?.onDurationChanged.listen(
@@ -53,7 +63,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       (PlayerState s) {
         setState(
           () {
-            audioPlayerState = s;
+            playerState = s;
           },
         );
       },
@@ -217,17 +227,26 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   playMusic() async {
-    await audioCache?.play(path);
+    await audioPlayer?.play(url);
+    //await audioCache?.play(path);
   }
 
   pauseMusic() async {
     await audioPlayer?.pause();
+    //await audioPlayer?.pause();
   }
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
-    // double height = MediaQuery.of(context).size.height;
+    // playMusic() async {
+    //   await audioPlayer?.play(widget.url);
+    //   //await audioCache?.play(path);
+    // }
+
+    // pauseMusic() async {
+    //   await audioPlayer?.pause();
+    //   //await audioPlayer?.pause();
+    // }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -318,14 +337,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
                             Expanded(
                               child: IconButton(
                                 icon: Icon(
-                                  audioPlayerState == PlayerState.PLAYING
+                                  playerState == PlayerState.PLAYING
                                       ? Icons.pause_circle_filled_rounded
                                       : Icons.play_circle_filled_rounded,
                                 ),
                                 iconSize: 60,
                                 color: Colors.green,
                                 onPressed: () {
-                                  audioPlayerState == PlayerState.PLAYING
+                                  playerState == PlayerState.PLAYING
                                       ? pauseMusic()
                                       : playMusic();
                                 },
