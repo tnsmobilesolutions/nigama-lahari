@@ -154,15 +154,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: CommonStyle.myStyle,
                           ),
                         ),
-                        onTap: () {
-                          //TODO  call firebase API to get the list of jagarana songs
+                        onTap: () async {
+                          final allSongsByCategory = await SearchSongAPI()
+                              .getAllSongsInCategory(snapshot.data![index]);
+                          print(allSongsByCategory);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ScrollableSongList(
-                                listName: snapshot.data![index],
-                                song: items,
-                                singer: singer,
+                                songCategory: snapshot.data![index],
+                                songs: allSongsByCategory,
                               ),
                             ),
                           ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase

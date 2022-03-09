@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/songs_model.dart';
 import 'music_player.dart';
 
 class ScrollableSongList extends StatefulWidget {
   ScrollableSongList({
     Key? key,
-    required this.listName,
-    required this.song,
-    required this.singer,
+    this.songCategory,
+    this.songs,
   }) : super(key: key);
 
-  final String? listName;
-  final List<String>? song, singer;
+  final String? songCategory;
+  final List<Song>? songs;
 
   @override
   _ScrollableSongListState createState() => _ScrollableSongListState();
@@ -27,10 +27,10 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text('${widget.listName} ତାଲିକା'),
+        title: Text('${widget.songCategory} ତାଲିକା'),
       ),
       body: ListView.builder(
-        itemCount: widget.song?.length,
+        itemCount: widget.songs?.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             child: ListTile(
@@ -38,7 +38,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.song![index],
+                    widget.songs![index].songTitle ?? "",
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                     ),
                   ),
                   Text(
-                    widget.singer![index],
+                    widget.songs![index].singerName ?? "",
                     style: TextStyle(
                       color: Colors.green,
                       //fontWeight: FontWeight.bold,
@@ -64,8 +64,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => MusicPlayer(
-                    songName: widget.song![index],
-                    singerName: widget.singer![index],
+                    // TODO: Music Player shoud should only accept the song object.
+                    songName: widget.songs![index].songTitle ?? "",
+                    singerName: widget.songs![index].singerName ?? "",
                     //url: widget.url!,
                   ),
                 ),
