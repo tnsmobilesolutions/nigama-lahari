@@ -43,7 +43,7 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
-  String? songURL;
+  String? songUrl;
   String duration = '';
   double? sizeInMb;
   var file1;
@@ -81,9 +81,9 @@ class _AddSongState extends State<AddSong> {
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {});
-    final songUrl = await snapshot.ref.getDownloadURL();
+    songUrl = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $songUrl');
+    //print('Download-Link: $songURL');
   }
 
   //upload status
@@ -328,7 +328,7 @@ class _AddSongState extends State<AddSong> {
                             songTitle: _titleController.text,
                             singerName: _singerNameController.text,
                             songText: _lyricsController.text,
-                            songURL: songURL,
+                            songURL: songUrl,
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );
