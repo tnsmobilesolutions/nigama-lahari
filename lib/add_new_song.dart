@@ -43,7 +43,7 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
-  String? songUrl;
+  // String? songUrl;
   String duration = '';
   double? sizeInMb;
   var file1;
@@ -67,9 +67,9 @@ class _AddSongState extends State<AddSong> {
   }
 
   //upload selected file to firebase storage
-  Future uploadFile() async {
+  Future<String?> uploadFile() async {
     if (file == null) {
-      return;
+      return '';
     } else {}
     final fileName = path.basename(file!.path);
     destination = '$_selectedOption/$fileName';
@@ -78,10 +78,12 @@ class _AddSongState extends State<AddSong> {
     setState(() {});
     showMyDialog();
 
-    if (task == null) return;
+    if (task == null) return '';
 
     final snapshot = await task!.whenComplete(() {});
-    songUrl = await snapshot.ref.getDownloadURL();
+    final songUrl = await snapshot.ref.getDownloadURL();
+
+    return songUrl;
 
     //print('Download-Link: $songURL');
   }
@@ -306,7 +308,8 @@ class _AddSongState extends State<AddSong> {
                     ),
                     SizedBox(height: 30),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var url;
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
@@ -317,7 +320,7 @@ class _AddSongState extends State<AddSong> {
                           Fluttertoast.showToast(
                               msg: "Select an audio file of max size 10 MB");
                         } else {
-                          uploadFile();
+                          url = await uploadFile();
                         }
 
                         if (_formKey.currentState!.validate()) {
@@ -328,11 +331,11 @@ class _AddSongState extends State<AddSong> {
                             songTitle: _titleController.text,
                             singerName: _singerNameController.text,
                             songText: _lyricsController.text,
-                            songURL: songUrl,
+                            songURL: url,
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );
-                          print(songURL);
+                          // print(songURL);
                           final songDetails =
                               SongAPI().createNewSong(songsModel);
                         }

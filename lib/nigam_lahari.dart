@@ -109,6 +109,7 @@ class _NigamLahariState extends State<NigamLahari> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         //backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text('ନିଗମ  ଲହରୀ'),
