@@ -17,7 +17,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  //bool? _passwordVisible;
+  bool _obscureText = true;
 
   final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
@@ -54,9 +54,10 @@ class _SignInState extends State<SignIn> {
 
     //password field
     final passwordField = TextFormField(
-      obscureText: true,
+      obscureText: _obscureText,
       autofocus: false,
       controller: passswordController,
+
       //keyboardType: TextInputType.phone,
       validator: (value) {
         RegExp regex = RegExp(r'^.{6}$');
@@ -76,6 +77,15 @@ class _SignInState extends State<SignIn> {
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
           prefixIcon: const Icon(Icons.vpn_key),
+          suffixIcon: new GestureDetector(
+            onTap: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+            child: new Icon(
+                _obscureText ? Icons.visibility : Icons.visibility_off),
+          ),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Password',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),

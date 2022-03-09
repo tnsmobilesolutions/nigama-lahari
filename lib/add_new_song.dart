@@ -84,8 +84,6 @@ class _AddSongState extends State<AddSong> {
     final songUrl = await snapshot.ref.getDownloadURL();
 
     return songUrl;
-
-    //print('Download-Link: $songURL');
   }
 
   //upload status
@@ -335,7 +333,7 @@ class _AddSongState extends State<AddSong> {
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );
-                          // print(songURL);
+
                           final songDetails =
                               SongAPI().createNewSong(songsModel);
                         }
