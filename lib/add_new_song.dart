@@ -322,6 +322,7 @@ class _AddSongState extends State<AddSong> {
 
                         if (_formKey.currentState!.validate()) {
                           SongsModel songsModel = SongsModel(
+                            isEditable: true,
                             songCategory: _selectedOption,
                             songAttribute: _attributeController.text,
                             songTitle: _titleController.text,
@@ -331,7 +332,7 @@ class _AddSongState extends State<AddSong> {
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );
-
+                          print(songURL);
                           final songDetails =
                               SongAPI().createNewSong(songsModel);
                         }

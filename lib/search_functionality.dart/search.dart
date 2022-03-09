@@ -96,19 +96,25 @@ class _SearchState extends State<Search> {
 
   Widget getNameWidget(String? selectedSong) {
     if (selectedSong == "Name") {
-      return TextFormField(
-        keyboardType: TextInputType.name,
-        controller: _nameController,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please Enter Your Name';
-          } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
-              .hasMatch(value)) {
-            return 'Please Enter Correct Name';
-          }
-          return null;
-        },
-        // style: TextStyle(height: 0.5),
+      return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: TextFormField(
+          keyboardType: TextInputType.name,
+          controller: _nameController,
+          decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please Enter Your Name';
+            } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
+                .hasMatch(value)) {
+              return 'Please Enter Correct Name';
+            }
+            return null;
+          },
+          // style: TextStyle(height: 0.5),
+        ),
       );
     } else {
       return SizedBox(width: 0, height: 0);
