@@ -8,18 +8,11 @@ import 'package:flutter_application_1/models/usermodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final _auth = FirebaseAuth.instance;
-// final _formkey = GlobalKey<FormState>();
-final TextEditingController emailController = TextEditingController();
-
-// Create a text controller and use it to retrieve the current value of the TextField.
-
-final nameController = TextEditingController();
-final mobileController = TextEditingController();
 
 class userAPI {
 // SignIn
 
-  void signIn(String email, String password) async {
+  dynamic signIn(String email, String password) async {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((uid) => {});
@@ -29,7 +22,6 @@ class userAPI {
     // TODO: Remove this from here to the UI layer
     await Fluttertoast.showToast(msg: "LogIn successfull :) ");
   }
-
   // SignUp
 
   dynamic signUp(String email, String password) async {
@@ -56,8 +48,8 @@ class userAPI {
     // writing all the values
     data.email = user!.email;
     data.uid = user.uid;
-    data.name = nameController.text;
-    data.mobile = mobileController.text;
+    // data.name = _nameController.text;
+    // data.mobile = _mobileController.text;
 
     await firebaseFirestore.collection("users").doc(user.uid).set(
           data.toMap(),

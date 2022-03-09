@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/data_store.dart';
@@ -10,6 +9,7 @@ import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
 import 'models/songs_model.dart';
 import 'search_functionality.dart/search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -94,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print(DataStore().allCategories);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         //backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text('ନିଗମ  ଲହରୀ'),
