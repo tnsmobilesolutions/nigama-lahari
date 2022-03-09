@@ -4,7 +4,7 @@ import 'package:flutter_application_1/models/songs_model.dart';
 class ResultSong extends StatefulWidget {
   ResultSong({Key? key, this.songs}) : super(key: key);
 
-  final List<SongsModel>? songs;
+  final List<Song>? songs;
 
   @override
   State<ResultSong> createState() => _ResultSongState();

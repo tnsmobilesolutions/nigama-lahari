@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class SongsModel {
+class Song {
   final String? songId;
   final String? songTitle;
   final String? songText;
@@ -10,7 +10,7 @@ class SongsModel {
   final String? singerName;
   final bool? isEditable;
   final double? songDuration;
-  SongsModel({
+  Song({
     this.songId,
     this.songTitle,
     this.songText,
@@ -22,7 +22,7 @@ class SongsModel {
     this.songDuration,
   });
 
-  SongsModel copyWith({
+  Song copyWith({
     String? songId,
     String? songTitle,
     String? songText,
@@ -33,7 +33,7 @@ class SongsModel {
     bool? isEditable,
     double? songDuration,
   }) {
-    return SongsModel(
+    return Song(
       songId: songId ?? this.songId,
       songTitle: songTitle ?? this.songTitle,
       songText: songText ?? this.songText,
@@ -60,8 +60,8 @@ class SongsModel {
     };
   }
 
-  factory SongsModel.fromMap(Map<String, dynamic> map) {
-    return SongsModel(
+  factory Song.fromMap(Map<String, dynamic> map) {
+    return Song(
       songId: map['songId'],
       songTitle: map['songTitle'],
       songText: map['songText'],
@@ -76,8 +76,8 @@ class SongsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SongsModel.fromJson(String source) =>
-      SongsModel.fromMap(json.decode(source));
+  factory Song.fromJson(String source) =>
+      Song.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -88,7 +88,7 @@ class SongsModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is SongsModel &&
+    return other is Song &&
         other.songId == songId &&
         other.songTitle == songTitle &&
         other.songText == songText &&

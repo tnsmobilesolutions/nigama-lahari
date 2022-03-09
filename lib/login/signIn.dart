@@ -7,7 +7,7 @@ import 'package:flutter_application_1/API/userAPI.dart';
 //import 'package:flutter_application_1/nigam_lahari.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../nigam_lahari.dart';
+import '../home_screen.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -91,7 +91,7 @@ class _SignInState extends State<SignIn> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NigamLahari(),
+                    builder: (context) => HomeScreen(),
                   ));
             }
           },

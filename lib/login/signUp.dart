@@ -1,14 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/homePage.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
-import 'package:flutter_application_1/models/usermodel.dart';
-import 'package:flutter_application_1/nigam_lahari.dart';
+import 'package:flutter_application_1/home_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -18,7 +12,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
 
   // Create a text controller and use it to retrieve the current value of the TextField.
@@ -181,7 +174,7 @@ class _SignUpState extends State<SignUp> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NigamLahari(),
+                    builder: (context) => HomeScreen(),
                   ));
             }
           },

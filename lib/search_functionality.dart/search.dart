@@ -53,7 +53,7 @@ class _SearchState extends State<Search> {
                 onPressed: () async {
                   print('search btn pressrd');
 
-                  final List<SongsModel>? allSongs;
+                  final List<Song>? allSongs;
 
                   final searchAPI = SearchSongAPI();
 

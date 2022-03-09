@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
+import 'package:flutter_application_1/models/data_store.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
+import 'models/songs_model.dart';
 import 'search_functionality.dart/search.dart';
 
-class NigamLahari extends StatefulWidget {
-  NigamLahari({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _NigamLahariState createState() => _NigamLahariState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
 final storage = FlutterSecureStorage();
@@ -38,7 +41,7 @@ final List<String> singer = [
   'ରବି ମିଶ୍ର',
 ];
 
-class _NigamLahariState extends State<NigamLahari> {
+class _HomeScreenState extends State<HomeScreen> {
   //Alert Dialog for signout
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -87,6 +90,8 @@ class _NigamLahariState extends State<NigamLahari> {
 
   @override
   Widget build(BuildContext context) {
+    print('home screen loading...');
+    print(DataStore().allCategories);
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Colors.transparent,

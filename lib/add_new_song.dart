@@ -339,7 +339,7 @@ class _AddSongState extends State<AddSong> {
                         }
 
                         if (_formKey.currentState!.validate()) {
-                          SongsModel songsModel = SongsModel(
+                          Song songsModel = Song(
                             songCategory: _selectedOption,
                             songAttribute: _attributeController.text,
                             songTitle: _titleController.text,

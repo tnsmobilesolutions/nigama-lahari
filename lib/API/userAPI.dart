@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/data_store.dart';
 
 import 'package:flutter_application_1/models/usermodel.dart';
 
@@ -22,6 +23,10 @@ class userAPI {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((uid) => {});
+    // TODO: If success then call This
+    await DataStore().loadAllData();
+
+    // TODO: Remove this from here to the UI layer
     await Fluttertoast.showToast(msg: "LogIn successfull :) ");
   }
 

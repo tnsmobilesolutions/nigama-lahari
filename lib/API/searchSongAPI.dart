@@ -2,23 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 class SearchSongAPI {
-  Future<List<SongsModel>?> getAllSongs() {
+  Future<List<Song>?> getAllSongs() {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
     final lstSongs = songs.get().then((querySnapshot) {
-      List<SongsModel>? lstSong = [];
+      List<Song>? lstSong = [];
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        print(receiptSongs);
-        final songs = SongsModel.fromMap(receiptSongs);
-        lstSong.add(songs);
+        final songMap = element.data() as Map<String, dynamic>;
+        // print(songMap);
+        final song = Song.fromMap(songMap);
+        lstSong.add(song);
       });
       return lstSong;
     });
     return lstSongs;
   }
 
-  Future<List<SongsModel>?> getSongByName(String name) {
+  Future<List<Song>?> getSongByName(String name) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
     print('all receipt here');
@@ -26,12 +26,12 @@ class SearchSongAPI {
     print(name);
 
     final lstSongs = songs.get().then((querySnapshot) {
-      List<SongsModel>? lstSong = [];
+      List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
         final receiptSongs = element.data() as Map<String, dynamic>;
         print(receiptSongs);
-        final receipt = SongsModel.fromMap(receiptSongs);
+        final receipt = Song.fromMap(receiptSongs);
         if ((receipt.songText ?? '').startsWith(name)) {
           lstSong.add(receipt);
         }
