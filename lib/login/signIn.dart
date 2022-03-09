@@ -42,7 +42,7 @@ class _SignInState extends State<SignIn> {
         return null;
       },
       onSaved: (value) {
-        value = emailController.text;
+        emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -66,10 +66,12 @@ class _SignInState extends State<SignIn> {
         if (!regex.hasMatch(value)) {
           return "ଦୟା କରି ନିଜ ସଠିକ ପାସୱାଡ଼  ଲେଖନ୍ତୁ";
         }
+
         return null;
       },
       onSaved: (value) {
-        value = passswordController.text;
+        passswordController.text = value!;
+        ;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -85,9 +87,10 @@ class _SignInState extends State<SignIn> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {
+          onPressed: () async {
             if (_formkey.currentState!.validate()) {
-              userAPI().signIn(emailController.text, passswordController.text);
+              await userAPI()
+                  .signIn(emailController.text, passswordController.text);
               Navigator.push(
                   context,
                   MaterialPageRoute(

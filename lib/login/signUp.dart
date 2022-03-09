@@ -60,7 +60,7 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
-    final mobileNum = IntlPhoneField(
+    final mobileNumber = IntlPhoneField(
         validator: (value) {
           RegExp regex = new RegExp(r'^.{10,}$');
           if (value == null || value.isEmpty) {
@@ -215,7 +215,7 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 20),
                       name,
                       const SizedBox(height: 20),
-                      mobileNum,
+                      mobileNumber,
                       const SizedBox(height: 20),
                       email,
                       const SizedBox(height: 20),
