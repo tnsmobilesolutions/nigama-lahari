@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
 import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:uuid/uuid.dart';
 import 'API/song_api.dart';
 
 class AddSong extends StatefulWidget {
@@ -23,7 +23,7 @@ class _AddSongState extends State<AddSong> {
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
-  final _songLyrics = TextEditingController();
+  final _lyricsController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -43,7 +43,8 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
-
+  String? songURL;
+  String duration = '';
   double? sizeInMb;
   var file1;
 
@@ -253,7 +254,7 @@ class _AddSongState extends State<AddSong> {
                       height: 20,
                     ),
                     TextFormField(
-                      controller: _songLyrics,
+                      controller: _lyricsController,
                       style: TextStyle(color: Colors.black),
                       autofocus: false,
                       maxLines: height ~/ 8,
@@ -325,7 +326,10 @@ class _AddSongState extends State<AddSong> {
                             songAttribute: _attributeController.text,
                             songTitle: _titleController.text,
                             singerName: _singerNameController.text,
-                            songId: '12345',
+                            songText: _lyricsController.text,
+                            songURL: songURL,
+                            songId: Uuid().v1(),
+                            songDuration: double.tryParse(duration),
                           );
 
                           final songDetails =
