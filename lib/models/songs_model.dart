@@ -76,12 +76,11 @@ class Song {
 
   String toJson() => json.encode(toMap());
 
-  factory Song.fromJson(String source) =>
-      Song.fromMap(json.decode(source));
+  factory Song.fromJson(String source) => Song.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'SongsModel(songId: $songId, songTitle: $songTitle, songText: $songText, songCategory: $songCategory, songAttribute: $songAttribute, songURL: $songURL, singerName: $singerName, isEditable: $isEditable, songDuration: $songDuration)';
+    return 'Song(songId: $songId, songTitle: $songTitle, songText: $songText, songCategory: $songCategory, songAttribute: $songAttribute, songURL: $songURL, singerName: $singerName, isEditable: $isEditable, songDuration: $songDuration)';
   }
 
   @override

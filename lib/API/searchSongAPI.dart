@@ -19,17 +19,20 @@ class SearchSongAPI {
   }
 
   Future<List<String>?> getAllCategories() {
+    //print('#######entry point########');
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
     final lstResult = songs.get().then((querySnapshot) {
       List<String>? lstCategories = [];
       querySnapshot.docs.forEach((element) {
         final songMap = element.data() as Map<String, dynamic>;
-        // print(songMap);
+        //print(songMap);
         final song = Song.fromMap(songMap);
+        //print(song);
         if (song.songCategory != null &&
             !lstCategories.contains(song.songCategory)) {
           lstCategories.add(song.songCategory ?? "No Category");
+          //print(lstCategories);
         }
       });
       return lstCategories;
@@ -40,20 +43,24 @@ class SearchSongAPI {
   Future<List<Song>?> getAllSongsInCategory(String categoryName) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
-    final lstResult = songs.get().then((querySnapshot) {
-      List<Song>? lstSongs = [];
-      querySnapshot.docs.forEach(
-        (element) {
-          final songMap = element.data() as Map<String, dynamic>;
-          // print(songMap);
-          final song = Song.fromMap(songMap);
-          if (song.songCategory == categoryName) {
-            lstSongs.add(song);
-          }
-        },
-      );
-      return lstSongs;
-    });
+    final lstResult = songs.get().then(
+      (querySnapshot) {
+        List<Song>? lstSongs = [];
+        querySnapshot.docs.forEach(
+          (element) {
+            final songMap = element.data() as Map<String, dynamic>;
+
+            final song = Song.fromMap(songMap);
+            if (song.songCategory == categoryName) {
+              lstSongs.add(song);
+            }
+          },
+        );
+        print(lstSongs);
+        return lstSongs;
+      },
+    );
+
     return lstResult;
   }
 

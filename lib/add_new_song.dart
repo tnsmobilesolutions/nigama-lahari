@@ -107,7 +107,7 @@ class _AddSongState extends State<AddSong> {
               backgroundColor: Colors.green.shade200,
               circularStrokeCap: CircularStrokeCap.round,
               center: Text(
-                '${percentage * 100.toInt()}%',
+                '${(percentage * 100).toInt()}%',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             );
@@ -136,6 +136,7 @@ class _AddSongState extends State<AddSong> {
                 TextButton(
                   child: val == 100.0 ? Text('Done') : Text(''),
                   onPressed: () {
+                    Navigator.of(context).pop();
                     Navigator.of(context).pop();
                   },
                 ),

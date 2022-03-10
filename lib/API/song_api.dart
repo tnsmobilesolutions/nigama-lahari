@@ -7,7 +7,7 @@ class SongAPI {
 
     final Reference = await songs.add({
       "songId": songsModel.songId,
-      "songCatageory": songsModel.songCategory,
+      "songCategory": songsModel.songCategory,
       "songAttributes": songsModel.songAttribute,
       "songTitle": songsModel.songTitle,
       "singerName": songsModel.singerName,
