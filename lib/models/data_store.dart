@@ -23,11 +23,13 @@ class DataStore {
     if (allSongs != null) {
       var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
       print(newMap.keys);
-      newMap.keys.forEach((key) {
-        if (key != null) {
-          result?.add(key);
-        }
-      });
+      newMap.keys.forEach(
+        (key) {
+          if (key != null) {
+            result?.add(key);
+          }
+        },
+      );
     }
     return result;
   }

@@ -42,14 +42,16 @@ class SearchSongAPI {
 
     final lstResult = songs.get().then((querySnapshot) {
       List<Song>? lstSongs = [];
-      querySnapshot.docs.forEach((element) {
-        final songMap = element.data() as Map<String, dynamic>;
-        // print(songMap);
-        final song = Song.fromMap(songMap);
-        if (song.songCategory == categoryName) {
-          lstSongs.add(song);
-        }
-      });
+      querySnapshot.docs.forEach(
+        (element) {
+          final songMap = element.data() as Map<String, dynamic>;
+          // print(songMap);
+          final song = Song.fromMap(songMap);
+          if (song.songCategory == categoryName) {
+            lstSongs.add(song);
+          }
+        },
+      );
       return lstSongs;
     });
     return lstResult;
