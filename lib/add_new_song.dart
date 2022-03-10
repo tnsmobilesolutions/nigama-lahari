@@ -326,6 +326,10 @@ class _AddSongState extends State<AddSong> {
                         } else {
                           uploadFile();
                         }
+                        // Navigator.pop(context);
+                        // await Fluttertoast.showToast(
+                        //     msg: 'Upload Successfully');
+                        // Navigator.pop(context);
 
                         if (_formKey.currentState!.validate()) {
                           Song songsModel = Song(

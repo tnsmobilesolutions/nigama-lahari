@@ -44,6 +44,6 @@ class DataStore {
   // All public methods
   Future<void> loadAllData() async {
     // Load all songs
-    allSongs = await SearchSongAPI().getAllSongs();
+    // allSongs = await SearchSongAPI().getAllSongs();
   }
 }

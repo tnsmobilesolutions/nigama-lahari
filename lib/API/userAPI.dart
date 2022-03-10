@@ -8,6 +8,9 @@ import 'package:flutter_application_1/models/usermodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final _auth = FirebaseAuth.instance;
+// final _emailController = TextEditingController();
+// final _nameController = TextEditingController();
+// final _mobileController = TextEditingController();
 
 class userAPI {
 // SignIn
@@ -20,42 +23,46 @@ class userAPI {
     await DataStore().loadAllData();
 
     // TODO: Remove this from here to the UI layer
-    await Fluttertoast.showToast(msg: "LogIn successfull :) ");
   }
   // SignUp
 
-  dynamic signUp(String email, String password) async {
+  dynamic signUp(
+      String email, String password, String name, String mobile) async {
     await _auth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) => {postDetailsToFirestore()})
-        .catchError(
-      (e) {
-        Fluttertoast.showToast(msg: e!.message);
-      },
-    );
-  }
+        .then((value) {
+      FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set({
+        'email': email,
+        'uid': value.user!.uid,
+        'name': name,
+        'mobile': mobile
+      });
+    });
 
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our data
-    // sedning these values
+    // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    // User? user = _auth.currentUser;
 
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-
-    AppUser data = AppUser();
+    // AppUser UserModel = AppUser();
+    // UserModel.email = email;
+    // UserModel.uid = user.uid;
+    // UserModel.name = name;
+    // UserModel.mobile = mobile;
 
     // writing all the values
-    data.email = user!.email;
-    data.uid = user.uid;
+    // data.email = user!.email;
+    // data.uid = user.uid;
     // data.name = _nameController.text;
     // data.mobile = _mobileController.text;
 
-    await firebaseFirestore.collection("users").doc(user.uid).set(
-          data.toMap(),
-        );
-    await Fluttertoast.showToast(msg: "Account created successfully :) ");
+    // await firebaseFirestore.collection("users").doc(user.uid).set(
+    //       UserModel.toMap(),
+    // );
   }
+
+  // postDetailsToFirestore() async {
+  // calling our firestore
+  // calling our data
+  // sedning these values
 
   // Reset Password
 
@@ -73,11 +80,3 @@ class userAPI {
     }
   }
 }
-
-//  void signIn(String email, String password) async {
-//     await _auth
-//         .signInWithEmailAndPassword(email: email, password: password)
-//         .then((uid) => {});
-//     await Fluttertoast.showToast(msg: "LogIn successfull :) ");
-//   }
-
