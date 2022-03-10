@@ -7,9 +7,7 @@ import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
-import 'models/songs_model.dart';
 import 'search_functionality.dart/search.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -141,35 +139,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CircularProgressIndicator(),
               );
             case ConnectionState.done:
-              if (snapshot.hasError)
+              if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
-              else
+              } else
                 return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Center(
-                          child: Text(
-                            snapshot.data![index],
-                            style: CommonStyle.myStyle,
-                          ),
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Center(
+                        child: Text(
+                          snapshot.data![
+                              index], // gets all available catagories dynamically
+                          style: CommonStyle.myStyle,
                         ),
-                        onTap: () async {
-                          final allSongsByCategory = await SearchSongAPI()
-                              .getAllSongsInCategory(snapshot.data![index]);
-                          print(allSongsByCategory);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ScrollableSongList(
-                                songCategory: snapshot.data![index],
-                                songs: allSongsByCategory,
-                              ),
+                      ),
+                      onTap: () async {
+                        final allSongsByCategory = await SearchSongAPI()
+                            .getAllSongsInCategory(snapshot.data![index]);
+                        print(allSongsByCategory);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScrollableSongList(
+                              songCategory: snapshot.data![index],
+                              songs: allSongsByCategory,
                             ),
-                          ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
-                        },
-                      );
-                    });
+                          ),
+                        ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                      },
+                    );
+                  },
+                );
 
             default:
               return Text('Unhandle State');

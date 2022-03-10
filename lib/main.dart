@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: FutureBuilder(
         future: checkLoginStatus(),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
