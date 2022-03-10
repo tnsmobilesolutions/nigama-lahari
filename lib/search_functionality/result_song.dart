@@ -28,10 +28,11 @@ class _ResultSongState extends State<ResultSong> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
+                    Text("Hello"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(widget.songs?[index].songTitle ?? ''),
+                        Text(widget.songs?[index].singerName ?? ''),
                         Text(widget.songs?[index].songText.toString() ?? ''),
                       ],
                     ),

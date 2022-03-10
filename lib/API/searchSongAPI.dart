@@ -70,9 +70,78 @@ class SearchSongAPI {
       querySnapshot.docs.forEach((element) {
         final receiptSongs = element.data() as Map<String, dynamic>;
         print(receiptSongs);
-        final receipt = Song.fromMap(receiptSongs);
-        if ((receipt.songText ?? '').startsWith(name)) {
-          lstSong.add(receipt);
+        final song = Song.fromMap(receiptSongs);
+        if ((song.songText ?? '').startsWith(name)) {
+          lstSong.add(song);
+        }
+      });
+      return lstSong;
+    });
+    return lstSongs;
+  }
+
+  Future<List<Song>?> getSongByingerName(String singerName) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+
+    // print('all receipt here');
+    // print(songs);
+    // print(singerName);
+
+    final lstSongs = songs.get().then((querySnapshot) {
+      List<Song>? lstSong = [];
+      print(querySnapshot.docs.length);
+      querySnapshot.docs.forEach((element) {
+        final receiptSongs = element.data() as Map<String, dynamic>;
+        //print(receiptSongs);
+        final song = Song.fromMap(receiptSongs);
+        if ((song.songText ?? '').startsWith(singerName)) {
+          lstSong.add(song);
+        }
+      });
+      return lstSong;
+    });
+    return lstSongs;
+  }
+
+  Future<List<Song>?> getSongByAttribute(String attribute) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+
+    // print('all receipt here');
+    // print(songs);
+    // print(singerName);
+
+    final lstSongs = songs.get().then((querySnapshot) {
+      List<Song>? lstSong = [];
+      print(querySnapshot.docs.length);
+      querySnapshot.docs.forEach((element) {
+        final receiptSongs = element.data() as Map<String, dynamic>;
+        //print(receiptSongs);
+        final song = Song.fromMap(receiptSongs);
+        if ((song.songText ?? '').startsWith(attribute)) {
+          lstSong.add(song);
+        }
+      });
+      return lstSong;
+    });
+    return lstSongs;
+  }
+
+  Future<List<Song>?> getSongByCategory(String category) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+
+    // print('all receipt here');
+    // print(songs);
+    // print(singerName);
+
+    final lstSongs = songs.get().then((querySnapshot) {
+      List<Song>? lstSong = [];
+      print(querySnapshot.docs.length);
+      querySnapshot.docs.forEach((element) {
+        final receiptSongs = element.data() as Map<String, dynamic>;
+        //print(receiptSongs);
+        final song = Song.fromMap(receiptSongs);
+        if ((song.songText ?? '').startsWith(category)) {
+          lstSong.add(song);
         }
       });
       return lstSong;
