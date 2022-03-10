@@ -4,10 +4,10 @@ import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/data_store.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
+import 'package:flutter_application_1/search_functionality/search.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
-import 'search_functionality.dart/search.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -89,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('home screen loading...');
-    final categories = DataStore().allCategories;
-    print(categories?.length);
+    //final categories = DataStore().allCategories;
+    //print(categories?.length);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

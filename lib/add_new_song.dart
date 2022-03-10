@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -43,7 +44,7 @@ class _AddSongState extends State<AddSong> {
   final height = 100;
   String destination = '';
   double percentage = 0;
-  // String? songUrl;
+  String? songUrl;
   String duration = '';
   double? sizeInMb;
   var file1;
@@ -51,6 +52,12 @@ class _AddSongState extends State<AddSong> {
   void initState() {
     super.initState();
   }
+
+  // AudioPlayer audioPlayer = AudioPlayer();
+
+  // final result = audioPlayer.onDurationChanged.listen((Duration d) {
+  //   print('Max duration: $d');
+  // });
 
   // select file from device
   Future selectFile() async {
@@ -67,9 +74,9 @@ class _AddSongState extends State<AddSong> {
   }
 
   //upload selected file to firebase storage
-  Future<String?> uploadFile() async {
+  Future uploadFile() async {
     if (file == null) {
-      return '';
+      return;
     } else {}
     final fileName = path.basename(file!.path);
     destination = '$_selectedOption/$fileName';
@@ -78,12 +85,12 @@ class _AddSongState extends State<AddSong> {
     setState(() {});
     showMyDialog();
 
-    if (task == null) return '';
+    if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {});
-    final songUrl = await snapshot.ref.getDownloadURL();
+    songUrl = await snapshot.ref.getDownloadURL();
 
-    return songUrl;
+    //print('Download-Link: $songURL');
   }
 
   //upload status
@@ -306,8 +313,7 @@ class _AddSongState extends State<AddSong> {
                     ),
                     SizedBox(height: 30),
                     ElevatedButton(
-                      onPressed: () async {
-                        var url;
+                      onPressed: () {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
@@ -318,7 +324,7 @@ class _AddSongState extends State<AddSong> {
                           Fluttertoast.showToast(
                               msg: "Select an audio file of max size 10 MB");
                         } else {
-                          url = await uploadFile();
+                          uploadFile();
                         }
 
                         if (_formKey.currentState!.validate()) {
@@ -329,7 +335,7 @@ class _AddSongState extends State<AddSong> {
                             songTitle: _titleController.text,
                             singerName: _singerNameController.text,
                             songText: _lyricsController.text,
-                            songURL: url,
+                            songURL: songUrl,
                             songId: Uuid().v1(),
                             songDuration: double.tryParse(duration),
                           );

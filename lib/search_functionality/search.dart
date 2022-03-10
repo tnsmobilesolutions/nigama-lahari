@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/searchSongAPI.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/search_functionality.dart/result_song.dart';
+
+import 'package:flutter_application_1/search_functionality/result_song.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
