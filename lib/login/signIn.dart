@@ -4,7 +4,7 @@ import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-//import 'package:flutter_application_1/nigam_lahari.dart';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -102,13 +102,14 @@ class _SignInState extends State<SignIn> {
             if (_formkey.currentState!.validate()) {
               await userAPI()
                   .signIn(emailController.text, passswordController.text);
-              await Fluttertoast.showToast(msg: "LogIn successfull :) ");
+              await Fluttertoast.showToast(msg: "LogIn successfull :) ")
+                  .whenComplete(() => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      )));
             }
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ));
+            return null;
           },
           child: Text(
             "Login",

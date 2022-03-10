@@ -58,8 +58,8 @@ class _SearchState extends State<Search> {
                   final searchAPI = SearchSongAPI();
 
                   if (_selectedSong == "Name") {
-                    allSongs =
-                        await searchAPI.getSongByName(_nameController.text);
+                    // allSongs =
+                    // await searchAPI.getSongByName(_nameController.text);
                     // } else if (_selectedSong == 'Date') {
                     //   allSongs =
                     //       await searchAPI.getReceiptByReceiptDate(_dateTime);
@@ -70,7 +70,7 @@ class _SearchState extends State<Search> {
                     allSongs = [];
                   }
 
-                  print(allSongs);
+                  // print(allSongs);
                   // if (_selectedSong == "Receipt No") {
                   //   final singleReceipt = await searchAPI
                   //       .getReceiptByReceiptNo(_receiptNoController.text);
@@ -84,7 +84,7 @@ class _SearchState extends State<Search> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ResultSong(
-                                songs: allSongs,
+                              // songs: allSongs,
                               )));
                   // }
                 }),

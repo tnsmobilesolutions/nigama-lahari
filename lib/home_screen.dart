@@ -89,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('home screen loading...');
-    final categories = DataStore().allCategories;
-    print(categories?.length);
+    // final categories = DataStore().allCategories;
+    // print(categories?.length);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

@@ -17,22 +17,22 @@ class DataStore {
   // All fields or getters to be accessible from outside
   List<Song>? allSongs;
 
-  List<String>? get allCategories {
-    print('calling getter of allCategories');
-    List<String>? result;
-    if (allSongs != null) {
-      var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
-      print(newMap.keys);
-      newMap.keys.forEach(
-        (key) {
-          if (key != null) {
-            result?.add(key);
-          }
-        },
-      );
-    }
-    return result;
-  }
+  // List<String>? get allCategories {
+  //   print('calling getter of allCategories');
+  //   List<String>? result;
+  //   if (allSongs != null) {
+  //     var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
+  //     print(newMap.keys);
+  //     newMap.keys.forEach(
+  //       (key) {
+  //         if (key != null) {
+  //           result?.add(key);
+  //         }
+  //       },
+  //     );
+  //   }
+  //   return result;
+  // }
 
   bool get isUserLoggedIn {
     return FirebaseAuth.instance.currentUser != null;
@@ -41,6 +41,6 @@ class DataStore {
   // All public methods
   Future<void> loadAllData() async {
     // Load all songs
-    allSongs = await SearchSongAPI().getAllSongs();
+    // allSongs = await SearchSongAPI().getAllSongs();
   }
 }
