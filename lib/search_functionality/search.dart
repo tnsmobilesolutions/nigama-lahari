@@ -69,7 +69,7 @@ class _SearchState extends State<Search> {
                         await searchAPI.getSongByName(_nameController.text);
                   } else if (_selectedSong == "Singer") {
                     allSongs = await searchAPI
-                        .getSongByingerName(_singerNameController.text);
+                        .getSongBySingerName(_singerNameController.text);
                   } else if (_selectedSong == "Attribute") {
                     allSongs = await searchAPI
                         .getSongByAttribute(_attributeController.text);

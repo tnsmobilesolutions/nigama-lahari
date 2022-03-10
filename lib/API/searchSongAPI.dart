@@ -78,7 +78,7 @@ class SearchSongAPI {
         final receiptSongs = element.data() as Map<String, dynamic>;
         print(receiptSongs);
         final song = Song.fromMap(receiptSongs);
-        if ((song.songText ?? '').startsWith(name)) {
+        if ((song.songTitle ?? '').startsWith(name)) {
           lstSong.add(song);
         }
       });
@@ -87,21 +87,21 @@ class SearchSongAPI {
     return lstSongs;
   }
 
-  Future<List<Song>?> getSongByingerName(String singerName) {
+  Future<List<Song>?> getSongBySingerName(String singerName) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
-    // print('all receipt here');
-    // print(songs);
-    // print(singerName);
+    print('all receipt here');
+    print(songs);
+    print(singerName);
 
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
         final receiptSongs = element.data() as Map<String, dynamic>;
-        //print(receiptSongs);
+        print(receiptSongs);
         final song = Song.fromMap(receiptSongs);
-        if ((song.songText ?? '').startsWith(singerName)) {
+        if ((song.singerName ?? '').startsWith(singerName)) {
           lstSong.add(song);
         }
       });
@@ -124,7 +124,7 @@ class SearchSongAPI {
         final receiptSongs = element.data() as Map<String, dynamic>;
         //print(receiptSongs);
         final song = Song.fromMap(receiptSongs);
-        if ((song.songText ?? '').startsWith(attribute)) {
+        if ((song.songAttribute ?? '').startsWith(attribute)) {
           lstSong.add(song);
         }
       });
@@ -147,7 +147,7 @@ class SearchSongAPI {
         final receiptSongs = element.data() as Map<String, dynamic>;
         //print(receiptSongs);
         final song = Song.fromMap(receiptSongs);
-        if ((song.songText ?? '').startsWith(category)) {
+        if ((song.songCategory ?? '').startsWith(category)) {
           lstSong.add(song);
         }
       });
