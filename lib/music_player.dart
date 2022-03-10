@@ -274,6 +274,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                       height: screenHeight / 1.8,
                       width: screenWidth / 1.2,
                       decoration: BoxDecoration(
+                          color: Colors.white,
                           border: Border.all(color: Colors.green, width: 2),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: Align(
@@ -287,7 +288,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 20,
                               ),
                             ),
                           ),
