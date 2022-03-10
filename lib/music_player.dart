@@ -35,6 +35,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   void initState() {
     super.initState();
+    playMusic();
 
     audioPlayer!.onPlayerStateChanged.listen((PlayerState s) {
       setState(() {
@@ -223,7 +224,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
     super.dispose();
     audioPlayer?.release();
     audioPlayer?.dispose();
-    //audioCache?.clear();
   }
 
   playMusic() async {

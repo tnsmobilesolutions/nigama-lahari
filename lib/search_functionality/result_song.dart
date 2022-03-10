@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
+import '../music_player.dart';
+
 class ResultSong extends StatefulWidget {
   ResultSong({Key? key, this.songs}) : super(key: key);
 
@@ -23,17 +25,23 @@ class _ResultSongState extends State<ResultSong> {
             child: Container(
               //color: Colors.amber[colorCodes[index]],
               // child: Center(child: Text('Entry ${entries[index]}')),
-              color: Colors.black12,
+              color: Colors.yellowAccent[700],
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Text("Hello"),
+                    //Text("ଜୟଗୁରୁ"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(widget.songs?[index].singerName ?? ''),
-                        Text(widget.songs?[index].songText.toString() ?? ''),
+                        Text(
+                          widget.songs?[index].singerName ?? '',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text(
+                          widget.songs?[index].songTitle.toString() ?? '',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ],
                     ),
                     // Row(
@@ -47,11 +55,19 @@ class _ResultSongState extends State<ResultSong> {
                 ),
               ),
             ),
-            // onTap: () => Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             ReceiptPreview(receipt: widget.receipts?[index]))),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MusicPlayer(
+                    songName: widget.songs![index].songTitle ?? "",
+                    singername: widget.songs![index].singerName ?? "",
+                    songUrl: widget.songs![index].songURL ?? "",
+                    songLyrics: widget.songs![index].songText ?? "",
+                  ),
+                ),
+              );
+            },
           );
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
