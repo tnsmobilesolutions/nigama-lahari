@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_application_1/home_screen.dart';
 
@@ -169,8 +170,13 @@ class _SignUpState extends State<SignUp> {
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () async {
             if (_formkey.currentState!.validate()) {
-              await userAPI()
-                  .signUp(_emailController.text, _passwordController.text);
+              await userAPI().signUp(
+                  _emailController.text,
+                  _passwordController.text,
+                  _nameController.text,
+                  _mobileController.text);
+              await Fluttertoast.showToast(
+                  msg: "Account created successfully :) ");
               Navigator.push(
                   context,
                   MaterialPageRoute(
