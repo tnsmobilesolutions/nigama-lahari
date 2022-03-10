@@ -7,14 +7,18 @@ class SongAPI {
 
     final Reference = await songs.add({
       "songId": songsModel.songId,
+
       "songCategory": songsModel.songCategory,
-      "songAttributes": songsModel.songAttribute,
+      //"songAttributes": songsModel.songAttribute,
+
+      "songCatageory": songsModel.songCategory,
+      "songAttribute": songsModel.songAttribute,
       "songTitle": songsModel.songTitle,
       "singerName": songsModel.singerName,
       "songText": songsModel.songText,
       "isEditable": songsModel.isEditable,
       "songDuration": songsModel.songDuration,
-      "songUrl": songsModel.songURL,
+      "songURL": songsModel.songURL,
     });
     return Reference.id;
   }

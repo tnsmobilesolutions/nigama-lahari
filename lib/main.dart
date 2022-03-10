@@ -18,7 +18,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final storage = FlutterSecureStorage();
-
   Future<bool> checkLoginStatus() async {
     String? value = await storage.read(key: 'uid');
     if (value == null) {
