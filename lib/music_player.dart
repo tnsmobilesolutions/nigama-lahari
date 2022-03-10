@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
 
 class MusicPlayer extends StatefulWidget {
-  MusicPlayer({
-    Key? key,
-    required this.songName,
-    required this.singerName,
-  }) : super(key: key);
+  MusicPlayer(
+      {Key? key,
+      required this.songName,
+      required this.singername,
+      required this.songUrl})
+      : super(key: key);
 
-  final String songName, singerName;
+  final String songName, singername, songUrl;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -29,9 +30,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   AudioPlayer? audioPlayer = AudioPlayer();
   PlayerState playerState = PlayerState.PAUSED;
   AudioCache? audioCache;
-  String path = 'audio.mp3';
-  String url =
-      'https://firebasestorage.googleapis.com/v0/b/nigama-lahari.appspot.com/o/%E0%AC%AC%E0%AC%A8%E0%AD%8D%E0%AC%A6%E0%AC%A8%E0%AC%BE%2F%5BLyric%5D%20Togetsukyou%20_Kimi%20Omofu_%20-%20Mai%20Kuraki(MP3_160K).mp3?alt=media&token=a312903a-5889-4852-b688-2da0a358292e';
+
   @override
   void initState() {
     super.initState();
@@ -227,48 +226,37 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   playMusic() async {
-    await audioPlayer?.play(url);
-    //await audioCache?.play(path);
+    print(widget.songUrl);
+    await audioPlayer?.play(widget.songUrl);
   }
 
   pauseMusic() async {
     await audioPlayer?.pause();
-    //await audioPlayer?.pause();
   }
 
   @override
   Widget build(BuildContext context) {
-    // playMusic() async {
-    //   await audioPlayer?.play(widget.url);
-    //   //await audioCache?.play(path);
-    // }
-
-    // pauseMusic() async {
-    //   await audioPlayer?.pause();
-    //   //await audioPlayer?.pause();
-    // }
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_downward),
-          onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => ScrollableSongList(),
-            //   ),
-            // );
-          },
-        ),
         backgroundColor: Colors.yellowAccent[700],
+        automaticallyImplyLeading: false,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {},
-          ),
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_downward),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {},
+              ),
+            ],
+          )
         ],
       ),
       body: Container(
@@ -287,7 +275,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                     ),
                   ),
                   Text(
-                    '${widget.singerName}',
+                    '${widget.singername}',
                     style: TextStyle(
                       fontSize: 20,
                     ),

@@ -64,10 +64,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => MusicPlayer(
-                    // TODO: Music Player shoud should only accept the song object.
+                    // TODO: Music Player should only accept the song object.
                     songName: widget.songs![index].songTitle ?? "",
-                    singerName: widget.songs![index].singerName ?? "",
-                    //url: widget.url!,
+                    singername: widget.songs![index].singerName ?? "",
+                    songUrl: widget.songs![index].songURL ?? "",
+                    //songLyrics: widget.songs![index].songText ?? "",
                   ),
                 ),
               );

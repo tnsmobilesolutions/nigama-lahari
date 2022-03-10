@@ -40,6 +40,10 @@ final List<String> singer = [
 ];
 
 class _HomeScreenState extends State<HomeScreen> {
+  void initState() {
+    super.initState();
+  }
+
   //Alert Dialog for signout
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -89,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('home screen loading...');
-    //final categories = DataStore().allCategories;
-    //print(categories?.length);
+    // final categories = DataStore().allCategories;
+    // print(categories?.length);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -156,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () async {
                         final allSongsByCategory = await SearchSongAPI()
                             .getAllSongsInCategory(snapshot.data![index]);
-                        print(allSongsByCategory);
+                        print('***********$allSongsByCategory***********');
                         Navigator.push(
                           context,
                           MaterialPageRoute(
