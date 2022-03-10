@@ -21,7 +21,10 @@ class DataStore {
   //   print('calling getter of allCategories');
   //   List<String>? result;
   //   if (allSongs != null) {
-  //     var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
+  //     // var newMap = groupBy(allSongs!, (Song obj) => obj.songCategory);
+  //     // var newMap = groupBy(allSongs!, (Song obj) {
+  //     //   return obj.songCategory;
+  //     // });
   //     print(newMap.keys);
   //     newMap.keys.forEach(
   //       (key) {
