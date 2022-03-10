@@ -284,8 +284,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
                             scrollDirection: Axis.vertical,
                             child: Text(
                               widget.songLyrics,
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 25,
                               ),
                             ),
                           ),
