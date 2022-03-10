@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/models/data_store.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -160,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () async {
                         final allSongsByCategory = await SearchSongAPI()
                             .getAllSongsInCategory(snapshot.data![index]);
-                        print('***********$allSongsByCategory***********');
+                        // print('***********$allSongsByCategory***********');
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -169,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               songs: allSongsByCategory,
                             ),
                           ),
-                        ); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                        );
+                        setState(
+                            () {}); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
                       },
                     );
                   },

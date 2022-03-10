@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -314,7 +313,7 @@ class _AddSongState extends State<AddSong> {
                     ),
                     SizedBox(height: 30),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "Please select a catagory");
@@ -325,7 +324,7 @@ class _AddSongState extends State<AddSong> {
                           Fluttertoast.showToast(
                               msg: "Select an audio file of max size 10 MB");
                         } else {
-                          uploadFile();
+                          await uploadFile();
                         }
                         // Navigator.pop(context);
                         // await Fluttertoast.showToast(

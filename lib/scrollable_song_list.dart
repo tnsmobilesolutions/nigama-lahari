@@ -68,7 +68,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                     songName: widget.songs![index].songTitle ?? "",
                     singername: widget.songs![index].singerName ?? "",
                     songUrl: widget.songs![index].songURL ?? "",
-                    //songLyrics: widget.songs![index].songText ?? "",
+                    songLyrics: widget.songs![index].songText ?? "",
                   ),
                 ),
               );
