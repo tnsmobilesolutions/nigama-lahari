@@ -7,10 +7,11 @@ class MusicPlayer extends StatefulWidget {
       {Key? key,
       required this.songName,
       required this.singername,
-      required this.songUrl})
+      required this.songUrl,
+      required this.songLyrics})
       : super(key: key);
 
-  final String songName, singername, songUrl;
+  final String songName, singername, songUrl, songLyrics;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -34,6 +35,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   void initState() {
     super.initState();
+    playMusic();
 
     audioPlayer!.onPlayerStateChanged.listen((PlayerState s) {
       setState(() {
@@ -82,8 +84,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
   //slider implimentation
   Widget slider() {
     return Slider(
-      activeColor: Colors.green,
-      inactiveColor: Colors.grey,
+      activeColor: Colors.green[900],
+      inactiveColor: Colors.green[400],
       value: _position.inSeconds.toDouble(),
       min: 0.0,
       max: _duration.inSeconds.toDouble(),
@@ -222,7 +224,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
     super.dispose();
     audioPlayer?.release();
     audioPlayer?.dispose();
-    //audioCache?.clear();
   }
 
   playMusic() async {
@@ -236,6 +237,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -263,8 +266,39 @@ class _MusicPlayerState extends State<MusicPlayer> {
         color: Colors.yellowAccent[700],
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              Column(
+                children: [
+                  Container(
+                      height: screenHeight / 1.8,
+                      width: screenWidth / 1.2,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.green, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Expanded(
+                          child: SingleChildScrollView(
+                            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                            scrollDirection: Axis.vertical,
+                            child: Text(
+                              widget.songLyrics,
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
               Column(
                 children: [
                   Text(

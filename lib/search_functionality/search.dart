@@ -23,81 +23,75 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Search'),
-      ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            // Text("Search By",
-            //    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            DropdownButton(
-              hint: Text('Search Songs'),
-              value: _selectedSong,
-              onChanged: (newValue) {
-                setState(() {
-                  _selectedSong = newValue as String?;
-                });
-              },
-              items: _songs.map((songs) {
-                return DropdownMenuItem(
-                  child: new Text(songs),
-                  value: songs,
-                );
-              }).toList(),
-            ),
-            SizedBox(height: 40),
-            getNameWidget(_selectedSong),
-            getSingerNameWidget(_selectedSong),
-            getAttributeSong(_selectedSong),
-            getCategorySong(_selectedSong),
-            ElevatedButton(
-                style: CommonStyle.elevatedSubmitButtonStyle(),
-                child: Text("Search"),
-                onPressed: () async {
-                  print('search btn pressrd');
+    return SafeArea(
+      child: Scaffold(
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text('ଖୋଜନ୍ତୁ'),
+        // ),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: Column(
+            children: [
+              // Text("Search By",
+              //    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              DropdownButton(
+                hint: Text('ସଂଗୀତ ଖୋଜନ୍ତୁ'),
+                value: _selectedSong,
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedSong = newValue as String?;
+                  });
+                },
+                items: _songs.map(
+                  (songs) {
+                    return DropdownMenuItem(
+                      child: new Text(songs),
+                      value: songs,
+                    );
+                  },
+                ).toList(),
+              ),
+              SizedBox(height: 40),
+              getNameWidget(_selectedSong),
+              getSingerNameWidget(_selectedSong),
+              getAttributeSong(_selectedSong),
+              getCategorySong(_selectedSong),
+              ElevatedButton(
+                  style: CommonStyle.elevatedSubmitButtonStyle(),
+                  child: Text("ଖୋଜନ୍ତୁ"),
+                  onPressed: () async {
+                    print('search btn pressrd');
 
-                  final List<Song>? allSongs;
+                    final List<Song>? allSongs;
 
-                  final searchAPI = SearchSongAPI();
+                    final searchAPI = SearchSongAPI();
 
-                  if (_selectedSong == "Name") {
-                    allSongs =
-                        await searchAPI.getSongByName(_nameController.text);
-                  } else if (_selectedSong == "Singer") {
-                    allSongs = await searchAPI
-                        .getSongBySingerName(_singerNameController.text);
-                  } else if (_selectedSong == "Attribute") {
-                    allSongs = await searchAPI
-                        .getSongByAttribute(_attributeController.text);
-                  } else if (_selectedSong == "Category") {
-                    allSongs = await searchAPI
-                        .getSongByCategory(_categoryController.text);
-                  } else {
-                    allSongs = [];
-                  }
-
-                  // if (_selectedSong == "Receipt No") {
-                  //   final singleReceipt = await searchAPI
-                  //       .getReceiptByReceiptNo(_receiptNoController.text);
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) =>
-                  //               ReceiptPreview(receipt: singleReceipt)));
-                  // } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ResultSong(
-                                songs: allSongs,
-                              )));
-                  // }
-                }),
-          ],
+                    if (_selectedSong == "Name") {
+                      allSongs =
+                          await searchAPI.getSongByName(_nameController.text);
+                    } else if (_selectedSong == "Singer") {
+                      allSongs = await searchAPI
+                          .getSongBySingerName(_singerNameController.text);
+                    } else if (_selectedSong == "Attribute") {
+                      allSongs = await searchAPI
+                          .getSongByAttribute(_attributeController.text);
+                    } else if (_selectedSong == "Category") {
+                      allSongs = await searchAPI
+                          .getSongByCategory(_categoryController.text);
+                    } else {
+                      allSongs = [];
+                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResultSong(
+                                  songs: allSongs,
+                                )));
+                    // }
+                  }),
+            ],
+          ),
         ),
       ),
     );
