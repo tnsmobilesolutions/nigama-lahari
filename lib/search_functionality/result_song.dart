@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 class ResultSong extends StatefulWidget {
@@ -23,26 +24,19 @@ class _ResultSongState extends State<ResultSong> {
             child: Container(
               //color: Colors.amber[colorCodes[index]],
               // child: Center(child: Text('Entry ${entries[index]}')),
-              color: Colors.black12,
+              color: Color.fromARGB(31, 213, 110, 110),
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Text("Hello"),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        Text(widget.songs?[index].songTitle ?? '',
+                            style: CommonStyle.myStyle),
                         Text(widget.songs?[index].singerName ?? ''),
-                        Text(widget.songs?[index].songText.toString() ?? ''),
                       ],
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     Text(widget.receipts?[index].paaliaName ?? ''),
-                    //     Text(widget.receipts?[index].amount.toString() ?? ''),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
