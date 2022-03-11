@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               songs: allSongsByCategory,
                             ),
                           ),
-                        ).then((value) => setState(() {}));
+                        );
                       },
                     );
                   },
