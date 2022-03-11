@@ -288,7 +288,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                               ),
                             ),
                           ),
