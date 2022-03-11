@@ -15,7 +15,6 @@ class MusicPlayer extends StatefulWidget {
 
   final String songName, singername, songUrl, songLyrics;
   final List<Song>? songList;
-  //List<Song>? songs;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -149,7 +148,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
         //int _counter = 0;
         setState(
           () {
-            //widget.songList!;
+            widget.songList!;
             //MediaControl.skipToNext;
           },
         );

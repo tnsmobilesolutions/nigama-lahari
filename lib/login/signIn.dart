@@ -5,7 +5,6 @@ import 'package:flutter_application_1/login/resetpasswordpage.dart';
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../home_screen.dart';
@@ -20,11 +19,9 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   bool _obscureText = true;
 
-  final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
-  final storage = FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {

@@ -79,4 +79,18 @@ class userAPI {
       }
     }
   }
+
+// signout
+  dynamic logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print(e); // TODO: show dialog with error
+    }
+  }
+// keep user logged
+
+  dynamic currentUser() async {
+    await FirebaseAuth.instance.currentUser;
+  }
 }
