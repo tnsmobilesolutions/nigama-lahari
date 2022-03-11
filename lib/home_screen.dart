@@ -4,7 +4,7 @@ import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
 
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-final storage = FlutterSecureStorage();
+// final storage = FlutterSecureStorage();
 
 final List<String> items = [
   'ଜଗାଅରେ ଗଗନ ଭୁବନ ପବନ',
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Text('Yes'),
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
-                    await storage.delete(key: 'uid');
+
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
