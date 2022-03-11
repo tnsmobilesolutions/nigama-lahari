@@ -214,12 +214,6 @@ class _AddSongState extends State<AddSong> {
                       autofocus: false,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter name';
-                        }
-                        return null;
-                      },
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ନାମ',
@@ -322,6 +316,8 @@ class _AddSongState extends State<AddSong> {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
                               msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                        } else if (_titleController.text.isEmpty) {
+                          Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
                         } else if (file1 == null) {
                           Fluttertoast.showToast(
                               msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
