@@ -156,8 +156,7 @@ class _AddSongState extends State<AddSong> {
 
   @override
   Widget build(BuildContext context) {
-    final fileName =
-        file != null ? path.basename(file!.path) : 'No File Selected';
+    final fileName = file != null ? path.basename(file!.path) : 'ଚୟନ କରନ୍ତୁ';
 
     return Scaffold(
       appBar: AppBar(
@@ -179,7 +178,7 @@ class _AddSongState extends State<AddSong> {
                       children: [
                         DropdownButton(
                           hint: Text(
-                            'Catagory',
+                            'ବିଭାଗ',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -215,9 +214,15 @@ class _AddSongState extends State<AddSong> {
                       autofocus: false,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter name';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          labelText: 'Title',
+                          labelText: 'ନାମ',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -234,7 +239,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          labelText: 'Singer',
+                          labelText: 'ଗାୟକ',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -251,7 +256,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          labelText: 'Attributes',
+                          labelText: 'ଭାବ',
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.black),
                           border: OutlineInputBorder(
@@ -269,7 +274,7 @@ class _AddSongState extends State<AddSong> {
                       textInputAction: TextInputAction.newline,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(15),
-                        labelText: 'Song Lyrics',
+                        labelText: 'ଗୀତ ଲେଖା',
                         hintStyle:
                             TextStyle(fontSize: 15.0, color: Colors.black),
                         border: OutlineInputBorder(
@@ -316,13 +321,13 @@ class _AddSongState extends State<AddSong> {
                       onPressed: () async {
                         if (_selectedOption == null) {
                           Fluttertoast.showToast(
-                              msg: "Please select a catagory");
+                              msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
                         } else if (file1 == null) {
                           Fluttertoast.showToast(
-                              msg: "Select an audio file to upload");
+                              msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
                         } else if (sizeInMb! > 10) {
                           Fluttertoast.showToast(
-                              msg: "Select an audio file of max size 10 MB");
+                              msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
                         } else {
                           await uploadFile();
                         }
@@ -348,7 +353,7 @@ class _AddSongState extends State<AddSong> {
                               SongAPI().createNewSong(songsModel);
                         }
                       },
-                      child: Text('Submit'),
+                      child: Text('ଅପଲୋଡ଼ କରନ୍ତୁ'),
                     ),
                   ],
                 ),

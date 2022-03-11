@@ -168,9 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               songs: allSongsByCategory,
                             ),
                           ),
-                        );
-                        setState(
-                            () {}); // 1st parameters : jagarana, 2nd parameter : list of jagarana songs from firebase
+                        ).then((value) => setState(() {}));
                       },
                     );
                   },
