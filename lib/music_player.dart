@@ -1,7 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
+<<<<<<< HEAD
 import 'package:flutter_application_1/edit_song.dart';
+=======
+import 'package:flutter_application_1/models/songs_model.dart';
+>>>>>>> 63074114bc60c16e35bd67bd4248e161368e2b5c
 
 class MusicPlayer extends StatefulWidget {
   MusicPlayer(
@@ -9,10 +13,12 @@ class MusicPlayer extends StatefulWidget {
       required this.songName,
       required this.singername,
       required this.songUrl,
-      required this.songLyrics})
+      required this.songLyrics,
+      required this.songList})
       : super(key: key);
 
   final String songName, singername, songUrl, songLyrics;
+  final List<Song>? songList;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -143,20 +149,13 @@ class _MusicPlayerState extends State<MusicPlayer> {
         color: Colors.green,
       ),
       onPressed: () {
-        setState(() {
-          MediaControl.skipToNext;
-        });
-        // setState(
-        //   () {
-        //     void next() async {
-        //       if (nextDone) {
-        //         nextDone = false;
-        //         await MediaControl.skipToNext;
-        //         nextDone = true;
-        //       }
-        //     }
-        //   },
-        // );
+        //int _counter = 0;
+        setState(
+          () {
+            widget.songList!;
+            //MediaControl.skipToNext;
+          },
+        );
       },
     );
   }
@@ -170,9 +169,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
         color: Colors.green,
       ),
       onPressed: () {
-        setState(() {
-          MediaControl.skipToPrevious;
-        });
+        setState(
+          () {
+            // widget.songList!;
+          },
+        );
       },
     );
   }
@@ -270,12 +271,12 @@ class _MusicPlayerState extends State<MusicPlayer> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.yellowAccent[700],
-          child: SafeArea(
+      body: Container(
+        color: Colors.yellowAccent[700],
+        child: SafeArea(
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Column(
                   children: [

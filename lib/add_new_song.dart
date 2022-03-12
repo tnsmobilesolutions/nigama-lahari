@@ -318,6 +318,9 @@ class _AddSongState extends State<AddSong> {
                               msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
                         } else if (_titleController.text.isEmpty) {
                           Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                        } else if (_lyricsController.text.isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
                         } else if (file1 == null) {
                           Fluttertoast.showToast(
                               msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
