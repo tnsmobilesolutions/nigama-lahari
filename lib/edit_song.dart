@@ -15,6 +15,9 @@ class _Edit_SongState extends State<EditSong> {
       appBar: AppBar(
         title: Text('Edit Song'),
       ),
+      body: Column(
+        children: [Text('Hello')],
+      ),
     );
   }
 }
