@@ -115,14 +115,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MusicPlayer(
-                                  songName:
-                                      widget.songs![index].songTitle ?? "",
-                                  singername:
-                                      widget.songs![index].singerName ?? "",
-                                  songUrl: widget.songs![index].songURL ?? "",
-                                  songLyrics:
-                                      widget.songs![index].songText ?? "",
+                                  song: widget.songs![index],
                                   songList: widget.songs,
+                                  index: index,
                                 ),
                               ),
                             );
