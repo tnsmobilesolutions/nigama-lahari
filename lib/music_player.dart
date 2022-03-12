@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 class MusicPlayer extends StatefulWidget {
@@ -254,7 +255,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
               ),
               IconButton(
                 icon: Icon(Icons.edit),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditSong(),
+                    ),
+                  );
+                },
               ),
             ],
           )

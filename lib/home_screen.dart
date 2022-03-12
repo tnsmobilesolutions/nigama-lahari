@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(right: 20),
                 child: GestureDetector(
                   onTap: showMyDialog,
-                  child: Icon(Icons.logout_rounded),
+                  child: Icon(Icons.settings_power),
                 ),
               ),
             ],
