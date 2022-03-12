@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter_application_1/edit_song.dart';
+import 'package:flutter_application_1/lyrics.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 class MusicPlayer extends StatefulWidget {
@@ -203,7 +204,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   bool get isFirstIndex {
     // Check if the current index is 0th index
-    return (_currentIndex ?? 0) > 0;
+    return (_currentIndex ?? 0) == 0;
   }
 
   Widget buttonShuffle() {
@@ -321,17 +322,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Expanded(
-                            child: SingleChildScrollView(
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              scrollDirection: Axis.vertical,
-                              child: Text(
-                                _currentSong?.songText ?? "",
-                                overflow: TextOverflow.fade,
-                                softWrap: false,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
+                            child: LyricsViewer(
+                              lyrics: _currentSong?.songText ?? "",
                             ),
                           ),
                         )),
