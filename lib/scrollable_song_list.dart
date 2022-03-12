@@ -37,9 +37,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
           .toList();
     }
 
-    setState(() {
-      items = results;
-    });
+    setState(
+      () {
+        items = results;
+      },
+    );
   }
 
   @override
