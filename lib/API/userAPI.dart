@@ -90,7 +90,7 @@ class userAPI {
   }
 // keep user logged
 
-  dynamic currentUser() async {
-    await FirebaseAuth.instance.currentUser;
-  }
+  // dynamic currentUser() async {
+  //   await FirebaseAuth.instance.currentUser;
+  // }
 }
