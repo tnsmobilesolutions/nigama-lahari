@@ -7,15 +7,14 @@ import 'package:flutter_application_1/models/songs_model.dart';
 class MusicPlayer extends StatefulWidget {
   MusicPlayer(
       {Key? key,
-      required this.songName,
-      required this.singername,
-      required this.songUrl,
-      required this.songLyrics,
-      required this.songList})
+      required this.song,
+      required this.songList,
+      required this.index})
       : super(key: key);
 
-  final String songName, singername, songUrl, songLyrics;
+  final Song song;
   final List<Song>? songList;
+  final int index;
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -23,6 +22,8 @@ class MusicPlayer extends StatefulWidget {
 
 class _MusicPlayerState extends State<MusicPlayer> {
   //final double screenHeight = MediaQuery.of(context).size.height;
+  Song? _currentSong;
+  int? _currentIndex;
   Duration _duration = new Duration();
   Duration _position = new Duration();
 
@@ -39,7 +40,13 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   void initState() {
     super.initState();
-    playMusic();
+    // Set the song passed from scrollableSongList as the currect song initially
+    _currentSong = widget.song;
+    _currentIndex = widget.index;
+
+    // It's not recomended to play while init since user may just need to read the lyrics
+    // so playing instantly may disturb the user.
+    //playMusic();
 
     audioPlayer!.onPlayerStateChanged.listen((PlayerState s) {
       setState(() {
@@ -143,18 +150,30 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_next_rounded,
         size: 40,
-        color: Colors.green,
+        color: isLastIndex ? Colors.blueGrey : Colors.green,
       ),
-      onPressed: () {
-        //int _counter = 0;
-        setState(
-          () {
-            widget.songList!;
-            //MediaControl.skipToNext;
-          },
-        );
-      },
+      onPressed: nextSongPressed,
     );
+  }
+
+  void nextSongPressed() {
+    if (!isLastIndex) {
+      setState(
+        () {
+          _currentIndex = _currentIndex! + 1;
+          _currentSong = widget.songList![_currentIndex!];
+        },
+      );
+    }
+  }
+
+  bool get isLastIndex {
+    // Check if the current index is less than the last index
+    if (widget.songList != null && _currentIndex != null) {
+      return _currentIndex! == widget.songList!.length - 1;
+    } else {
+      return true;
+    }
   }
 
   //previous song
@@ -163,16 +182,28 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_previous_rounded,
         size: 40,
-        color: Colors.green,
+        color: isFirstIndex ? Colors.blueGrey : Colors.green,
       ),
-      onPressed: () {
-        setState(
-          () {
-            // widget.songList!;
-          },
-        );
-      },
+      onPressed: prevSongPressed,
     );
+  }
+
+  void prevSongPressed() {
+    if (!isFirstIndex &&
+        widget.songList != null &&
+        widget.songList!.length > 0) {
+      setState(
+        () {
+          _currentIndex = _currentIndex! - 1;
+          _currentSong = widget.songList![_currentIndex!];
+        },
+      );
+    }
+  }
+
+  bool get isFirstIndex {
+    // Check if the current index is 0th index
+    return (_currentIndex ?? 0) > 0;
   }
 
   Widget buttonShuffle() {
@@ -226,8 +257,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   playMusic() async {
-    print(widget.songUrl);
-    await audioPlayer?.play(widget.songUrl);
+    print(_currentSong?.songURL);
+    if (_currentSong?.songURL != null) {
+      await audioPlayer?.play(_currentSong!.songURL!);
+    }
   }
 
   pauseMusic() async {
@@ -292,7 +325,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                               padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                               scrollDirection: Axis.vertical,
                               child: Text(
-                                widget.songLyrics,
+                                _currentSong?.songText ?? "",
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
                                 style: TextStyle(
@@ -310,14 +343,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
                 Column(
                   children: [
                     Text(
-                      '${widget.songName}',
+                      '${_currentSong?.songTitle}',
                       style: TextStyle(
                         fontSize: 30,
                         //fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      '${widget.singername}',
+                      '${_currentSong?.singerName}',
                       style: TextStyle(
                         fontSize: 20,
                       ),
