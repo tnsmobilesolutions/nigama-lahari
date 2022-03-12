@@ -1,11 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
-<<<<<<< HEAD
 import 'package:flutter_application_1/edit_song.dart';
-=======
 import 'package:flutter_application_1/models/songs_model.dart';
->>>>>>> 63074114bc60c16e35bd67bd4248e161368e2b5c
 
 class MusicPlayer extends StatefulWidget {
   MusicPlayer(
