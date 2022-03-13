@@ -147,7 +147,7 @@ class _SignInState extends State<SignIn> {
                       children: [
                         // logo
                         const Image(
-                          image: AssetImage('assets/image/pic.jpg'),
+                          image: AssetImage('assets/image/nsslogo.png'),
                         ),
                         const SizedBox(height: 20),
                         emailField,

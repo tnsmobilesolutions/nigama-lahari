@@ -45,6 +45,7 @@ class _Edit_SongState extends State<EditSong> {
     _singerNameController.text = widget.song.singerName ?? "";
     _attributeController.text = widget.song.songAttribute ?? "";
     _lyricsController.text = widget.song.songText ?? "";
+    _selectedOption = widget.song.songCategory ?? "";
   }
 
   @override
@@ -178,15 +179,15 @@ class _Edit_SongState extends State<EditSong> {
                 SizedBox(height: 15),
                 ElevatedButton(
                   onPressed: () async {
-                    if (_selectedOption == null) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
-                    } else if (_titleController.text.isEmpty) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
-                    } else if (_lyricsController.text.isEmpty) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                    } else {
-                      await HomeScreen();
-                    }
+                    // if (_selectedOption == null) {
+                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                    // } else if (_titleController.text.isEmpty) {
+                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                    // } else if (_lyricsController.text.isEmpty) {
+                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
+                    // } else {
+                    //   await HomeScreen();
+                    // }
                     // Navigator.pop(context);
                     // await Fluttertoast.showToast(
                     //     msg: 'Upload Successfully');
@@ -210,9 +211,8 @@ class _Edit_SongState extends State<EditSong> {
                         const SnackBar(content: Text('Data Updated.')),
                       );
 
-                      Navigator.pop(context, HomeScreen());
-                    } else
-                      return null;
+                      Navigator.pop(context, songsModel);
+                    }
                   },
                   child: Text('Update'),
                 ),
