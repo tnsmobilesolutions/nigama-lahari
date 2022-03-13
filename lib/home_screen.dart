@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+// import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/login/signIn.dart';
-import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
 
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
+import 'login/common_widgets/common_style.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

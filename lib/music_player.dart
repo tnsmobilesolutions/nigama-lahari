@@ -130,7 +130,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  //fastforward button
+  //slow button
   Widget buttonSlow() {
     return IconButton(
       icon: Icon(
@@ -405,9 +405,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                                   },
                                 ),
                               ),
-                              // SizedBox(
-                              //   width: 20,
-                              // ),
+
                               Expanded(child: nextSong()),
                               //Expanded(child: buttonFast()),
                               Expanded(child: buttonShuffle()),

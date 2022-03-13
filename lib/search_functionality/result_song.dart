@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common_widgets/common_style.dart';
+// import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
+
+import '../login/common_widgets/common_style.dart';
 
 class ResultSong extends StatefulWidget {
   ResultSong({Key? key, this.songs}) : super(key: key);
