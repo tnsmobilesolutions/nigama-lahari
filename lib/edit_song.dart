@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/API/song_api.dart';
-import 'package:flutter_application_1/common_widgets/common_style.dart';
+//import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/music_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song}) : super(key: key);
