@@ -52,6 +52,7 @@ class _Edit_SongState extends State<EditSong> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.song.songTitle ?? ""),
       ),
       body: SafeArea(
