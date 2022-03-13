@@ -18,4 +18,14 @@ class SongAPI {
     });
     return Reference.id;
   }
+
+// update
+  Future<void> updateSong(Song song) async {
+    // Implement Update song logic here
+    var collection = FirebaseFirestore.instance.collection('songs');
+
+    collection
+        .doc(song.songId) // <-- Doc ID where data should be updated.
+        .update(song.toMap());
+  }
 }

@@ -293,7 +293,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => EditSong(),
+                      builder: (context) => EditSong(
+                        song: _currentSong!,
+                      ),
                     ),
                   );
                 },
