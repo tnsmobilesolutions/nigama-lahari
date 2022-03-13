@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/API/song_api.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'API/song_api.dart';
+import 'home_screen.dart';
 import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
@@ -30,6 +30,7 @@ class _Edit_SongState extends State<EditSong> {
   String? _selectedOption;
   final height = 100;
 
+  final _catagoryController = TextEditingController();
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
@@ -39,6 +40,7 @@ class _Edit_SongState extends State<EditSong> {
   void initState() {
     super.initState();
 
+    _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
     _singerNameController.text = widget.song.singerName ?? "";
     _attributeController.text = widget.song.songAttribute ?? "";
@@ -52,16 +54,16 @@ class _Edit_SongState extends State<EditSong> {
       appBar: AppBar(
         title: Text(widget.song.songTitle ?? ""),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               DropdownButton(
                 hint: Text(
-                  'ବିଭାଗ',
+                  _catagoryController.text,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,
@@ -186,7 +188,7 @@ class _Edit_SongState extends State<EditSong> {
                   if (_formKey.currentState!.validate()) {
                     Song songsModel = Song(
                       isEditable: true,
-                      songCategory: _selectedOption,
+                      //songCategory: _selectedOption,
                       songAttribute: _attributeController.text,
                       songTitle: _titleController.text,
                       singerName: _singerNameController.text,
