@@ -54,32 +54,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-    // return MaterialApp(
-    //   title: 'ନିଗମ ଲହରୀ',
-    //   theme: ThemeData(
-    //     primarySwatch: Colors.green,
-    //   ),
-    //   debugShowCheckedModeBanner: true,
-    //   home: FutureBuilder(
-    //     future: checkLoginStatus(),
-    //     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-    //       if (snapshot.data == false) {
-    //         return SignIn();
-    //       }
-
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return Container(
-    //           color: Colors.white,
-    //           child: Center(
-    //             child: CircularProgressIndicator(),
-    //           ),
-    //         );
-    //       }
-    //       return HomeScreen();
-    //     },
-    //   ),
-    // );
