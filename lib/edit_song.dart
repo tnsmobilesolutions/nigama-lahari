@@ -52,162 +52,169 @@ class _Edit_SongState extends State<EditSong> {
       appBar: AppBar(
         title: Text(widget.song.songTitle ?? ""),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              DropdownButton(
-                hint: Text(
-                  'ବିଭାଗ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DropdownButton(
+                  hint: Text(
+                    'ବିଭାଗ',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
                   ),
-                ),
-                value: _selectedOption,
-                dropdownColor: Colors.yellowAccent[700],
-                onChanged: (value) {
-                  setState(
-                    () {
-                      _selectedOption = value as String?;
-                      print(_selectedOption.toString());
-                    },
-                  );
-                },
-                items: _catagory.map(
-                  (val) {
-                    return DropdownMenuItem(
-                      child: new Text(val),
-                      value: val,
+                  value: _selectedOption,
+                  dropdownColor: Colors.yellowAccent[700],
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _selectedOption = value as String?;
+                        print(_selectedOption.toString());
+                      },
                     );
                   },
-                ).toList(),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.name,
-                controller: _titleController,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                ],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter Name';
-                  } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    return 'Please Enter Correct Name';
-                  }
-                  return null;
-                },
-                // style: TextStyle(height: 0.5),
-                decoration: CommonStyle.textFieldStyle(
-                  labelTextStr: "Song Name",
-                  hintTextStr: "Enter Song name",
+                  items: _catagory.map(
+                    (val) {
+                      return DropdownMenuItem(
+                        child: new Text(val),
+                        value: val,
+                      );
+                    },
+                  ).toList(),
                 ),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.name,
-                controller: _singerNameController,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                ],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter Singer Name';
-                  } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    return 'Please Enter Correct Singer Name';
-                  }
-                  return null;
-                },
-                // style: TextStyle(height: 0.5),
-                decoration: CommonStyle.textFieldStyle(
-                  labelTextStr: "Singer Name",
-                  hintTextStr: "Enter Singer name",
-                ),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.name,
-                controller: _attributeController,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                ],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter  Attribute Name';
-                  } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    return 'Please Enter Correct Attribute Name';
-                  }
-                  return null;
-                },
-                // style: TextStyle(height: 0.5),
-                decoration: CommonStyle.textFieldStyle(
-                  labelTextStr: "Song Attribute Name",
-                  hintTextStr: "Enter Song Attribute name",
-                ),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                controller: _lyricsController,
-                maxLines: height ~/ 8,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                ],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter Lyrics';
-                  } else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
-                    return 'Please Enter Correct Lyrics';
-                  }
-                  return null;
-                },
-                // style: TextStyle(height: 0.5),
-                decoration: CommonStyle.textFieldStyle(
-                  labelTextStr: "Song Lyrics",
-                  hintTextStr: "Enter Song Lyrics",
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_selectedOption == null) {
-                    Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
-                  } else if (_titleController.text.isEmpty) {
-                    Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
-                  } else if (_lyricsController.text.isEmpty) {
-                    Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                  } else {
-                    await HomeScreen();
-                  }
-                  // Navigator.pop(context);
-                  // await Fluttertoast.showToast(
-                  //     msg: 'Upload Successfully');
-                  // Navigator.pop(context);
-
-                  if (_formKey.currentState!.validate()) {
-                    Song songsModel = Song(
-                      isEditable: true,
-                      songCategory: _selectedOption,
-                      songAttribute: _attributeController.text,
-                      songTitle: _titleController.text,
-                      singerName: _singerNameController.text,
-                      songText: _lyricsController.text,
-                    );
-
-                    final SongDetails = SongAPI().updateSong(songsModel);
-                    print(songsModel);
-                    print(SongDetails);
-
-                    await ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Data Updated.')),
-                    );
-
-                    Navigator.pop(context, HomeScreen());
-                  } else
+                SizedBox(height: 15),
+                TextFormField(
+                  keyboardType: TextInputType.name,
+                  controller: _titleController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                  ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter Name';
+                    } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return 'Please Enter Correct Name';
+                    }
                     return null;
-                },
-                child: Text('Update'),
-              ),
-            ],
+                  },
+                  // style: TextStyle(height: 0.5),
+                  decoration: CommonStyle.textFieldStyle(
+                    labelTextStr: "Song Name",
+                    hintTextStr: "Enter Song name",
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextFormField(
+                  keyboardType: TextInputType.name,
+                  controller: _singerNameController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                  ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter Singer Name';
+                    } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return 'Please Enter Correct Singer Name';
+                    }
+                    return null;
+                  },
+                  // style: TextStyle(height: 0.5),
+                  decoration: CommonStyle.textFieldStyle(
+                    labelTextStr: "Singer Name",
+                    hintTextStr: "Enter Singer name",
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextFormField(
+                  keyboardType: TextInputType.name,
+                  controller: _attributeController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                  ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter  Attribute Name';
+                    } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return 'Please Enter Correct Attribute Name';
+                    }
+                    return null;
+                  },
+                  // style: TextStyle(height: 0.5),
+                  decoration: CommonStyle.textFieldStyle(
+                    labelTextStr: "Song Attribute Name",
+                    hintTextStr: "Enter Song Attribute name",
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: _lyricsController,
+                  maxLines: height ~/ 8,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                  ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter Lyrics';
+                    } else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
+                      return 'Please Enter Correct Lyrics';
+                    }
+                    return null;
+                  },
+                  // style: TextStyle(height: 0.5),
+                  decoration: CommonStyle.textFieldStyle(
+                    labelTextStr: "Song Lyrics",
+                    hintTextStr: "Enter Song Lyrics",
+                  ),
+                ),
+                SizedBox(height: 15),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_selectedOption == null) {
+                      Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                    } else if (_titleController.text.isEmpty) {
+                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                    } else if (_lyricsController.text.isEmpty) {
+                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
+                    } else {
+                      await HomeScreen();
+                    }
+                    // Navigator.pop(context);
+                    // await Fluttertoast.showToast(
+                    //     msg: 'Upload Successfully');
+                    // Navigator.pop(context);
+
+                    if (_formKey.currentState!.validate()) {
+                      Song songsModel = Song(
+                        isEditable: true,
+                        songCategory: _selectedOption,
+                        songAttribute: _attributeController.text,
+                        songTitle: _titleController.text,
+                        singerName: _singerNameController.text,
+                        songText: _lyricsController.text,
+                      );
+
+                      final SongDetails = SongAPI().updateSong(songsModel);
+                      print(songsModel);
+                      print(SongDetails);
+
+                      await ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Data Updated.')),
+                      );
+
+                      Navigator.pop(context, HomeScreen());
+                    } else
+                      return null;
+                  },
+                  child: Text('Update'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
