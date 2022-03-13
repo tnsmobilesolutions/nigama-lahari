@@ -62,7 +62,7 @@ class _Edit_SongState extends State<EditSong> {
               children: [
                 DropdownButton(
                   hint: Text(
-                    'ବିଭାଗ',
+                    widget.song.songCategory ?? "",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
