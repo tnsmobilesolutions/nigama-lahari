@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/API/song_api.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'API/song_api.dart';
+import 'home_screen.dart';
 import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
@@ -30,6 +30,7 @@ class _Edit_SongState extends State<EditSong> {
   String? _selectedOption;
   final height = 100;
 
+  final _catagoryController = TextEditingController();
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
@@ -39,6 +40,7 @@ class _Edit_SongState extends State<EditSong> {
   void initState() {
     super.initState();
 
+    _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
     _singerNameController.text = widget.song.singerName ?? "";
     _attributeController.text = widget.song.songAttribute ?? "";
@@ -50,6 +52,7 @@ class _Edit_SongState extends State<EditSong> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.song.songTitle ?? ""),
       ),
       body: SafeArea(
@@ -62,7 +65,7 @@ class _Edit_SongState extends State<EditSong> {
               children: [
                 DropdownButton(
                   hint: Text(
-                    widget.song.songCategory ?? "",
+                    _catagoryController.text,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
