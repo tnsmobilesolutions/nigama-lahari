@@ -280,9 +280,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
         elevation: 0,
         actions: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_downward),
+                icon: Icon(Icons.arrow_back_rounded),
                 onPressed: () {
                   Navigator.pop(context);
                 },
