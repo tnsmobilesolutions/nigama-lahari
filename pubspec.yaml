@@ -29,6 +29,7 @@ dependencies:
   percent_indicator: ^4.0.0
   # open_file: ^3.2.1
   just_audio: ^0.9.20
+  animated_splash_screen: ^1.2.0
 
 dev_dependencies:
   flutter_test:
