@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
@@ -147,7 +146,7 @@ class _SignInState extends State<SignIn> {
                       children: [
                         // logo
                         const Image(
-                          image: AssetImage('assets/image/nsslogo.png'),
+                          image: AssetImage('assets/image/pic.jpg'),
                         ),
                         const SizedBox(height: 20),
                         emailField,
