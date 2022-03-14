@@ -201,4 +201,38 @@ class _SearchState extends State<Search> {
       return SizedBox(width: 0, height: 0);
     }
   }
+
+  Widget getDurationWidget(String? selectedSong) {
+    if (selectedSong == "Duration") {
+      return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            child: Column(children: [
+              Text('<6'),
+              Text('6-15'),
+              Text('>15'),
+            ]),
+          )
+
+          // TextFormField(
+          //   keyboardType: TextInputType.name,
+          //   controller: _categoryController,
+          //   validator: (value) {
+          //     if (value!.isEmpty) {
+          //       return 'Please Enter Your Name';
+          //     } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
+          //         .hasMatch(value)) {
+          //       return 'Please Enter Correct Name';
+          //     }
+          //     return null;
+          //   },
+          //   decoration: InputDecoration(
+          //       border:
+          //           OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+          // ),
+          );
+    } else {
+      return SizedBox(width: 0, height: 0);
+    }
+  }
 }
