@@ -1,10 +1,10 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/data_store.dart';
-
-import 'login/signIn.dart';
 import 'home_screen.dart';
+import 'login/signIn.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,51 +25,32 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            final user = snapshot.data;
-            if (user == null) {
-              return SignIn();
+      home: AnimatedSplashScreen(
+        splash: Image(
+          image: AssetImage('assets/image/nsslogo.png'),
+        ),
+        splashIconSize: 200,
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: Colors.orangeAccent,
+        nextScreen: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              final user = snapshot.data;
+              if (user == null) {
+                return SignIn();
+              }
+              return HomeScreen();
+            } else {
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
             }
-            return HomeScreen();
-          } else {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
+          },
+        ),
       ),
     );
   }
 }
- 
-
-    // return MaterialApp(
-    //   title: 'ନିଗମ ଲହରୀ',
-    //   theme: ThemeData(
-    //     primarySwatch: Colors.green,
-    //   ),
-    //   debugShowCheckedModeBanner: true,
-    //   home: FutureBuilder(
-    //     future: checkLoginStatus(),
-    //     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-    //       if (snapshot.data == false) {
-    //         return SignIn();
-    //       }
-
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return Container(
-    //           color: Colors.white,
-    //           child: Center(
-    //             child: CircularProgressIndicator(),
-    //           ),
-    //         );
-    //       }
-    //       return HomeScreen();
-    //     },
-    //   ),
-    // );
