@@ -127,7 +127,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                     )
                   : Center(
                       child: Text(
-                        'No results found',
+                        '',
                         style: TextStyle(fontSize: 24),
                       ),
                     ),

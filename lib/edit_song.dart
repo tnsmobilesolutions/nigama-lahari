@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'API/song_api.dart';
-import 'home_screen.dart';
 import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
@@ -178,21 +176,7 @@ class _Edit_SongState extends State<EditSong> {
                 ),
                 SizedBox(height: 15),
                 ElevatedButton(
-                  onPressed: () async {
-                    // if (_selectedOption == null) {
-                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
-                    // } else if (_titleController.text.isEmpty) {
-                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
-                    // } else if (_lyricsController.text.isEmpty) {
-                    //   Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                    // } else {
-                    //   await HomeScreen();
-                    // }
-                    // Navigator.pop(context);
-                    // await Fluttertoast.showToast(
-                    //     msg: 'Upload Successfully');
-                    // Navigator.pop(context);
-
+                  onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Song songsModel = Song(
                         isEditable: true,
@@ -207,7 +191,7 @@ class _Edit_SongState extends State<EditSong> {
                       print(songsModel);
                       print(SongDetails);
 
-                      await ScaffoldMessenger.of(context).showSnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Data Updated.')),
                       );
 

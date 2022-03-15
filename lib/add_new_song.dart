@@ -45,6 +45,7 @@ class _AddSongState extends State<AddSong> {
   double percentage = 0;
   String? songUrl;
   String duration = '';
+  //String? autoDuration;
   double? sizeInMb;
   var file1;
 
@@ -52,11 +53,8 @@ class _AddSongState extends State<AddSong> {
     super.initState();
   }
 
-  // AudioPlayer audioPlayer = AudioPlayer();
-
-  // final result = audioPlayer.onDurationChanged.listen((Duration d) {
-  //   print('Max duration: $d');
-  // });
+  // final player = AudioPlayer();
+  // autoDuration =  player.setUrl('file.mp3');
 
   // select file from device
   Future selectFile() async {
