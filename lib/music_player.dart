@@ -96,8 +96,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
   //slider implimentation
   Widget slider() {
     return Slider(
-      activeColor: Colors.green[900],
-      inactiveColor: Colors.green[400],
+      activeColor: Colors.purple,
+      inactiveColor: Colors.purple[300],
       value: _position.inSeconds.toDouble(),
       min: 0.0,
       max: _duration.inSeconds.toDouble(),
@@ -125,7 +125,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
         color: Colors.green,
       ),
       onPressed: () {
-        audioPlayer?.setPlaybackRate(1.5);
+        //_position +=
+        //audioPlayer?.setPlaybackRate(1.5);
       },
     );
   }
@@ -151,7 +152,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_next_rounded,
         size: 40,
-        color: isLastIndex ? Colors.blueGrey : Colors.green,
+        color: isLastIndex ? Colors.blueGrey : Colors.purple,
       ),
       onPressed: nextSongPressed,
     );
@@ -183,7 +184,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_previous_rounded,
         size: 40,
-        color: isFirstIndex ? Colors.blueGrey : Colors.green,
+        color: isFirstIndex ? Colors.blueGrey : Colors.purple,
       ),
       onPressed: prevSongPressed,
     );
@@ -212,7 +213,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.shuffle,
         size: 40,
-        color: Colors.green,
+        color: Colors.purple,
       ),
       onPressed: () {
         if (isRepeat == false) {}
@@ -241,7 +242,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           audioPlayer?.setReleaseMode(ReleaseMode.RELEASE);
           setState(
             () {
-              color = Colors.green;
+              color = Colors.purple;
               isRepeat = false;
             },
           );
@@ -413,7 +414,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                                           : Icons.play_circle_filled_rounded,
                                     ),
                                     iconSize: 60,
-                                    color: Colors.green,
+                                    color: Colors.purple,
                                     onPressed: () {
                                       playerState == PlayerState.PLAYING
                                           ? pauseMusic()

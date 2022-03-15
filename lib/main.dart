@@ -23,32 +23,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ନିଗମ ଲହରୀ',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.purple,
       ),
-      home: AnimatedSplashScreen(
-        splash: Image(
-          image: AssetImage('assets/image/nsslogo.png'),
+      home: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.red, Colors.blue],
+          ),
         ),
-        splashIconSize: 200,
-        splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: Colors.orangeAccent,
-        nextScreen: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              final user = snapshot.data;
-              if (user == null) {
-                return SignIn();
-              }
-              return HomeScreen();
-            } else {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-          },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: AnimatedSplashScreen(
+            splash: Image(
+              image: AssetImage('assets/image/nsslogo.png'),
+            ),
+            splashIconSize: 200,
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Colors.transparent,
+            nextScreen: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  final user = snapshot.data;
+                  if (user == null) {
+                    return SignIn();
+                  }
+                  return HomeScreen();
+                } else {
+                  return Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
         ),
       ),
     );

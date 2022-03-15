@@ -90,7 +90,7 @@ class _SignInState extends State<SignIn> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.green,
+      color: Colors.purple,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -122,7 +122,7 @@ class _SignInState extends State<SignIn> {
       child: const Text(
         'Forgot Password?',
         style: TextStyle(
-          color: Colors.orange,
+          color: Colors.purple,
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),

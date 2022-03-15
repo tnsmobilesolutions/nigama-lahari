@@ -190,6 +190,7 @@ class _AddSongState extends State<AddSong> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           DropdownButton(
+                            iconEnabledColor: Colors.teal,
                             hint: Text(
                               'ବିଭାଗ',
                               style: TextStyle(
