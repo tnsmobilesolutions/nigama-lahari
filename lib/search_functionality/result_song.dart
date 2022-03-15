@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 import '../login/common_widgets/common_style.dart';
+import '../music_player.dart';
 
 class ResultSong extends StatefulWidget {
   ResultSong({Key? key, this.songs}) : super(key: key);
@@ -43,11 +44,18 @@ class _ResultSongState extends State<ResultSong> {
                 ),
               ),
             ),
-            // onTap: () => Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             ReceiptPreview(receipt: widget.receipts?[index]))),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MusicPlayer(
+                    song: widget.songs![index],
+                    songList: widget.songs,
+                    index: index,
+                  ),
+                ),
+              );
+            },
           );
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
