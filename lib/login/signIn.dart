@@ -98,7 +98,7 @@ class _SignInState extends State<SignIn> {
             if (_formkey.currentState!.validate()) {
               await userAPI()
                   .signIn(emailController.text, passswordController.text);
-              await Fluttertoast.showToast(msg: "LogIn successfull :) ")
+              await Fluttertoast.showToast(msg: "LogIn successfull")
                   .whenComplete(() => Navigator.push(
                       context,
                       MaterialPageRoute(

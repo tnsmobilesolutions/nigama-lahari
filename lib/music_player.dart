@@ -272,159 +272,173 @@ class _MusicPlayerState extends State<MusicPlayer> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.yellowAccent[700],
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back_rounded),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditSong(
-                        song: _currentSong!,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          )
-        ],
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.purple, Colors.teal],
+        ),
       ),
-      body: Container(
-        color: Colors.yellowAccent[700],
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    Container(
-                        height: screenHeight / 1.8,
-                        width: screenWidth / 1.2,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.green, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Expanded(
-                            child: LyricsViewer(
-                              lyrics: _currentSong?.songText ?? "",
-                            ),
-                          ),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    )
-                  ],
+                IconButton(
+                  icon: Icon(Icons.arrow_back_rounded),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                Column(
-                  children: [
-                    Text(
-                      '${_currentSong?.songTitle}',
-                      style: TextStyle(
-                        fontSize: 30,
-                        //fontWeight: FontWeight.bold,
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditSong(
+                          song: _currentSong!,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '${_currentSong?.singerName}',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-
-                //
-                Column(
-                  //mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        slider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              _position.toString().split('.')[0],
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              _duration.toString().split('.')[0],
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
+              ],
+            )
+          ],
+        ),
+        body: Container(
+          color: Colors.transparent,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                          height: screenHeight / 1.8,
+                          width: screenWidth / 1.2,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32.0),
-                              color: Colors.yellowAccent[700]),
-                          padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              //color: Colors.transparent,
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.teal, Colors.purple],
+                              ),
+                              //border: Border.all(color: Colors.green, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Expanded(
+                              child: LyricsViewer(
+                                lyrics: _currentSong?.songText ?? "",
+                              ),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        '${_currentSong?.songTitle}',
+                        style: TextStyle(
+                          fontSize: 30,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '${_currentSong?.singerName}',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //
+                  Column(
+                    //mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          slider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Expanded(child: buttonLoop()),
-                              //Expanded(child: buttonSlow()),
-                              Expanded(child: previousSong()),
-                              Expanded(
-                                child: IconButton(
-                                  icon: Icon(
-                                    playerState == PlayerState.PLAYING
-                                        ? Icons.pause_circle_filled_rounded
-                                        : Icons.play_circle_filled_rounded,
-                                  ),
-                                  iconSize: 60,
-                                  color: Colors.green,
-                                  onPressed: () {
-                                    playerState == PlayerState.PLAYING
-                                        ? pauseMusic()
-                                        : playMusic();
-                                  },
+                              Text(
+                                _position.toString().split('.')[0],
+                                style: TextStyle(
+                                  fontSize: 20,
                                 ),
                               ),
-
-                              Expanded(child: nextSong()),
-                              //Expanded(child: buttonFast()),
-                              Expanded(child: buttonShuffle()),
+                              Text(
+                                _duration.toString().split('.')[0],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32.0),
+                                color: Colors.transparent),
+                            padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(child: buttonLoop()),
+                                //Expanded(child: buttonSlow()),
+                                Expanded(child: previousSong()),
+                                Expanded(
+                                  child: IconButton(
+                                    icon: Icon(
+                                      playerState == PlayerState.PLAYING
+                                          ? Icons.pause_circle_filled_rounded
+                                          : Icons.play_circle_filled_rounded,
+                                    ),
+                                    iconSize: 60,
+                                    color: Colors.green,
+                                    onPressed: () {
+                                      playerState == PlayerState.PLAYING
+                                          ? pauseMusic()
+                                          : playMusic();
+                                    },
+                                  ),
+                                ),
 
-                    //AudioFile(advancedPlayer: advancedPlayer),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                )
-              ],
+                                Expanded(child: nextSong()),
+                                //Expanded(child: buttonFast()),
+                                Expanded(child: buttonShuffle()),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      //AudioFile(advancedPlayer: advancedPlayer),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  )
+                ],
+              ),
             ),
           ),
         ),

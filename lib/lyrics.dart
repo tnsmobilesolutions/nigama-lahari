@@ -20,6 +20,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
         overflow: TextOverflow.fade,
         softWrap: false,
         style: TextStyle(
+          color: Colors.white70,
           fontSize: 16,
         ),
       ),

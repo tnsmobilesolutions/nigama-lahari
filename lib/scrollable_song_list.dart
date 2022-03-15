@@ -46,93 +46,103 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          title: Container(
-            height: 40,
-            child: TextField(
-              onChanged: (value) {
-                _runFilter(value);
-              },
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.black26,
-                  contentPadding: EdgeInsets.all(0),
-                  prefixIcon: Icon(Icons.search, color: Colors.green),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide.none),
-                  hintStyle:
-                      TextStyle(fontSize: 18, color: Colors.grey.shade500),
-                  hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.purple, Colors.teal],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            title: Container(
+              height: 40,
+              child: TextField(
+                onChanged: (value) {
+                  _runFilter(value);
+                },
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.black26,
+                    contentPadding: EdgeInsets.all(0),
+                    prefixIcon: Icon(Icons.search, color: Colors.green),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none),
+                    hintStyle:
+                        TextStyle(fontSize: 18, color: Colors.grey.shade500),
+                    hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
+              ),
             ),
           ),
         ),
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: items!.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: items?.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          child: ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.songs![index].songTitle ?? "",
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: items!.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: items?.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            child: ListTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.songs![index].songTitle ?? "",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  widget.songs![index].singerName ?? "",
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    //fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                                  Text(
+                                    widget.songs![index].singerName ?? "",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MusicPlayer(
-                                  song: widget.songs![index],
-                                  songList: widget.songs,
-                                  index: index,
-                                ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                        );
-                      },
-                    )
-                  : Center(
-                      child: Text(
-                        '',
-                        style: TextStyle(fontSize: 24),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MusicPlayer(
+                                    song: widget.songs![index],
+                                    songList: widget.songs,
+                                    index: index,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                          '',
+                          style: TextStyle(fontSize: 24),
+                        ),
                       ),
-                    ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
