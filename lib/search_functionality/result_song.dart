@@ -18,15 +18,16 @@ class _ResultSongState extends State<ResultSong> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Result Song')),
+      appBar: AppBar(
+        title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
+        centerTitle: true,
+      ),
       body: ListView.separated(
         padding: const EdgeInsets.all(8),
         itemCount: widget.songs?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Container(
-              //color: Colors.amber[colorCodes[index]],
-              // child: Center(child: Text('Entry ${entries[index]}')),
               color: Color.fromARGB(31, 213, 110, 110),
               child: Padding(
                 padding: EdgeInsets.all(10),
