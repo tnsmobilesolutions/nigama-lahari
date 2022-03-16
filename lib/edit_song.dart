@@ -175,22 +175,41 @@ class _Edit_SongState extends State<EditSong> {
                     labelTextStr: "Song Lyrics",
                     hintTextStr: "Enter Song Lyrics",
                   ),
-                ),
-                SizedBox(height: 15),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_selectedOption == null) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
-                    } else if (_titleController.text.isEmpty) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
-                    } else if (_lyricsController.text.isEmpty) {
-                      Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                    } else {
-                      await HomeScreen();
-                    }
-                    Navigator.pop(context);
-                    await Fluttertoast.showToast(msg: 'Upload Successfully');
-                    Navigator.pop(context);
+                  SizedBox(height: 15),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: _lyricsController,
+                    maxLines: height ~/ 8,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                    ],
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter Lyrics';
+                      } else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
+                        return 'Please Enter Correct Lyrics';
+                      }
+                      return null;
+                    },
+                    // style: TextStyle(height: 0.5),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Lyrics",
+                      hintTextStr: "Enter Song Lyrics",
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
+                        Song songsModel = Song(
+                          isEditable: true,
+                          songCategory: _selectedOption,
+                          songAttribute: _attributeController.text,
+                          songTitle: _titleController.text,
+                          singerName: _singerNameController.text,
+                          songText: _lyricsController.text,
+                        );
 
                     if (_formKey.currentState!.validate()) {
                       Song songsModel = Song(
@@ -202,20 +221,18 @@ class _Edit_SongState extends State<EditSong> {
                         songText: _lyricsController.text,
                       );
 
-                      final SongDetails = SongAPI().updateSong(songsModel);
-                      print(songsModel);
-                      print(SongDetails);
-
-                      await ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data Updated.')),
-                      );
-
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Text('Update'),
-                ),
-              ],
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Data Updated.')),
+                        );
+                      } else {
+                        return;
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Update'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
