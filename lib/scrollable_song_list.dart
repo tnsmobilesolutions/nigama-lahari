@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'music_player.dart';
+import 'song_detail.dart';
 
 class ScrollableSongList extends StatefulWidget {
   ScrollableSongList({

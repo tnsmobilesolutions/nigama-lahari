@@ -186,7 +186,8 @@ class _Edit_SongState extends State<EditSong> {
                   SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
                         Song songsModel = Song(
                           isEditable: true,
                           songCategory: _selectedOption,
@@ -203,9 +204,10 @@ class _Edit_SongState extends State<EditSong> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Data Updated.')),
                         );
-
-                        Navigator.pop(context, songsModel);
+                      } else {
+                        return;
                       }
+                      Navigator.of(context).pop();
                     },
                     child: Text('Update'),
                   ),
