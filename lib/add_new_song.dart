@@ -85,8 +85,8 @@ class _AddSongState extends State<AddSong> {
     //lenghOfAudio(file1);
 
     file1 = result.files.first;
-    print('++++  $file1  ++++');
-    print('----  ${file1.name}  ----');
+    // print('++++  $file1  ++++');
+    // print('----  ${file1.name}  ----');
 
     sizeInMb = file1.size / 1048576;
 
@@ -111,7 +111,8 @@ class _AddSongState extends State<AddSong> {
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
     autoDuration = await player.setUrl(songUrl.toString());
-    print('****  $autoDuration  ****');
+
+    //print('****  $autoDuration  ****');
     //print('Download-Link: $songURL');
   }
 
@@ -373,17 +374,17 @@ class _AddSongState extends State<AddSong> {
 
                           if (_formKey.currentState!.validate()) {
                             Song songsModel = Song(
-                              isEditable: true,
-                              songCategory: _selectedOption,
-                              songAttribute: _attributeController.text,
-                              songTitle: _titleController.text,
-                              singerName: _singerNameController.text,
-                              songText: _lyricsController.text,
-                              songURL: songUrl,
-                              songId: Uuid().v1(),
-                              songDuration:
-                                  double.tryParse(autoDuration.toString()),
-                            );
+                                isEditable: true,
+                                songCategory: _selectedOption,
+                                songAttribute: _attributeController.text,
+                                songTitle: _titleController.text,
+                                singerName: _singerNameController.text,
+                                songText: _lyricsController.text,
+                                songURL: songUrl,
+                                songId: Uuid().v1(),
+                                songDuration: autoDuration.toString()
+                                //double.tryParse(autoDuration.toString()),
+                                );
 
                             final songDetails =
                                 SongAPI().createNewSong(songsModel);

@@ -9,7 +9,7 @@ class Song {
   final String? songURL;
   final String? singerName;
   final bool? isEditable;
-  final double? songDuration;
+  final String? songDuration;
   Song({
     this.songId,
     this.songTitle,
@@ -31,7 +31,7 @@ class Song {
     String? songURL,
     String? singerName,
     bool? isEditable,
-    double? songDuration,
+    String? songDuration,
   }) {
     return Song(
       songId: songId ?? this.songId,
@@ -70,7 +70,7 @@ class Song {
       songURL: map['songURL'],
       singerName: map['singerName'],
       isEditable: map['isEditable'],
-      songDuration: map['songDuration']?.toDouble(),
+      songDuration: map['songDuration'],
     );
   }
 
