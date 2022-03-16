@@ -280,7 +280,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
         elevation: 0,
         actions: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back_rounded),
