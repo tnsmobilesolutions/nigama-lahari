@@ -9,6 +9,7 @@ import 'API/firebaseAPI.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:uuid/uuid.dart';
 import 'API/song_api.dart';
+import 'package:just_audio/just_audio.dart';
 
 class AddSong extends StatefulWidget {
   const AddSong({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class AddSong extends StatefulWidget {
 
 class _AddSongState extends State<AddSong> {
   var val;
+
+  //final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
 
   final _titleController = TextEditingController();
   final _singerNameController = TextEditingController();
@@ -45,7 +48,7 @@ class _AddSongState extends State<AddSong> {
   double percentage = 0;
   String? songUrl;
   String duration = '';
-  //String? autoDuration;
+  Duration? autoDuration;
   double? sizeInMb;
   var file1;
 
@@ -53,8 +56,17 @@ class _AddSongState extends State<AddSong> {
     super.initState();
   }
 
-  // final player = AudioPlayer();
-  // autoDuration =  player.setUrl('file.mp3');
+//   Future<int> lenghOfAudio(File audio) async {
+//     MediaInformation info =
+//         await _flutterFFprobe.getMediaInformation(audio.path);
+// // the given duration is in milliseconds, assuming you want to have seconds I divide by 1000
+//     // int seconds = (info['duration']/1000).round();
+//     // print('DURATION: ${seconds.toString()}');
+//     print(info);
+//     return 1;
+//   }
+
+  AudioPlayer player = AudioPlayer();
 
   // select file from device
   Future selectFile() async {
@@ -62,6 +74,7 @@ class _AddSongState extends State<AddSong> {
       allowMultiple: false,
       type: FileType.audio,
     );
+    print('****  $result  ****');
     if (result != null) {
       file1 = result.files.first;
       sizeInMb = file1.size / 1048576;
@@ -69,7 +82,12 @@ class _AddSongState extends State<AddSong> {
       return;
     }
 
+    //lenghOfAudio(file1);
+
     file1 = result.files.first;
+    print('++++  $file1  ++++');
+    print('----  ${file1.name}  ----');
+
     sizeInMb = file1.size / 1048576;
 
     final path = result.files.single.path!;
@@ -92,7 +110,8 @@ class _AddSongState extends State<AddSong> {
 
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
-
+    autoDuration = await player.setUrl(songUrl.toString());
+    print('****  $autoDuration  ****');
     //print('Download-Link: $songURL');
   }
 
@@ -133,26 +152,26 @@ class _AddSongState extends State<AddSong> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Center(
-            child: val == 100
-                ? Text('Uploaded Successfully')
-                : Text('Uploading...'),
-          ),
+          // title: Center(
+          //   child: val == 100
+          //       ? Text('Uploaded Successfully')
+          //       : Text('Uploading...'),
+          // ),
           content: buildUploadStatus(task!),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  child: val == 100 ? Text('Done') : Text(''),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ],
+          // actions: <Widget>[
+          //   Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: [
+          //       TextButton(
+          //         child: val == 100 ? Text('Done') : Text(''),
+          //         onPressed: () {
+          //           Navigator.of(context).pop();
+          //           Navigator.of(context).pop();
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ],
         );
       },
     );
@@ -173,6 +192,8 @@ class _AddSongState extends State<AddSong> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          shadowColor: Colors.purple[300],
+          //elevation: 0,
           centerTitle: true,
           title: Text('Add Song'),
         ),
@@ -360,7 +381,8 @@ class _AddSongState extends State<AddSong> {
                               songText: _lyricsController.text,
                               songURL: songUrl,
                               songId: Uuid().v1(),
-                              songDuration: double.tryParse(duration),
+                              songDuration:
+                                  double.tryParse(autoDuration.toString()),
                             );
 
                             final songDetails =

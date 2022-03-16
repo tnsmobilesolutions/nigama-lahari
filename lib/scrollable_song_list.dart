@@ -18,17 +18,18 @@ class ScrollableSongList extends StatefulWidget {
 
 class _ScrollableSongListState extends State<ScrollableSongList> {
   List<Song>? items, results;
+  List<String>? songName;
 
   @override
   void initState() {
-    super.initState();
-
     items = widget.songs;
+    print(items!.length);
+    super.initState();
   }
 
   void _runFilter(String enteredKeyword) {
     if (enteredKeyword.isEmpty) {
-      results = items;
+      results = widget.songs;
     } else {
       results = widget.songs!
           .where((text) => text.songTitle!
@@ -36,7 +37,6 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               .contains(enteredKeyword.toLowerCase()))
           .toList();
     }
-
     setState(
       () {
         items = results;
@@ -65,9 +65,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
             title: Container(
               height: 40,
               child: TextField(
-                onChanged: (value) {
-                  _runFilter(value);
-                },
+                onChanged: (value) => _runFilter(value),
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.black26,
