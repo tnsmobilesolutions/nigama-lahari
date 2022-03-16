@@ -175,43 +175,12 @@ class _Edit_SongState extends State<EditSong> {
                     labelTextStr: "Song Lyrics",
                     hintTextStr: "Enter Song Lyrics",
                   ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: _lyricsController,
-                    maxLines: height ~/ 8,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    ],
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter Lyrics';
-                      } else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
-                        return 'Please Enter Correct Lyrics';
-                      }
-                      return null;
-                    },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Lyrics",
-                      hintTextStr: "Enter Song Lyrics",
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState != null &&
-                          _formKey.currentState!.validate()) {
-                        Song songsModel = Song(
-                          isEditable: true,
-                          songCategory: _selectedOption,
-                          songAttribute: _attributeController.text,
-                          songTitle: _titleController.text,
-                          singerName: _singerNameController.text,
-                          songText: _lyricsController.text,
-                        );
-
-                    if (_formKey.currentState!.validate()) {
+                ),
+                SizedBox(height: 15),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState != null &&
+                        _formKey.currentState!.validate()) {
                       Song songsModel = Song(
                         isEditable: true,
                         songCategory: _selectedOption,
@@ -221,18 +190,53 @@ class _Edit_SongState extends State<EditSong> {
                         songText: _lyricsController.text,
                       );
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Data Updated.')),
-                        );
-                      } else {
-                        return;
-                      }
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Update'),
-                  ),
-                ],
-              ),
+                      final SongDetails = SongAPI().updateSong(songsModel);
+                      print(songsModel);
+                      print(SongDetails);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Data Updated.')),
+                      );
+
+                      Navigator.pop(context, songsModel);
+                    }
+                  },
+                  // if (_formKey.currentState != null &&
+                  //     _formKey.currentState!.validate()) {
+                  //   Song songsModel = Song(
+                  //     isEditable: true,
+                  //     songCategory: _selectedOption,
+                  //     songAttribute: _attributeController.text,
+                  //     songTitle: _titleController.text,
+                  //     singerName: _singerNameController.text,
+                  //     songText: _lyricsController.text,
+                  //   );
+                  //   final SongDetails = SongAPI().updateSong(songsModel);
+                  //   print(songsModel);
+                  //   print(SongDetails);
+
+                  // if (_formKey.currentState!.validate()) {
+                  //   Song songsModel = Song(
+                  //     isEditable: true,
+                  //     songCategory: _selectedOption,
+                  //     songAttribute: _attributeController.text,
+                  //     songTitle: _titleController.text,
+                  //     singerName: _singerNameController.text,
+                  //     songText: _lyricsController.text,
+                  //   );
+
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('Data Updated.')),
+                  // );
+                  // } else {
+                  //   return;
+                  // }
+                  //     Navigator.pop(context, songsModel);
+                  //   }
+                  // },
+                  child: Text('Update'),
+                ),
+              ],
             ),
           ),
         ),
