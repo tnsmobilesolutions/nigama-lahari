@@ -45,6 +45,7 @@ class _AddSongState extends State<AddSong> {
   double percentage = 0;
   String? songUrl;
   String duration = '';
+  //String? autoDuration;
   double? sizeInMb;
   var file1;
 
@@ -52,11 +53,8 @@ class _AddSongState extends State<AddSong> {
     super.initState();
   }
 
-  // AudioPlayer audioPlayer = AudioPlayer();
-
-  // final result = audioPlayer.onDurationChanged.listen((Duration d) {
-  //   print('Max duration: $d');
-  // });
+  // final player = AudioPlayer();
+  // autoDuration =  player.setUrl('file.mp3');
 
   // select file from device
   Future selectFile() async {
@@ -64,8 +62,14 @@ class _AddSongState extends State<AddSong> {
       allowMultiple: false,
       type: FileType.audio,
     );
+    if (result != null) {
+      file1 = result.files.first;
+      sizeInMb = file1.size / 1048576;
+    } else {
+      return;
+    }
 
-    file1 = result!.files.first;
+    file1 = result.files.first;
     sizeInMb = file1.size / 1048576;
 
     final path = result.files.single.path!;
@@ -130,7 +134,7 @@ class _AddSongState extends State<AddSong> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
-            child: val == 100.0
+            child: val == 100
                 ? Text('Uploaded Successfully')
                 : Text('Uploading...'),
           ),
@@ -140,7 +144,7 @@ class _AddSongState extends State<AddSong> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: val == 100.0 ? Text('Done') : Text(''),
+                  child: val == 100 ? Text('Done') : Text(''),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
@@ -158,215 +162,229 @@ class _AddSongState extends State<AddSong> {
   Widget build(BuildContext context) {
     final fileName = file != null ? path.basename(file!.path) : 'ଚୟନ କରନ୍ତୁ';
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Add Song'),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.purple, Colors.teal],
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SafeArea(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        DropdownButton(
-                          hint: Text(
-                            'ବିଭାଗ',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                            ),
-                          ),
-                          value: _selectedOption,
-                          dropdownColor: Colors.yellowAccent[700],
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                _selectedOption = value as String?;
-                                print(_selectedOption.toString());
-                              },
-                            );
-                          },
-                          items: _catagory.map(
-                            (val) {
-                              return DropdownMenuItem(
-                                child: new Text(val),
-                                value: val,
-                              );
-                            },
-                          ).toList(),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      style: TextStyle(color: Colors.black),
-                      controller: _titleController,
-                      autofocus: false,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText: 'ନାମ',
-                          hintStyle:
-                              TextStyle(fontSize: 15.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _singerNameController,
-                      style: TextStyle(color: Colors.black),
-                      autofocus: false,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText: 'ଗାୟକ',
-                          hintStyle:
-                              TextStyle(fontSize: 15.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _attributeController,
-                      style: TextStyle(color: Colors.black),
-                      autofocus: false,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText: 'ଭାବ',
-                          hintStyle:
-                              TextStyle(fontSize: 15.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _lyricsController,
-                      style: TextStyle(color: Colors.black),
-                      autofocus: false,
-                      maxLines: height ~/ 8,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.newline,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(15),
-                        labelText: 'ଗୀତ ଲେଖା',
-                        hintStyle:
-                            TextStyle(fontSize: 15.0, color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.white),
-                      padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Add Song'),
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SafeArea(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          GestureDetector(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.attach_file_rounded,
-                                size: 30,
+                          DropdownButton(
+                            iconEnabledColor: Colors.teal,
+                            hint: Text(
+                              'ବିଭାଗ',
+                              style: TextStyle(
                                 color: Colors.black,
+                                fontSize: 15,
                               ),
                             ),
-                            onTap: selectFile,
-                          ),
-                          SizedBox(width: 50),
-                          Flexible(
-                            child: Text(
-                              fileName,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                            ),
+                            value: _selectedOption,
+                            dropdownColor: Colors.tealAccent[700],
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  _selectedOption = value as String?;
+                                  print(_selectedOption.toString());
+                                },
+                              );
+                            },
+                            items: _catagory.map(
+                              (val) {
+                                return DropdownMenuItem(
+                                  child: new Text(val),
+                                  value: val,
+                                );
+                              },
+                            ).toList(),
                           ),
                         ],
                       ),
-                      width: double.infinity,
-                    ),
-                    SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_selectedOption == null) {
-                          Fluttertoast.showToast(
-                              msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
-                        } else if (_titleController.text.isEmpty) {
-                          Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
-                        } else if (_lyricsController.text.isEmpty) {
-                          Fluttertoast.showToast(
-                              msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                        } else if (file1 == null) {
-                          Fluttertoast.showToast(
-                              msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
-                        } else if (sizeInMb! > 10) {
-                          Fluttertoast.showToast(
-                              msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
-                        } else {
-                          await uploadFile();
-                        }
-                        // Navigator.pop(context);
-                        // await Fluttertoast.showToast(
-                        //     msg: 'Upload Successfully');
-                        // Navigator.pop(context);
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        style: TextStyle(color: Colors.black),
+                        controller: _titleController,
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            labelText: 'ନାମ',
+                            hintStyle:
+                                TextStyle(fontSize: 15.0, color: Colors.black),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _singerNameController,
+                        style: TextStyle(color: Colors.black),
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            labelText: 'ଗାୟକ',
+                            hintStyle:
+                                TextStyle(fontSize: 15.0, color: Colors.black),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _attributeController,
+                        style: TextStyle(color: Colors.black),
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            labelText: 'ଭାବ',
+                            hintStyle:
+                                TextStyle(fontSize: 15.0, color: Colors.black),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _lyricsController,
+                        style: TextStyle(color: Colors.black),
+                        autofocus: false,
+                        maxLines: height ~/ 8,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.newline,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'ଗୀତ ଲେଖା',
+                          hintStyle:
+                              TextStyle(fontSize: 15.0, color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Colors.transparent),
+                        padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.attach_file_rounded,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              onTap: selectFile,
+                            ),
+                            SizedBox(width: 50),
+                            Flexible(
+                              child: Text(
+                                fileName,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 30),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_selectedOption == null) {
+                            Fluttertoast.showToast(
+                                msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                          } else if (_titleController.text.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                          } else if (_lyricsController.text.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
+                          } else if (file1 == null) {
+                            Fluttertoast.showToast(
+                                msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
+                          } else if (sizeInMb! > 10) {
+                            Fluttertoast.showToast(
+                                msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
+                          } else {
+                            await uploadFile();
+                          }
+                          // Navigator.pop(context);
+                          // await Fluttertoast.showToast(
+                          //     msg: 'Upload Successfully');
+                          // Navigator.pop(context);
 
-                        if (_formKey.currentState!.validate()) {
-                          Song songsModel = Song(
-                            isEditable: true,
-                            songCategory: _selectedOption,
-                            songAttribute: _attributeController.text,
-                            songTitle: _titleController.text,
-                            singerName: _singerNameController.text,
-                            songText: _lyricsController.text,
-                            songURL: songUrl,
-                            songId: Uuid().v1(),
-                            songDuration: double.tryParse(duration),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            Song songsModel = Song(
+                              isEditable: true,
+                              songCategory: _selectedOption,
+                              songAttribute: _attributeController.text,
+                              songTitle: _titleController.text,
+                              singerName: _singerNameController.text,
+                              songText: _lyricsController.text,
+                              songURL: songUrl,
+                              songId: Uuid().v1(),
+                              songDuration: double.tryParse(duration),
+                            );
 
-                          final songDetails =
-                              SongAPI().createNewSong(songsModel);
-                        }
-                      },
-                      child: Text('ଅପଲୋଡ଼ କରନ୍ତୁ'),
-                    ),
-                  ],
+                            final songDetails =
+                                SongAPI().createNewSong(songsModel);
+                          }
+                        },
+                        child: Text(
+                          'ଅପଲୋଡ଼ କରନ୍ତୁ',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
 
-      //   floatingActionButton: FloatingActionButton(
-      //     child: Text('Next'),
-      // onPressed: (){
-      //     Navigator.push(context, MaterialPageRoute(builder: (context) => AddSongLyrics()),);
-      // },),
+        //   floatingActionButton: FloatingActionButton(
+        //     child: Text('Next'),
+        // onPressed: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => AddSongLyrics()),);
+        // },),
+      ),
     );
   }
 }

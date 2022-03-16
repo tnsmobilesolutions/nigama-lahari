@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.green,
+      color: Colors.purple,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -192,39 +192,44 @@ class _SignUpState extends State<SignUp> {
           )),
     );
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 50,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.purple, Colors.teal],
+        ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      photo,
-                      const SizedBox(height: 20),
-                      name,
-                      const SizedBox(height: 20),
-                      mobileNumber,
-                      const SizedBox(height: 20),
-                      email,
-                      const SizedBox(height: 20),
-                      password,
-                      const SizedBox(height: 20),
-                      confirmPassword,
-                      const SizedBox(height: 20),
-                      signUpButton
-                    ],
-                  )),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              //color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        photo,
+                        const SizedBox(height: 20),
+                        name,
+                        const SizedBox(height: 20),
+                        mobileNumber,
+                        const SizedBox(height: 20),
+                        email,
+                        const SizedBox(height: 20),
+                        password,
+                        const SizedBox(height: 20),
+                        confirmPassword,
+                        const SizedBox(height: 20),
+                        signUpButton
+                      ],
+                    )),
+              ),
             ),
           ),
         ),

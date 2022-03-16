@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
@@ -91,7 +90,7 @@ class _SignInState extends State<SignIn> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.green,
+      color: Colors.purple,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -99,7 +98,7 @@ class _SignInState extends State<SignIn> {
             if (_formkey.currentState!.validate()) {
               await userAPI()
                   .signIn(emailController.text, passswordController.text);
-              await Fluttertoast.showToast(msg: "LogIn successfull :) ")
+              await Fluttertoast.showToast(msg: "LogIn successfull")
                   .whenComplete(() => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -123,7 +122,7 @@ class _SignInState extends State<SignIn> {
       child: const Text(
         'Forgot Password?',
         style: TextStyle(
-          color: Colors.orange,
+          color: Colors.purple,
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
@@ -147,7 +146,7 @@ class _SignInState extends State<SignIn> {
                       children: [
                         // logo
                         const Image(
-                          image: AssetImage('assets/image/nsslogo.png'),
+                          image: AssetImage('assets/image/pic.jpg'),
                         ),
                         const SizedBox(height: 20),
                         emailField,
