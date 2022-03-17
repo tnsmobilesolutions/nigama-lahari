@@ -47,7 +47,6 @@ class _AddSongState extends State<AddSong> {
   String destination = '';
   double percentage = 0;
   String? songUrl;
-  String duration = '';
   Duration? autoDuration;
   double? sizeInMb;
   var file1;
@@ -55,16 +54,6 @@ class _AddSongState extends State<AddSong> {
   void initState() {
     super.initState();
   }
-
-//   Future<int> lenghOfAudio(File audio) async {
-//     MediaInformation info =
-//         await _flutterFFprobe.getMediaInformation(audio.path);
-// // the given duration is in milliseconds, assuming you want to have seconds I divide by 1000
-//     // int seconds = (info['duration']/1000).round();
-//     // print('DURATION: ${seconds.toString()}');
-//     print(info);
-//     return 1;
-//   }
 
   AudioPlayer player = AudioPlayer();
 
@@ -82,11 +71,7 @@ class _AddSongState extends State<AddSong> {
       return;
     }
 
-    //lenghOfAudio(file1);
-
     file1 = result.files.first;
-    // print('++++  $file1  ++++');
-    // print('----  ${file1.name}  ----');
 
     sizeInMb = file1.size / 1048576;
 
@@ -110,10 +95,8 @@ class _AddSongState extends State<AddSong> {
 
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
-    autoDuration = await player.setUrl(songUrl.toString());
-
-    //print('****  $autoDuration  ****');
-    //print('Download-Link: $songURL');
+    autoDuration =
+        await player.setUrl(songUrl.toString()); // autodetects audio duration
   }
 
   //upload status
@@ -367,24 +350,20 @@ class _AddSongState extends State<AddSong> {
                           } else {
                             await uploadFile();
                           }
-                          // Navigator.pop(context);
-                          // await Fluttertoast.showToast(
-                          //     msg: 'Upload Successfully');
-                          // Navigator.pop(context);
 
                           if (_formKey.currentState!.validate()) {
                             Song songsModel = Song(
-                                isEditable: true,
-                                songCategory: _selectedOption,
-                                songAttribute: _attributeController.text,
-                                songTitle: _titleController.text,
-                                singerName: _singerNameController.text,
-                                songText: _lyricsController.text,
-                                songURL: songUrl,
-                                songId: Uuid().v1(),
-                                songDuration: autoDuration.toString()
-                                //double.tryParse(autoDuration.toString()),
-                                );
+                              isEditable: true,
+                              songCategory: _selectedOption,
+                              songAttribute: _attributeController.text,
+                              songTitle: _titleController.text,
+                              singerName: _singerNameController.text,
+                              songText: _lyricsController.text,
+                              songURL: songUrl,
+                              songId: Uuid().v1(),
+                              songDuration:
+                                  autoDuration.toString().split('.')[0],
+                            );
 
                             final songDetails =
                                 SongAPI().createNewSong(songsModel);
