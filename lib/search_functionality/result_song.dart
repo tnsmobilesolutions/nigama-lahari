@@ -58,7 +58,7 @@ class _ResultSongState extends State<ResultSong> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MusicPlayer(
+                    builder: (context) => SongDetail(
                       song: widget.songs![index],
                       songList: widget.songs,
                       index: index,

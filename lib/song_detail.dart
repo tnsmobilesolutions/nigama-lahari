@@ -5,8 +5,8 @@ import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/lyrics.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
-class MusicPlayer extends StatefulWidget {
-  MusicPlayer(
+class SongDetail extends StatefulWidget {
+  SongDetail(
       {Key? key,
       required this.song,
       required this.songList,
@@ -18,10 +18,10 @@ class MusicPlayer extends StatefulWidget {
   final int index;
 
   @override
-  _MusicPlayerState createState() => _MusicPlayerState();
+  _SongDetailState createState() => _SongDetailState();
 }
 
-class _MusicPlayerState extends State<MusicPlayer> {
+class _SongDetailState extends State<SongDetail> {
   //final double screenHeight = MediaQuery.of(context).size.height;
   Song? _currentSong;
   int? _currentIndex;
