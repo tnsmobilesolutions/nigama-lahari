@@ -121,7 +121,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MusicPlayer(
+                                  builder: (context) => SongDetail(
                                     song: widget.songs![index],
                                     songList: widget.songs,
                                     index: index,

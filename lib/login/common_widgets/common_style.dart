@@ -54,7 +54,7 @@ class CommonStyle {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
+                borderRadius: BorderRadius.circular(24.0),
                 side: BorderSide(color: Colors.green))));
   }
 
