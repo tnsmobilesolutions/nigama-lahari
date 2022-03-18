@@ -125,8 +125,8 @@ class _Edit_SongState extends State<EditSong> {
             percentage =
                 double.parse((progress * 100).toStringAsFixed(0)) / 100;
 
-            val = percentage * 100.toInt();
-            print(val);
+            val = {(percentage * 100).toInt()};
+            print('value : $val');
             return CircularPercentIndicator(
               animation: true,
               radius: 55,
@@ -145,6 +145,23 @@ class _Edit_SongState extends State<EditSong> {
           }
         },
       );
+  // Future<void> delete(String ref) async {
+  //   await FirebaseStorage.instance.ref(ref).delete;
+  //   // Rebuild the UI
+  //   setState(() {});
+  // }
+  //
+//   Future<void> deleteImage(String imageFileUrl) async {
+//   var fileUrl = Uri.decodeFull(Path.basename(songUrl)))
+
+// final Reference firebaseStorageRef =
+//     FirebaseStorage.instance.ref().child(fileUrl);
+//     await firebaseStorageRef.delete();
+//  }
+  // Future<void> delete(String songUrl) async {
+  //   var photo = FirebaseStorage.instance.refFromURL(songUrl);
+  //   await photo.delete();
+  // }
 
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -153,7 +170,7 @@ class _Edit_SongState extends State<EditSong> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
-            child: val == ProgressIndicator
+            child: val == '100%'
                 ? Text('Uploaded Successfully')
                 : Text('Uploading...'),
           ),
@@ -163,7 +180,7 @@ class _Edit_SongState extends State<EditSong> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: val == 100 ? Text('Done') : Text(''),
+                  child: val == '100%' ? Text('Done') : Text('Done'),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
@@ -367,6 +384,7 @@ class _Edit_SongState extends State<EditSong> {
                         Fluttertoast.showToast(
                             msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
                       } else {
+                        // await delete(songUrl.toString());
                         await uploadFile();
                       }
                       // Navigator.pop(context);
