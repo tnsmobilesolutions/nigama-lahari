@@ -25,6 +25,7 @@ class SongDetail extends StatefulWidget {
 class _SongDetailState extends State<SongDetail> {
   Song? _currentSong;
   int? _currentIndex;
+  bool _lyricsExpanded = false;
 
   @override
   void initState() {
@@ -71,7 +72,25 @@ class _SongDetailState extends State<SongDetail> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          //automaticallyImplyLeading: false,
+          title: Center(
+            child: Column(
+              children: [
+                Text(
+                  '${_currentSong?.songTitle}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    //fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${_currentSong?.singerName}',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
           elevation: 0,
           actions: [
             Row(
@@ -97,54 +116,39 @@ class _SongDetailState extends State<SongDetail> {
           ],
         ),
         body: Container(
+          height: double.infinity,
           color: Colors.transparent,
           child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                          height: screenHeight / 1.8,
-                          width: screenWidth / 1.2,
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Colors.teal, Colors.purple],
-                            ),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        LyricsViewer(
+                          lyrics: _currentSong?.songText ?? "",
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _lyricsExpanded
+                                ? Icons.zoom_in_map
+                                : Icons.zoom_out_map,
                           ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Expanded(
-                              child: LyricsViewer(
-                                lyrics: _currentSong?.songText ?? "",
-                              ),
-                            ),
-                          )),
-                      SizedBox(
-                        height: 20,
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '${_currentSong?.songTitle}',
-                        style: TextStyle(
-                          fontSize: 30,
-                          //fontWeight: FontWeight.bold,
+                          iconSize: 40,
+                          color: Colors.green,
+                          onPressed: () {
+                            print('expand pressed');
+                            setState(() {
+                              _lyricsExpanded = !_lyricsExpanded;
+                            });
+                          },
                         ),
-                      ),
-                      Text(
-                        '${_currentSong?.singerName}',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                ),
+                if (!_lyricsExpanded)
                   MusicPlayer(
                     song: widget.song,
                     songList: widget.songList,
@@ -152,11 +156,7 @@ class _SongDetailState extends State<SongDetail> {
                     onPreviousTappedCallback: onPrevPressed,
                     onNextTappedCallback: onNextPressed,
                   ),
-                  SizedBox(
-                    height: 30,
-                  )
-                ],
-              ),
+              ],
             ),
           ),
         ),

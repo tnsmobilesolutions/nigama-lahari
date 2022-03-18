@@ -110,19 +110,16 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   Text(
                     _position.toString().split('.')[0],
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                     ),
                   ),
                   Text(
                     _duration.toString().split('.')[0],
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -169,18 +166,23 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   //slider implimentation
   Widget slider() {
-    return Slider(
-      activeColor: Colors.purple[700],
-      inactiveColor: Colors.purple[400],
-      value: _position.inSeconds.toDouble(),
-      min: 0.0,
-      max: _duration.inSeconds.toDouble(),
-      onChanged: (double value) {
-        setState(() {
-          changeToSecond(value.toInt());
-          value = value;
-        });
-      },
+    return SliderTheme(
+      data: SliderThemeData(
+        trackHeight: 2,
+      ),
+      child: Slider(
+        activeColor: Colors.purple[700],
+        inactiveColor: Colors.purple[400],
+        value: _position.inSeconds.toDouble(),
+        min: 0.0,
+        max: _duration.inSeconds.toDouble(),
+        onChanged: (double value) {
+          setState(() {
+            changeToSecond(value.toInt());
+            value = value;
+          });
+        },
+      ),
     );
   }
 
