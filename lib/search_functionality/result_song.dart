@@ -31,47 +31,74 @@ class _ResultSongState extends State<ResultSong> {
           title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
           centerTitle: true,
         ),
-        body: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: widget.songs?.length ?? 0,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              child: Container(
-                color: Colors.purple,
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(widget.songs?[index].songTitle ?? '',
-                              style: CommonStyle.myStyle),
-                          Text(widget.songs?[index].singerName ?? ''),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SongDetail(
-                      song: widget.songs![index],
-                      songList: widget.songs,
-                      index: index,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+        body: SearchSongList(
+          widget: widget,
         ),
       ),
+    );
+  }
+}
+
+class SearchSongList extends StatelessWidget {
+  const SearchSongList({
+    Key? key,
+    required this.widget,
+  }) : super(key: key);
+
+  final ResultSong widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: widget.songs?.length ?? 0,
+      itemBuilder: (BuildContext context, int index) {
+        return GestureDetector(
+          child: Container(
+            color: Colors.purple,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(widget.songs?[index].songTitle ?? '',
+                          style: CommonStyle.myStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            widget.songs?[index].singerName ?? '',
+                            style: CommonStyle.subStyle,
+                          ),
+                          Text(
+                            widget.songs?[index].songCategory ?? '',
+                            style: CommonStyle.subStyle,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SongDetail(
+                  song: widget.songs![index],
+                  songList: widget.songs,
+                  index: index,
+                ),
+              ),
+            );
+          },
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }
