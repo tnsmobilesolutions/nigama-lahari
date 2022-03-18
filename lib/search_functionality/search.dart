@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/API/searchSongAPI.dart';
-// import 'package:flutter_application_1/common_widgets/common_style.dart';
-import 'package:flutter_application_1/models/songs_model.dart';
-
 import 'package:flutter_application_1/search_functionality/result_song.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:flutter_application_1/common_widgets/common_style.dart';
 
+import '../API/searchSongAPI.dart';
 import '../login/common_widgets/common_style.dart';
+import '../models/songs_model.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -16,12 +16,14 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
-  String? _selectedSong;
+  String? _selectedOption;
+  var _value = 1;
 
   final _nameController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
   final _categoryController = TextEditingController();
+  final _durationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +38,11 @@ class _SearchState extends State<Search> {
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          // appBar: AppBar(
-          //   centerTitle: true,
-          //   title: Text('ଖୋଜନ୍ତୁ'),
-          // ),
+          appBar: AppBar(
+            elevation: 0,
+            centerTitle: true,
+            title: Text('ଖୋଜନ୍ତୁ'),
+          ),
           body: Align(
             alignment: Alignment.topCenter,
             child: Column(
@@ -49,10 +52,10 @@ class _SearchState extends State<Search> {
                 DropdownButton(
                   dropdownColor: Colors.tealAccent[700],
                   hint: Text('ସଂଗୀତ ଖୋଜନ୍ତୁ'),
-                  value: _selectedSong,
+                  value: _selectedOption,
                   onChanged: (newValue) {
                     setState(() {
-                      _selectedSong = newValue as String?;
+                      _selectedOption = newValue as String?;
                     });
                   },
                   items: _songs.map(
@@ -64,44 +67,53 @@ class _SearchState extends State<Search> {
                     },
                   ).toList(),
                 ),
-                SizedBox(height: 40),
-                getNameWidget(_selectedSong),
-                getSingerNameWidget(_selectedSong),
-                getAttributeSong(_selectedSong),
-                getCategorySong(_selectedSong),
-                ElevatedButton(
-                    style: CommonStyle.elevatedSubmitButtonStyle(),
-                    child: Text("ଖୋଜନ୍ତୁ"),
-                    onPressed: () async {
-                      print('search btn pressrd');
 
+                getNameWidget(_selectedOption),
+                getSingerNameWidget(_selectedOption),
+                getAttributeSong(_selectedOption),
+                getCategorySong(_selectedOption),
+                getDurationWidget(_selectedOption),
+                ElevatedButton(
+                  style: CommonStyle.elevatedSubmitButtonStyle(),
+                  child: Text("ଖୋଜନ୍ତୁ"),
+                  onPressed: () async {
+                    print('search btn pressrd');
+                    if (_selectedOption == null) {
+                      Fluttertoast.showToast(msg: "କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ");
+                    } else {
                       final List<Song>? allSongs;
 
                       final searchAPI = SearchSongAPI();
 
-                      if (_selectedSong == "Name") {
+                      if (_selectedOption == "Name") {
                         allSongs =
                             await searchAPI.getSongByName(_nameController.text);
-                      } else if (_selectedSong == "Singer") {
+                      } else if (_selectedOption == "Singer") {
                         allSongs = await searchAPI
                             .getSongBySingerName(_singerNameController.text);
-                      } else if (_selectedSong == "Attribute") {
+                      } else if (_selectedOption == "Attribute") {
                         allSongs = await searchAPI
                             .getSongByAttribute(_attributeController.text);
-                      } else if (_selectedSong == "Category") {
+                      } else if (_selectedOption == "Category") {
                         allSongs = await searchAPI
                             .getSongByCategory(_categoryController.text);
+                      } else if (_selectedOption == "Duration") {
+                        allSongs = await searchAPI
+                            .getSongByDuration(_durationController.text);
                       } else {
                         allSongs = [];
                       }
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                    songs: allSongs,
-                                  )));
-                      // }
-                    }),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResultSong(
+                            songs: allSongs,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -110,16 +122,18 @@ class _SearchState extends State<Search> {
     );
   }
 
-  Widget getNameWidget(String? selectedSong) {
-    if (selectedSong == "Name") {
+  Widget getNameWidget(String? selectedOption) {
+    if (selectedOption == "Name") {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextFormField(
           keyboardType: TextInputType.name,
           controller: _nameController,
           decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+            labelText: 'Type Song $selectedOption',
+            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+          ),
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please Enter Your Name';
@@ -137,8 +151,8 @@ class _SearchState extends State<Search> {
     }
   }
 
-  Widget getSingerNameWidget(String? selectedSong) {
-    if (selectedSong == "Singer") {
+  Widget getSingerNameWidget(String? selectedOption) {
+    if (selectedOption == "Singer") {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextFormField(
@@ -154,8 +168,10 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+            labelText: 'Type $selectedOption Name',
+            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+          ),
         ),
       );
     } else {
@@ -163,8 +179,8 @@ class _SearchState extends State<Search> {
     }
   }
 
-  Widget getAttributeSong(String? selectedSong) {
-    if (selectedSong == "Attribute") {
+  Widget getAttributeSong(String? selectedOption) {
+    if (selectedOption == "Attribute") {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextFormField(
@@ -180,8 +196,10 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+            labelText: 'Type Song $selectedOption',
+            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+          ),
         ),
       );
     } else {
@@ -189,8 +207,8 @@ class _SearchState extends State<Search> {
     }
   }
 
-  Widget getCategorySong(String? selectedSong) {
-    if (selectedSong == "Category") {
+  Widget getCategorySong(String? selectedOption) {
+    if (selectedOption == "Category") {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextFormField(
@@ -206,8 +224,10 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+            labelText: 'Type Song $selectedOption',
+            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+          ),
         ),
       );
     } else {
@@ -215,35 +235,53 @@ class _SearchState extends State<Search> {
     }
   }
 
-  Widget getDurationWidget(String? selectedSong) {
-    if (selectedSong == "Duration") {
-      return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Container(
-            child: Column(children: [
-              Text('<6'),
-              Text('6-15'),
-              Text('>15'),
-            ]),
-          )
-
-          // TextFormField(
-          //   keyboardType: TextInputType.name,
-          //   controller: _categoryController,
-          //   validator: (value) {
-          //     if (value!.isEmpty) {
-          //       return 'Please Enter Your Name';
-          //     } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
-          //         .hasMatch(value)) {
-          //       return 'Please Enter Correct Name';
-          //     }
-          //     return null;
-          //   },
-          //   decoration: InputDecoration(
-          //       border:
-          //           OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
-          // ),
-          );
+  Widget getDurationWidget(String? selectedOption) {
+    if (selectedOption == "Duration") {
+      return Theme(
+        data: ThemeData(unselectedWidgetColor: Colors.teal),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ListTile(
+              title: Text('Small'),
+              leading: Radio(
+                value: 1,
+                groupValue: _value,
+                onChanged: (value) {
+                  setState(() {
+                    _value = 1;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text('Medium'),
+              leading: Radio(
+                groupValue: _value,
+                value: 2,
+                onChanged: (value) {
+                  setState(() {
+                    _value = 2;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text('Long'),
+              leading: Radio(
+                groupValue: _value,
+                value: 3,
+                onChanged: (value) {
+                  setState(() {
+                    _value = 3;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      );
     } else {
       return SizedBox(width: 0, height: 0);
     }
