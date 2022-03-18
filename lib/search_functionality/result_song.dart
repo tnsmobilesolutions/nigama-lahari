@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
-import '../login/common_widgets/common_style.dart';
 import '../song_detail.dart';
 
 class ResultSong extends StatefulWidget {
@@ -28,48 +27,78 @@ class _ResultSongState extends State<ResultSong> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          elevation: 0,
           title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
           centerTitle: true,
         ),
-        body: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: widget.songs?.length ?? 0,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              child: Container(
-                color: Colors.purple,
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(widget.songs?[index].songTitle ?? '',
-                              style: CommonStyle.myStyle),
-                          Text(widget.songs?[index].singerName ?? ''),
-                        ],
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: widget.songs?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      child: ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.songs?[index].songTitle ?? '',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  widget.songs?[index].singerName ?? '',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                Text(
+                                  widget.songs?[index].songCategory ?? '',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SongDetail(
+                              song: widget.songs![index],
+                              songList: widget.songs,
+                              index: index,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SongDetail(
-                      song: widget.songs![index],
-                      songList: widget.songs,
-                      index: index,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+            ],
+          ),
         ),
       ),
     );

@@ -4,7 +4,6 @@ import 'package:flutter_application_1/models/songs_model.dart';
 class SearchSongAPI {
   Future<List<Song>?> getAllSongs() {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       querySnapshot.docs.forEach((element) {
@@ -19,9 +18,7 @@ class SearchSongAPI {
   }
 
   Future<List<String>?> getAllCategories() {
-    //print('#######entry point########');
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
     final lstResult = songs.get().then((querySnapshot) {
       List<String>? lstCategories = [];
       querySnapshot.docs.forEach((element) {
@@ -42,7 +39,6 @@ class SearchSongAPI {
 
   Future<List<Song>?> getAllSongsInCategory(String categoryName) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
     final lstResult = songs.get().then(
       (querySnapshot) {
         List<Song>? lstSongs = [];
@@ -66,11 +62,6 @@ class SearchSongAPI {
 
   Future<List<Song>?> getSongByName(String name) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
-    print('all receipt here');
-    print(songs);
-    print(name);
-
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
@@ -89,11 +80,6 @@ class SearchSongAPI {
 
   Future<List<Song>?> getSongBySingerName(String singerName) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
-    print('all receipt here');
-    print(songs);
-    print(singerName);
-
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
@@ -112,11 +98,6 @@ class SearchSongAPI {
 
   Future<List<Song>?> getSongByAttribute(String attribute) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-
-    // print('all receipt here');
-    // print(songs);
-    // print(singerName);
-
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
@@ -135,11 +116,25 @@ class SearchSongAPI {
 
   Future<List<Song>?> getSongByCategory(String category) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+    final lstSongs = songs.get().then((querySnapshot) {
+      List<Song>? lstSong = [];
+      print(querySnapshot.docs.length);
+      querySnapshot.docs.forEach((element) {
+        final receiptSongs = element.data() as Map<String, dynamic>;
+        print(receiptSongs);
+        final song = Song.fromMap(receiptSongs);
+        print(song);
+        if ((song.songCategory ?? '').startsWith(category)) {
+          lstSong.add(song);
+        }
+      });
+      return lstSong;
+    });
+    return lstSongs;
+  }
 
-    // print('all receipt here');
-    // print(songs);
-    // print(singerName);
-
+  Future<List<Song>?> getSongByDuration(String duration) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
@@ -147,7 +142,7 @@ class SearchSongAPI {
         final receiptSongs = element.data() as Map<String, dynamic>;
         //print(receiptSongs);
         final song = Song.fromMap(receiptSongs);
-        if ((song.songCategory ?? '').startsWith(category)) {
+        if (song.songDuration!.isNotEmpty) {
           lstSong.add(song);
         }
       });
