@@ -72,6 +72,7 @@ class _SongDetailState extends State<SongDetail> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: _lyricsExpanded ? false : true,
           title: Center(
             child: Column(
               children: [
@@ -96,19 +97,31 @@ class _SongDetailState extends State<SongDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    if (_currentSong != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditSong(
-                            song: _currentSong!,
+                if (!_lyricsExpanded)
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+                      if (_currentSong != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditSong(
+                              song: _currentSong!,
+                            ),
                           ),
-                        ),
-                      );
-                    }
+                        );
+                      }
+                    },
+                  ),
+                IconButton(
+                  icon: Icon(
+                    _lyricsExpanded ? Icons.zoom_in_map : Icons.zoom_out_map,
+                  ),
+                  onPressed: () {
+                    print('expand pressed');
+                    setState(() {
+                      _lyricsExpanded = !_lyricsExpanded;
+                    });
                   },
                 ),
               ],
@@ -128,21 +141,6 @@ class _SongDetailState extends State<SongDetail> {
                       children: [
                         LyricsViewer(
                           lyrics: _currentSong?.songText ?? "",
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            _lyricsExpanded
-                                ? Icons.zoom_in_map
-                                : Icons.zoom_out_map,
-                          ),
-                          iconSize: 40,
-                          color: Colors.green,
-                          onPressed: () {
-                            print('expand pressed');
-                            setState(() {
-                              _lyricsExpanded = !_lyricsExpanded;
-                            });
-                          },
                         ),
                       ],
                     ),
