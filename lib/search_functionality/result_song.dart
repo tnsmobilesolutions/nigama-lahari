@@ -47,7 +47,19 @@ class _ResultSongState extends State<ResultSong> {
                         children: [
                           Text(widget.songs?[index].songTitle ?? '',
                               style: CommonStyle.myStyle),
-                          Text(widget.songs?[index].singerName ?? ''),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                widget.songs?[index].singerName ?? '',
+                                style: CommonStyle.subStyle,
+                              ),
+                              Text(
+                                widget.songs?[index].songCategory ?? '',
+                                style: CommonStyle.subStyle,
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ],
