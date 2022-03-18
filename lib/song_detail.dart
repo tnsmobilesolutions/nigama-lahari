@@ -153,7 +153,14 @@ class _SongDetailState extends State<SongDetail> {
         size: 40,
         color: isLastIndex ? Colors.blueGrey : Colors.green,
       ),
-      onPressed: nextSongPressed,
+      onPressed: () {
+        nextSongPressed();
+        setState(
+          () {
+            playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
+          },
+        );
+      },
     );
   }
 
@@ -185,7 +192,14 @@ class _SongDetailState extends State<SongDetail> {
         size: 40,
         color: isFirstIndex ? Colors.blueGrey : Colors.green,
       ),
-      onPressed: prevSongPressed,
+      onPressed: () {
+        prevSongPressed();
+        setState(
+          () {
+            playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
+          },
+        );
+      },
     );
   }
 
