@@ -22,17 +22,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ନିଗମ ଲହରୀ',
+      // theme: ThemeData(
+      //   primarySwatch: Colors.purple,
+      // ),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        brightness: Brightness.light,
+        /* light theme settings */
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.deepPurple,
+        /* dark theme settings */
+      ),
+      themeMode: ThemeMode.dark,
       home: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.red, Colors.blue],
-          ),
-        ),
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //     colors: [Colors.red, Colors.blue],
+        //   ),
+        // ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: AnimatedSplashScreen(

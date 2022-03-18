@@ -74,15 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
     // final categories = DataStore().allCategories;
     // print(categories?.length);
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.purple, Colors.teal],
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //     begin: Alignment.topLeft,
+      //     end: Alignment.bottomRight,
+      //     colors: [Colors.purple, Colors.teal],
+      //   ),
+      // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           //backgroundColor: Colors.transparent,
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.transparent,
+          // backgroundColor: Colors.transparent,
           elevation: 0,
           highlightElevation: 0,
           onPressed: () {
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
           child: Icon(
-            Icons.add_circle_outline_rounded,
+            Icons.add,
             size: 30,
           ),
         ),
