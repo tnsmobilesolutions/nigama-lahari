@@ -105,8 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    child: Image(
-                      image: AssetImage('assets/image/search_icon.gif'),
+                    child: Icon(
+                      Icons.search_rounded,
+                      size: 30,
                     ),
                   ),
                 ),
@@ -116,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: showMyDialog,
-                    child: Icon(Icons.settings_power),
+                    child: Icon(Icons.logout_rounded),
                   ),
                 ),
               ],
@@ -149,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () async {
                           final allSongsByCategory = await SearchSongAPI()
                               .getAllSongsInCategory(snapshot.data![index]);
-                          // print('***********$allSongsByCategory***********');
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -181,8 +182,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-          child: Image(
-            image: AssetImage('assets/image/add_song.gif'),
+          child: Icon(
+            Icons.add_circle_outline_rounded,
+            size: 30,
           ),
         ),
       ),
