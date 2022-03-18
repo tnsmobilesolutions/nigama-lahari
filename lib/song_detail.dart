@@ -26,6 +26,7 @@ class _SongDetailState extends State<SongDetail> {
   Song? _currentSong;
   int? _currentIndex;
   bool _lyricsExpanded = false;
+  double _fontSize = 16;
 
   @override
   void initState() {
@@ -113,6 +114,26 @@ class _SongDetailState extends State<SongDetail> {
                       }
                     },
                   ),
+                if (_lyricsExpanded)
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      setState(() {
+                        _fontSize = _fontSize + 1;
+                      });
+                    },
+                  ),
+                if (_lyricsExpanded)
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () {
+                      if (_fontSize > 16) {
+                        setState(() {
+                          _fontSize = _fontSize - 1;
+                        });
+                      }
+                    },
+                  ),
                 IconButton(
                   icon: Icon(
                     _lyricsExpanded ? Icons.zoom_in_map : Icons.zoom_out_map,
@@ -141,6 +162,7 @@ class _SongDetailState extends State<SongDetail> {
                       children: [
                         LyricsViewer(
                           lyrics: _currentSong?.songText ?? "",
+                          fontSize: _fontSize,
                         ),
                       ],
                     ),
