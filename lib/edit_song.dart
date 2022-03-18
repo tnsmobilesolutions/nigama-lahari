@@ -145,23 +145,11 @@ class _Edit_SongState extends State<EditSong> {
           }
         },
       );
-  // Future<void> delete(String ref) async {
-  //   await FirebaseStorage.instance.ref(ref).delete;
-  //   // Rebuild the UI
-  //   setState(() {});
-  // }
-  //
-//   Future<void> deleteImage(String imageFileUrl) async {
-//   var fileUrl = Uri.decodeFull(Path.basename(songUrl)))
-
-// final Reference firebaseStorageRef =
-//     FirebaseStorage.instance.ref().child(fileUrl);
-//     await firebaseStorageRef.delete();
-//  }
-  // Future<void> delete(String songUrl) async {
-  //   var photo = FirebaseStorage.instance.refFromURL(songUrl);
-  //   await photo.delete();
-  // }
+  Future<void> delete(String songURL) async {
+    await FirebaseStorage.instance.ref(songURL).delete;
+    // Rebuild the UI
+    // setState(() {});
+  }
 
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -180,7 +168,7 @@ class _Edit_SongState extends State<EditSong> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: val == '100%' ? Text('Done') : Text('Done'),
+                  child: val == '100%' ? Text('Done') : Text('Wait Please'),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
