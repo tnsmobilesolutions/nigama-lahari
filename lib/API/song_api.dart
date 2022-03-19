@@ -24,7 +24,7 @@ class SongAPI {
   Future<String> createNewSong(Song songsModel) async {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
-    final Reference = await songs.add({
+    final Reference = await songs.doc(songsModel.songId).set({
       "songId": songsModel.songId,
       "songCategory": songsModel.songCategory,
       "songAttribute": songsModel.songAttribute,
@@ -35,7 +35,7 @@ class SongAPI {
       "songDuration": songsModel.songDuration,
       "songURL": songsModel.songURL,
     });
-    return Reference.id;
+    return songsModel.songId ?? "0";
   }
 
 // update

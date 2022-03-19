@@ -65,6 +65,7 @@ class _Edit_SongState extends State<EditSong> {
   double? sizeInMb;
   var file1;
   var val;
+  bool _songChangedByUser = false;
 
   AudioPlayer player = AudioPlayer();
 
@@ -76,6 +77,9 @@ class _Edit_SongState extends State<EditSong> {
     );
     print('****  $result  ****');
     if (result != null) {
+      setState(() {
+        _songChangedByUser = true;
+      });
       file1 = result.files.first;
       sizeInMb = file1.size / 1048576;
     } else {
@@ -114,6 +118,11 @@ class _Edit_SongState extends State<EditSong> {
 
     //print('****  $autoDuration  ****');
     //print('Download-Link: $songURL');
+
+    // Delete the previous uploaded song
+    if (widget.song.songURL != null) {
+      FirebaseApi.deleteFile(widget.song.songURL!);
+    }
   }
 
   //upload status
@@ -169,15 +178,15 @@ class _Edit_SongState extends State<EditSong> {
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? path.basename(file!.path) : 'ଚୟନ କରନ୍ତୁ';
+    final fileName = widget.song.songURL ?? 'ଚୟନ କରନ୍ତୁ';
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.purple, Colors.teal],
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //     begin: Alignment.topLeft,
+      //     end: Alignment.bottomRight,
+      //     colors: [Colors.purple, Colors.teal],
+      //   ),
+      // ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -312,9 +321,10 @@ class _Edit_SongState extends State<EditSong> {
                   SizedBox(height: 15),
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
-                        color: Colors.transparent),
-                    padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+                      border: Border.all(color: Colors.grey, width: 1),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -324,17 +334,41 @@ class _Edit_SongState extends State<EditSong> {
                             child: Icon(
                               Icons.attach_file_rounded,
                               size: 30,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                           ),
-                          onTap: selectFile,
+                          onTap: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Replace Song Music'),
+                              content: const Text(
+                                  'This would replace the existing music for this song. Are you sure to continue ?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    selectFile();
+                                    return Navigator.pop(context, 'Continue');
+                                  },
+                                  child: const Text('Continue'),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 50),
-                        Flexible(
+                        SizedBox(width: 10),
+                        Expanded(
                           child: Text(
                             fileName,
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ],
@@ -350,14 +384,13 @@ class _Edit_SongState extends State<EditSong> {
                         Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
                       } else if (_lyricsController.text.isEmpty) {
                         Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
-                      } else if (file1 == null) {
+                      } else if (_songChangedByUser && file1 == null) {
                         Fluttertoast.showToast(
                             msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
-                      } else if (sizeInMb! > 10) {
+                      } else if (_songChangedByUser && sizeInMb! > 10) {
                         Fluttertoast.showToast(
                             msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
-                      } else {
-                        // await delete(songUrl.toString());
+                      } else if (_songChangedByUser) {
                         await uploadFile();
                         await Fluttertoast.showToast(
                             msg: "Upload SuccessFully");
@@ -368,24 +401,26 @@ class _Edit_SongState extends State<EditSong> {
                       //     msg: 'Upload Successfully');
                       // Navigator.pop(context);
 
-                      if (_formKey != null &&
-                          _formKey.currentState != null &&
-                          _formKey.currentState!.validate()) {
-                        Song songsModel = Song(
-                            isEditable: true,
-                            songCategory: _selectedOption,
-                            songAttribute: _attributeController.text,
-                            songTitle: _titleController.text,
-                            singerName: _singerNameController.text,
-                            songText: _lyricsController.text,
-                            songURL: songUrl,
-                            songId: Uuid().v1(),
-                            songDuration: autoDuration.toString()
-                            //double.tryParse(autoDuration.toString()),
-                            );
+                      // if (_formKey != null &&
+                      //     _formKey.currentState != null &&
+                      //     _formKey.currentState!.validate()) {
+                      Song songsModel = Song(
+                          isEditable: true,
+                          songCategory: _selectedOption,
+                          songAttribute: _attributeController.text,
+                          songTitle: _titleController.text,
+                          singerName: _singerNameController.text,
+                          songText: _lyricsController.text,
+                          songURL: _songChangedByUser
+                              ? songUrl
+                              : widget.song.songURL,
+                          songId: widget.song.songId,
+                          songDuration: autoDuration.toString()
+                          //double.tryParse(autoDuration.toString()),
+                          );
 
-                        final songDetails = SongAPI().updateSong(songsModel);
-                      }
+                      final songDetails = SongAPI().updateSong(songsModel);
+                      // }
                     },
                     child: Text(
                       'Update',
