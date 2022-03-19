@@ -11,4 +11,13 @@ class FirebaseApi {
       return null;
     }
   }
+
+  static Future<void> deleteFile(String url) {
+    try {
+      return FirebaseStorage.instance.refFromURL(url).delete();
+    } on FirebaseException catch (e) {
+      print(e.toString());
+      return Future.error(e.toString());
+    }
+  }
 }
