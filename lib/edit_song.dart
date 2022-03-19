@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
+import 'package:flutter_application_1/home_screen.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -158,25 +159,9 @@ class _Edit_SongState extends State<EditSong> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
-            child: val == '100%'
-                ? Text('Uploaded Successfully')
-                : Text('Uploading...'),
+            child: Text('Uploading...'),
           ),
           content: buildUploadStatus(task!),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  child: val == '100%' ? Text('Done') : Text('Wait Please'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ],
         );
       },
     );
@@ -374,6 +359,9 @@ class _Edit_SongState extends State<EditSong> {
                       } else {
                         // await delete(songUrl.toString());
                         await uploadFile();
+                        await Fluttertoast.showToast(
+                            msg: "Upload SuccessFully");
+                        Navigator.pop(context);
                       }
                       // Navigator.pop(context);
                       // await Fluttertoast.showToast(

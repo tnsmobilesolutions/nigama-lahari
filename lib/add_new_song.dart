@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
@@ -136,26 +137,11 @@ class _AddSongState extends State<AddSong> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          // title: Center(
-          //   child: val == 100
-          //       ? Text('Uploaded Successfully')
-          //       : Text('Uploading...'),
-          // ),
+          title: Center(
+            child: Text('Uploading...'),
+          ),
           content: buildUploadStatus(task!),
-          // actions: <Widget>[
-          //   Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: [
-          //       TextButton(
-          //         child: val == 100 ? Text('Done') : Text(''),
-          //         onPressed: () {
-          //           Navigator.of(context).pop();
-          //           Navigator.of(context).pop();
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ],
+          actions: <Widget>[Center(child: Text('Please Wait...'))],
         );
       },
     );
@@ -349,6 +335,13 @@ class _AddSongState extends State<AddSong> {
                                 msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
                           } else {
                             await uploadFile();
+                            await Fluttertoast.showToast(
+                                msg: "Upload SuccessFully");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ));
                           }
 
                           if (_formKey.currentState!.validate()) {
