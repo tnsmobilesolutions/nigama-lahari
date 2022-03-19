@@ -134,8 +134,8 @@ class _Edit_SongState extends State<EditSong> {
             percentage =
                 double.parse((progress * 100).toStringAsFixed(0)) / 100;
 
-            val = percentage * 100.toInt();
-            print(val);
+            val = {(percentage * 100).toInt()};
+            print('value : $val');
             return CircularPercentIndicator(
               animation: true,
               radius: 55,
@@ -154,6 +154,11 @@ class _Edit_SongState extends State<EditSong> {
           }
         },
       );
+  Future<void> delete(String songURL) async {
+    await FirebaseStorage.instance.ref(songURL).delete;
+    // Rebuild the UI
+    // setState(() {});
+  }
 
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -162,7 +167,7 @@ class _Edit_SongState extends State<EditSong> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
-            child: val == ProgressIndicator
+            child: val == '100%'
                 ? Text('Uploaded Successfully')
                 : Text('Uploading...'),
           ),
@@ -172,7 +177,7 @@ class _Edit_SongState extends State<EditSong> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: val == 100 ? Text('Done') : Text(''),
+                  child: val == '100%' ? Text('Done') : Text('Wait Please'),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
