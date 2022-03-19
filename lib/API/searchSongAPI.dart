@@ -52,7 +52,7 @@ class SearchSongAPI {
             }
           },
         );
-        print(lstSongs);
+        //print(lstSongs);
         return lstSongs;
       },
     );
@@ -64,11 +64,11 @@ class SearchSongAPI {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
-      print(querySnapshot.docs.length);
+      //print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        print(receiptSongs);
-        final song = Song.fromMap(receiptSongs);
+        final resultSongs = element.data() as Map<String, dynamic>;
+        //print(resultSongs);
+        final song = Song.fromMap(resultSongs);
         if ((song.songTitle ?? '').startsWith(name)) {
           lstSong.add(song);
         }
@@ -82,11 +82,11 @@ class SearchSongAPI {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
-      print(querySnapshot.docs.length);
+      // print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        print(receiptSongs);
-        final song = Song.fromMap(receiptSongs);
+        final resultSongs = element.data() as Map<String, dynamic>;
+        //print(resultSongs);
+        final song = Song.fromMap(resultSongs);
         if ((song.singerName ?? '').startsWith(singerName)) {
           lstSong.add(song);
         }
@@ -100,11 +100,11 @@ class SearchSongAPI {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
-      print(querySnapshot.docs.length);
+      //print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        //print(receiptSongs);
-        final song = Song.fromMap(receiptSongs);
+        final resultSongs = element.data() as Map<String, dynamic>;
+        //print(resultSongs);
+        final song = Song.fromMap(resultSongs);
         if ((song.songAttribute ?? '').startsWith(attribute)) {
           lstSong.add(song);
         }
@@ -118,12 +118,12 @@ class SearchSongAPI {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
-      print(querySnapshot.docs.length);
+      //print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        print(receiptSongs);
-        final song = Song.fromMap(receiptSongs);
-        print(song);
+        final resultSongs = element.data() as Map<String, dynamic>;
+        //print(resultSongs);
+        final song = Song.fromMap(resultSongs);
+        //print(song);
         if ((song.songCategory ?? '').startsWith(category)) {
           lstSong.add(song);
         }
@@ -139,9 +139,9 @@ class SearchSongAPI {
       List<Song>? lstSong = [];
       print(querySnapshot.docs.length);
       querySnapshot.docs.forEach((element) {
-        final receiptSongs = element.data() as Map<String, dynamic>;
-        //print(receiptSongs);
-        final song = Song.fromMap(receiptSongs);
+        final resultSongs = element.data() as Map<String, dynamic>;
+        //print(resultSongs);
+        final song = Song.fromMap(resultSongs);
         if (song.songDuration!.isNotEmpty) {
           lstSong.add(song);
         }

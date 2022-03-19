@@ -17,7 +17,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
   String? _selectedOption;
-  var _value = 1;
+  String _value = '';
 
   final _nameController = TextEditingController();
   final _singerNameController = TextEditingController();
@@ -98,8 +98,7 @@ class _SearchState extends State<Search> {
                         allSongs = await searchAPI
                             .getSongByCategory(_categoryController.text);
                       } else if (_selectedOption == "Duration") {
-                        allSongs = await searchAPI
-                            .getSongByDuration(_durationController.text);
+                        allSongs = await searchAPI.getSongByDuration(_value);
                       } else {
                         allSongs = [];
                       }
@@ -245,36 +244,36 @@ class _SearchState extends State<Search> {
           children: [
             ListTile(
               title: Text('Small'),
-              leading: Radio(
-                value: 1,
+              leading: Radio<String>(
+                value: '0:04:00 - 0:07:00',
                 groupValue: _value,
                 onChanged: (value) {
                   setState(() {
-                    _value = 1;
+                    _value = value!; //'0:04:00 - 0:07:00';
                   });
                 },
               ),
             ),
             ListTile(
               title: Text('Medium'),
-              leading: Radio(
+              leading: Radio<String>(
                 groupValue: _value,
-                value: 2,
+                value: '0:07:00 - 0:10:00',
                 onChanged: (value) {
                   setState(() {
-                    _value = 2;
+                    _value = value!; //'0:07:00 - 0:10:00';
                   });
                 },
               ),
             ),
             ListTile(
               title: Text('Long'),
-              leading: Radio(
+              leading: Radio<String>(
                 groupValue: _value,
-                value: 3,
+                value: '> 0:10:00',
                 onChanged: (value) {
                   setState(() {
-                    _value = 3;
+                    _value = value!; //'> 0:10:00';
                   });
                 },
               ),
