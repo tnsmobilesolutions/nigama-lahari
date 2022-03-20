@@ -29,13 +29,13 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.purple, Colors.teal],
-          ),
-        ),
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //     colors: [Colors.purple, Colors.teal],
+        //   ),
+        // ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -243,7 +243,10 @@ class _SearchState extends State<Search> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ListTile(
-              title: Text('Small'),
+              title: Text(
+                'Small',
+                style: TextStyle(color: Colors.white),
+              ),
               leading: Radio<String>(
                 value: '0:04:00 - 0:07:00',
                 groupValue: _value,
@@ -255,7 +258,10 @@ class _SearchState extends State<Search> {
               ),
             ),
             ListTile(
-              title: Text('Medium'),
+              title: Text(
+                'Medium',
+                style: TextStyle(color: Colors.white),
+              ),
               leading: Radio<String>(
                 groupValue: _value,
                 value: '0:07:00 - 0:10:00',
@@ -267,7 +273,10 @@ class _SearchState extends State<Search> {
               ),
             ),
             ListTile(
-              title: Text('Long'),
+              title: Text(
+                'Long',
+                style: TextStyle(color: Colors.white),
+              ),
               leading: Radio<String>(
                 groupValue: _value,
                 value: '> 0:10:00',
