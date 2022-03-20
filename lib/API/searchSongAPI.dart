@@ -69,7 +69,10 @@ class SearchSongAPI {
         final resultSongs = element.data() as Map<String, dynamic>;
         //print(resultSongs);
         final song = Song.fromMap(resultSongs);
-        if ((song.songTitle ?? '').startsWith(name)) {
+        if ((song.songTitle ?? '').toLowerCase().contains(name.toLowerCase()) ||
+            (song.songTitleInEnglish ?? '')
+                .toLowerCase()
+                .contains(name.toLowerCase())) {
           lstSong.add(song);
         }
       });

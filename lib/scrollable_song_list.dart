@@ -80,9 +80,13 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
       results = widget.songs;
     } else {
       results = widget.songs!
-          .where((text) => text.songTitle!
-              .toLowerCase()
-              .contains(enteredKeyword.toLowerCase()))
+          .where((text) =>
+              (text.songTitle ?? "")
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()) ||
+              (text.songTitleInEnglish ?? "")
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(

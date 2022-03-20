@@ -37,6 +37,7 @@ class _Edit_SongState extends State<EditSong> {
 
   final _catagoryController = TextEditingController();
   final _titleController = TextEditingController();
+  final _titleInEnglishController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
   final _lyricsController = TextEditingController();
@@ -47,6 +48,7 @@ class _Edit_SongState extends State<EditSong> {
 
     _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
+    _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
     _singerNameController.text = widget.song.singerName ?? "";
     _attributeController.text = widget.song.songAttribute ?? "";
     _lyricsController.text = widget.song.songText ?? "";
@@ -254,6 +256,28 @@ class _Edit_SongState extends State<EditSong> {
                   SizedBox(height: 15),
                   TextFormField(
                     keyboardType: TextInputType.name,
+                    controller: _titleInEnglishController,
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                    // ],
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter Song Name in English';
+                        //
+                        //} else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                        //   return 'Please Enter Correct Name';
+                      }
+                      return null;
+                    },
+                    // style: TextStyle(height: 0.5),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Name in English",
+                      hintTextStr: "Enter Searchable Song name in English",
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  TextFormField(
+                    keyboardType: TextInputType.name,
                     controller: _singerNameController,
                     // inputFormatters: [
                     //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
@@ -409,6 +433,7 @@ class _Edit_SongState extends State<EditSong> {
                           songCategory: _selectedOption,
                           songAttribute: _attributeController.text,
                           songTitle: _titleController.text,
+                          songTitleInEnglish: _titleInEnglishController.text,
                           singerName: _singerNameController.text,
                           songText: _lyricsController.text,
                           songURL: _songChangedByUser
