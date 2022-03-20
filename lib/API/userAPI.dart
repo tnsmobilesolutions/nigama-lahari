@@ -15,12 +15,15 @@ final _auth = FirebaseAuth.instance;
 class userAPI {
 // SignIn
 
-  dynamic signIn(String email, String password) async {
-    await _auth
+  Future<String?> signIn(String email, String password) async {
+    final uid = await _auth
         .signInWithEmailAndPassword(email: email, password: password)
-        .then((uid) => {});
+        .then((uid) => uid);
+
+    return uid.user?.uid;
+
     // TODO: If success then call This
-    await DataStore().loadAllData();
+    //await DataStore().loadAllData();
 
     // TODO: Remove this from here to the UI layer
   }

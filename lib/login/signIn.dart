@@ -96,16 +96,16 @@ class _SignInState extends State<SignIn> {
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () async {
             if (_formkey.currentState!.validate()) {
-              await userAPI()
+              final uid = await userAPI()
                   .signIn(emailController.text, passswordController.text);
-              await Fluttertoast.showToast(msg: "LogIn successfull")
-                  .whenComplete(() => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      )));
+              if (uid != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ));
+              }
             }
-            return null;
           },
           child: Text(
             "Login",
