@@ -147,20 +147,32 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               SizedBox(height: 30),
               Expanded(
                 child: items!.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: items?.length,
+                    ? ListView.separated(
+                        itemCount: items?.length ?? 0,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: ListTile(
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              tileColor: Colors.blueGrey[900],
+                              title: Text(
+                                widget.songs![index].songTitle ?? "",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              subtitle: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    widget.songs![index].songTitle ?? "",
+                                    widget.songs![index].songCategory ?? "",
                                     style: TextStyle(
                                       color: Colors.green,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 15,
                                     ),
                                   ),
                                   Text(
@@ -171,8 +183,13 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                       fontSize: 15,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 30,
+                                  Text(
+                                    widget.songs![index].songDuration ?? "",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ],
                               ),
