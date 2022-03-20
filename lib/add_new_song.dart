@@ -25,6 +25,7 @@ class _AddSongState extends State<AddSong> {
   //final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
 
   final _titleController = TextEditingController();
+  final _titleEnglishController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
   final _lyricsController = TextEditingController();
@@ -231,6 +232,23 @@ class _AddSongState extends State<AddSong> {
                         height: 20,
                       ),
                       TextFormField(
+                        style: TextStyle(color: Colors.black),
+                        controller: _titleEnglishController,
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            labelText: 'Searchable Song Name in English',
+                            hintStyle:
+                                TextStyle(fontSize: 15.0, color: Colors.black),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
                         controller: _singerNameController,
                         style: TextStyle(color: Colors.black),
                         autofocus: false,
@@ -346,6 +364,7 @@ class _AddSongState extends State<AddSong> {
                               songCategory: _selectedOption,
                               songAttribute: _attributeController.text,
                               songTitle: _titleController.text,
+                              songTitleInEnglish: _titleEnglishController.text,
                               singerName: _singerNameController.text,
                               songText: _lyricsController.text,
                               songURL: songUrl,

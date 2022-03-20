@@ -29,6 +29,7 @@ class SongAPI {
       "songCategory": songsModel.songCategory,
       "songAttribute": songsModel.songAttribute,
       "songTitle": songsModel.songTitle,
+      "songTitleInEnglish": songsModel.songTitleInEnglish,
       "singerName": songsModel.singerName,
       "songText": songsModel.songText,
       "isEditable": songsModel.isEditable,
