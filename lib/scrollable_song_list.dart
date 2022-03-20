@@ -19,7 +19,7 @@ class ScrollableSongList extends StatefulWidget {
 }
 
 class _ScrollableSongListState extends State<ScrollableSongList> {
-  List<Song>? items, results;
+  List<Song>? items;
   List<String>? songName;
 
   Future<void> showMyDialog() async {
@@ -75,6 +75,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
   }
 
   void _runFilter(String enteredKeyword) {
+    var results;
     if (enteredKeyword.isEmpty) {
       results = widget.songs;
     } else {
@@ -156,7 +157,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                             child: ListTile(
                               tileColor: Colors.blueGrey[900],
                               title: Text(
-                                widget.songs![index].songTitle ?? "",
+                                items![index].songTitle ?? "",
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
@@ -168,7 +169,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    widget.songs![index].songCategory ?? "",
+                                    items![index].songCategory ?? "",
                                     style: TextStyle(
                                       color: Colors.green,
                                       //fontWeight: FontWeight.bold,
@@ -176,7 +177,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                     ),
                                   ),
                                   Text(
-                                    widget.songs![index].singerName ?? "",
+                                    items![index].singerName ?? "",
                                     style: TextStyle(
                                       color: Colors.green,
                                       //fontWeight: FontWeight.bold,
@@ -184,7 +185,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                     ),
                                   ),
                                   Text(
-                                    widget.songs![index].songDuration ?? "",
+                                    items![index].songDuration ?? "",
                                     style: TextStyle(
                                       color: Colors.green,
                                       //fontWeight: FontWeight.bold,
@@ -199,7 +200,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SongDetail(
-                                    song: widget.songs![index],
+                                    song: items![index],
                                     songList: widget.songs,
                                     index: index,
                                   ),
