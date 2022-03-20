@@ -337,11 +337,7 @@ class _AddSongState extends State<AddSong> {
                             await uploadFile();
                             await Fluttertoast.showToast(
                                 msg: "Upload SuccessFully");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeScreen(),
-                                ));
+                            Navigator.pop(context);
                           }
 
                           if (_formKey.currentState!.validate()) {

@@ -41,31 +41,7 @@ class userAPI {
         'mobile': mobile
       });
     });
-
-    // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    // User? user = _auth.currentUser;
-
-    // AppUser UserModel = AppUser();
-    // UserModel.email = email;
-    // UserModel.uid = user.uid;
-    // UserModel.name = name;
-    // UserModel.mobile = mobile;
-
-    // writing all the values
-    // data.email = user!.email;
-    // data.uid = user.uid;
-    // data.name = _nameController.text;
-    // data.mobile = _mobileController.text;
-
-    // await firebaseFirestore.collection("users").doc(user.uid).set(
-    //       UserModel.toMap(),
-    // );
   }
-
-  // postDetailsToFirestore() async {
-  // calling our firestore
-  // calling our data
-  // sedning these values
 
   // Reset Password
 
