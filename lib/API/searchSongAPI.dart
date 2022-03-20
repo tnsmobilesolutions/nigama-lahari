@@ -52,7 +52,9 @@ class SearchSongAPI {
             }
           },
         );
-        //print(lstSongs);
+        lstSongs
+            .sort((a, b) => (a.songTitle ?? "").compareTo(b.songTitle ?? ""));
+
         return lstSongs;
       },
     );
