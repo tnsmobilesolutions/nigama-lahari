@@ -1,6 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
 class MusicPlayer extends StatefulWidget {
@@ -105,19 +106,21 @@ class _MusicPlayerState extends State<MusicPlayer> {
             children: [
               slider(),
               Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 25, right: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       _position.toString().split('.')[0],
                       style: TextStyle(
+                        color: Constant.white,
                         fontSize: 15,
                       ),
                     ),
                     Text(
                       _duration.toString().split('.')[0],
                       style: TextStyle(
+                        color: Constant.white,
                         fontSize: 15,
                       ),
                     ),
@@ -137,7 +140,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                             : Icons.play_circle_filled_rounded,
                       ),
                       iconSize: 60,
-                      color: Colors.purple,
+                      color: Constant.orange,
                       onPressed: () {
                         playerState == PlayerState.PLAYING
                             ? pauseMusic()
@@ -165,8 +168,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
         trackHeight: 2,
       ),
       child: Slider(
-        activeColor: Colors.purple[700],
-        inactiveColor: Colors.purple[400],
+        activeColor: Constant.orange,
+        inactiveColor: Constant.lightblue,
         value: _position.inSeconds.toDouble(),
         min: 0.0,
         max: _duration.inSeconds.toDouble(),
@@ -221,7 +224,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_next_rounded,
         size: 40,
-        color: isLastIndex ? Colors.blueGrey : Colors.green,
+        color: isLastIndex ? Constant.lightblue : Constant.orange,
       ),
       onPressed: nextSongPressed,
     );
@@ -258,7 +261,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.skip_previous_rounded,
         size: 40,
-        color: isFirstIndex ? Colors.blueGrey : Colors.green,
+        color: isFirstIndex ? Constant.lightblue : Constant.orange,
       ),
       onPressed: prevSongPressed,
     );
@@ -292,7 +295,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.shuffle,
         size: 40,
-        color: Colors.green,
+        color: Constant.orange,
       ),
       onPressed: () {
         if (isRepeat == false) {}
@@ -313,7 +316,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           audioPlayer?.setReleaseMode(ReleaseMode.LOOP);
           setState(
             () {
-              color = Colors.black;
+              color = Constant.lightblue;
               isRepeat = true;
             },
           );
@@ -321,7 +324,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           audioPlayer?.setReleaseMode(ReleaseMode.RELEASE);
           setState(
             () {
-              color = Colors.green;
+              color = Constant.orange;
               isRepeat = false;
             },
           );

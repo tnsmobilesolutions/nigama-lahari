@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ନିଗମ ଲହରୀ',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.purple,
-      // ),
       theme: ThemeData(
         brightness: Brightness.light,
         /* light theme settings */
@@ -40,7 +37,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       home: Container(
         child: Scaffold(
-          backgroundColor: Constant.darkBlue,
           body: AnimatedSplashScreen(
             splash: Image(
               image: AssetImage('assets/image/nsslogo.png'),

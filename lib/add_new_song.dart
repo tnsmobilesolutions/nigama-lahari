@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
@@ -181,16 +182,16 @@ class _AddSongState extends State<AddSong> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           DropdownButton(
-                            iconEnabledColor: Colors.teal,
+                            iconEnabledColor: Colors.white24,
                             hint: Text(
                               'ବିଭାଗ',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white24,
                                 fontSize: 15,
                               ),
                             ),
                             value: _selectedOption,
-                            dropdownColor: Colors.tealAccent[700],
+                            dropdownColor: Constant.lightblue,
                             onChanged: (value) {
                               setState(
                                 () {
@@ -214,76 +215,84 @@ class _AddSongState extends State<AddSong> {
                         height: 20,
                       ),
                       TextFormField(
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Constant.white),
                         controller: _titleController,
                         autofocus: false,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15),
-                            labelText: 'ନାମ',
-                            hintStyle:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'ନାମ',
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       TextFormField(
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Constant.white),
                         controller: _titleEnglishController,
                         autofocus: false,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15),
-                            labelText: 'Searchable Song Name in English',
-                            hintStyle:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'Name in English',
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       TextFormField(
                         controller: _singerNameController,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Constant.white),
                         autofocus: false,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15),
-                            labelText: 'ଗାୟକ',
-                            hintStyle:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'ଗାୟକ',
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       TextFormField(
                         controller: _attributeController,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Constant.white),
                         autofocus: false,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15),
-                            labelText: 'ଭାବ',
-                            hintStyle:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'ଭାବ',
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       TextFormField(
                         controller: _lyricsController,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Constant.white),
                         autofocus: false,
                         maxLines: height ~/ 8,
                         keyboardType: TextInputType.name,
@@ -291,11 +300,11 @@ class _AddSongState extends State<AddSong> {
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗୀତ ଲେଖା',
-                          hintStyle:
-                              TextStyle(fontSize: 15.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -315,7 +324,7 @@ class _AddSongState extends State<AddSong> {
                                 child: Icon(
                                   Icons.attach_file_rounded,
                                   size: 30,
-                                  color: Colors.black,
+                                  color: Constant.white,
                                 ),
                               ),
                               onTap: selectFile,

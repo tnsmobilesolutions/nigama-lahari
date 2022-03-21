@@ -140,7 +140,7 @@ class _SongDetailState extends State<SongDetail> {
         ),
         body: Container(
           height: double.infinity,
-          color: Colors.transparent,
+          //color: Colors.transparent,
           child: SafeArea(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.end,
