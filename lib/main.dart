@@ -28,17 +28,15 @@ class MyApp extends StatelessWidget {
       // ),
       theme: ThemeData(
         brightness: Brightness.light,
-
         /* light theme settings */
       ),
       darkTheme: ThemeData(
-          scaffoldBackgroundColor: Constant.darkBlue,
-          brightness: Brightness.dark,
-          primarySwatch: Colors.deepPurple,
-          primaryColor: Constant.blue,
-          appBarTheme: AppBarTheme(foregroundColor: Constant.blue)
-          /* dark theme settings */
-          ),
+        scaffoldBackgroundColor: Constant.darkBlue,
+        primarySwatch: Colors.deepPurple,
+        appBarTheme: AppBarTheme(color: Constant.blue),
+
+        /* dark theme settings */
+      ),
       themeMode: ThemeMode.dark,
       home: Container(
         child: Scaffold(

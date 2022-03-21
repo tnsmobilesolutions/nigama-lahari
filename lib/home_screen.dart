@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         // backgroundColor: Colors.transparent,
         appBar: AppBar(
+          elevation: 0,
           automaticallyImplyLeading: false,
           //backgroundColor: Colors.transparent,
           centerTitle: true,
