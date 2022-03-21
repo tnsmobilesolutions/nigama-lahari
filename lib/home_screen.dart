@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 
 // import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/login/signIn.dart';
@@ -141,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
+                        textColor: Constant.white,
                         title: Center(
                           child: Text(
                             snapshot.data![
