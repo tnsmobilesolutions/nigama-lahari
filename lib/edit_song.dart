@@ -5,11 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
-<<<<<<< HEAD
 import 'package:flutter_application_1/home_screen.dart';
-=======
-import 'package:flutter_application_1/constant.dart';
->>>>>>> 3fe68a5a2a4f1ae67600de1d40c4a3b7f9c6b6e2
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
@@ -18,6 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
+import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song}) : super(key: key);
@@ -205,7 +202,6 @@ class _Edit_SongState extends State<EditSong> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-<<<<<<< HEAD
                   Container(
                     width: double.infinity,
                     height: 50,
@@ -234,42 +230,6 @@ class _Edit_SongState extends State<EditSong> {
                                 _selectedOption = value as String?;
                                 print(_selectedOption.toString());
                               },
-=======
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'ବିଭାଗ',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
-                      ),
-                      DropdownButton(
-                        iconEnabledColor: Colors.teal,
-                        hint: Text(
-                          _catagoryController.text,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                        value: _selectedOption,
-                        dropdownColor: Constant.lightblue,
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              _selectedOption = value as String?;
-                              print(_selectedOption.toString());
-                            },
-                          );
-                        },
-                        items: _catagory.map(
-                          (val) {
-                            return DropdownMenuItem(
-                              child: new Text(val),
-                              value: val,
->>>>>>> 3fe68a5a2a4f1ae67600de1d40c4a3b7f9c6b6e2
                             );
                           },
                           items: _catagory.map(
@@ -288,7 +248,7 @@ class _Edit_SongState extends State<EditSong> {
                   TextFormField(
                     keyboardType: TextInputType.name,
                     controller: _titleController,
-                    style: TextStyle(color: Constant.white),
+
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Name';
@@ -299,19 +259,13 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     // style: TextStyle(height: 0.5),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ନାମ',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Name",
+                      hintTextStr: "Enter Song name",
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _titleInEnglishController,
                     // inputFormatters: [
@@ -327,19 +281,13 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     // style: TextStyle(height: 0.5),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Name in English",
+                      hintTextStr: "Enter Searchable Song name in English",
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _singerNameController,
                     // inputFormatters: [
@@ -355,19 +303,13 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     // style: TextStyle(height: 0.5),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ଗାୟକ',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Singer Name",
+                      hintTextStr: "Enter Singer name",
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _attributeController,
                     // inputFormatters: [
@@ -383,19 +325,13 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     // style: TextStyle(height: 0.5),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ଭାବ',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Attribute Name",
+                      hintTextStr: "Enter Song Attribute name",
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.text,
                     controller: _lyricsController,
                     maxLines: height ~/ 8,
@@ -412,14 +348,9 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     // style: TextStyle(height: 0.5),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ଗୀତ ଲେଖା',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
+                    decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Song Lyrics",
+                      hintTextStr: "Enter Song Lyrics",
                     ),
                   ),
                   SizedBox(height: 15),
