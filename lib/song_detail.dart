@@ -60,16 +60,8 @@ class _SongDetailState extends State<SongDetail> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
           automaticallyImplyLeading: _lyricsExpanded ? false : true,
           title: Center(
             child: Column(

@@ -151,39 +151,45 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                             const Divider(),
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            child: ListTile(
-                              textColor: Constant.white,
-                              tileColor: Constant.lightblue,
-                              title: Text(
-                                items![index].songTitle ?? "",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: ListTile(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    items![index].songCategory ?? "",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
+                                textColor: Constant.white,
+                                tileColor: Constant.lightblue,
+                                title: Text(
+                                  items![index].songTitle ?? "",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
                                   ),
-                                  Text(
-                                    items![index].singerName ?? "",
-                                    style: TextStyle(
-                                      fontSize: 15,
+                                ),
+                                subtitle: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      items![index].songCategory ?? "",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    items![index].songDuration ?? "",
-                                    style: TextStyle(
-                                      fontSize: 15,
+                                    Text(
+                                      items![index].singerName ?? "",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      items![index].songDuration ?? "",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             onTap: () {
