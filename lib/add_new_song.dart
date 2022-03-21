@@ -324,7 +324,7 @@ class _AddSongState extends State<AddSong> {
                                 child: Icon(
                                   Icons.attach_file_rounded,
                                   size: 30,
-                                  color: Colors.black,
+                                  color: Constant.white,
                                 ),
                               ),
                               onTap: selectFile,
