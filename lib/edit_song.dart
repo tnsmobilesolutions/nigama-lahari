@@ -199,41 +199,45 @@ class _Edit_SongState extends State<EditSong> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  DropdownButton(
-                    iconEnabledColor: Colors.teal,
-                    hint: Text(
-                      _catagoryController.text,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                    value: _selectedOption,
-                    dropdownColor: Colors.teal,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          _selectedOption = value as String?;
-                          print(_selectedOption.toString());
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('ବିଭାଗ', style: CommonStyle.subStyle),
+                      DropdownButton(
+                        iconEnabledColor: Colors.teal,
+                        hint: Text(
+                          _catagoryController.text,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                          ),
+                        ),
+                        value: _selectedOption,
+                        dropdownColor: Colors.teal,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              _selectedOption = value as String?;
+                              print(_selectedOption.toString());
+                            },
+                          );
                         },
-                      );
-                    },
-                    items: _catagory.map(
-                      (val) {
-                        return DropdownMenuItem(
-                          child: new Text(val),
-                          value: val,
-                        );
-                      },
-                    ).toList(),
+                        items: _catagory.map(
+                          (val) {
+                            return DropdownMenuItem(
+                              child: new Text(val),
+                              value: val,
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 15),
                   TextFormField(
                     keyboardType: TextInputType.name,
                     controller: _titleController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
+
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Name';
@@ -416,6 +420,7 @@ class _Edit_SongState extends State<EditSong> {
                       }
                       await Fluttertoast.showToast(msg: "Update SuccessFully");
                       Navigator.pop(context);
+                      setState(() {});
 
                       Song songsModel = Song(
                         isEditable: true,
@@ -434,7 +439,6 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       final songDetails = SongAPI().updateSong(songsModel);
-                      // }
                     },
                     child: Text(
                       'Update',
