@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'login/signIn.dart';
 import 'song_detail.dart';
@@ -132,7 +133,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                       filled: true,
                       fillColor: Colors.black26,
                       contentPadding: EdgeInsets.all(0),
-                      prefixIcon: Icon(Icons.search, color: Colors.green),
+                      prefixIcon: Icon(Icons.search, color: Constant.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none),
@@ -151,11 +152,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: ListTile(
-                              tileColor: Colors.blueGrey[900],
+                              tileColor: Constant.lightblue,
                               title: Text(
                                 items![index].songTitle ?? "",
                                 style: TextStyle(
-                                  color: Colors.green,
+                                  color: Constant.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
                                 ),
@@ -167,7 +168,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   Text(
                                     items![index].songCategory ?? "",
                                     style: TextStyle(
-                                      color: Colors.green,
+                                      color: Constant.white,
                                       //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
@@ -175,7 +176,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   Text(
                                     items![index].singerName ?? "",
                                     style: TextStyle(
-                                      color: Colors.green,
+                                      color: Constant.white,
                                       //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
@@ -183,7 +184,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   Text(
                                     items![index].songDuration ?? "",
                                     style: TextStyle(
-                                      color: Colors.green,
+                                      color: Constant.white,
                                       //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
