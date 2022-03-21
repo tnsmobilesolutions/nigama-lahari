@@ -187,7 +187,6 @@ class _Edit_SongState extends State<EditSong> {
       //   ),
       // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           centerTitle: true,
           title: Text(widget.song.songTitle ?? ""),
