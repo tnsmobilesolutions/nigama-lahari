@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/data_store.dart';
 import 'home_screen.dart';
 import 'login/signIn.dart';
@@ -27,25 +28,21 @@ class MyApp extends StatelessWidget {
       // ),
       theme: ThemeData(
         brightness: Brightness.light,
+
         /* light theme settings */
       ),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.deepPurple,
-        // appBarTheme: AppBarTheme(foregroundColor: Colors.amber)
-        /* dark theme settings */
-      ),
+          scaffoldBackgroundColor: Constant.darkBlue,
+          brightness: Brightness.dark,
+          primarySwatch: Colors.deepPurple,
+          primaryColor: Constant.blue,
+          appBarTheme: AppBarTheme(foregroundColor: Constant.blue)
+          /* dark theme settings */
+          ),
       themeMode: ThemeMode.dark,
       home: Container(
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //     begin: Alignment.topLeft,
-        //     end: Alignment.bottomRight,
-        //     colors: [Colors.red, Colors.blue],
-        //   ),
-        // ),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Constant.darkBlue,
           body: AnimatedSplashScreen(
             splash: Image(
               image: AssetImage('assets/image/nsslogo.png'),
