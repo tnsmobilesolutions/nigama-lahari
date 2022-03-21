@@ -152,11 +152,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: ListTile(
+                              textColor: Constant.white,
                               tileColor: Constant.lightblue,
                               title: Text(
                                 items![index].songTitle ?? "",
                                 style: TextStyle(
-                                  color: Constant.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
                                 ),
@@ -168,24 +168,18 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   Text(
                                     items![index].songCategory ?? "",
                                     style: TextStyle(
-                                      color: Constant.white,
-                                      //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
                                   ),
                                   Text(
                                     items![index].singerName ?? "",
                                     style: TextStyle(
-                                      color: Constant.white,
-                                      //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
                                   ),
                                   Text(
                                     items![index].songDuration ?? "",
                                     style: TextStyle(
-                                      color: Constant.white,
-                                      //fontWeight: FontWeight.bold,
                                       fontSize: 15,
                                     ),
                                   ),
