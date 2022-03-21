@@ -17,13 +17,6 @@ class _ResultSongState extends State<ResultSong> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
