@@ -25,7 +25,6 @@ class _ResultSongState extends State<ResultSong> {
       //   ),
       // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0,
           title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
