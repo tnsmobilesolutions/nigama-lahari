@@ -414,12 +414,12 @@ class _Edit_SongState extends State<EditSong> {
                       } else if (_songChangedByUser && sizeInMb! > 10) {
                         Fluttertoast.showToast(
                             msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
-                      } else if (_songChangedByUser) {
+                      } else if (_songChangedByUser == true) {
                         await uploadFile();
-                        await Fluttertoast.showToast(
-                            msg: "Upload SuccessFully");
                         Navigator.pop(context);
                       }
+                      await Fluttertoast.showToast(msg: "Update SuccessFully");
+                      Navigator.pop(context);
                       // Navigator.pop(context);
                       // await Fluttertoast.showToast(
                       //     msg: 'Upload Successfully');
