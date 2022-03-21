@@ -68,7 +68,6 @@ class _SongDetailState extends State<SongDetail> {
       //   ),
       // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: _lyricsExpanded ? false : true,
