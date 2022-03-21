@@ -37,7 +37,6 @@ class _SearchState extends State<Search> {
         //   ),
         // ),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
           appBar: AppBar(
             elevation: 0,
             centerTitle: true,
