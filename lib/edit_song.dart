@@ -5,8 +5,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
+import 'package:flutter_application_1/home_screen.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
+import 'package:flutter_application_1/music_player.dart';
+import 'package:flutter_application_1/song_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
@@ -199,39 +202,47 @@ class _Edit_SongState extends State<EditSong> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text('ବିଭାଗ', style: CommonStyle.subStyle),
-                      DropdownButton(
-                        iconEnabledColor: Colors.teal,
-                        hint: Text(
-                          _catagoryController.text,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('ବିଭାଗ', style: CommonStyle.subStyle),
+                        DropdownButton(
+                          iconEnabledColor: Colors.teal,
+                          hint: Text(
+                            _catagoryController.text,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                        value: _selectedOption,
-                        dropdownColor: Colors.teal,
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              _selectedOption = value as String?;
-                              print(_selectedOption.toString());
-                            },
-                          );
-                        },
-                        items: _catagory.map(
-                          (val) {
-                            return DropdownMenuItem(
-                              child: new Text(val),
-                              value: val,
+                          value: _selectedOption,
+                          dropdownColor: Colors.teal,
+                          onChanged: (value) {
+                            setState(
+                              () {
+                                _selectedOption = value as String?;
+                                print(_selectedOption.toString());
+                              },
                             );
                           },
-                        ).toList(),
-                      ),
-                    ],
+                          items: _catagory.map(
+                            (val) {
+                              return DropdownMenuItem(
+                                child: new Text(val),
+                                value: val,
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
@@ -418,9 +429,8 @@ class _Edit_SongState extends State<EditSong> {
                         await uploadFile();
                         Navigator.pop(context);
                       }
+
                       await Fluttertoast.showToast(msg: "Update SuccessFully");
-                      Navigator.pop(context);
-                      setState(() {});
 
                       Song songsModel = Song(
                         isEditable: true,
@@ -439,6 +449,12 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       final songDetails = SongAPI().updateSong(songsModel);
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                      });
                     },
                     child: Text(
                       'Update',
