@@ -100,7 +100,6 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
