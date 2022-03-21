@@ -4,9 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
-import 'package:flutter_application_1/home_screen.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +12,6 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
 import 'login/common_widgets/common_style.dart';
-import 'package:uuid/uuid.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song}) : super(key: key);
@@ -420,29 +417,22 @@ class _Edit_SongState extends State<EditSong> {
                       }
                       await Fluttertoast.showToast(msg: "Update SuccessFully");
                       Navigator.pop(context);
-                      // Navigator.pop(context);
-                      // await Fluttertoast.showToast(
-                      //     msg: 'Upload Successfully');
-                      // Navigator.pop(context);
 
-                      // if (_formKey != null &&
-                      //     _formKey.currentState != null &&
-                      //     _formKey.currentState!.validate()) {
                       Song songsModel = Song(
-                          isEditable: true,
-                          songCategory: _selectedOption,
-                          songAttribute: _attributeController.text,
-                          songTitle: _titleController.text,
-                          songTitleInEnglish: _titleInEnglishController.text,
-                          singerName: _singerNameController.text,
-                          songText: _lyricsController.text,
-                          songURL: _songChangedByUser
-                              ? songUrl
-                              : widget.song.songURL,
-                          songId: widget.song.songId,
-                          songDuration: autoDuration.toString()
-                          //double.tryParse(autoDuration.toString()),
-                          );
+                        isEditable: true,
+                        songCategory: _selectedOption,
+                        songAttribute: _attributeController.text,
+                        songTitle: _titleController.text,
+                        songTitleInEnglish: _titleInEnglishController.text,
+                        singerName: _singerNameController.text,
+                        songText: _lyricsController.text,
+                        songURL:
+                            _songChangedByUser ? songUrl : widget.song.songURL,
+                        songId: widget.song.songId,
+                        songDuration: _songChangedByUser
+                            ? autoDuration.toString()
+                            : widget.song.songDuration,
+                      );
 
                       final songDetails = SongAPI().updateSong(songsModel);
                       // }
@@ -451,32 +441,6 @@ class _Edit_SongState extends State<EditSong> {
                       'Update',
                     ),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     if (_formKey.currentState != null &&
-                  //         _formKey.currentState!.validate()) {
-                  //       Song songsModel = Song(
-                  //         isEditable: true,
-                  //         songCategory: _selectedOption,
-                  //         songAttribute: _attributeController.text,
-                  //         songTitle: _titleController.text,
-                  //         singerName: _singerNameController.text,
-                  //         songText: _lyricsController.text,
-                  //       );
-
-                  //       final SongDetails = SongAPI().updateSong(songsModel);
-                  //       print(songsModel);
-                  //       print(SongDetails);
-
-                  //       ScaffoldMessenger.of(context).showSnackBar(
-                  //         const SnackBar(content: Text('Data Updated.')),
-                  //       );
-
-                  //       Navigator.pop(context, songsModel);
-                  //     }
-                  //   },
-                  //   child: Text('Update'),
-                  // ),
                 ],
               ),
             ),

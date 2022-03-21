@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as path;
@@ -355,6 +354,7 @@ class _AddSongState extends State<AddSong> {
                             await uploadFile();
                             await Fluttertoast.showToast(
                                 msg: "Upload SuccessFully");
+                            Navigator.pop(context);
                             Navigator.pop(context);
                           }
 

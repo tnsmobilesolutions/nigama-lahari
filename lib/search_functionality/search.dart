@@ -248,7 +248,7 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
-                value: '0:04:00 - 0:07:00',
+                value: 'small',
                 groupValue: _value,
                 onChanged: (value) {
                   setState(() {
@@ -264,7 +264,7 @@ class _SearchState extends State<Search> {
               ),
               leading: Radio<String>(
                 groupValue: _value,
-                value: '0:07:00 - 0:10:00',
+                value: 'medium',
                 onChanged: (value) {
                   setState(() {
                     _value = value!; //'0:07:00 - 0:10:00';
@@ -279,7 +279,7 @@ class _SearchState extends State<Search> {
               ),
               leading: Radio<String>(
                 groupValue: _value,
-                value: '> 0:10:00',
+                value: 'long',
                 onChanged: (value) {
                   setState(() {
                     _value = value!; //'> 0:10:00';
