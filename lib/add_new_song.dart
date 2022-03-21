@@ -241,7 +241,7 @@ class _AddSongState extends State<AddSong> {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
-                          labelText: 'Name in English',
+                          labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
                           enabledBorder: OutlineInputBorder(

@@ -4,9 +4,8 @@ import 'package:flutter_application_1/login/resetpasswordpage.dart';
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
-import 'package:fluttertoast/fluttertoast.dart';
-
 import '../home_screen.dart';
+import '../models/usermodel.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -16,11 +15,17 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  AppUser? loggedInUser;
+
   bool _obscureText = true;
 
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
+
+  //User? user = FirebaseAuth.instance.currentUser;
+
+  String? currentUserName;
 
   @override
   Widget build(BuildContext context) {
@@ -98,12 +103,14 @@ class _SignInState extends State<SignIn> {
             if (_formkey.currentState!.validate()) {
               final uid = await userAPI()
                   .signIn(emailController.text, passswordController.text);
+
               if (uid != null) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
               }
             }
           },

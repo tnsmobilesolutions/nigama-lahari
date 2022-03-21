@@ -131,7 +131,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   onChanged: (value) => _runFilter(value),
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.black26,
+                      fillColor: Colors.black45,
                       contentPadding: EdgeInsets.all(0),
                       prefixIcon: Icon(Icons.search, color: Constant.white),
                       border: OutlineInputBorder(
