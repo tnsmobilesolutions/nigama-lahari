@@ -28,38 +28,34 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     const photo = CircleAvatar();
 
-    final name = Container(
-      //color: Constant.lightblue,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-      child: TextFormField(
-        style: TextStyle(color: Constant.white),
-        autofocus: false,
-        controller: _nameController,
-        keyboardType: TextInputType.name,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-        ],
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter name';
-          }
-          return null;
-        },
-        onSaved: (value) {
-          _nameController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          labelText: 'ନାମ',
-          labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Constant.white)),
+    final name = TextFormField(
+      style: TextStyle(color: Constant.white),
+      autofocus: false,
+      controller: _nameController,
+      keyboardType: TextInputType.name,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))],
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter name';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _nameController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'Name',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.white),
         ),
       ),
     );
     final mobileNumber = IntlPhoneField(
+        style: TextStyle(color: Constant.white),
         validator: (value) {
           RegExp regex = new RegExp(r'^.{10,}$');
           if (value == null || value.isEmpty) {
@@ -75,15 +71,19 @@ class _SignUpState extends State<SignUp> {
         },
         controller: _mobileController,
         decoration: InputDecoration(
-          labelText: 'Phone Number',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          contentPadding: const EdgeInsets.all(15),
+          labelText: 'Mobile Number',
+          labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Constant.white),
           ),
         ),
         initialCountryCode: 'IN',
         onChanged: (phone) {});
 
     final email = TextFormField(
+      style: TextStyle(color: Constant.white),
       autofocus: false,
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
@@ -106,44 +106,49 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.mail),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'Email',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.white),
         ),
       ),
     );
     final password = TextFormField(
-        autofocus: false,
-        controller: _passwordController,
-        obscureText: true,
-        validator: (value) {
-          RegExp regex = new RegExp(r'^.{6,}$');
-          if (value == null || value.isEmpty) {
-            return ("Password length must be atleast 6 characters");
-          }
-          if (!regex.hasMatch(value)) {
-            return ("Enter Valid Password (min 6 character)");
-          } else if (value.length < 6) {
-            return 'Password length must be atleast 6 characters';
-          }
-          return null;
-        },
-        onSaved: (value) {
-          _passwordController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+      style: TextStyle(color: Constant.white),
+      autofocus: false,
+      controller: _passwordController,
+      obscureText: true,
+      validator: (value) {
+        RegExp regex = new RegExp(r'^.{6,}$');
+        if (value == null || value.isEmpty) {
+          return ("Password length must be atleast 6 characters");
+        }
+        if (!regex.hasMatch(value)) {
+          return ("Enter Valid Password (min 6 character)");
+        } else if (value.length < 6) {
+          return 'Password length must be atleast 6 characters';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _passwordController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'Password',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.white),
+        ),
+      ),
+    );
 
     final confirmPassword = TextFormField(
+      style: TextStyle(color: Constant.white),
       autofocus: false,
       controller: _confirmPasswordController,
       obscureText: true,
@@ -158,11 +163,12 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.vpn_key),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Confirm Password",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'Confirm Password',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.white),
         ),
       ),
     );
