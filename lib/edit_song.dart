@@ -209,7 +209,7 @@ class _Edit_SongState extends State<EditSong> {
                         ),
                         DropdownButton(
                           style: TextStyle(color: Constant.white),
-                          iconEnabledColor: Colors.teal,
+                          iconEnabledColor: Constant.lightblue,
                           hint: Text(
                             _catagoryController.text,
                             style: TextStyle(
@@ -218,7 +218,7 @@ class _Edit_SongState extends State<EditSong> {
                             ),
                           ),
                           value: _selectedOption,
-                          dropdownColor: Colors.teal,
+                          dropdownColor: Constant.lightblue,
                           onChanged: (value) {
                             setState(
                               () {
