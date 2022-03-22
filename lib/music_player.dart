@@ -33,7 +33,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   bool nextDone = true;
   bool prevDone = true;
   bool isRepeat = false;
-  Color color = Colors.green;
+  Color color = Constant.orange;
 
   AudioService? audioService = AudioService();
   AudioPlayer? audioPlayer = AudioPlayer();
@@ -195,7 +195,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.fast_forward_rounded,
         size: 40,
-        color: Colors.green,
       ),
       onPressed: () {
         audioPlayer?.setPlaybackRate(1.5);
@@ -209,7 +208,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.fast_rewind_rounded,
         size: 40,
-        color: Colors.green,
       ),
       onPressed: () {
         //audioPlayer?.setPlaybackRate(1);

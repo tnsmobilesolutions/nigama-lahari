@@ -118,8 +118,8 @@ class _AddSongState extends State<AddSong> {
               radius: 55,
               lineWidth: 15,
               percent: percentage,
-              progressColor: Colors.green,
-              backgroundColor: Colors.green.shade200,
+              progressColor: Constant.blue,
+              backgroundColor: Constant.lightblue,
               circularStrokeCap: CircularStrokeCap.round,
               center: Text(
                 '${(percentage * 100).toInt()}%',
@@ -206,20 +206,23 @@ class _AddSongState extends State<AddSong> {
                       SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        style: TextStyle(color: Constant.white),
-                        controller: _titleController,
-                        autofocus: false,
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText: 'ନାମ',
-                          labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
+                      Container(
+                        color: Constant.lightblue,
+                        child: TextFormField(
+                          style: TextStyle(color: Constant.white),
+                          controller: _titleController,
+                          autofocus: false,
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            labelText: 'ନାମ',
+                            labelStyle: TextStyle(
+                                fontSize: 15.0, color: Constant.white12),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(color: Constant.white)),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -325,8 +328,8 @@ class _AddSongState extends State<AddSong> {
                             Flexible(
                               child: Text(
                                 fileName,
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                // style: TextStyle(color: Constant.white,
+                                //     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],

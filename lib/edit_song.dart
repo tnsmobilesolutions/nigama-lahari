@@ -142,8 +142,8 @@ class _Edit_SongState extends State<EditSong> {
               radius: 55,
               lineWidth: 15,
               percent: percentage,
-              progressColor: Colors.green,
-              backgroundColor: Colors.green.shade200,
+              progressColor: Constant.blue,
+              backgroundColor: Constant.lightblue,
               circularStrokeCap: CircularStrokeCap.round,
               center: Text(
                 '${(percentage * 100).toInt()}%',
