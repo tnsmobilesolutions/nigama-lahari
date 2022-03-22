@@ -13,7 +13,6 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
 import 'constant.dart';
-import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song}) : super(key: key);
@@ -204,7 +203,10 @@ class _Edit_SongState extends State<EditSong> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('ବିଭାଗ', style: CommonStyle.subStyle),
+                        Text(
+                          'ବିଭାଗ',
+                          style: TextStyle(color: Constant.white),
+                        ),
                         DropdownButton(
                           style: TextStyle(color: Constant.white),
                           iconEnabledColor: Colors.teal,
