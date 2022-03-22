@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_application_1/home_screen.dart';
 
+import '../constant.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -24,33 +26,36 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    const photo = Image(
-      image: AssetImage('assets/image/circle_avatar.gif'),
-      height: 100,
-      width: 100,
-    );
+    const photo = CircleAvatar();
 
-    final name = TextFormField(
-      autofocus: false,
-      controller: _nameController,
-      keyboardType: TextInputType.name,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))],
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter name';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        _nameController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.account_circle),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Name",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+    final name = Container(
+      //color: Constant.lightblue,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+      child: TextFormField(
+        style: TextStyle(color: Constant.white),
+        autofocus: false,
+        controller: _nameController,
+        keyboardType: TextInputType.name,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+        ],
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter name';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          _nameController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(15),
+          labelText: 'ନାମ',
+          labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Constant.white)),
         ),
       ),
     );
@@ -161,47 +166,33 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
-    final signUpButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.purple,
-      child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          minWidth: MediaQuery.of(context).size.width,
-          onPressed: () async {
-            if (_formkey.currentState!.validate()) {
-              await userAPI().signUp(
-                  _emailController.text,
-                  _passwordController.text,
-                  _nameController.text,
-                  _mobileController.text);
-              await Fluttertoast.showToast(
-                  msg: "Account created successfully :) ");
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ));
-            }
-          },
-          child: Text(
-            "SignUp",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
-    );
+    final signUpButton = ElevatedButton(
+        onPressed: () async {
+          if (_formkey.currentState!.validate()) {
+            await userAPI().signUp(
+                _emailController.text,
+                _passwordController.text,
+                _nameController.text,
+                _mobileController.text);
+            await Fluttertoast.showToast(
+                msg: "Account created successfully :) ");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            );
+          }
+        },
+        child: Text(
+          "SignUp",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ));
 
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.purple, Colors.teal],
-        ),
-      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         body: Center(
           child: SingleChildScrollView(
             child: Container(

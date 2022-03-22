@@ -9,7 +9,6 @@ import 'package:flutter_application_1/search_functionality/search.dart';
 
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
-import 'login/common_widgets/common_style.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -147,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             snapshot.data![
                                 index], // gets all available catagories dynamically
-                            style: CommonStyle.myStyle,
+                            style:
+                                TextStyle(color: Constant.white, fontSize: 30),
                           ),
                         ),
                         onTap: () async {
