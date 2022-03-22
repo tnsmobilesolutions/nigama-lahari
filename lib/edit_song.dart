@@ -239,111 +239,108 @@ class _Edit_SongState extends State<EditSong> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _titleController,
-
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Name';
-                        //
-                        //} else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                        //   return 'Please Enter Correct Name';
                       }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Name",
-                      hintTextStr: "Enter Song name",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ନାମ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _titleInEnglishController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Song Name in English';
-                        //
-                        //} else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                        //   return 'Please Enter Correct Name';
                       }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Name in English",
-                      hintTextStr: "Enter Searchable Song name in English",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _singerNameController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Singer Name';
                       }
-                      //  else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Singer Name';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Singer Name",
-                      hintTextStr: "Enter Singer name",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗାୟକ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _attributeController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter  Attribute Name';
                       }
-                      // else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Attribute Name';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Attribute Name",
-                      hintTextStr: "Enter Song Attribute name",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଭାବ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.text,
                     controller: _lyricsController,
                     maxLines: height ~/ 8,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Lyrics';
                       }
-                      //  else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Lyrics';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Lyrics",
-                      hintTextStr: "Enter Song Lyrics",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗୀତ ଲେଖା',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -422,9 +419,7 @@ class _Edit_SongState extends State<EditSong> {
                         await uploadFile();
                         Navigator.pop(context);
                       }
-
                       await Fluttertoast.showToast(msg: "Update SuccessFully");
-
                       Song songsModel = Song(
                         isEditable: true,
                         songCategory: _selectedOption,
