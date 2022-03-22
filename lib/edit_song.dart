@@ -26,7 +26,6 @@ class EditSong extends StatefulWidget {
 }
 
 class _Edit_SongState extends State<EditSong> {
-  Song? songg;
   final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
@@ -48,7 +47,7 @@ class _Edit_SongState extends State<EditSong> {
   @override
   void initState() {
     super.initState();
-    // songg = FirebaseFirestore.
+
     _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
     _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
