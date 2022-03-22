@@ -8,12 +8,11 @@ import 'package:flutter_application_1/API/firebaseAPI.dart';
 import 'package:flutter_application_1/home_screen.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/music_player.dart';
-import 'package:flutter_application_1/song_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
+import 'constant.dart';
 import 'login/common_widgets/common_style.dart';
 
 class EditSong extends StatefulWidget {
@@ -182,13 +181,6 @@ class _Edit_SongState extends State<EditSong> {
   Widget build(BuildContext context) {
     final fileName = widget.song.songURL ?? 'ଚୟନ କରନ୍ତୁ';
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -214,6 +206,7 @@ class _Edit_SongState extends State<EditSong> {
                       children: [
                         Text('ବିଭାଗ', style: CommonStyle.subStyle),
                         DropdownButton(
+                          style: TextStyle(color: Constant.white),
                           iconEnabledColor: Colors.teal,
                           hint: Text(
                             _catagoryController.text,
