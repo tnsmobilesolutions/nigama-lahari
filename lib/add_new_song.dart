@@ -206,23 +206,20 @@ class _AddSongState extends State<AddSong> {
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        color: Constant.lightblue,
-                        child: TextFormField(
-                          style: TextStyle(color: Constant.white),
-                          controller: _titleController,
-                          autofocus: false,
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15),
-                            labelText: 'ନାମ',
-                            labelStyle: TextStyle(
-                                fontSize: 15.0, color: Constant.white12),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(color: Constant.white)),
-                          ),
+                      TextFormField(
+                        style: TextStyle(color: Constant.white),
+                        controller: _titleController,
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText: 'ନାମ',
+                          labelStyle: TextStyle(
+                              fontSize: 15.0, color: Constant.white12),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
