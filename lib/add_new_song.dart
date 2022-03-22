@@ -153,18 +153,9 @@ class _AddSongState extends State<AddSong> {
     final fileName = file != null ? path.basename(file!.path) : 'ଚୟନ କରନ୍ତୁ';
 
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
-        // backgroundColor: Colors.transparent,
         appBar: AppBar(
-          // shadowColor: Colors.purple[300],
-          //elevation: 0,
+          elevation: 0,
           centerTitle: true,
           title: Text('Add Song'),
         ),
@@ -182,6 +173,7 @@ class _AddSongState extends State<AddSong> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           DropdownButton(
+                            style: TextStyle(color: Constant.white),
                             iconEnabledColor: Colors.white24,
                             hint: Text(
                               'ବିଭାଗ',
@@ -397,12 +389,6 @@ class _AddSongState extends State<AddSong> {
             ),
           ),
         ),
-
-        //   floatingActionButton: FloatingActionButton(
-        //     child: Text('Next'),
-        // onPressed: (){
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => AddSongLyrics()),);
-        // },),
       ),
     );
   }

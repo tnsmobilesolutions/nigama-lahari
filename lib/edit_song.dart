@@ -10,13 +10,11 @@ import 'package:flutter_application_1/API/firebaseAPI.dart';
 import 'package:flutter_application_1/home_screen.dart';
 //import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/music_player.dart';
-import 'package:flutter_application_1/song_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
-import 'login/common_widgets/common_style.dart';
+import 'constant.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song}) : super(key: key);
@@ -184,13 +182,6 @@ class _Edit_SongState extends State<EditSong> {
   Widget build(BuildContext context) {
     final fileName = widget.song.songURL ?? 'ଚୟନ କରନ୍ତୁ';
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -214,9 +205,13 @@ class _Edit_SongState extends State<EditSong> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('ବିଭାଗ', style: CommonStyle.subStyle),
+                        Text(
+                          'ବିଭାଗ',
+                          style: TextStyle(color: Constant.white),
+                        ),
                         DropdownButton(
-                          iconEnabledColor: Colors.teal,
+                          style: TextStyle(color: Constant.white),
+                          iconEnabledColor: Constant.lightblue,
                           hint: Text(
                             _catagoryController.text,
                             style: TextStyle(
@@ -225,7 +220,7 @@ class _Edit_SongState extends State<EditSong> {
                             ),
                           ),
                           value: _selectedOption,
-                          dropdownColor: Colors.teal,
+                          dropdownColor: Constant.lightblue,
                           onChanged: (value) {
                             setState(
                               () {
@@ -248,112 +243,116 @@ class _Edit_SongState extends State<EditSong> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _titleController,
-
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Name';
-                        //
-                        //} else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                        //   return 'Please Enter Correct Name';
                       }
                       return null;
                     },
+<<<<<<< HEAD
 
                     // style: TextStyle(height: 0.5),
                     decoration: CommonStyle.textFieldStyle(
                       labelTextStr: "Song Name",
                       hintTextStr: "Enter Song name",
+=======
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ନାମ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
+>>>>>>> db2988b0fcc4cffb031bc087838cf1d9f21e5d3c
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _titleInEnglishController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Song Name in English';
-                        //
-                        //} else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                        //   return 'Please Enter Correct Name';
                       }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Name in English",
-                      hintTextStr: "Enter Searchable Song name in English",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _singerNameController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Singer Name';
                       }
-                      //  else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Singer Name';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Singer Name",
-                      hintTextStr: "Enter Singer name",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗାୟକ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.name,
                     controller: _attributeController,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter  Attribute Name';
                       }
-                      // else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Attribute Name';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Attribute Name",
-                      hintTextStr: "Enter Song Attribute name",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଭାବ',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.text,
                     controller: _lyricsController,
                     maxLines: height ~/ 8,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
-                    // ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please Enter Lyrics';
                       }
-                      //  else if (!RegExp(r'^[0-9 a-z A-Z]+$').hasMatch(value)) {
-                      //   return 'Please Enter Correct Lyrics';
-                      // }
                       return null;
                     },
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Lyrics",
-                      hintTextStr: "Enter Song Lyrics",
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(15),
+                      labelText: 'ଗୀତ ଲେଖା',
+                      labelStyle:
+                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -432,9 +431,7 @@ class _Edit_SongState extends State<EditSong> {
                         await uploadFile();
                         Navigator.pop(context);
                       }
-
                       await Fluttertoast.showToast(msg: "Update SuccessFully");
-
                       Song songsModel = Song(
                         isEditable: true,
                         songCategory: _selectedOption,
