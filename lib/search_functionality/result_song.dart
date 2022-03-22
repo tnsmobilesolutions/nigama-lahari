@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 
+import '../constant.dart';
 import '../song_detail.dart';
 
 class ResultSong extends StatefulWidget {
@@ -34,43 +35,48 @@ class _ResultSongState extends State<ResultSong> {
                   itemCount: widget.songs?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.songs?[index].songTitle ?? '',
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          textColor: Constant.white,
+                          tileColor: Constant.lightblue,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.songs?[index].songTitle ?? '',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  widget.songs?[index].singerName ?? '',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 15,
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.songs?[index].singerName ?? '',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Text(
-                                  widget.songs?[index].songCategory ?? '',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 15,
+                                  SizedBox(
+                                    width: 30,
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                          ],
+                                  Text(
+                                    widget.songs?[index].songCategory ?? '',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       onTap: () {
