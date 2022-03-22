@@ -66,6 +66,7 @@ class _Edit_SongState extends State<EditSong> {
   var file1;
   var val;
   bool _songChangedByUser = false;
+  //var songDetails = '';
 
   AudioPlayer player = AudioPlayer();
 
@@ -223,7 +224,7 @@ class _Edit_SongState extends State<EditSong> {
                             setState(
                               () {
                                 _selectedOption = value as String?;
-                                print(_selectedOption.toString());
+                                //print(_selectedOption.toString());
                               },
                             );
                           },
@@ -438,7 +439,22 @@ class _Edit_SongState extends State<EditSong> {
                             : widget.song.songDuration,
                       );
 
-                      final songDetails = SongAPI().updateSong(songsModel);
+                      final songDetails =
+                          await SongAPI().updateSong(songsModel);
+
+                      //print(songsModel);
+                      //print(songDetails);
+
+                      // if (songsModel != null) {
+                      //   print('song details = value');
+                      // } else {
+                      //   print('song details = null');
+                      // }
+                      // if (songsModel == songDetails) {
+                      //   print('Nothing changed');
+                      // } else {
+                      //   print('Data changed');
+                      // }
                       setState(() {
                         Navigator.push(
                             context,

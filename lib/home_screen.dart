@@ -137,33 +137,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.hasError) {
                   return Text(snapshot.error.toString());
                 } else
-                  return ListView.builder(
+                  return ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        textColor: Constant.white,
-                        title: Center(
-                          child: Text(
-                            snapshot.data![
-                                index], // gets all available catagories dynamically
-                            style:
-                                TextStyle(color: Constant.white, fontSize: 30),
-                          ),
-                        ),
-                        onTap: () async {
-                          final allSongsByCategory = await SearchSongAPI()
-                              .getAllSongsInCategory(snapshot.data![index]);
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ScrollableSongList(
-                                songCategory: snapshot.data![index],
-                                songs: allSongsByCategory,
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(110, 20, 110, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Constant.lightblue,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: ListTile(
+                            textColor: Constant.white,
+                            title: Center(
+                              child: Text(
+                                snapshot.data![
+                                    index], // gets all available catagories dynamically
+                                style: TextStyle(
+                                    color: Constant.white, fontSize: 30),
                               ),
                             ),
-                          );
-                        },
+                            onTap: () async {
+                              final allSongsByCategory = await SearchSongAPI()
+                                  .getAllSongsInCategory(snapshot.data![index]);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScrollableSongList(
+                                    songCategory: snapshot.data![index],
+                                    songs: allSongsByCategory,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       );
                     },
                   );
