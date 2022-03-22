@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
@@ -24,6 +26,7 @@ class EditSong extends StatefulWidget {
 }
 
 class _Edit_SongState extends State<EditSong> {
+  Song? songg;
   final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
@@ -45,7 +48,7 @@ class _Edit_SongState extends State<EditSong> {
   @override
   void initState() {
     super.initState();
-
+    // songg = FirebaseFirestore.
     _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
     _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
@@ -258,6 +261,7 @@ class _Edit_SongState extends State<EditSong> {
                       }
                       return null;
                     },
+
                     // style: TextStyle(height: 0.5),
                     decoration: CommonStyle.textFieldStyle(
                       labelTextStr: "Song Name",
@@ -449,12 +453,8 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       final songDetails = SongAPI().updateSong(songsModel);
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
-                      });
+                      setState(() {});
+                      Navigator.pop(context);
                     },
                     child: Text(
                       'Update',
