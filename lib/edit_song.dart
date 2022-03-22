@@ -24,7 +24,8 @@ class EditSong extends StatefulWidget {
 }
 
 class _Edit_SongState extends State<EditSong> {
-  final _formKey = GlobalKey<FormState>();
+  bool _dataChange = false;
+  // final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
@@ -252,13 +253,6 @@ class _Edit_SongState extends State<EditSong> {
                       }
                       return null;
                     },
-<<<<<<< HEAD
-
-                    // style: TextStyle(height: 0.5),
-                    decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Song Name",
-                      hintTextStr: "Enter Song name",
-=======
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ନାମ',
@@ -267,7 +261,6 @@ class _Edit_SongState extends State<EditSong> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(color: Constant.white)),
->>>>>>> db2988b0fcc4cffb031bc087838cf1d9f21e5d3c
                     ),
                   ),
                   SizedBox(height: 15),
@@ -450,7 +443,8 @@ class _Edit_SongState extends State<EditSong> {
 
                       final songDetails = SongAPI().updateSong(songsModel);
                       setState(() {});
-                      Navigator.pop(context);
+
+                      Navigator.pop(context, _dataChange);
                     },
                     child: Text(
                       'Update',
