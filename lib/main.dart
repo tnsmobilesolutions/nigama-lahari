@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         /* light theme settings */
       ),
       darkTheme: ThemeData(
+        textTheme: TextTheme(button: TextStyle(color: Constant.white)),
         scaffoldBackgroundColor: Constant.darkBlue,
         primarySwatch: Colors.deepPurple,
         appBarTheme: AppBarTheme(color: Constant.blue),
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: AnimatedSplashScreen(
             splash: Image(
-              image: AssetImage('assets/image/nsslogo.png'),
+              image: AssetImage('assets/image/nsslogo.jpg'),
             ),
             splashIconSize: 200,
             splashTransition: SplashTransition.fadeTransition,
