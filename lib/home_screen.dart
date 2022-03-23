@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //backgroundColor: Colors.transparent,
           centerTitle: true,
           title: Text(
-            'ନିଗମ  ଲହରୀ',
+            'ଜୟଗୁରୁ',
           ),
           actions: [
             Row(
