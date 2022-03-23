@@ -142,13 +142,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                       hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Expanded(
                 child: items!.isNotEmpty
-                    ? ListView.separated(
+                    ? ListView.builder(
                         itemCount: items?.length ?? 0,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(),
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: Padding(
