@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:just_audio/just_audio.dart';
-//import 'package:audioplayers/audioplayers.dart';
+
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
 import 'package:flutter_application_1/home_screen.dart';
-//import 'package:flutter_application_1/common_widgets/common_style.dart';
+
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -428,19 +428,6 @@ class _Edit_SongState extends State<EditSong> {
 
                       await SongAPI().updateSong(songsModel);
 
-                      //print(songsModel);
-                      //print(songDetails);
-
-                      // if (songsModel != null) {
-                      //   print('song details = value');
-                      // } else {
-                      //   print('song details = null');
-                      // }
-                      // if (songsModel == songDetails) {
-                      //   print('Nothing changed');
-                      // } else {
-                      //   print('Data changed');
-                      // }
                       setState(() {
                         Navigator.push(
                             context,

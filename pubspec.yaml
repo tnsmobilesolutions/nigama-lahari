@@ -27,12 +27,6 @@ dependencies:
   percent_indicator: ^4.0.0
   just_audio: ^0.9.20
   animated_splash_screen: ^1.2.0
-<<<<<<< HEAD
-  google_fonts: ^2.3.1
-  
-=======
-
->>>>>>> c208f435441a8db1adb9b7ce2c8da91c366749e4
  
 
 dev_dependencies:
