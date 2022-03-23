@@ -152,6 +152,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   Expanded(child: buttonShuffle()),
                 ],
               ),
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
 
