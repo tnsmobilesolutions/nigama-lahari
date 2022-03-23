@@ -118,7 +118,7 @@ class _AddSongState extends State<AddSong> {
               radius: 55,
               lineWidth: 15,
               percent: percentage,
-              progressColor: Constant.blue,
+              progressColor: Theme.of(context).primaryColor,
               backgroundColor: Constant.lightblue,
               circularStrokeCap: CircularStrokeCap.round,
               center: Text(
