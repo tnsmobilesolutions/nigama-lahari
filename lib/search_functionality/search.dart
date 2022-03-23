@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/search_functionality/result_song.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:flutter_application_1/common_widgets/common_style.dart';
@@ -49,8 +50,12 @@ class _SearchState extends State<Search> {
                 // Text("Search By",
                 //    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 DropdownButton(
-                  dropdownColor: Colors.tealAccent[700],
-                  hint: Text('ସଂଗୀତ ଖୋଜନ୍ତୁ'),
+                  style: TextStyle(color: Constant.white),
+                  dropdownColor: Constant.lightblue,
+                  hint: Text(
+                    'ସଂଗୀତ ଖୋଜନ୍ତୁ',
+                    style: TextStyle(color: Constant.white),
+                  ),
                   value: _selectedOption,
                   onChanged: (newValue) {
                     setState(() {
