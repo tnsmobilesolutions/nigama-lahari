@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: AnimatedSplashScreen(
             splash: Image(
-              image: AssetImage('assets/image/nsslogo.png'),
+              image: AssetImage('assets/image/nsslogo.jpg'),
             ),
             splashIconSize: 200,
             splashTransition: SplashTransition.fadeTransition,

@@ -24,7 +24,6 @@ class EditSong extends StatefulWidget {
 }
 
 class _Edit_SongState extends State<EditSong> {
-  bool _dataChange = false;
   // final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
@@ -69,6 +68,7 @@ class _Edit_SongState extends State<EditSong> {
   var file1;
   var val;
   bool _songChangedByUser = false;
+  bool _dataChange = true;
 
   AudioPlayer player = AudioPlayer();
 
@@ -442,9 +442,19 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       final songDetails = SongAPI().updateSong(songsModel);
-                      setState(() {});
 
-                      Navigator.pop(context, _dataChange);
+                      if (songDetails != songsModel) {
+                        setState(() {
+                          _dataChange == true;
+                          print(
+                              '************dataChange = ${_dataChange}********************');
+                        });
+
+                        Navigator.of(context).pop(_dataChange);
+                      } else {
+                        print('*********_dataChange == false*******');
+                        Navigator.pop(context);
+                      }
                     },
                     child: Text(
                       'Update',
