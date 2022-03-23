@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/data_store.dart';
-
-import 'package:flutter_application_1/models/usermodel.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -69,7 +65,4 @@ class userAPI {
   }
 // keep user logged
 
-  // dynamic currentUser() async {
-  //   await FirebaseAuth.instance.currentUser;
-  // }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_application_1/models/songs_model.dart';
 
 UploadTask? task;
 File? file;
-String? _selectedOption;
+//String? _selectedOption;
 
 String destination = '';
 
@@ -21,7 +21,7 @@ class SongAPI {
   Future<String> createNewSong(Song songsModel) async {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
 
-    final Reference = await songs.doc(songsModel.songId).set({
+    await songs.doc(songsModel.songId).set({
       "songId": songsModel.songId,
       "songCategory": songsModel.songCategory,
       "songAttribute": songsModel.songAttribute,
