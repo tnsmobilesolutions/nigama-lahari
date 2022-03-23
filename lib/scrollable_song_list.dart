@@ -13,7 +13,7 @@ class ScrollableSongList extends StatefulWidget {
   }) : super(key: key);
 
   final String? songCategory;
-  List<Song>? songs;
+  final List<Song>? songs;
 
   @override
   _ScrollableSongListState createState() => _ScrollableSongListState();

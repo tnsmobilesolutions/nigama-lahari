@@ -57,8 +57,8 @@ class _SongDetailState extends State<SongDetail> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -70,7 +70,6 @@ class _SongDetailState extends State<SongDetail> {
                   '${_currentSong?.songTitle}',
                   style: TextStyle(
                     fontSize: 20,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
@@ -143,7 +142,6 @@ class _SongDetailState extends State<SongDetail> {
           //color: Colors.transparent,
           child: SafeArea(
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
                   child: Center(

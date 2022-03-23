@@ -1,7 +1,6 @@
 import 'dart:io';
-
-import 'package:audioplayers/audioplayers.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:just_audio/just_audio.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -24,7 +23,7 @@ class EditSong extends StatefulWidget {
 }
 
 class _Edit_SongState extends State<EditSong> {
-  // final _formKey = GlobalKey<FormState>();
+  //final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
@@ -68,7 +67,7 @@ class _Edit_SongState extends State<EditSong> {
   var file1;
   var val;
   bool _songChangedByUser = false;
-  bool _dataChange = true;
+  //var songDetails = '';
 
   AudioPlayer player = AudioPlayer();
 
@@ -80,20 +79,13 @@ class _Edit_SongState extends State<EditSong> {
     );
     print('****  $result  ****');
     if (result != null) {
-      setState(() {
-        _songChangedByUser = true;
-      });
       file1 = result.files.first;
       sizeInMb = file1.size / 1048576;
     } else {
       return;
     }
 
-    //lenghOfAudio(file1);
-
     file1 = result.files.first;
-    // print('++++  $file1  ++++');
-    // print('----  ${file1.name}  ----');
 
     sizeInMb = file1.size / 1048576;
 
@@ -117,15 +109,8 @@ class _Edit_SongState extends State<EditSong> {
 
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
-    // autoDuration = await player.setUrl(songUrl.toString());
-
-    //print('****  $autoDuration  ****');
-    //print('Download-Link: $songURL');
-
-    // Delete the previous uploaded song
-    if (widget.song.songURL != null) {
-      FirebaseApi.deleteFile(widget.song.songURL!);
-    }
+    autoDuration =
+        await player.setUrl(songUrl.toString()); // autodetects audio duration
   }
 
   //upload status
@@ -226,7 +211,7 @@ class _Edit_SongState extends State<EditSong> {
                             setState(
                               () {
                                 _selectedOption = value as String?;
-                                print(_selectedOption.toString());
+                                //print(_selectedOption.toString());
                               },
                             );
                           },
@@ -437,24 +422,31 @@ class _Edit_SongState extends State<EditSong> {
                             _songChangedByUser ? songUrl : widget.song.songURL,
                         songId: widget.song.songId,
                         songDuration: _songChangedByUser
-                            ? autoDuration.toString()
+                            ? autoDuration.toString().split('.')[0]
                             : widget.song.songDuration,
                       );
 
-                      final songDetails = SongAPI().updateSong(songsModel);
+                      await SongAPI().updateSong(songsModel);
 
-                      if (songDetails != songsModel) {
-                        setState(() {
-                          _dataChange == true;
-                          print(
-                              '************dataChange = ${_dataChange}********************');
-                        });
+                      //print(songsModel);
+                      //print(songDetails);
 
-                        Navigator.of(context).pop(_dataChange);
-                      } else {
-                        print('*********_dataChange == false*******');
-                        Navigator.pop(context);
-                      }
+                      // if (songsModel != null) {
+                      //   print('song details = value');
+                      // } else {
+                      //   print('song details = null');
+                      // }
+                      // if (songsModel == songDetails) {
+                      //   print('Nothing changed');
+                      // } else {
+                      //   print('Data changed');
+                      // }
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                      });
                     },
                     child: Text(
                       'Update',

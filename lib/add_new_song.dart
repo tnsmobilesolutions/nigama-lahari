@@ -374,8 +374,7 @@ class _AddSongState extends State<AddSong> {
                                   autoDuration.toString().split('.')[0],
                             );
 
-                            final songDetails =
-                                SongAPI().createNewSong(songsModel);
+                            SongAPI().createNewSong(songsModel);
                           }
                         },
                         child: Text(

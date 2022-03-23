@@ -152,6 +152,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   Expanded(child: buttonShuffle()),
                 ],
               ),
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
 
@@ -225,6 +228,12 @@ class _MusicPlayerState extends State<MusicPlayer> {
         color: isLastIndex ? Constant.lightblue : Constant.orange,
       ),
       onPressed: nextSongPressed,
+      // () {
+      //   nextSongPressed;
+      //   setState(() {
+      //     playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
+      //   });
+      // },
     );
   }
 
@@ -234,6 +243,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
         () {
           _currentIndex = _currentIndex! + 1;
           _currentSong = widget.songList![_currentIndex!];
+          playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
         },
       );
 
@@ -273,6 +283,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
         () {
           _currentIndex = _currentIndex! - 1;
           _currentSong = widget.songList![_currentIndex!];
+          playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
         },
       );
 

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,7 +10,7 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  final _auth = FirebaseAuth.instance;
+  //final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
   var email = "";
 
