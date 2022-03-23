@@ -159,6 +159,7 @@ class _SearchState extends State<Search> {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextFormField(
+          style: TextStyle(color: Constant.white),
           keyboardType: TextInputType.name,
           controller: _singerNameController,
           validator: (value) {
