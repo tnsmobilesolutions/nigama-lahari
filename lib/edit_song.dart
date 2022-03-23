@@ -1,6 +1,6 @@
 import 'dart:io';
-
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -78,20 +78,13 @@ class _Edit_SongState extends State<EditSong> {
     );
     print('****  $result  ****');
     if (result != null) {
-      setState(() {
-        _songChangedByUser = true;
-      });
       file1 = result.files.first;
       sizeInMb = file1.size / 1048576;
     } else {
       return;
     }
 
-    //lenghOfAudio(file1);
-
     file1 = result.files.first;
-    // print('++++  $file1  ++++');
-    // print('----  ${file1.name}  ----');
 
     sizeInMb = file1.size / 1048576;
 
@@ -115,15 +108,8 @@ class _Edit_SongState extends State<EditSong> {
 
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
-    // autoDuration = await player.setUrl(songUrl.toString());
-
-    //print('****  $autoDuration  ****');
-    //print('Download-Link: $songURL');
-
-    // Delete the previous uploaded song
-    if (widget.song.songURL != null) {
-      FirebaseApi.deleteFile(widget.song.songURL!);
-    }
+    autoDuration =
+        await player.setUrl(songUrl.toString()); // autodetects audio duration
   }
 
   //upload status
@@ -435,7 +421,7 @@ class _Edit_SongState extends State<EditSong> {
                             _songChangedByUser ? songUrl : widget.song.songURL,
                         songId: widget.song.songId,
                         songDuration: _songChangedByUser
-                            ? autoDuration.toString()
+                            ? autoDuration.toString().split('.')[0]
                             : widget.song.songDuration,
                       );
 
