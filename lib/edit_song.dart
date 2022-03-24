@@ -185,7 +185,7 @@ class _Edit_SongState extends State<EditSong> {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(),
+                      border: Border.all(color: Constant.white),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
