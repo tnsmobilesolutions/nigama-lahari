@@ -4,9 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final _auth = FirebaseAuth.instance;
-// final _emailController = TextEditingController();
-// final _nameController = TextEditingController();
-// final _mobileController = TextEditingController();
 
 class userAPI {
 // SignIn
@@ -17,11 +14,6 @@ class userAPI {
         .then((uid) => uid);
 
     return uid.user?.uid;
-
-    // TODO: If success then call This
-    //await DataStore().loadAllData();
-
-    // TODO: Remove this from here to the UI layer
   }
   // SignUp
 
@@ -63,6 +55,4 @@ class userAPI {
       print(e); // TODO: show dialog with error
     }
   }
-// keep user logged
-
 }

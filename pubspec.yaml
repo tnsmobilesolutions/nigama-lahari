@@ -28,7 +28,6 @@ dependencies:
   percent_indicator: ^4.0.0
   just_audio: ^0.9.20
   animated_splash_screen: ^1.2.0
-
  
 
 dev_dependencies:

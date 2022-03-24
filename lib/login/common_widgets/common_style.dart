@@ -4,14 +4,6 @@ class CommonStyle {
   static InputDecoration textFieldStyle(
       {String labelTextStr = "", String hintTextStr = ""}) {
     return InputDecoration(
-      // prefixText: prefixText,
-      //prefixIcon: Icon(Icons.vpn_key_rounded),
-      // prefixStyle: Theme.of(context).textTheme.bodyText1,
-      // prefixStyle: textStyle,
-      // fillColor: Colors.white.withOpacity(0.6),
-      // filled: true,
-      // isDense: true,
-      // labelStyle: Theme.of(context).textTheme.overline,
       focusColor: Colors.blue,
 
       border: new OutlineInputBorder(

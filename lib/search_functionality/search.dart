@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/search_functionality/result_song.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:flutter_application_1/common_widgets/common_style.dart';
 
 import '../API/searchSongAPI.dart';
 import '../login/common_widgets/common_style.dart';
