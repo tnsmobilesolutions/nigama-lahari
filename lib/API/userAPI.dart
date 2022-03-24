@@ -36,13 +36,10 @@ class userAPI {
   Future resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-
-      await Fluttertoast.showToast(
-          msg: "Password Reset Email has been sent  :) ");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
-        await Fluttertoast.showToast(msg: "No user found for that email.:) ");
+        await Fluttertoast.showToast(msg: "ଏହି ଇମେଲର ରେଜିଷ୍ଟ୍ରି ହୋଇ ନାହିଁ");
       }
     }
   }
