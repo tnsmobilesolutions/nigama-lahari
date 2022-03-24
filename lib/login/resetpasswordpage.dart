@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key? key}) : super(key: key);
@@ -71,8 +70,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                       email = emailController.text;
                     });
                     await userAPI().resetPassword(email);
-                    await Fluttertoast.showToast(
-                        msg: 'Password Sent successfull');
+                    await SnackBar(
+                        content: const Text('Password Sent successfull :)'));
+
+                    // Fluttertoast.showToast(
+                    //     msg: 'Password Sent successfull');
                     Navigator.pop(context);
                   }
                 },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/search_functionality/result_song.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../API/searchSongAPI.dart';
 import '../login/common_widgets/common_style.dart';
@@ -82,7 +81,8 @@ class _SearchState extends State<Search> {
                   onPressed: () async {
                     print('search btn pressrd');
                     if (_selectedOption == null) {
-                      Fluttertoast.showToast(msg: "କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ");
+                      SnackBar(
+                          content: const Text('କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ'));
                     } else {
                       final List<Song>? allSongs;
 

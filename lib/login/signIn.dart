@@ -105,6 +105,9 @@ class _SignInState extends State<SignIn> {
                   .signIn(emailController.text, passswordController.text);
 
               if (uid != null) {
+                final snackBar =
+                    SnackBar(content: Text('LoggedIn Successfully'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

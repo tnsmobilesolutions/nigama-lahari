@@ -9,7 +9,7 @@ import 'package:flutter_application_1/API/firebaseAPI.dart';
 import 'package:flutter_application_1/home_screen.dart';
 
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
@@ -394,22 +394,27 @@ class _Edit_SongState extends State<EditSong> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_selectedOption == null) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                        SnackBar(
+                            content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
                       } else if (_titleController.text.isEmpty) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                        SnackBar(content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
                       } else if (_lyricsController.text.isEmpty) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
+                        SnackBar(
+                            content: const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
                       } else if (_songChangedByUser && file1 == null) {
-                        Fluttertoast.showToast(
-                            msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
+                        SnackBar(
+                            content: const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
                       } else if (_songChangedByUser && sizeInMb! > 10) {
-                        Fluttertoast.showToast(
-                            msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
+                        SnackBar(
+                            content:
+                                const Text('ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
                       } else if (_songChangedByUser == true) {
                         await uploadFile();
                         Navigator.pop(context);
                       }
-                      await Fluttertoast.showToast(msg: "Update SuccessFully");
+                      await SnackBar(
+                          content: const Text('Upadate SuccessFully'));
+
                       Song songsModel = Song(
                         isEditable: true,
                         songCategory: _selectedOption,

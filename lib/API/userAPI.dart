@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -37,12 +36,12 @@ class userAPI {
     try {
       await _auth.sendPasswordResetEmail(email: email);
 
-      await Fluttertoast.showToast(
-          msg: "Password Reset Email has been sent  :) ");
+      await SnackBar(
+          content: const Text('Password Reset Email has been sent  :)'));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
-        await Fluttertoast.showToast(msg: "No user found for that email.:) ");
+        await SnackBar(content: const Text('No user found for that email.:)'));
       }
     }
   }
