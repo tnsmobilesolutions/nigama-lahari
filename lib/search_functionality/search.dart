@@ -3,7 +3,6 @@ import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/search_functionality/result_song.dart';
 
 import '../API/searchSongAPI.dart';
-import '../login/common_widgets/common_style.dart';
 import '../models/songs_model.dart';
 
 class Search extends StatefulWidget {
@@ -22,21 +21,15 @@ class _SearchState extends State<Search> {
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
   final _categoryController = TextEditingController();
-  final _durationController = TextEditingController();
+  //final _durationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //     begin: Alignment.topLeft,
-        //     end: Alignment.bottomRight,
-        //     colors: [Colors.purple, Colors.teal],
-        //   ),
-        // ),
         child: Scaffold(
           appBar: AppBar(
+            leading: BackButton(color: Theme.of(context).iconTheme.color),
             elevation: 0,
             centerTitle: true,
             title: Text('ଖୋଜନ୍ତୁ'),
@@ -45,9 +38,8 @@ class _SearchState extends State<Search> {
             alignment: Alignment.topCenter,
             child: Column(
               children: [
-                // Text("Search By",
-                //    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 DropdownButton(
+                  iconEnabledColor: Theme.of(context).iconTheme.color,
                   style: TextStyle(color: Constant.white),
                   dropdownColor: Constant.lightblue,
                   hint: Text(
@@ -69,14 +61,13 @@ class _SearchState extends State<Search> {
                     },
                   ).toList(),
                 ),
-
                 getNameWidget(_selectedOption),
                 getSingerNameWidget(_selectedOption),
                 getAttributeSong(_selectedOption),
                 getCategorySong(_selectedOption),
                 getDurationWidget(_selectedOption),
                 ElevatedButton(
-                  style: CommonStyle.elevatedSubmitButtonStyle(),
+                  style: ElevatedButton.styleFrom(primary: Constant.orange),
                   child: Text("ଖୋଜନ୍ତୁ"),
                   onPressed: () async {
                     print('search btn pressrd');
@@ -241,7 +232,7 @@ class _SearchState extends State<Search> {
   Widget getDurationWidget(String? selectedOption) {
     if (selectedOption == "Duration") {
       return Theme(
-        data: ThemeData(unselectedWidgetColor: Colors.teal),
+        data: ThemeData(unselectedWidgetColor: Constant.lightblue),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -267,8 +258,8 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
-                groupValue: _value,
                 value: 'medium',
+                groupValue: _value,
                 onChanged: (value) {
                   setState(() {
                     _value = value!; //'0:07:00 - 0:10:00';
@@ -282,8 +273,8 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
-                groupValue: _value,
                 value: 'long',
+                groupValue: _value,
                 onChanged: (value) {
                   setState(() {
                     _value = value!; //'> 0:10:00';

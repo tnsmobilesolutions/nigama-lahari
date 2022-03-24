@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
@@ -50,7 +51,7 @@ class _SignInState extends State<SignIn> {
       decoration: InputDecoration(
           prefixIcon: const Icon(Icons.email),
           contentPadding: const EdgeInsets.all(15),
-          hintText: 'Email',
+          hintText: 'ଇମେଲ',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
 
@@ -89,21 +90,22 @@ class _SignInState extends State<SignIn> {
                 _obscureText ? Icons.visibility : Icons.visibility_off),
           ),
           contentPadding: const EdgeInsets.all(15),
-          hintText: 'Password',
+          hintText: 'ପାସୱର୍ଡ',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.purple,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          minWidth: MediaQuery.of(context).size.width,
-          onPressed: () async {
-            if (_formkey.currentState!.validate()) {
-              final uid = await userAPI()
-                  .signIn(emailController.text, passswordController.text);
+        color: Constant.orange,
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () async {
+          if (_formkey.currentState!.validate()) {
+            final uid = await userAPI()
+                .signIn(emailController.text, passswordController.text);
 
+<<<<<<< HEAD
               if (uid != null) {
                 final snackBar =
                     SnackBar(content: Text('LoggedIn Successfully'));
@@ -115,14 +117,24 @@ class _SignInState extends State<SignIn> {
                   ),
                 );
               }
+=======
+            if (uid != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+>>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
             }
-          },
-          child: Text(
-            "Login",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+          }
+        },
+        child: Text(
+          "ଲଗ ଇନ",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
     final resetPassword = TextButton(
       onPressed: () {
@@ -130,9 +142,9 @@ class _SignInState extends State<SignIn> {
             context, MaterialPageRoute(builder: (context) => ResetPassword()));
       },
       child: const Text(
-        'Forgot Password?',
+        'ପାସୱର୍ଡ ଭୁଲିଯାଇଛନ୍ତି ?',
         style: TextStyle(
-          color: Colors.purple,
+          color: Constant.orange,
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
@@ -174,7 +186,7 @@ class _SignInState extends State<SignIn> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              const Text('Don\'t have an account?'),
+                              const Text('ଆକାଉଣ୍ଟ ନାହିଁ ?'),
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -185,8 +197,9 @@ class _SignInState extends State<SignIn> {
                                   );
                                 },
                                 child: const Text(
-                                  'SignUp',
+                                  'ସାଇନ ଅପ',
                                   style: TextStyle(
+                                    color: Constant.orange,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),

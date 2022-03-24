@@ -170,6 +170,7 @@ class _Edit_SongState extends State<EditSong> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          leading: BackButton(color: Theme.of(context).iconTheme.color),
           centerTitle: true,
           title: Text(widget.song.songTitle ?? ""),
         ),
@@ -185,7 +186,7 @@ class _Edit_SongState extends State<EditSong> {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(),
+                      border: Border.all(color: Constant.white),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -197,7 +198,7 @@ class _Edit_SongState extends State<EditSong> {
                         ),
                         DropdownButton(
                           style: TextStyle(color: Constant.white),
-                          iconEnabledColor: Constant.lightblue,
+                          iconEnabledColor: Constant.orange,
                           hint: Text(
                             _catagoryController.text,
                             style: TextStyle(
@@ -392,6 +393,7 @@ class _Edit_SongState extends State<EditSong> {
                   ),
                   SizedBox(height: 30),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Constant.orange),
                     onPressed: () async {
                       if (_selectedOption == null) {
                         SnackBar(

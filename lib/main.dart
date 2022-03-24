@@ -33,13 +33,26 @@ class MyApp extends StatelessWidget {
       title: 'ନିଗମ ଲହରୀ',
       theme: ThemeData(
         brightness: Brightness.light,
+        iconTheme: IconThemeData(color: Constant.orange, size: 30),
+        textTheme: TextTheme(button: TextStyle(color: Constant.white)),
+        primarySwatch: Colors.grey,
+        primaryColor: Colors.black,
+        backgroundColor: const Color(0xFF212121),
+        //colorScheme: Colors.white,
+
+        dividerColor: Colors.black12,
         /* light theme settings */
       ),
       darkTheme: ThemeData(
+        iconTheme: IconThemeData(color: Constant.orange),
+        buttonTheme: ButtonThemeData(
+            buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
+
+        fontFamily: 'Roboto',
         primaryColor: Constant.orange,
         textTheme: TextTheme(button: TextStyle(color: Constant.white)),
         scaffoldBackgroundColor: Constant.darkBlue,
-        primarySwatch: Colors.deepPurple,
+        //primarySwatch: Colors.orange,
         appBarTheme: AppBarTheme(color: Constant.blue),
         brightness: Brightness.dark,
         /* dark theme settings */

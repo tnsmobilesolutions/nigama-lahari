@@ -124,35 +124,45 @@ class SearchSongAPI {
     final lstSongs = songs.get().then((querySnapshot) {
       List<Song>? lstSong = [];
       //print(querySnapshot.docs.length);
-      querySnapshot.docs.forEach((element) {
-        final resultSongs = element.data() as Map<String, dynamic>;
-        //print(resultSongs);
-        final song = Song.fromMap(resultSongs);
-        //print(song);
-        if ((song.songCategory ?? '').startsWith(category)) {
-          lstSong.add(song);
-        }
-      });
+      querySnapshot.docs.forEach(
+        (element) {
+          final resultSongs = element.data() as Map<String, dynamic>;
+          //print(resultSongs);
+          final song = Song.fromMap(resultSongs);
+          //print(song);
+          if ((song.songCategory ?? '').startsWith(category)) {
+            lstSong.add(song);
+          }
+        },
+      );
       return lstSong;
     });
     return lstSongs;
   }
 
-  Future<List<Song>?> getSongByDuration(String duration) {
+  Future<List<Song>?> getSongByDuration(String value) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-    final lstSongs = songs.get().then((querySnapshot) {
-      List<Song>? lstSong = [];
-      print(querySnapshot.docs.length);
-      querySnapshot.docs.forEach((element) {
-        final resultSongs = element.data() as Map<String, dynamic>;
-        //print(resultSongs);
-        final song = Song.fromMap(resultSongs);
-        if (song.songDuration!.isNotEmpty) {
-          lstSong.add(song);
-        }
-      });
-      return lstSong;
-    });
+    final lstSongs = songs.get().then(
+      (querySnapshot) {
+        List<Song>? lstSong = [];
+        //print(querySnapshot.docs.length);
+        querySnapshot.docs.forEach(
+          (element) {
+            final resultSongs = element.data() as Map<String, dynamic>;
+            //print(resultSongs);
+            final song = Song.fromMap(resultSongs);
+            if (song.songDuration!.isNotEmpty) {
+              lstSong.add(song);
+              lstSong.forEach((element) {
+                final resultDuration = element.songDuration;
+                print(resultDuration);
+              });
+            }
+          },
+        );
+        return lstSong;
+      },
+    );
     return lstSongs;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
+import '../constant.dart';
+
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     final notice = Text(
-      'Reset Link will be\nsent to your email id !',
+      'ପାସୱର୍ଡ ପୁନଃସେଟ ପାଇଁ ଆପଣଙ୍କ ଇମେଲକୁ ଲିଙ୍କ ଯିବ',
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
     final emailField = TextFormField(
@@ -42,10 +44,9 @@ class _ResetPasswordState extends State<ResetPassword> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Reset Password'),
+        title: Text('ପାସୱର୍ଡ ପୁନଃସେଟ କରନ୍ତୁ'),
       ),
       body: Center(
         child: Form(
@@ -62,7 +63,8 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                child: Text('Send Request'),
+                style: ElevatedButton.styleFrom(primary: Constant.orange),
+                child: Text('ଅନୁରୋଧ କରନ୍ତୁ'),
                 onPressed: () async {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formkey.currentState!.validate()) {
@@ -70,11 +72,16 @@ class _ResetPasswordState extends State<ResetPassword> {
                       email = emailController.text;
                     });
                     await userAPI().resetPassword(email);
+<<<<<<< HEAD
                     await SnackBar(
                         content: const Text('Password Sent successfull :)'));
 
                     // Fluttertoast.showToast(
                     //     msg: 'Password Sent successfull');
+=======
+                    await Fluttertoast.showToast(
+                        msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି');
+>>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
                     Navigator.pop(context);
                   }
                 },

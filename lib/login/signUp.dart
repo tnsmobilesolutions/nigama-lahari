@@ -25,8 +25,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    const photo = CircleAvatar();
-
     final name = TextFormField(
       style: TextStyle(color: Constant.white),
       autofocus: false,
@@ -45,7 +43,7 @@ class _SignUpState extends State<SignUp> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
-        labelText: 'Name',
+        labelText: 'ନାମ',
         labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -53,6 +51,7 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+<<<<<<< HEAD
     final mobileNumber = TextFormField(
       style: TextStyle(color: Constant.white),
       autofocus: false,
@@ -82,6 +81,32 @@ class _SignUpState extends State<SignUp> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(color: Constant.white),
+=======
+    final mobileNumber = IntlPhoneField(
+        style: TextStyle(color: Constant.white),
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{10,}$');
+          if (value == null || value.isEmpty) {
+            return ("ଦୟାକରି ନିଜ ମୋବାଇଲ ନମ୍ବର ଦିଅନ୍ତୁ");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter a valid number(Min. 10 Character)");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          _mobileController.text = value!.toString();
+        },
+        controller: _mobileController,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(15),
+          labelText: 'ମୋବାଇଲ ନମ୍ବର',
+          labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Constant.white),
+          ),
+>>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
         ),
       ),
     );
@@ -177,6 +202,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
     final signUpButton = ElevatedButton(
+        style: ElevatedButton.styleFrom(primary: Constant.orange),
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
             await userAPI().signUp(
@@ -216,7 +242,6 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        photo,
                         const SizedBox(height: 20),
                         name,
                         const SizedBox(height: 20),

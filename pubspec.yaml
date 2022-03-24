@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+ 
 
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.3.6
@@ -21,6 +22,10 @@ dependencies:
   firebase_storage: ^10.2.9
   firebase_core: ^1.13.1
   file_picker: ^4.4.0
+<<<<<<< HEAD
+=======
+  google_fonts: ^2.3.1
+>>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
   path_provider: ^2.0.9
   percent_indicator: ^4.0.0
   just_audio: ^0.9.20

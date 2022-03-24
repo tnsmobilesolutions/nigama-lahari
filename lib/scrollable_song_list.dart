@@ -102,6 +102,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          leading: BackButton(color: Theme.of(context).iconTheme.color),
           elevation: 0,
           centerTitle: true,
           title: Text('${widget.songCategory}'),
@@ -112,7 +113,10 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   padding: EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: showMyDialog,
-                    child: Icon(Icons.logout_rounded),
+                    child: Icon(
+                      Icons.logout_rounded,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                 ),
               ],
@@ -131,9 +135,12 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   onChanged: (value) => _runFilter(value),
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.black45,
+                      fillColor: Constant.lightblue,
                       contentPadding: EdgeInsets.all(0),
-                      prefixIcon: Icon(Icons.search, color: Constant.white),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none),
