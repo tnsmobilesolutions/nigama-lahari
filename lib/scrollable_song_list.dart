@@ -153,6 +153,8 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               Expanded(
                 child: items!.isNotEmpty
                     ? ListView.builder(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: items?.length ?? 0,
                         itemBuilder: (context, index) {
                           return GestureDetector(

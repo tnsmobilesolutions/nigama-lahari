@@ -452,7 +452,7 @@ class _Edit_SongState extends State<EditSong> {
                       await ScaffoldMessenger.of(context)
                           .showSnackBar(snackBar);
 
-                      Navigator.pop(context);
+                      Navigator.of(context).pop(_songChangedByUser);
                     },
                     child: Text(
                       'Update',
