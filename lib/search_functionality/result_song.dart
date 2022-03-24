@@ -19,11 +19,18 @@ class _ResultSongState extends State<ResultSong> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
-          centerTitle: true,
-        ),
+        appBar: widget.songs!.isNotEmpty
+            ? AppBar(
+                elevation: 0,
+                title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
+                centerTitle: true,
+              )
+            : AppBar(
+                backgroundColor: Constant.darkBlue,
+                elevation: 0,
+                title: Text(''),
+                centerTitle: true,
+              ),
         body: SafeArea(
           child: Column(
             children: [
