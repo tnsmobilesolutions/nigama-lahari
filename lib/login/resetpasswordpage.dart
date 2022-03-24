@@ -19,7 +19,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     final notice = Text(
-      'Reset Link will be\nsent to your email id !',
+      'ପାସୱର୍ଡ ପୁନଃସେଟ ପାଇଁ ଆପଣଙ୍କ ଇମେଲକୁ ଲିଙ୍କ ଯିବ',
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
     final emailField = TextFormField(
@@ -43,10 +43,9 @@ class _ResetPasswordState extends State<ResetPassword> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Reset Password'),
+        title: Text('ପାସୱର୍ଡ ପୁନଃସେଟ କରନ୍ତୁ'),
       ),
       body: Center(
         child: Form(
@@ -63,7 +62,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                child: Text('Send Request'),
+                child: Text('ଅନୁରୋଧ କରନ୍ତୁ'),
                 onPressed: () async {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formkey.currentState!.validate()) {
@@ -72,7 +71,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     });
                     await userAPI().resetPassword(email);
                     await Fluttertoast.showToast(
-                        msg: 'Password Sent successfull');
+                        msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲ କୁ ଯାଇଛି');
                     Navigator.pop(context);
                   }
                 },
