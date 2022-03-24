@@ -26,8 +26,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    const photo = CircleAvatar();
-
     final name = TextFormField(
       style: TextStyle(color: Constant.white),
       autofocus: false,
@@ -211,7 +209,6 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        photo,
                         const SizedBox(height: 20),
                         name,
                         const SizedBox(height: 20),
