@@ -183,9 +183,11 @@ class _SignUpState extends State<SignUp> {
                 _passwordController.text,
                 _nameController.text,
                 _mobileController.text);
-            await SnackBar(
+
+            final snackBar = SnackBar(
               content: const Text('Yay! Account created successfully :)'),
             );
+            await ScaffoldMessenger.of(context).showSnackBar(snackBar);
             Navigator.push(
               context,
               MaterialPageRoute(

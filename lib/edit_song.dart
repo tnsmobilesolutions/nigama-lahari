@@ -400,20 +400,31 @@ class _Edit_SongState extends State<EditSong> {
                     style: ElevatedButton.styleFrom(primary: Constant.orange),
                     onPressed: () async {
                       if (_selectedOption == null) {
-                        SnackBar(
+                        final snackBar = SnackBar(
                             content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_titleController.text.isEmpty) {
-                        SnackBar(content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
+                        final snackBar = SnackBar(
+                            content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_lyricsController.text.isEmpty) {
-                        SnackBar(
+                        final snackBar = SnackBar(
                             content: const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser && file1 == null) {
-                        SnackBar(
+                        final snackBar = SnackBar(
                             content: const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser && sizeInMb! > 10) {
-                        SnackBar(
+                        final snackBar = SnackBar(
                             content:
                                 const Text('ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser == true) {
                         await uploadFile();
                         Navigator.pop(context);
@@ -436,8 +447,10 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       await SongAPI().updateSong(songsModel);
-                      await SnackBar(
-                          content: const Text('Upadate SuccessFully'));
+                      final snackBar =
+                          SnackBar(content: const Text('Upadate SuccessFully'));
+                      await ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
 
                       Navigator.pop(context);
                     },

@@ -340,29 +340,39 @@ class _AddSongState extends State<AddSong> {
                             ElevatedButton.styleFrom(primary: Constant.orange),
                         onPressed: () async {
                           if (_selectedOption == null) {
-                            SnackBar(
+                            final snackBar = SnackBar(
                                 content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
-                            // Fluttertoast.showToast(
-                            //     msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           } else if (_titleController.text.isEmpty) {
-                            SnackBar(
+                            final snackBar = SnackBar(
                                 content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           } else if (_lyricsController.text.isEmpty) {
-                            SnackBar(
+                            final snackBar = SnackBar(
                                 content:
                                     const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           } else if (file1 == null) {
-                            SnackBar(
+                            final snackBar = SnackBar(
                                 content:
                                     const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           } else if (sizeInMb! > 10) {
-                            SnackBar(
+                            final snackBar = SnackBar(
                                 content: const Text(
                                     'ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           } else {
                             await uploadFile();
-                            await SnackBar(
+                            final snackBar = SnackBar(
                                 content: const Text('Upload SuccessFully'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
 
                             Navigator.pop(context);
                             Navigator.pop(context);

@@ -71,10 +71,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                     setState(() {
                       email = emailController.text;
                     });
-                    await userAPI().resetPassword(email);
 
-                    // await Fluttertoast.showToast(
-                    //     msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି');
+                    await userAPI().resetPassword(email);
+                    final snackBar = SnackBar(
+                      content: const Text('ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି :)'),
+                    );
+                    await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                     Navigator.pop(context);
                   }
                 },

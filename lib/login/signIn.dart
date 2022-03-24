@@ -106,9 +106,12 @@ class _SignInState extends State<SignIn> {
                 .signIn(emailController.text, passswordController.text);
 
             if (uid != null) {
-              await SnackBar(
-                content: const Text('Yay! Account created successfully :)'),
+              final snackBar = SnackBar(
+                content: const Text(
+                  'Yay! Welcom to Nigam-Lahari :)',
+                ),
               );
+              await ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.push(
                 context,
                 MaterialPageRoute(

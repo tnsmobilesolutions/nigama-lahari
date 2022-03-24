@@ -72,8 +72,10 @@ class _SearchState extends State<Search> {
                   onPressed: () async {
                     print('search btn pressrd');
                     if (_selectedOption == null) {
-                      SnackBar(
+                      final snackBar = SnackBar(
                           content: const Text('କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ'));
+                      await ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
                     } else {
                       final List<Song>? allSongs;
 
