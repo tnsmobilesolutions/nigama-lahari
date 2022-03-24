@@ -62,6 +62,7 @@ class _SongDetailState extends State<SongDetail> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          leading: BackButton(color: Theme.of(context).iconTheme.color),
           automaticallyImplyLeading: _lyricsExpanded ? false : true,
           title: Center(
             child: Column(
@@ -88,7 +89,10 @@ class _SongDetailState extends State<SongDetail> {
               children: [
                 if (!_lyricsExpanded)
                   IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: Icon(
+                      Icons.edit,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                     onPressed: () {
                       if (_currentSong != null) {
                         Navigator.push(
@@ -104,7 +108,10 @@ class _SongDetailState extends State<SongDetail> {
                   ),
                 if (_lyricsExpanded)
                   IconButton(
-                    icon: Icon(Icons.add),
+                    icon: Icon(
+                      Icons.add,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                     onPressed: () {
                       setState(() {
                         _fontSize = _fontSize + 1;
@@ -113,7 +120,10 @@ class _SongDetailState extends State<SongDetail> {
                   ),
                 if (_lyricsExpanded)
                   IconButton(
-                    icon: Icon(Icons.remove),
+                    icon: Icon(
+                      Icons.remove,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                     onPressed: () {
                       if (_fontSize > 16) {
                         setState(() {

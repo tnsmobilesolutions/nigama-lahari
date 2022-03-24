@@ -304,7 +304,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: Icon(
         Icons.shuffle,
         size: 40,
-        color: Constant.orange,
+        color: Theme.of(context).iconTheme.color,
       ),
       onPressed: () {
         if (isRepeat == false) {}
@@ -333,7 +333,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           audioPlayer?.setReleaseMode(ReleaseMode.RELEASE);
           setState(
             () {
-              color = Constant.orange;
+              Theme.of(context).iconTheme.color;
               isRepeat = false;
             },
           );

@@ -71,22 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('home screen loading...');
-    // final categories = DataStore().allCategories;
-    // print(categories?.length);
+
     return Container(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //     begin: Alignment.topLeft,
-      //     end: Alignment.bottomRight,
-      //     colors: [Colors.purple, Colors.teal],
-      //   ),
-      // ),
       child: Scaffold(
-        // backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          //backgroundColor: Colors.transparent,
           centerTitle: true,
           title: Text(
             'ଜୟଗୁରୁ',
@@ -108,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Icon(
                       Icons.search_rounded,
+                      color: Constant.orange,
                       size: 30,
                     ),
                   ),
@@ -118,7 +109,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: showMyDialog,
-                    child: Icon(Icons.logout_rounded),
+                    child: Icon(
+                      Icons.logout_rounded,
+                      color: Constant.orange,
+                    ),
                   ),
                 ),
               ],
@@ -182,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          // backgroundColor: Colors.transparent,
+          backgroundColor: Constant.orange,
           elevation: 0,
           highlightElevation: 0,
           onPressed: () {

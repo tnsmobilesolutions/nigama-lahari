@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
-        labelText: 'Name',
+        labelText: 'ନାମ',
         labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -171,6 +171,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
     final signUpButton = ElevatedButton(
+        style: ElevatedButton.styleFrom(primary: Constant.orange),
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
             await userAPI().signUp(

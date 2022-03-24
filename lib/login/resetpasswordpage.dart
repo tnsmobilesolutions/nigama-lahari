@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../constant.dart';
+
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key? key}) : super(key: key);
 
@@ -62,6 +64,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Constant.orange),
                 child: Text('ଅନୁରୋଧ କରନ୍ତୁ'),
                 onPressed: () async {
                   // Validate returns true if the form is valid, otherwise false.

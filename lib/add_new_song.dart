@@ -155,6 +155,7 @@ class _AddSongState extends State<AddSong> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          leading: BackButton(color: Theme.of(context).iconTheme.color),
           elevation: 0,
           centerTitle: true,
           title: Text('Add Song'),
@@ -174,7 +175,7 @@ class _AddSongState extends State<AddSong> {
                         children: [
                           DropdownButton(
                             style: TextStyle(color: Constant.white),
-                            iconEnabledColor: Colors.white24,
+                            iconEnabledColor: Theme.of(context).iconTheme.color,
                             hint: Text(
                               'ବିଭାଗ',
                               style: TextStyle(
@@ -316,7 +317,7 @@ class _AddSongState extends State<AddSong> {
                                 child: Icon(
                                   Icons.attach_file_rounded,
                                   size: 30,
-                                  color: Constant.white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                               onTap: selectFile,
@@ -335,6 +336,8 @@ class _AddSongState extends State<AddSong> {
                       ),
                       SizedBox(height: 30),
                       ElevatedButton(
+                        style:
+                            ElevatedButton.styleFrom(primary: Constant.orange),
                         onPressed: () async {
                           if (_selectedOption == null) {
                             Fluttertoast.showToast(
