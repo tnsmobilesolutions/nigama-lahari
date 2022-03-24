@@ -33,7 +33,7 @@ class _ResultSongState extends State<ResultSong> {
               Expanded(
                 child: ListView.builder(
                   itemCount: widget.songs?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     return GestureDetector(
                       child: Padding(
                         padding: const EdgeInsets.all(10),
@@ -43,37 +43,33 @@ class _ResultSongState extends State<ResultSong> {
                           ),
                           textColor: Constant.white,
                           tileColor: Constant.lightblue,
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          title: Text(
+                            widget.songs?[index].songTitle ?? '',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                            ),
+                          ),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.songs?[index].songTitle ?? '',
+                                widget.songs?[index].songCategory ?? '',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
+                                  fontSize: 15,
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    widget.songs?[index].singerName ?? '',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Text(
-                                    widget.songs?[index].songCategory ?? '',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                widget.songs?[index].singerName ?? '',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
                               ),
-                              SizedBox(
-                                height: 30,
+                              Text(
+                                widget.songs?[index].songDuration ?? '',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
                               ),
                             ],
                           ),
