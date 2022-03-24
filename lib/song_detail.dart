@@ -24,6 +24,7 @@ class _SongDetailState extends State<SongDetail> {
   Song? _currentSong;
   int? _currentIndex;
   bool _lyricsExpanded = false;
+  bool _songChanged = false;
   double _fontSize = 16;
 
   @override
@@ -32,6 +33,9 @@ class _SongDetailState extends State<SongDetail> {
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
     _currentIndex = widget.index;
+    // if (_songChanged) {
+    //   SongAPI.getSongBySongId();
+    // }
   }
 
   void onPrevPressed() {
@@ -93,9 +97,9 @@ class _SongDetailState extends State<SongDetail> {
                       Icons.edit,
                       color: Theme.of(context).iconTheme.color,
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_currentSong != null) {
-                        Navigator.push(
+                        _songChanged = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => EditSong(

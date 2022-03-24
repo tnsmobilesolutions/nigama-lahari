@@ -435,7 +435,7 @@ class _Edit_SongState extends State<EditSong> {
                       await SongAPI().updateSong(songsModel);
                       await Fluttertoast.showToast(msg: "Updated SuccessFully");
 
-                      Navigator.pop(context);
+                      Navigator.of(context).pop(_songChangedByUser);
                     },
                     child: Text(
                       'Update',
