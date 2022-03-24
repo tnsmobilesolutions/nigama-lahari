@@ -93,9 +93,19 @@ class _ResultSongState extends State<ResultSong> {
                         },
                       )
                     : Center(
-                        child: Text(
-                          '             କ୍ଷମା କରିବେ! \n ଏହି ଶବ୍ଦରେ କୌଣସି ଗୀତ ନାହିଁ',
-                          style: TextStyle(fontSize: 18),
+                        child: Column(
+                          children: [
+                            Image(
+                              image: AssetImage('assets/image/sad.png'),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              '             କ୍ଷମା କରିବେ! \n ଏହି ଶବ୍ଦରେ କୌଣସି ଗୀତ ନାହିଁ',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
                         ),
                       ),
               ),
