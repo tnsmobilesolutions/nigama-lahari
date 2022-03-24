@@ -57,7 +57,7 @@ class _SignUpState extends State<SignUp> {
         validator: (value) {
           RegExp regex = new RegExp(r'^.{10,}$');
           if (value == null || value.isEmpty) {
-            return ("Please enter your phone number");
+            return ("ଦୟାକରି ନିଜ ମୋବାଇଲ ନମ୍ବର ଦିଅନ୍ତୁ");
           }
           if (!regex.hasMatch(value)) {
             return ("Enter a valid number(Min. 10 Character)");
@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
         controller: _mobileController,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(15),
-          labelText: 'Mobile Number',
+          labelText: 'ମୋବାଇଲ ନମ୍ବର',
           labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
