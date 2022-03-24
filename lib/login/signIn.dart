@@ -105,27 +105,16 @@ class _SignInState extends State<SignIn> {
             final uid = await userAPI()
                 .signIn(emailController.text, passswordController.text);
 
-<<<<<<< HEAD
-              if (uid != null) {
-                final snackBar =
-                    SnackBar(content: Text('LoggedIn Successfully'));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
-              }
-=======
             if (uid != null) {
+              await SnackBar(
+                content: const Text('Yay! Account created successfully :)'),
+              );
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(),
                 ),
               );
->>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
             }
           }
         },

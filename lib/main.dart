@@ -77,10 +77,8 @@ class MyApp extends StatelessWidget {
                   }
                   return HomeScreen();
                 } else {
-                  return Scaffold(
-                    body: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
                 }
               },

@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
-import 'package:flutter_application_1/home_screen.dart';
 
 import 'package:flutter_application_1/models/songs_model.dart';
 
@@ -81,6 +80,11 @@ class _Edit_SongState extends State<EditSong> {
     if (result != null) {
       file1 = result.files.first;
       sizeInMb = file1.size / 1048576;
+      setState(
+        () {
+          _songChangedByUser = true;
+        },
+      );
     } else {
       return;
     }
@@ -414,8 +418,6 @@ class _Edit_SongState extends State<EditSong> {
                         await uploadFile();
                         Navigator.pop(context);
                       }
-                      await SnackBar(
-                          content: const Text('Upadate SuccessFully'));
 
                       Song songsModel = Song(
                         isEditable: true,
@@ -434,13 +436,10 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       await SongAPI().updateSong(songsModel);
+                      await SnackBar(
+                          content: const Text('Upadate SuccessFully'));
 
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
-                      });
+                      Navigator.pop(context);
                     },
                     child: Text(
                       'Update',

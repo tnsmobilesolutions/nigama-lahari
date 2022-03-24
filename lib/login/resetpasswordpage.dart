@@ -72,16 +72,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                       email = emailController.text;
                     });
                     await userAPI().resetPassword(email);
-<<<<<<< HEAD
-                    await SnackBar(
-                        content: const Text('Password Sent successfull :)'));
 
-                    // Fluttertoast.showToast(
-                    //     msg: 'Password Sent successfull');
-=======
-                    await Fluttertoast.showToast(
-                        msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି');
->>>>>>> a6ad81219899b22cb0968a3242b8493636cadef0
+                    // await Fluttertoast.showToast(
+                    //     msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି');
                     Navigator.pop(context);
                   }
                 },
