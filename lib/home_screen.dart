@@ -132,9 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.hasError) {
                   return Text(snapshot.error.toString());
                 } else
-                  return ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
+                  return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
