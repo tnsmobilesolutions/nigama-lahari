@@ -104,7 +104,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              slider(),
               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25),
                 child: Row(
@@ -117,6 +116,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                         fontSize: 15,
                       ),
                     ),
+                    slider(),
                     Text(
                       _duration.toString().split('.')[0],
                       style: TextStyle(
@@ -130,7 +130,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(child: buttonLoop()),
+                  //Expanded(child: buttonLoop()),
                   Expanded(child: previousSong()),
                   Expanded(
                     child: IconButton(
@@ -149,7 +149,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                     ),
                   ),
                   Expanded(child: nextSong()),
-                  Expanded(child: buttonShuffle()),
+                  // Expanded(child: buttonShuffle()),
                 ],
               ),
               SizedBox(
@@ -170,18 +170,20 @@ class _MusicPlayerState extends State<MusicPlayer> {
       data: SliderThemeData(
         trackHeight: 2,
       ),
-      child: Slider(
-        activeColor: Constant.orange,
-        inactiveColor: Constant.lightblue,
-        value: _position.inSeconds.toDouble(),
-        min: 0.0,
-        max: _duration.inSeconds.toDouble(),
-        onChanged: (double value) {
-          setState(() {
-            changeToSecond(value.toInt());
-            value = value;
-          });
-        },
+      child: Expanded(
+        child: Slider(
+          activeColor: Constant.orange,
+          inactiveColor: Constant.lightblue,
+          value: _position.inSeconds.toDouble(),
+          min: 0.0,
+          max: _duration.inSeconds.toDouble(),
+          onChanged: (double value) {
+            setState(() {
+              changeToSecond(value.toInt());
+              value = value;
+            });
+          },
+        ),
       ),
     );
   }
