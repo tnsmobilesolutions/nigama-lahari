@@ -354,7 +354,7 @@ class _Edit_SongState extends State<EditSong> {
                             child: Icon(
                               Icons.attach_file_rounded,
                               size: 30,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                           ),
                           onTap: () => showDialog<String>(

@@ -97,9 +97,9 @@ class _SongDetailState extends State<SongDetail> {
                       Icons.edit,
                       color: Theme.of(context).iconTheme.color,
                     ),
-                    onPressed: () async {
+                    onPressed: () {
                       if (_currentSong != null) {
-                        _songChanged = await Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => EditSong(

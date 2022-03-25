@@ -72,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     print('home screen loading...');
 
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -98,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Icon(
                       Icons.search_rounded,
-                      color: Constant.orange,
+                      color: Theme.of(context).iconTheme.color,
                       size: 30,
                     ),
                   ),
@@ -111,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: showMyDialog,
                     child: Icon(
                       Icons.logout_rounded,
-                      color: Constant.orange,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ),
@@ -147,7 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 snapshot.data![
                                     index], // gets all available catagories dynamically
                                 style: TextStyle(
-                                    color: Constant.white, fontSize: 30),
+                                    color: Constant.white,
+                                    fontSize: 30 * textScale),
                               ),
                             ),
                             onTap: () async {
