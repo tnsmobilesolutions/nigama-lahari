@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'package:file_picker/file_picker.dart';
@@ -163,6 +164,49 @@ class _Edit_SongState extends State<EditSong> {
             child: Text('Uploading...'),
           ),
           content: buildUploadStatus(task!),
+        );
+      },
+    );
+  }
+
+  Future<void> DialogForDelete() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Constant.lightblue,
+          title: Center(child: const Text('Delete')),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Center(child: Text('Do you want to delete this song ?')),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'No',
+                    style: TextStyle(color: Constant.orange),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(color: Constant.orange),
+                  ),
+                  onPressed: () async {},
+                ),
+              ],
+            ),
+          ],
         );
       },
     );
@@ -396,68 +440,97 @@ class _Edit_SongState extends State<EditSong> {
                     width: double.infinity,
                   ),
                   SizedBox(height: 30),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Constant.orange),
-                    onPressed: () async {
-                      if (_selectedOption == null) {
-                        final snackBar = SnackBar(
-                            content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
-                        await ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      } else if (_titleController.text.isEmpty) {
-                        final snackBar = SnackBar(
-                            content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
-                        await ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      } else if (_lyricsController.text.isEmpty) {
-                        final snackBar = SnackBar(
-                            content: const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
-                        await ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      } else if (_songChangedByUser && file1 == null) {
-                        final snackBar = SnackBar(
-                            content: const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
-                        await ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      } else if (_songChangedByUser && sizeInMb! > 10) {
-                        final snackBar = SnackBar(
-                            content:
-                                const Text('ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
-                        await ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      } else if (_songChangedByUser == true) {
-                        await uploadFile();
-                        Navigator.pop(context);
-                      }
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ElevatedButton(
+                        style:
+                            ElevatedButton.styleFrom(primary: Constant.orange),
+                        onPressed: () async {
+                          if (_selectedOption == null) {
+                            final snackBar = SnackBar(
+                                content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else if (_titleController.text.isEmpty) {
+                            final snackBar = SnackBar(
+                                content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else if (_lyricsController.text.isEmpty) {
+                            final snackBar = SnackBar(
+                                content:
+                                    const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else if (_songChangedByUser && file1 == null) {
+                            final snackBar = SnackBar(
+                                content:
+                                    const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else if (_songChangedByUser && sizeInMb! > 10) {
+                            final snackBar = SnackBar(
+                                content: const Text(
+                                    'ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                            await ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else if (_songChangedByUser == true) {
+                            await uploadFile();
+                            Navigator.pop(context);
+                          }
 
-                      Song songsModel = Song(
-                        isEditable: true,
-                        songCategory: _selectedOption,
-                        songAttribute: _attributeController.text,
-                        songTitle: _titleController.text,
-                        songTitleInEnglish: _titleInEnglishController.text,
-                        singerName: _singerNameController.text,
-                        songText: _lyricsController.text,
-                        songURL:
-                            _songChangedByUser ? songUrl : widget.song.songURL,
-                        songId: widget.song.songId,
-                        songDuration: _songChangedByUser
-                            ? autoDuration.toString().split('.')[0]
-                            : widget.song.songDuration,
-                      );
+                          Song songsModel = Song(
+                            isEditable: true,
+                            songCategory: _selectedOption,
+                            songAttribute: _attributeController.text,
+                            songTitle: _titleController.text,
+                            songTitleInEnglish: _titleInEnglishController.text,
+                            singerName: _singerNameController.text,
+                            songText: _lyricsController.text,
+                            songURL: _songChangedByUser
+                                ? songUrl
+                                : widget.song.songURL,
+                            songId: widget.song.songId,
+                            songDuration: _songChangedByUser
+                                ? autoDuration.toString().split('.')[0]
+                                : widget.song.songDuration,
+                          );
 
-                      await SongAPI().updateSong(songsModel);
-                      final snackBar =
-                          SnackBar(content: const Text('Upadate SuccessFully'));
-                      await ScaffoldMessenger.of(context)
-                          .showSnackBar(snackBar);
+                          await SongAPI().updateSong(songsModel);
+                          final snackBar = SnackBar(
+                            elevation: 6,
+                            behavior: SnackBarBehavior.floating,
+                            content: const Text(
+                              'Upadated SuccessFully',
+                              style: TextStyle(color: Constant.white),
+                            ),
+                            backgroundColor: Constant.orange,
+                          );
+                          await ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBar);
 
-                      Navigator.of(context).pop(_songChangedByUser);
-                    },
-                    child: Text(
-                      'Update',
-                    ),
-                  ),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Update',
+                        ),
+                      ),
+                      ElevatedButton(
+                        style:
+                            ElevatedButton.styleFrom(primary: Constant.orange),
+                        onPressed: DialogForDelete,
+                        child: Text(
+                          'Delete',
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

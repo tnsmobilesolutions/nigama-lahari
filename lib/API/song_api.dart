@@ -46,25 +46,25 @@ class SongAPI {
         .update(song.toMap());
   }
 
-  Future<Song?> getSongBySongId(String songId) {
-    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
-    final result = songs.get().then(
-      (querySnapshot) {
-        Song? _song;
-        //print(querySnapshot.docs.length);
-        querySnapshot.docs.forEach(
-          (element) {
-            final resultSongs = element.data() as Map<String, dynamic>;
-            //print(resultSongs);
-            final song = Song.fromMap(resultSongs);
-            if (song.songId == songId) {
-              _song = song;
-            }
-          },
-        );
-        return _song;
-      },
-    );
-    return result;
-  }
+  // Future<Song?> getSongBySongId(String songId) {
+  //   CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+  //   final result = songs.get().then(
+  //     (querySnapshot) {
+  //       Song? _song;
+  //       //print(querySnapshot.docs.length);
+  //       querySnapshot.docs.forEach(
+  //         (element) {
+  //           final resultSongs = element.data() as Map<String, dynamic>;
+  //           //print(resultSongs);
+  //           final song = Song.fromMap(resultSongs);
+  //           if (song.songId == songId) {
+  //             _song = song;
+  //           }
+  //         },
+  //       );
+  //       return _song;
+  //     },
+  //   );
+  //   return result;
+  // }
 }

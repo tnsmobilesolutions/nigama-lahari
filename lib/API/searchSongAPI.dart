@@ -141,6 +141,10 @@ class SearchSongAPI {
   }
 
   Future<List<Song>?> getSongByDuration(String value) {
+    var s1 = '00:00:00';
+    var s2 = '00:05:00';
+    var s3 = '00:10:00';
+
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
       (querySnapshot) {
@@ -151,12 +155,41 @@ class SearchSongAPI {
             final resultSongs = element.data() as Map<String, dynamic>;
             //print(resultSongs);
             final song = Song.fromMap(resultSongs);
-            if (song.songDuration!.isNotEmpty) {
-              lstSong.add(song);
-              lstSong.forEach((element) {
-                final resultDuration = element.songDuration;
-                print(resultDuration);
-              });
+            switch (value) {
+              case 'small':
+                if (song.songDuration!.isNotEmpty) {
+                  lstSong.add(song);
+                  lstSong.forEach(
+                    (element) {
+                      final resultDuration = element.songDuration;
+                      print(resultDuration);
+                    },
+                  );
+                }
+                break;
+              case 'medium':
+                if (song.songDuration!.isNotEmpty) {
+                  lstSong.add(song);
+                  lstSong.forEach(
+                    (element) {
+                      final resultDuration = element.songDuration;
+                      print(resultDuration);
+                    },
+                  );
+                }
+                break;
+              case 'long':
+                if (song.songDuration!.isNotEmpty) {
+                  lstSong.add(song);
+                  lstSong.forEach(
+                    (element) {
+                      final resultDuration = element.songDuration;
+                      print(resultDuration);
+                    },
+                  );
+                }
+                break;
+              default:
             }
           },
         );
