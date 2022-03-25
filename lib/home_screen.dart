@@ -80,129 +80,126 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final textScale = MediaQuery.of(context).textScaleFactor;
 
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'ଜୟଗୁରୁ',
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Search(),
-                        ),
-                      );
-                    },
-                    child: Icon(
-                      Icons.search_rounded,
-                      color: Theme.of(context).iconTheme.color,
-                      size: 30,
-                    ),
-                  ),
-                ),
-
-                //SignOut implemented
-                Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: showMyDialog,
-                    child: Icon(
-                      Icons.logout_rounded,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'ଜୟଗୁରୁ',
         ),
-        body: FutureBuilder<List<String>?>(
-          future: SearchSongAPI().getAllCategories(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              case ConnectionState.done:
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                } else
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(110, 20, 110, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Constant.lightblue,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Flexible(
-                            child: ListTile(
-                              textColor: Constant.white,
-                              title: Center(
-                                child: Text(
-                                  snapshot.data![
-                                      index], // gets all available catagories dynamically
-                                  style: TextStyle(
-                                      color: Constant.white,
-                                      fontSize: 30 * textScale),
-                                ),
-                              ),
-                              onTap: () async {
-                                final allSongsByCategory = await SearchSongAPI()
-                                    .getAllSongsInCategory(
-                                        snapshot.data![index]);
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Search(),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.search_rounded,
+                    color: Theme.of(context).iconTheme.color,
+                    size: 30,
+                  ),
+                ),
+              ),
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ScrollableSongList(
-                                      songCategory: snapshot.data![index],
-                                      songs: allSongsByCategory,
-                                    ),
-                                  ),
-                                );
-                              },
+              //SignOut implemented
+              Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: GestureDetector(
+                  onTap: showMyDialog,
+                  child: Icon(
+                    Icons.logout_rounded,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+      body: FutureBuilder<List<String>?>(
+        future: SearchSongAPI().getAllCategories(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              } else
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(110, 20, 110, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Constant.lightblue,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Flexible(
+                          child: ListTile(
+                            textColor: Constant.white,
+                            title: Center(
+                              child: Text(
+                                snapshot.data![
+                                    index], // gets all available catagories dynamically
+                                style: TextStyle(
+                                    color: Constant.white,
+                                    fontSize: 30 * textScale),
+                              ),
                             ),
+                            onTap: () async {
+                              final allSongsByCategory = await SearchSongAPI()
+                                  .getAllSongsInCategory(snapshot.data![index]);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScrollableSongList(
+                                    songCategory: snapshot.data![index],
+                                    songs: allSongsByCategory,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      );
-                    },
-                  );
+                      ),
+                    );
+                  },
+                );
 
-              default:
-                return Text('Unhandle State');
-            }
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Constant.orange,
-          elevation: 0,
-          highlightElevation: 0,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddSong(),
-              ),
-            );
-          },
-          child: Icon(
-            Icons.add,
-            size: 30,
-          ),
+            default:
+              return Text('Unhandle State');
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Constant.orange,
+        elevation: 0,
+        highlightElevation: 0,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddSong(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.add,
+          size: 30,
         ),
       ),
     );
