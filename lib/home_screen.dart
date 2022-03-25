@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Constant.lightblue,
           title: Center(child: const Text('Sign Out')),
           content: SingleChildScrollView(
             child: ListBody(
@@ -41,13 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  child: const Text('No'),
+                  child: const Text(
+                    'No',
+                    style: TextStyle(color: Constant.orange),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('Yes'),
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(color: Constant.orange),
+                  ),
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
 
