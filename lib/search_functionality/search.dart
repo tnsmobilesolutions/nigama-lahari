@@ -127,7 +127,9 @@ class _SearchState extends State<Search> {
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+            hintStyle: TextStyle(
+              fontSize: 15.0,
+            ),
           ),
           validator: (value) {
             if (value!.isEmpty) {
@@ -166,7 +168,9 @@ class _SearchState extends State<Search> {
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             labelText: 'Type $selectedOption Name',
-            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+            hintStyle: TextStyle(
+              fontSize: 15.0,
+            ),
           ),
         ),
       );
@@ -194,7 +198,9 @@ class _SearchState extends State<Search> {
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+            hintStyle: TextStyle(
+              fontSize: 15.0,
+            ),
           ),
         ),
       );
@@ -222,7 +228,9 @@ class _SearchState extends State<Search> {
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+            hintStyle: TextStyle(
+              fontSize: 15.0,
+            ),
           ),
         ),
       );

@@ -177,12 +177,12 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      items![index].songCategory ?? "",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                    ),
+                                    // Text(
+                                    //   items![index].songCategory ?? "",
+                                    //   style: TextStyle(
+                                    //     fontSize: 15,
+                                    //   ),
+                                    // ),
                                     Text(
                                       items![index].singerName ?? "",
                                       style: TextStyle(

@@ -142,8 +142,14 @@ class SearchSongAPI {
 
   Future<List<Song>?> getSongByDuration(String value) {
     var s1 = '00:00:00';
-    var s2 = '00:05:00';
-    var s3 = '00:10:00';
+    var s2 = '00:00:00';
+    var s3 = '00:05:00';
+    var s4 = '00:10:00';
+
+    var t1 = DateTime.parse('2000-01-01 $s1');
+    var t2 = DateTime.parse('2000-01-01 $s2');
+    var t3 = DateTime.parse('2000-01-01 $s3');
+    var t4 = DateTime.parse('2000-01-01 $s4');
 
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
