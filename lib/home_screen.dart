@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 
-// import 'package:flutter_application_1/common_widgets/common_style.dart';
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
@@ -133,7 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.hasError) {
                   return Text(snapshot.error.toString());
                 } else
-                  return ListView.builder(
+                  return ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(

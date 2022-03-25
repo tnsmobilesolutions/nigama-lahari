@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:fluttertoast/fluttertoast.dart';
-
 final _auth = FirebaseAuth.instance;
 
 class userAPI {
@@ -39,7 +37,6 @@ class userAPI {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
-        await Fluttertoast.showToast(msg: "ଏହି ଇମେଲର ରେଜିଷ୍ଟ୍ରି ହୋଇ ନାହିଁ");
       }
     }
   }

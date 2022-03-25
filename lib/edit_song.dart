@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
 
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
@@ -400,17 +400,31 @@ class _Edit_SongState extends State<EditSong> {
                     style: ElevatedButton.styleFrom(primary: Constant.orange),
                     onPressed: () async {
                       if (_selectedOption == null) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ");
+                        final snackBar = SnackBar(
+                            content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_titleController.text.isEmpty) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ");
+                        final snackBar = SnackBar(
+                            content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_lyricsController.text.isEmpty) {
-                        Fluttertoast.showToast(msg: "ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ");
+                        final snackBar = SnackBar(
+                            content: const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser && file1 == null) {
-                        Fluttertoast.showToast(
-                            msg: "ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ");
+                        final snackBar = SnackBar(
+                            content: const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser && sizeInMb! > 10) {
-                        Fluttertoast.showToast(
-                            msg: "ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ");
+                        final snackBar = SnackBar(
+                            content:
+                                const Text('ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
+                        await ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
                       } else if (_songChangedByUser == true) {
                         await uploadFile();
                         Navigator.pop(context);
@@ -433,7 +447,10 @@ class _Edit_SongState extends State<EditSong> {
                       );
 
                       await SongAPI().updateSong(songsModel);
-                      await Fluttertoast.showToast(msg: "Updated SuccessFully");
+                      final snackBar =
+                          SnackBar(content: const Text('Upadate SuccessFully'));
+                      await ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
 
                       Navigator.of(context).pop(_songChangedByUser);
                     },

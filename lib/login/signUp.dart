@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+
 import 'package:flutter_application_1/home_screen.dart';
 
 import '../constant.dart';
@@ -52,33 +51,38 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
-    final mobileNumber = IntlPhoneField(
-        style: TextStyle(color: Constant.white),
-        validator: (value) {
-          RegExp regex = new RegExp(r'^.{10,}$');
-          if (value == null || value.isEmpty) {
-            return ("ଦୟାକରି ନିଜ ମୋବାଇଲ ନମ୍ବର ଦିଅନ୍ତୁ");
-          }
-          if (!regex.hasMatch(value)) {
-            return ("Enter a valid number(Min. 10 Character)");
-          }
-          return null;
-        },
-        onSaved: (value) {
-          _mobileController.text = value!.toString();
-        },
-        controller: _mobileController,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(15),
-          labelText: 'ମୋବାଇଲ ନମ୍ବର',
-          labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Constant.white),
-          ),
+    final mobileNumber = TextFormField(
+      style: TextStyle(color: Constant.white),
+      autofocus: false,
+      controller: _mobileController,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        // Returns true if Phone Number address is in use.
+
+        if (value == null || value.isEmpty) {
+          return ("Please enter Your Phone Number");
+        }
+        // reg expression for email validation
+        else if (!RegExp(r'^.{6,}$').hasMatch(value)) {
+          return ("Please enter 10 Digit Phone Number");
+        }
+        //else if () {}
+        return null;
+      },
+      onSaved: (value) {
+        _mobileController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'Phone Number',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.white),
         ),
-        initialCountryCode: 'IN',
-        onChanged: (phone) {});
+      ),
+    );
 
     final email = TextFormField(
       style: TextStyle(color: Constant.white),
@@ -179,8 +183,11 @@ class _SignUpState extends State<SignUp> {
                 _passwordController.text,
                 _nameController.text,
                 _mobileController.text);
-            await Fluttertoast.showToast(
-                msg: "Account created successfully :) ");
+
+            final snackBar = SnackBar(
+              content: const Text('Yay! Account created successfully :)'),
+            );
+            await ScaffoldMessenger.of(context).showSnackBar(snackBar);
             Navigator.push(
               context,
               MaterialPageRoute(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../constant.dart';
 
@@ -72,9 +71,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                     setState(() {
                       email = emailController.text;
                     });
+
                     await userAPI().resetPassword(email);
-                    await Fluttertoast.showToast(
-                        msg: 'ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି');
+                    final snackBar = SnackBar(
+                      content: const Text('ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି :)'),
+                    );
+                    await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                     Navigator.pop(context);
                   }
                 },
