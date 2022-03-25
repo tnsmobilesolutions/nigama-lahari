@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
-import '../home_screen.dart';
 import '../models/usermodel.dart';
 
 class SignIn extends StatefulWidget {
@@ -16,7 +16,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  AppUser? loggedInUser;
+  AppUser? _loggedInUser;
 
   bool _obscureText = true;
 
@@ -102,23 +102,28 @@ class _SignInState extends State<SignIn> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
-            final uid = await userAPI()
+            _loggedInUser = await userAPI()
                 .signIn(emailController.text, passswordController.text);
 
-            if (uid != null) {
-              final snackBar = SnackBar(
-                content: const Text(
-                  'Yay! Welcom to Nigam-Lahari :)',
+            print("Name: ${_loggedInUser?.name}");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                  loggedInUser: _loggedInUser,
                 ),
-              );
-              await ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-              );
-            }
+              ),
+            );
+
+            await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              elevation: 6,
+              behavior: SnackBarBehavior.floating,
+              content: const Text(
+                'ଜୟଗୁରୁ !  ନିଗମ ଲହରୀକୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ',
+                style: TextStyle(color: Constant.white),
+              ),
+              backgroundColor: Constant.orange,
+            ));
           }
         },
         child: Text(

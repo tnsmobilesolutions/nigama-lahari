@@ -12,9 +12,11 @@ import 'package:uuid/uuid.dart';
 import 'API/song_api.dart';
 import 'package:just_audio/just_audio.dart';
 
-class AddSong extends StatefulWidget {
-  const AddSong({Key? key}) : super(key: key);
+import 'models/usermodel.dart';
 
+class AddSong extends StatefulWidget {
+  const AddSong({Key? key, required this.loggedInUser}) : super(key: key);
+  final AppUser? loggedInUser;
   @override
   _AddSongState createState() => _AddSongState();
 }
@@ -55,6 +57,7 @@ class _AddSongState extends State<AddSong> {
 
   void initState() {
     super.initState();
+    print('${widget.loggedInUser?.name}');
   }
 
   AudioPlayer player = AudioPlayer();
@@ -369,10 +372,19 @@ class _AddSongState extends State<AddSong> {
                                 .showSnackBar(snackBar);
                           } else {
                             await uploadFile();
-                            final snackBar = SnackBar(
-                                content: const Text('Upload SuccessFully'));
-                            await ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+                            print(
+                                '********${widget.loggedInUser?.name}*********');
+                            await ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
+                                content: const Text(
+                                  'Uploaded SuccessFully',
+                                  style: TextStyle(color: Constant.white),
+                                ),
+                                backgroundColor: Constant.orange,
+                              ),
+                            );
 
                             Navigator.pop(context);
                             Navigator.pop(context);
@@ -391,6 +403,7 @@ class _AddSongState extends State<AddSong> {
                               songId: Uuid().v1(),
                               songDuration:
                                   autoDuration.toString().split('.')[0],
+                              uploadedBy: widget.loggedInUser?.name,
                             );
 
                             SongAPI().createNewSong(songsModel);

@@ -209,6 +209,17 @@ class _Edit_SongState extends State<EditSong> {
                           .collection('songs')
                           .doc(widget.song.songId)
                           .delete();
+                      await ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text(
+                            'Deleted SuccessFully',
+                            style: TextStyle(color: Constant.white),
+                          ),
+                          backgroundColor: Constant.orange,
+                        ),
+                      );
                     }
                     Navigator.pop(context);
                     Navigator.pop(context);
@@ -526,17 +537,18 @@ class _Edit_SongState extends State<EditSong> {
                           );
 
                           await SongAPI().updateSong(songsModel);
-                          final snackBar = SnackBar(
-                            elevation: 6,
-                            behavior: SnackBarBehavior.floating,
-                            content: const Text(
-                              'Upadated SuccessFully',
-                              style: TextStyle(color: Constant.white),
+
+                          await ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'Upadated SuccessFully',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
                             ),
-                            backgroundColor: Constant.orange,
                           );
-                          await ScaffoldMessenger.of(context)
-                              .showSnackBar(snackBar);
 
                           Navigator.push(
                             context,

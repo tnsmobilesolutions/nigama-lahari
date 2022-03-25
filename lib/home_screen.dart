@@ -8,9 +8,11 @@ import 'package:flutter_application_1/search_functionality/search.dart';
 
 import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
+import 'models/usermodel.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key, this.loggedInUser}) : super(key: key);
+  final AppUser? loggedInUser;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
+    print('${widget.loggedInUser?.name}');
   }
 
   //Alert Dialog for signout
@@ -81,127 +84,128 @@ class _HomeScreenState extends State<HomeScreen> {
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'ଜୟଗୁରୁ',
-        ),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Search(),
-                      ),
-                    );
-                  },
-                  child: Icon(
-                    Icons.search_rounded,
-                    color: Theme.of(context).iconTheme.color,
-                    size: 30,
-                  ),
-                ),
-              ),
-
-              //SignOut implemented
-              Padding(
-                padding: EdgeInsets.only(right: 20),
-                child: GestureDetector(
-                  onTap: showMyDialog,
-                  child: Icon(
-                    Icons.logout_rounded,
-                    color: Theme.of(context).iconTheme.color,
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 5),
-        child: FutureBuilder<List<String>?>(
-          future: SearchSongAPI().getAllCategories(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              case ConnectionState.done:
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                } else
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.only(
-                            left: 40, right: 40, top: 5, bottom: 5),
-                        decoration: BoxDecoration(
-                            color: Constant.lightblue,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: ListTile(
-                          textColor: Constant.white,
-                          title: Center(
-                            child: Text(
-                              snapshot.data![
-                                  index], // gets all available catagories dynamically
-                              style: TextStyle(
-                                  color: Constant.white,
-                                  fontSize: 30 * textScale),
-                            ),
-                          ),
-                          onTap: () async {
-                            final allSongsByCategory = await SearchSongAPI()
-                                .getAllSongsInCategory(snapshot.data![index]);
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ScrollableSongList(
-                                  songCategory: snapshot.data![index],
-                                  songs: allSongsByCategory,
-                                ),
-                              ),
-                            );
-                          },
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            'ଜୟଗୁରୁ',
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Search(),
                         ),
                       );
                     },
-                  );
+                    child: Icon(
+                      Icons.search_rounded,
+                      color: Theme.of(context).iconTheme.color,
+                      size: 30,
+                    ),
+                  ),
+                ),
 
-              default:
-                return Text('Unhandle State');
-            }
+                //SignOut implemented
+                Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: GestureDetector(
+                    onTap: showMyDialog,
+                    child: Icon(
+                      Icons.logout_rounded,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: FutureBuilder<List<String>?>(
+            future: SearchSongAPI().getAllCategories(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  } else
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                              left: 40, right: 40, top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: Constant.lightblue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: ListTile(
+                            textColor: Constant.white,
+                            title: Center(
+                              child: Text(
+                                snapshot.data![
+                                    index], // gets all available catagories dynamically
+                                style: TextStyle(
+                                    color: Constant.white,
+                                    fontSize: 30 * textScale),
+                              ),
+                            ),
+                            onTap: () async {
+                              final allSongsByCategory = await SearchSongAPI()
+                                  .getAllSongsInCategory(snapshot.data![index]);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScrollableSongList(
+                                    songCategory: snapshot.data![index],
+                                    songs: allSongsByCategory,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+
+                default:
+                  return Text('Unhandle State');
+              }
+            },
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Constant.orange,
+          elevation: 0,
+          highlightElevation: 0,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddSong(
+                  loggedInUser: widget.loggedInUser,
+                ),
+              ),
+            );
           },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Constant.orange,
-        elevation: 0,
-        highlightElevation: 0,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddSong(),
-            ),
-          );
-        },
-        child: Icon(
-          Icons.add,
-          size: 30,
-        ),
-      ),
-    );
+          child: Icon(
+            Icons.add,
+            size: 30,
+          ),
+        ));
   }
 }

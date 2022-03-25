@@ -32,6 +32,7 @@ class SongAPI {
       "isEditable": songsModel.isEditable,
       "songDuration": songsModel.songDuration,
       "songURL": songsModel.songURL,
+      "uploadedBy": songsModel.uploadedBy,
     });
     return songsModel.songId ?? "0";
   }

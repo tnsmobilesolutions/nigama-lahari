@@ -9,6 +9,7 @@ class Song {
   final String? songAttribute;
   final String? songURL;
   final String? singerName;
+  final String? uploadedBy;
   final bool? isEditable;
   final String? songDuration;
   Song({
@@ -20,6 +21,7 @@ class Song {
     this.songAttribute,
     this.songURL,
     this.singerName,
+    this.uploadedBy,
     this.isEditable,
     this.songDuration,
   });
@@ -33,6 +35,7 @@ class Song {
     String? songAttribute,
     String? songURL,
     String? singerName,
+    String? uploadedBy,
     bool? isEditable,
     String? songDuration,
   }) {
@@ -45,6 +48,7 @@ class Song {
       songAttribute: songAttribute ?? this.songAttribute,
       songURL: songURL ?? this.songURL,
       singerName: singerName ?? this.singerName,
+      uploadedBy: uploadedBy ?? this.uploadedBy,
       isEditable: isEditable ?? this.isEditable,
       songDuration: songDuration ?? this.songDuration,
     );
@@ -60,6 +64,7 @@ class Song {
       'songAttribute': songAttribute,
       'songURL': songURL,
       'singerName': singerName,
+      'uploadedBy': uploadedBy,
       'isEditable': isEditable,
       'songDuration': songDuration,
     };
@@ -75,6 +80,7 @@ class Song {
       songAttribute: map['songAttribute'],
       songURL: map['songURL'],
       singerName: map['singerName'],
+      uploadedBy: map['uploadedBy'],
       isEditable: map['isEditable'],
       songDuration: map['songDuration'],
     );
@@ -86,7 +92,7 @@ class Song {
 
   @override
   String toString() {
-    return 'Song(songId: $songId, songTitle: $songTitle, songTitleInEnglish: $songTitleInEnglish, songText: $songText, songCategory: $songCategory, songAttribute: $songAttribute, songURL: $songURL, singerName: $singerName, isEditable: $isEditable, songDuration: $songDuration)';
+    return 'Song(songId: $songId, songTitle: $songTitle, songTitleInEnglish: $songTitleInEnglish, songText: $songText, songCategory: $songCategory, songAttribute: $songAttribute, songURL: $songURL, singerName: $singerName, uploadedBy: $uploadedBy, isEditable: $isEditable, songDuration: $songDuration)';
   }
 
   @override
@@ -102,6 +108,7 @@ class Song {
         other.songAttribute == songAttribute &&
         other.songURL == songURL &&
         other.singerName == singerName &&
+        other.uploadedBy == uploadedBy &&
         other.isEditable == isEditable &&
         other.songDuration == songDuration;
   }
@@ -116,6 +123,7 @@ class Song {
         songAttribute.hashCode ^
         songURL.hashCode ^
         singerName.hashCode ^
+        uploadedBy.hashCode ^
         isEditable.hashCode ^
         songDuration.hashCode;
   }
