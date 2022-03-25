@@ -234,7 +234,7 @@ class _SearchState extends State<Search> {
   Widget getDurationWidget(String? selectedOption) {
     if (selectedOption == "Duration") {
       return Theme(
-        data: ThemeData(unselectedWidgetColor: Constant.lightblue),
+        data: ThemeData(unselectedWidgetColor: Constant.orange),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -245,6 +245,8 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
+                fillColor:
+                    MaterialStateColor.resolveWith((states) => Constant.orange),
                 value: 'small',
                 groupValue: _value,
                 onChanged: (value) {
@@ -260,6 +262,8 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
+                fillColor:
+                    MaterialStateColor.resolveWith((states) => Constant.orange),
                 value: 'medium',
                 groupValue: _value,
                 onChanged: (value) {
@@ -275,6 +279,8 @@ class _SearchState extends State<Search> {
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
+                fillColor:
+                    MaterialStateColor.resolveWith((states) => Constant.orange),
                 value: 'long',
                 groupValue: _value,
                 onChanged: (value) {
