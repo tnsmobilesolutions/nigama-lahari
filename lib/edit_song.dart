@@ -1,15 +1,12 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:just_audio/just_audio.dart';
-
 import 'package:file_picker/file_picker.dart';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/firebaseAPI.dart';
-
 import 'package:flutter_application_1/models/songs_model.dart';
-
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
@@ -202,7 +199,22 @@ class _Edit_SongState extends State<EditSong> {
                     'Yes',
                     style: TextStyle(color: Constant.orange),
                   ),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (widget.song.songURL != null) {
+                      await FirebaseStorage.instance
+                          .refFromURL(widget.song.songURL!)
+                          .delete();
+
+                      await FirebaseFirestore.instance
+                          .collection('songs')
+                          .doc(widget.song.songId)
+                          .delete();
+                    }
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                 ),
               ],
             ),
@@ -404,22 +416,38 @@ class _Edit_SongState extends State<EditSong> {
                           onTap: () => showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Replace Song Music'),
+                              backgroundColor: Constant.lightblue,
+                              title: Center(child: const Text('Replace Song')),
                               content: const Text(
-                                  'This would replace the existing music for this song. Are you sure to continue ?'),
+                                  'This will replace the existing song. Do you want to continue ?'),
                               actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    selectFile();
-                                    return Navigator.pop(context, 'Continue');
-                                  },
-                                  child: const Text('Continue'),
-                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Cancel'),
+                                      child: const Text(
+                                        'Cancel',
+                                        style:
+                                            TextStyle(color: Constant.orange),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        selectFile();
+                                        return Navigator.pop(
+                                            context, 'Continue');
+                                      },
+                                      child: const Text(
+                                        'Continue',
+                                        style:
+                                            TextStyle(color: Constant.orange),
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),

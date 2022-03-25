@@ -92,31 +92,31 @@ class Song {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Song &&
-      other.songId == songId &&
-      other.songTitle == songTitle &&
-      other.songTitleInEnglish == songTitleInEnglish &&
-      other.songText == songText &&
-      other.songCategory == songCategory &&
-      other.songAttribute == songAttribute &&
-      other.songURL == songURL &&
-      other.singerName == singerName &&
-      other.isEditable == isEditable &&
-      other.songDuration == songDuration;
+        other.songId == songId &&
+        other.songTitle == songTitle &&
+        other.songTitleInEnglish == songTitleInEnglish &&
+        other.songText == songText &&
+        other.songCategory == songCategory &&
+        other.songAttribute == songAttribute &&
+        other.songURL == songURL &&
+        other.singerName == singerName &&
+        other.isEditable == isEditable &&
+        other.songDuration == songDuration;
   }
 
   @override
   int get hashCode {
     return songId.hashCode ^
-      songTitle.hashCode ^
-      songTitleInEnglish.hashCode ^
-      songText.hashCode ^
-      songCategory.hashCode ^
-      songAttribute.hashCode ^
-      songURL.hashCode ^
-      singerName.hashCode ^
-      isEditable.hashCode ^
-      songDuration.hashCode;
+        songTitle.hashCode ^
+        songTitleInEnglish.hashCode ^
+        songText.hashCode ^
+        songCategory.hashCode ^
+        songAttribute.hashCode ^
+        songURL.hashCode ^
+        singerName.hashCode ^
+        isEditable.hashCode ^
+        songDuration.hashCode;
   }
 }

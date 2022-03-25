@@ -216,7 +216,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                       )
                     : Center(
                         child: Text(
-                          '',
+                          'କ୍ଷମା କରିବେ !  ଏହି ବିଭାଗରେ କୌଣସି ଗୀତ ନାହିଁ',
                           style: TextStyle(fontSize: 24),
                         ),
                       ),
