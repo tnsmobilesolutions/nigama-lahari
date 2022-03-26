@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/data_store.dart';
+import 'API/userAPI.dart';
 import 'home_screen.dart';
 import 'login/signIn.dart';
+import 'models/usermodel.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,10 +74,34 @@ class MyApp extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   final user = snapshot.data;
+
                   if (user == null) {
                     return SignIn();
+                  } else {
+                    return FutureBuilder<AppUser?>(
+                      future: userAPI().getAppUserFromUid(user.uid),
+                      builder: (_, snap) {
+                        if (snap.hasData) {
+                          return HomeScreen(loggedInUser: snap.data);
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    );
+
+                    // userAPI().getAppUserFromUid(user.uid).then(
+                    //   (value) {
+                    //     return HomeScreen(loggedInUser: value);
+                    //   },
+                    // ).catchError(
+                    //   (e) {
+                    //     return CircularProgressIndicator();
+                    //   },
+                    // );
+                    //return CircularProgressIndicator();
                   }
-                  return HomeScreen();
                 } else {
                   return Center(
                     child: CircularProgressIndicator(),

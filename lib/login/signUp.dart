@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
       style: ElevatedButton.styleFrom(primary: Constant.orange),
       onPressed: () async {
         if (_formkey.currentState!.validate()) {
-          await userAPI().signUp(
+          final _appUser = await userAPI().signUp(
               _emailController.text,
               _passwordController.text,
               _nameController.text,
@@ -193,7 +193,9 @@ class _SignUpState extends State<SignUp> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              builder: (context) => HomeScreen(
+                loggedInUser: _appUser,
+              ),
             ),
           );
         }

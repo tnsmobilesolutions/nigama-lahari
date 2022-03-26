@@ -140,6 +140,7 @@ class _SongDetailState extends State<SongDetail> {
                 IconButton(
                   icon: Icon(
                     _lyricsExpanded ? Icons.zoom_in_map : Icons.zoom_out_map,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   onPressed: () {
                     print('expand pressed');

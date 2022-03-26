@@ -12,17 +12,13 @@ class userAPI {
     return _loggedInUser;
   }
 
-  static const RELEASE_MODE = true;
-  UserCredential? userCredential;
-
 // SignIn
   Future<AppUser?> signIn(String email, String password) async {
+    UserCredential? userCredential;
     try {
-      if (RELEASE_MODE) {
-        userCredential = await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => uid);
-      }
+      userCredential = await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => uid);
 
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
@@ -54,19 +50,89 @@ class userAPI {
     return null;
   }
 
+  Future<AppUser?> getAppUserFromUid(String uid) async {
+    try {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+
+      //TODO : replace this logic with collection map
+
+      final user = users.where("uid", isEqualTo: uid).get().then(
+        (querySnapshot) {
+          final userData =
+              querySnapshot.docs.first.data() as Map<String, dynamic>;
+          final user = AppUser.fromMap(userData);
+          _loggedInUser = user;
+          return user;
+        },
+      );
+      return user;
+
+      //return uid.user?.uid;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        return null;
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        return null;
+      }
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    return null;
+  }
+
   // SignUp
-  dynamic signUp(
+  Future<AppUser?> signUp(
       String email, String password, String name, String mobile) async {
-    await _auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) {
-      FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set({
-        'email': email,
-        'uid': value.user!.uid,
-        'name': name,
-        'mobile': mobile
-      });
-    });
+    try {
+      final userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then(
+        (value) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(value.user!.uid)
+              .set(
+            {
+              'email': email,
+              'uid': value.user!.uid,
+              'name': name,
+              'mobile': mobile
+            },
+          );
+          return value;
+        },
+      );
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+
+      final user =
+          users.where("uid", isEqualTo: userCredential.user?.uid).get().then(
+        (querySnapshot) {
+          final userData =
+              querySnapshot.docs.first.data() as Map<String, dynamic>;
+          final user = AppUser.fromMap(userData);
+          _loggedInUser = user;
+          return user;
+        },
+      );
+      return user;
+
+      //return uid.user?.uid;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        return null;
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        return null;
+      }
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   // Reset Password

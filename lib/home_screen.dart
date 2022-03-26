@@ -13,7 +13,7 @@ import 'models/songs_model.dart';
 import 'models/usermodel.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key, this.loggedInUser}) : super(key: key);
+  HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
   final AppUser? loggedInUser;
 
   @override
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            'ଜୟଗୁରୁ',
+            'ନିଗମ ଲହରୀ',
           ),
           actions: [
             //SignOut implemented
