@@ -148,7 +148,7 @@ class SearchSongAPI {
     var t1 = DateTime.parse('2000-01-01 $s1');
     var t2 = DateTime.parse('2000-01-01 $s2');
     var t3 = DateTime.parse('2000-01-01 $s3');
-
+    print(t2.minute);
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
       (querySnapshot) {
@@ -161,15 +161,22 @@ class SearchSongAPI {
             final song = Song.fromMap(resultSongs);
             switch (value) {
               case 'small':
-                if (song.songDuration!.isNotEmpty) {
+                //print(song.songDuration);
+                if (song.songDuration != null) {
                   lstSong.add(song);
                   lstSong.forEach(
                     (element) {
-                      final resultDuration = element.songDuration;
-                      print(resultDuration);
+                      //print(element);
+                      var s4 = element.songDuration;
+                      //print(s4);
+                      //DateTime time = DateTime.parse('2000-01-01 $s4');
+                      //print(t4);
+                      // final resultDuration = element.songDuration;
+                      // print(resultDuration);
                     },
                   );
                 }
+                ;
                 break;
               case 'medium':
                 if (song.songDuration!.isNotEmpty) {

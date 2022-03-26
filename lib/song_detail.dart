@@ -4,17 +4,21 @@ import 'package:flutter_application_1/lyrics.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
 
+import 'models/usermodel.dart';
+
 class SongDetail extends StatefulWidget {
   SongDetail(
       {Key? key,
       required this.song,
       required this.songList,
-      required this.index})
+      required this.index,
+      this.loggedInUser})
       : super(key: key);
 
   final Song song;
   final List<Song>? songList;
   final int index;
+  final AppUser? loggedInUser;
 
   @override
   _SongDetailState createState() => _SongDetailState();
@@ -24,7 +28,6 @@ class _SongDetailState extends State<SongDetail> {
   Song? _currentSong;
   int? _currentIndex;
   bool _lyricsExpanded = false;
-  bool _songChanged = false;
   double _fontSize = 16;
 
   @override
@@ -33,9 +36,6 @@ class _SongDetailState extends State<SongDetail> {
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
     _currentIndex = widget.index;
-    // if (_songChanged) {
-    //   SongAPI.getSongBySongId();
-    // }
   }
 
   void onPrevPressed() {
@@ -104,6 +104,7 @@ class _SongDetailState extends State<SongDetail> {
                           MaterialPageRoute(
                             builder: (context) => EditSong(
                               song: _currentSong!,
+                              loggedInUser: widget.loggedInUser,
                             ),
                           ),
                         );

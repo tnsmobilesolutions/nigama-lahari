@@ -35,7 +35,7 @@ class _ResultSongState extends State<ResultSong> {
           child: Column(
             children: [
               SizedBox(
-                height: 30,
+                height: 10,
               ),
               Expanded(
                 child: widget.songs!.isNotEmpty

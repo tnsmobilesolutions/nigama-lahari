@@ -11,10 +11,12 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:path/path.dart' as path;
 import 'API/song_api.dart';
 import 'constant.dart';
+import 'models/usermodel.dart';
 
 class EditSong extends StatefulWidget {
-  EditSong({Key? key, required this.song}) : super(key: key);
+  EditSong({Key? key, required this.song, this.loggedInUser}) : super(key: key);
   final Song song;
+  final AppUser? loggedInUser;
   @override
   State<EditSong> createState() => _Edit_SongState();
 }
@@ -41,6 +43,7 @@ class _Edit_SongState extends State<EditSong> {
   @override
   void initState() {
     super.initState();
+    print('${widget.loggedInUser?.name}');
 
     _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
@@ -516,6 +519,8 @@ class _Edit_SongState extends State<EditSong> {
                                 .showSnackBar(snackBar);
                           } else if (_songChangedByUser == true) {
                             await uploadFile();
+                            print(
+                                '********${widget.loggedInUser?.name}*********');
                             Navigator.pop(context);
                           }
 
@@ -528,12 +533,13 @@ class _Edit_SongState extends State<EditSong> {
                             singerName: _singerNameController.text,
                             songText: _lyricsController.text,
                             songURL: _songChangedByUser
-                                ? songUrl
+                                ? await songUrl
                                 : widget.song.songURL,
                             songId: widget.song.songId,
                             songDuration: _songChangedByUser
                                 ? autoDuration.toString().split('.')[0]
                                 : widget.song.songDuration,
+                            uploadedBy: widget.loggedInUser?.name,
                           );
 
                           await SongAPI().updateSong(songsModel);

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'login/signIn.dart';
+import 'models/usermodel.dart';
 import 'song_detail.dart';
 
 class ScrollableSongList extends StatefulWidget {
-  ScrollableSongList({
-    Key? key,
-    this.songCategory,
-    this.songs,
-  }) : super(key: key);
+  ScrollableSongList(
+      {Key? key, this.songCategory, this.songs, this.loggedInUser})
+      : super(key: key);
 
   final String? songCategory;
   final List<Song>? songs;
+  final AppUser? loggedInUser;
 
   @override
   _ScrollableSongListState createState() => _ScrollableSongListState();
@@ -71,8 +71,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
   @override
   void initState() {
     items = widget.songs;
-    print(items!.length);
+    //print(items!.length);
     super.initState();
+    print('${widget.loggedInUser?.name}');
   }
 
   void _runFilter(String enteredKeyword) {
@@ -207,6 +208,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                     song: items![index],
                                     songList: widget.songs,
                                     index: index,
+                                    loggedInUser: widget.loggedInUser,
                                   ),
                                 ),
                               );

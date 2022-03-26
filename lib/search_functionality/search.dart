@@ -72,10 +72,17 @@ class _SearchState extends State<Search> {
                   onPressed: () async {
                     print('search btn pressrd');
                     if (_selectedOption == null) {
-                      final snackBar = SnackBar(
-                          content: const Text('କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ'));
-                      await ScaffoldMessenger.of(context)
-                          .showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text(
+                            'କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ',
+                            style: TextStyle(color: Constant.white),
+                          ),
+                          backgroundColor: Constant.orange,
+                        ),
+                      );
                     } else {
                       final List<Song>? allSongs;
 
@@ -249,7 +256,7 @@ class _SearchState extends State<Search> {
           children: [
             ListTile(
               title: Text(
-                'Small',
+                'ଛୋଟ ଗୀତ',
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
@@ -266,7 +273,7 @@ class _SearchState extends State<Search> {
             ),
             ListTile(
               title: Text(
-                'Medium',
+                'ମଧ୍ୟମ ଗୀତ',
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(
@@ -283,7 +290,7 @@ class _SearchState extends State<Search> {
             ),
             ListTile(
               title: Text(
-                'Long',
+                'ଲମ୍ବା ଗୀତ',
                 style: TextStyle(color: Colors.white),
               ),
               leading: Radio<String>(

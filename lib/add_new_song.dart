@@ -100,8 +100,9 @@ class _AddSongState extends State<AddSong> {
 
     final snapshot = await task!.whenComplete(() {});
     songUrl = await snapshot.ref.getDownloadURL();
-    autoDuration =
-        await player.setUrl(songUrl.toString()); // autodetects audio duration
+
+    // autodetects audio duration
+    autoDuration = await player.setUrl(songUrl.toString());
   }
 
   //upload status
@@ -399,11 +400,11 @@ class _AddSongState extends State<AddSong> {
                               songTitleInEnglish: _titleEnglishController.text,
                               singerName: _singerNameController.text,
                               songText: _lyricsController.text,
-                              songURL: songUrl,
+                              songURL: await songUrl,
                               songId: Uuid().v1(),
                               songDuration:
                                   autoDuration.toString().split('.')[0],
-                              uploadedBy: widget.loggedInUser?.name,
+                              uploadedBy: await widget.loggedInUser?.name,
                             );
 
                             SongAPI().createNewSong(songsModel);
