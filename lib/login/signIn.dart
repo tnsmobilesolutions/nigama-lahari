@@ -106,24 +106,40 @@ class _SignInState extends State<SignIn> {
                 .signIn(emailController.text, passswordController.text);
 
             print("Name: ${_loggedInUser?.name}");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                  loggedInUser: _loggedInUser,
+            if (_loggedInUser != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(
+                    loggedInUser: _loggedInUser,
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  elevation: 6,
+                  behavior: SnackBarBehavior.floating,
+                  content: const Text(
+                    'Wrong user credential',
+                    style: TextStyle(color: Constant.white),
+                  ),
+                  backgroundColor: Constant.orange,
+                ),
+              );
+            }
 
-            await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              elevation: 6,
-              behavior: SnackBarBehavior.floating,
-              content: const Text(
-                'ଜୟଗୁରୁ !  ନିଗମ ଲହରୀକୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ',
-                style: TextStyle(color: Constant.white),
-              ),
-              backgroundColor: Constant.orange,
-            ));
+            // await ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(
+            //     elevation: 6,
+            //     behavior: SnackBarBehavior.floating,
+            //     content: const Text(
+            //       'ଜୟଗୁରୁ !  ନିଗମ ଲହରୀକୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ',
+            //       style: TextStyle(color: Constant.white),
+            //     ),
+            //     backgroundColor: Constant.orange,
+            //   ),
+            // );
           }
         },
         child: Text(

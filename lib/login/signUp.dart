@@ -184,20 +184,32 @@ class _SignUpState extends State<SignUp> {
               _nameController.text,
               _mobileController.text);
 
-          final snackBar = SnackBar(
-            backgroundColor: Theme.of(context).iconTheme.color,
-            behavior: SnackBarBehavior.floating,
-            content: const Text('Account created successfully'),
-          );
-          await ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                loggedInUser: _appUser,
+          if (_appUser != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).iconTheme.color,
+                behavior: SnackBarBehavior.floating,
+                content: const Text('Account created successfully'),
               ),
-            ),
-          );
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                  loggedInUser: _appUser,
+                ),
+              ),
+            );
+          } else {
+            print('AppUser is null');
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).iconTheme.color,
+                behavior: SnackBarBehavior.floating,
+                content: const Text('Account already exists'),
+              ),
+            );
+          }
         }
       },
       child: Text(
