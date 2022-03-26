@@ -400,11 +400,11 @@ class _AddSongState extends State<AddSong> {
                               songTitleInEnglish: _titleEnglishController.text,
                               singerName: _singerNameController.text,
                               songText: _lyricsController.text,
-                              songURL: await songUrl,
+                              songURL: songUrl,
                               songId: Uuid().v1(),
                               songDuration:
                                   autoDuration.toString().split('.')[0],
-                              uploadedBy: await widget.loggedInUser?.name,
+                              uploadedBy: widget.loggedInUser?.name,
                             );
 
                             SongAPI().createNewSong(songsModel);

@@ -12,26 +12,31 @@ class userAPI {
     return _loggedInUser;
   }
 
+  static const RELEASE_MODE = true;
+  UserCredential? userCredential;
+
 // SignIn
   Future<AppUser?> signIn(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => uid);
+      if (RELEASE_MODE) {
+        userCredential = await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => uid);
+      }
 
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
 
-      final user = users
-          .where("uid", isEqualTo: userCredential.user?.uid)
-          .get()
-          .then((querySnapshot) {
-        final userData =
-            querySnapshot.docs.first.data() as Map<String, dynamic>;
-        final user = AppUser.fromMap(userData);
-        _loggedInUser = user;
-        return user;
-      });
+      final user =
+          users.where("uid", isEqualTo: userCredential?.user?.uid).get().then(
+        (querySnapshot) {
+          final userData =
+              querySnapshot.docs.first.data() as Map<String, dynamic>;
+          final user = AppUser.fromMap(userData);
+          _loggedInUser = user;
+          return user;
+        },
+      );
       return user;
 
       //return uid.user?.uid;

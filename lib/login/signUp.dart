@@ -175,33 +175,36 @@ class _SignUpState extends State<SignUp> {
       ),
     );
     final signUpButton = ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Constant.orange),
-        onPressed: () async {
-          if (_formkey.currentState!.validate()) {
-            await userAPI().signUp(
-                _emailController.text,
-                _passwordController.text,
-                _nameController.text,
-                _mobileController.text);
+      style: ElevatedButton.styleFrom(primary: Constant.orange),
+      onPressed: () async {
+        if (_formkey.currentState!.validate()) {
+          await userAPI().signUp(
+              _emailController.text,
+              _passwordController.text,
+              _nameController.text,
+              _mobileController.text);
 
-            final snackBar = SnackBar(
-              content: const Text('Yay! Account created successfully :)'),
-            );
-            await ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-              ),
-            );
-          }
-        },
-        child: Text(
-          "SignUp",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ));
+          final snackBar = SnackBar(
+            backgroundColor: Theme.of(context).iconTheme.color,
+            behavior: SnackBarBehavior.floating,
+            content: const Text('Account created successfully'),
+          );
+          await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
+        }
+      },
+      child: Text(
+        "SignUp",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+    );
 
     return Container(
       child: Scaffold(

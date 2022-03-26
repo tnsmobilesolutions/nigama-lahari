@@ -141,14 +141,18 @@ class SearchSongAPI {
   }
 
   Future<List<Song>?> getSongByDuration(String value) {
-    var s1 = '00:00:00';
-    var s2 = '00:05:00';
-    var s3 = '00:10:00';
+    var small = DateTime.parse('2000-01-01 00:05:00');
+    var medium = DateTime.parse('2000-01-01 00:08:00');
 
-    var t1 = DateTime.parse('2000-01-01 $s1');
-    var t2 = DateTime.parse('2000-01-01 $s2');
-    var t3 = DateTime.parse('2000-01-01 $s3');
-    print(t2.minute);
+    // if (songDurationInDate == small || songDurationInDate.isBefore(small)) {
+    //   print('This is a small duration song');
+    // } else if (songDurationInDate.isAfter(small) &&
+    //     songDurationInDate.isBefore(medium)) {
+    //   print('This is a medium duration song');
+    // } else {
+    //   print('This is a large duration song');
+    // }
+
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
       (querySnapshot) {
@@ -159,45 +163,27 @@ class SearchSongAPI {
             final resultSongs = element.data() as Map<String, dynamic>;
             //print(resultSongs);
             final song = Song.fromMap(resultSongs);
+            final songDurationInString = song.songDuration?.padLeft(8, '0');
+            var songDurationInDate =
+                DateTime.parse('2000-01-01 $songDurationInString');
             switch (value) {
               case 'small':
-                //print(song.songDuration);
-                if (song.songDuration != null) {
+                if (songDurationInDate == small ||
+                    songDurationInDate.isBefore(small)) {
+                  //print('This is a small duration song');
                   lstSong.add(song);
-                  lstSong.forEach(
-                    (element) {
-                      //print(element);
-                      var s4 = element.songDuration;
-                      //print(s4);
-                      //DateTime time = DateTime.parse('2000-01-01 $s4');
-                      //print(t4);
-                      // final resultDuration = element.songDuration;
-                      // print(resultDuration);
-                    },
-                  );
                 }
-                ;
+
                 break;
               case 'medium':
-                if (song.songDuration!.isNotEmpty) {
+                if (songDurationInDate.isAfter(small) &&
+                    songDurationInDate.isBefore(medium)) {
                   lstSong.add(song);
-                  lstSong.forEach(
-                    (element) {
-                      final resultDuration = element.songDuration;
-                      print(resultDuration);
-                    },
-                  );
                 }
                 break;
               case 'long':
-                if (song.songDuration!.isNotEmpty) {
+                if (songDurationInDate.isAfter(medium)) {
                   lstSong.add(song);
-                  lstSong.forEach(
-                    (element) {
-                      final resultDuration = element.songDuration;
-                      print(resultDuration);
-                    },
-                  );
                 }
                 break;
               default:

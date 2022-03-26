@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/edit_song.dart';
-import 'package:flutter_application_1/lyrics.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
 
+import 'lyrics.dart';
 import 'models/usermodel.dart';
 
 class SongDetail extends StatefulWidget {
@@ -153,6 +153,7 @@ class _SongDetailState extends State<SongDetail> {
           ],
         ),
         body: Container(
+          //width: double.maxFinite,
           height: double.infinity,
           //color: Colors.transparent,
           child: SafeArea(

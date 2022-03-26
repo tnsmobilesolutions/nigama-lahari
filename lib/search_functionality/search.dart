@@ -14,6 +14,13 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
+  Map<String, String> _songsInOdia = {
+    'Name': 'ନାମ',
+    'Singer': 'ଗାୟକ',
+    'Attribute': 'ଭାବ',
+    'Category': 'ବିଭାଗ',
+    'Duration': "ଦୀର୍ଘତା"
+  };
   String? _selectedOption;
   String _value = '';
 
@@ -48,15 +55,17 @@ class _SearchState extends State<Search> {
                   ),
                   value: _selectedOption,
                   onChanged: (newValue) {
-                    setState(() {
-                      _selectedOption = newValue as String?;
-                    });
+                    setState(
+                      () {
+                        _selectedOption = newValue as String?;
+                      },
+                    );
                   },
                   items: _songs.map(
-                    (songs) {
+                    (song) {
                       return DropdownMenuItem(
-                        child: new Text(songs),
-                        value: songs,
+                        child: new Text(_songsInOdia[song] ?? ''),
+                        value: song,
                       );
                     },
                   ).toList(),
