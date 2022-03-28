@@ -35,6 +35,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   bool nextDone = true;
   bool prevDone = true;
   bool isRepeat = false;
+  bool haveDuration = false;
   Color color = Constant.orange;
 
   AudioService? audioService = AudioService();
@@ -63,7 +64,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       },
     );
 
-    MaxDuration();
+    MaxDuration().then((value) => nextSong());
 
     // //max duration of mp3 file
     // audioPlayer?.onDurationChanged.listen(
@@ -103,14 +104,20 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  StreamSubscription<Duration>? MaxDuration() {
-    //max duration of mp3 file
-    return audioPlayer?.onDurationChanged.listen(
+  //max duration of mp3 file
+  Future<StreamSubscription<Duration>?> MaxDuration() async {
+    StreamSubscription<Duration>? maxDuration =
+        await audioPlayer?.onDurationChanged.listen(
       (Duration d) {
         print('Max duration: $d');
         setState(() => _duration = d);
       },
     );
+    setState(() {
+      haveDuration = true;
+    });
+    // nextSongPressed();
+    return maxDuration;
   }
 
   @override
@@ -245,13 +252,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
         size: 40,
         color: isLastIndex ? Constant.lightblue : Constant.orange,
       ),
-      onPressed: nextSongPressed,
-      // () {
-      //   nextSongPressed;
-      //   setState(() {
-      //     playerState == PlayerState.PLAYING ? playMusic() : pauseMusic();
-      //   });
-      // },
+      onPressed: haveDuration ? nextSongPressed : () {},
     );
   }
 
