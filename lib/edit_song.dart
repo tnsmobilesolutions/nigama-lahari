@@ -267,37 +267,40 @@ class _Edit_SongState extends State<EditSong> {
                       children: [
                         Text(
                           'ବିଭାଗ',
-                          style: TextStyle(color: Constant.white),
+                          style: TextStyle(color: Constant.white12),
                         ),
-                        DropdownButton(
-                          borderRadius: BorderRadius.circular(15),
-                          style: TextStyle(color: Constant.white),
-                          iconEnabledColor: Constant.orange,
-                          hint: Text(
-                            _catagoryController.text,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
+                        DropdownButtonHideUnderline(
+                          // this widget hides the dropdown default underline
+                          child: DropdownButton(
+                            borderRadius: BorderRadius.circular(15),
+                            style: TextStyle(color: Constant.white),
+                            iconEnabledColor: Constant.orange,
+                            hint: Text(
+                              _catagoryController.text,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          value: _selectedOption,
-                          dropdownColor: Constant.orange,
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                _selectedOption = value as String?;
-                                //print(_selectedOption.toString());
-                              },
-                            );
-                          },
-                          items: _catagory.map(
-                            (val) {
-                              return DropdownMenuItem(
-                                child: new Text(val),
-                                value: val,
+                            value: _selectedOption,
+                            dropdownColor: Constant.orange,
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  _selectedOption = value as String?;
+                                  //print(_selectedOption.toString());
+                                },
                               );
                             },
-                          ).toList(),
+                            items: _catagory.map(
+                              (val) {
+                                return DropdownMenuItem(
+                                  child: new Text(val),
+                                  value: val,
+                                );
+                              },
+                            ).toList(),
+                          ),
                         ),
                       ],
                     ),
