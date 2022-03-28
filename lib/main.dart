@@ -71,7 +71,8 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: AnimatedSplashScreen(
             splash: Image(
-              image: AssetImage('assets/image/nsslogo.jpg'),
+              //image: AssetImage('assets/image/nsslogo(1).jpg'),
+              image: AssetImage('assets/image/nsslogo-2.png'),
             ),
             splashIconSize: 200,
             splashTransition: SplashTransition.fadeTransition,
@@ -97,17 +98,6 @@ class MyApp extends StatelessWidget {
                         }
                       },
                     );
-
-                    // userAPI().getAppUserFromUid(user.uid).then(
-                    //   (value) {
-                    //     return HomeScreen(loggedInUser: value);
-                    //   },
-                    // ).catchError(
-                    //   (e) {
-                    //     return CircularProgressIndicator();
-                    //   },
-                    // );
-                    //return CircularProgressIndicator();
                   }
                 } else {
                   return Center(
