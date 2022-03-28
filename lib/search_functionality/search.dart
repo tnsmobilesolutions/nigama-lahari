@@ -244,13 +244,6 @@ class _SearchState extends State<Search> {
             labelText: 'Type Song $selectedOption',
             labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           ),
-          // decoration: InputDecoration(
-          //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-          //   labelText: 'Type Song $selectedOption',
-          //   hintStyle: TextStyle(
-          //     fontSize: 15.0,
-          //   ),
-          // ),
         ),
       );
     } else {

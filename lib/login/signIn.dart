@@ -98,10 +98,10 @@ class _SignInState extends State<SignIn> {
             color: Constant.orange,
           ),
         ),
-        // enabledBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(15),
-        //   borderSide: BorderSide(color: Constant.orange),
-        // ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.orange),
+        ),
         prefixIcon: const Icon(Icons.vpn_key, color: Constant.orange),
         suffixIcon: new GestureDetector(
           onTap: () {

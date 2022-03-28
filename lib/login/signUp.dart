@@ -260,32 +260,28 @@ class _SignUpState extends State<SignUp> {
           title: Text('ସାଇନ ଅପ'),
         ),
         body: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              //color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Form(
-                    key: _formkey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        const SizedBox(height: 20),
-                        name,
-                        const SizedBox(height: 20),
-                        mobileNumber,
-                        const SizedBox(height: 20),
-                        email,
-                        const SizedBox(height: 20),
-                        password,
-                        const SizedBox(height: 20),
-                        confirmPassword,
-                        const SizedBox(height: 20),
-                        signUpButton
-                      ],
-                    )),
-              ),
+          child: Container(
+            //color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Form(
+                  key: _formkey,
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(height: 20),
+                      name,
+                      const SizedBox(height: 20),
+                      mobileNumber,
+                      const SizedBox(height: 20),
+                      email,
+                      const SizedBox(height: 20),
+                      password,
+                      const SizedBox(height: 20),
+                      confirmPassword,
+                      const SizedBox(height: 20),
+                      signUpButton
+                    ],
+                  )),
             ),
           ),
         ),
