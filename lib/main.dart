@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
@@ -46,17 +47,23 @@ class MyApp extends StatelessWidget {
         /* light theme settings */
       ),
       darkTheme: ThemeData(
+        cupertinoOverrideTheme: CupertinoThemeData(
+          primaryColor: Constant.orange,
+        ),
+
         iconTheme: IconThemeData(color: Constant.orange),
         buttonTheme: ButtonThemeData(
             buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
 
         fontFamily: 'Roboto',
         primaryColor: Constant.orange,
-        textTheme: TextTheme(button: TextStyle(color: Constant.white)),
+        textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
         scaffoldBackgroundColor: Constant.darkBlue,
         //primarySwatch: Colors.orange,
         appBarTheme: AppBarTheme(color: Constant.blue),
         brightness: Brightness.dark,
+        textSelectionTheme:
+            TextSelectionThemeData(cursorColor: Constant.orange),
         /* dark theme settings */
       ),
       themeMode: ThemeMode.dark,

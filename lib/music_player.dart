@@ -51,11 +51,15 @@ class _MusicPlayerState extends State<MusicPlayer> {
     // so playing instantly may disturb the user.
     //playMusic();
 
-    audioPlayer!.onPlayerStateChanged.listen((PlayerState s) {
-      setState(() {
-        playerState = s;
-      });
-    });
+    audioPlayer!.onPlayerStateChanged.listen(
+      (PlayerState s) {
+        setState(
+          () {
+            playerState = s;
+          },
+        );
+      },
+    );
 
     //max duration of mp3 file
     audioPlayer?.onDurationChanged.listen(

@@ -259,7 +259,7 @@ class _Edit_SongState extends State<EditSong> {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Constant.white),
+                      border: Border.all(color: Constant.orange),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -270,6 +270,7 @@ class _Edit_SongState extends State<EditSong> {
                           style: TextStyle(color: Constant.white),
                         ),
                         DropdownButton(
+                          borderRadius: BorderRadius.circular(15),
                           style: TextStyle(color: Constant.white),
                           iconEnabledColor: Constant.orange,
                           hint: Text(
@@ -280,7 +281,7 @@ class _Edit_SongState extends State<EditSong> {
                             ),
                           ),
                           value: _selectedOption,
-                          dropdownColor: Constant.lightblue,
+                          dropdownColor: Constant.orange,
                           onChanged: (value) {
                             setState(
                               () {
@@ -313,13 +314,20 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Constant.orange,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Constant.orange),
+                      ),
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ନାମ',
                       labelStyle:
                           TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -334,13 +342,20 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Constant.orange,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Constant.orange),
+                      ),
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
                       labelStyle:
                           TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -355,13 +370,20 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Constant.orange,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Constant.orange),
+                      ),
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗାୟକ',
                       labelStyle:
                           TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -376,13 +398,20 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Constant.orange,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Constant.orange),
+                      ),
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଭାବ',
                       labelStyle:
                           TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -398,19 +427,26 @@ class _Edit_SongState extends State<EditSong> {
                       return null;
                     },
                     decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Constant.orange,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Constant.orange),
+                      ),
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗୀତ ଲେଖା',
                       labelStyle:
                           TextStyle(fontSize: 15.0, color: Constant.white12),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Constant.white)),
                     ),
                   ),
                   SizedBox(height: 15),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1),
+                      border: Border.all(color: Constant.orange, width: 1),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),

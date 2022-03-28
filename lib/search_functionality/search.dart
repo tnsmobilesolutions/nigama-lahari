@@ -46,9 +46,10 @@ class _SearchState extends State<Search> {
             child: Column(
               children: [
                 DropdownButton(
+                  borderRadius: BorderRadius.circular(15),
                   iconEnabledColor: Theme.of(context).iconTheme.color,
                   style: TextStyle(color: Constant.white),
-                  dropdownColor: Constant.lightblue,
+                  dropdownColor: Constant.orange,
                   hint: Text(
                     'ସଂଗୀତ ଖୋଜନ୍ତୁ',
                     style: TextStyle(color: Constant.white),
@@ -141,12 +142,21 @@ class _SearchState extends State<Search> {
           keyboardType: TextInputType.name,
           controller: _nameController,
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(
-              fontSize: 15.0,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                color: Constant.orange,
+              ),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Constant.orange),
+            ),
+            contentPadding: const EdgeInsets.all(15),
+            labelText: 'Type Song $selectedOption',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           ),
+
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please Enter Your Name';
@@ -182,11 +192,19 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            labelText: 'Type $selectedOption Name',
-            hintStyle: TextStyle(
-              fontSize: 15.0,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                color: Constant.orange,
+              ),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Constant.orange),
+            ),
+            contentPadding: const EdgeInsets.all(15),
+            labelText: 'Type $selectedOption Name',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           ),
         ),
       );
@@ -212,12 +230,27 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(
-              fontSize: 15.0,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                color: Constant.orange,
+              ),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Constant.orange),
+            ),
+            contentPadding: const EdgeInsets.all(15),
+            labelText: 'Type Song $selectedOption',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           ),
+          // decoration: InputDecoration(
+          //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+          //   labelText: 'Type Song $selectedOption',
+          //   hintStyle: TextStyle(
+          //     fontSize: 15.0,
+          //   ),
+          // ),
         ),
       );
     } else {
@@ -242,12 +275,27 @@ class _SearchState extends State<Search> {
             return null;
           },
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            labelText: 'Type Song $selectedOption',
-            hintStyle: TextStyle(
-              fontSize: 15.0,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                color: Constant.orange,
+              ),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Constant.orange),
+            ),
+            contentPadding: const EdgeInsets.all(15),
+            labelText: 'Type Song $selectedOption',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
           ),
+          // decoration: InputDecoration(
+          //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+          //   labelText: 'Type Song $selectedOption',
+          //   hintStyle: TextStyle(
+          //     fontSize: 15.0,
+          //   ),
+          // ),
         ),
       );
     } else {

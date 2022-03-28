@@ -162,7 +162,7 @@ class _AddSongState extends State<AddSong> {
           leading: BackButton(color: Theme.of(context).iconTheme.color),
           elevation: 0,
           centerTitle: true,
-          title: Text('Add Song'),
+          title: Text('ନୂଆ ଗୀତ', style: TextStyle(color: Constant.orange)),
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -178,6 +178,7 @@ class _AddSongState extends State<AddSong> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           DropdownButton(
+                            borderRadius: BorderRadius.circular(15),
                             style: TextStyle(color: Constant.white),
                             iconEnabledColor: Theme.of(context).iconTheme.color,
                             hint: Text(
@@ -188,7 +189,7 @@ class _AddSongState extends State<AddSong> {
                               ),
                             ),
                             value: _selectedOption,
-                            dropdownColor: Constant.lightblue,
+                            dropdownColor: Constant.orange,
                             onChanged: (value) {
                               setState(
                                 () {
@@ -218,13 +219,20 @@ class _AddSongState extends State<AddSong> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Constant.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Constant.orange),
+                          ),
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ନାମ',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -237,13 +245,20 @@ class _AddSongState extends State<AddSong> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Constant.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Constant.orange),
+                          ),
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -256,13 +271,20 @@ class _AddSongState extends State<AddSong> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Constant.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Constant.orange),
+                          ),
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗାୟକ',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -275,13 +297,20 @@ class _AddSongState extends State<AddSong> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Constant.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Constant.orange),
+                          ),
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଭାବ',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -295,13 +324,20 @@ class _AddSongState extends State<AddSong> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.newline,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Constant.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Constant.orange),
+                          ),
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗୀତ ଲେଖା',
                           labelStyle: TextStyle(
                               fontSize: 15.0, color: Constant.white12),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Constant.white)),
                         ),
                       ),
                       SizedBox(
@@ -330,8 +366,10 @@ class _AddSongState extends State<AddSong> {
                             Flexible(
                               child: Text(
                                 fileName,
-                                // style: TextStyle(color: Constant.white,
-                                //     fontSize: 16, fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                    color: Constant.orange,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],

@@ -39,10 +39,20 @@ class _ResetPasswordState extends State<ResetPassword> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.email),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'ନିଜ ଇମେଲ ଲେଖନ୍ତୁ',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.orange),
+        ),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'ନିଜ ଇମେଲ ଲେଖନ୍ତୁ',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+      ),
     );
     return Scaffold(
       appBar: AppBar(

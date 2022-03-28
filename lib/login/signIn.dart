@@ -49,10 +49,23 @@ class _SignInState extends State<SignIn> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.email),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'ଇମେଲ',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.orange),
+        ),
+        prefixIcon: const Icon(Icons.email, color: Constant.orange),
+        contentPadding: const EdgeInsets.all(15),
+        hintText: 'ଇମେଲ',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
     );
 
     //password field
@@ -79,19 +92,33 @@ class _SignInState extends State<SignIn> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
-          suffixIcon: new GestureDetector(
-            onTap: () {
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
-            child: new Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
           ),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'ପାସୱର୍ଡ',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        ),
+        // enabledBorder: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(15),
+        //   borderSide: BorderSide(color: Constant.orange),
+        // ),
+        prefixIcon: const Icon(Icons.vpn_key, color: Constant.orange),
+        suffixIcon: new GestureDetector(
+          onTap: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          child: new Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
+              color: Constant.orange),
+        ),
+        contentPadding: const EdgeInsets.all(15),
+        hintText: 'ପାସୱର୍ଡ',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
     );
     final loginButton = Material(
       elevation: 5,
