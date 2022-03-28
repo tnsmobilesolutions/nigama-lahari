@@ -213,6 +213,29 @@ class _SearchState extends State<Search> {
     }
   }
 
+  // Widget getAttributeSong(String? selectedOption) {
+  //   bool _isSelected = false;
+  //   if (selectedOption == "Attribute") {
+  //     return Padding(
+  //         padding: const EdgeInsets.all(20.0),
+  //         child: Wrap(
+  //           children: [
+  //             ChoiceChip(
+  //               label: Text('ନାମ'),
+  //               disabledColor: Constant.lightblue,
+  //               selectedColor: Constant.orange,
+  //               selected: _isSelected,
+  //               onSelected: (value) {
+  //                 _isSelected = value;
+  //               },
+  //             )
+  //           ],
+  //         ));
+  //   } else {
+  //     return SizedBox(width: 0, height: 0);
+  //   }
+  // }
+
   Widget getAttributeSong(String? selectedOption) {
     if (selectedOption == "Attribute") {
       return Padding(

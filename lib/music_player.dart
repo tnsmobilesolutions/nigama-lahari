@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -61,13 +63,15 @@ class _MusicPlayerState extends State<MusicPlayer> {
       },
     );
 
-    //max duration of mp3 file
-    audioPlayer?.onDurationChanged.listen(
-      (Duration d) {
-        print('Max duration: $d');
-        setState(() => _duration = d);
-      },
-    );
+    MaxDuration();
+
+    // //max duration of mp3 file
+    // audioPlayer?.onDurationChanged.listen(
+    //   (Duration d) {
+    //     print('Max duration: $d');
+    //     setState(() => _duration = d);
+    //   },
+    // );
 
     //current playtime of mp3 file
     audioPlayer?.onAudioPositionChanged.listen(
@@ -95,6 +99,16 @@ class _MusicPlayerState extends State<MusicPlayer> {
           _position = Duration(seconds: 0);
           //buttonRepeat();
         });
+      },
+    );
+  }
+
+  StreamSubscription<Duration>? MaxDuration() {
+    //max duration of mp3 file
+    return audioPlayer?.onDurationChanged.listen(
+      (Duration d) {
+        print('Max duration: $d');
+        setState(() => _duration = d);
       },
     );
   }
