@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
@@ -68,17 +69,34 @@ class _ResetPasswordState extends State<ResetPassword> {
                 onPressed: () async {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formkey.currentState!.validate()) {
-                    setState(() {
-                      email = emailController.text;
-                    });
-
-                    await userAPI().resetPassword(email);
-                    final snackBar = SnackBar(
-                      content: const Text('ଲିଙ୍କ ଆପଣଙ୍କ ଇମେଲକୁ ଯାଇଛି :)'),
-                    );
-                    await ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-                    Navigator.pop(context);
+                    final resetPassword = await userAPI()
+                        .resetPassword(emailController.text.trim());
+                    if (resetPassword) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text(
+                            'Password sent to Email',
+                            style: TextStyle(color: Constant.white),
+                          ),
+                          backgroundColor: Constant.orange,
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text(
+                            'Wrong user credential',
+                            style: TextStyle(color: Constant.white),
+                          ),
+                          backgroundColor: Constant.orange,
+                        ),
+                      );
+                    }
                   }
                 },
               ),

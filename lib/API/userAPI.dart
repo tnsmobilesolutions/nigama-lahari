@@ -137,13 +137,15 @@ class userAPI {
 
   // Reset Password
 
-  Future resetPassword(String email) async {
+  Future<bool> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       }
+      return false;
     }
   }
 
