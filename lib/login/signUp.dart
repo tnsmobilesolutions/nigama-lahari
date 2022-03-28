@@ -42,13 +42,22 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Constant.orange),
+        ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ନାମ',
         labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Constant.white),
-        ),
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(15),
+        // ),
       ),
     );
     final mobileNumber = TextFormField(
@@ -74,13 +83,19 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(15),
-        labelText: 'Phone Number',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Constant.white),
+          borderSide: BorderSide(color: Constant.orange),
         ),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'ଫୋନ ନମ୍ବର',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
       ),
     );
 
@@ -108,13 +123,19 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(15),
-        labelText: 'Email',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Constant.white),
+          borderSide: BorderSide(color: Constant.orange),
         ),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'ଇମେଲ',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
       ),
     );
     final password = TextFormField(
@@ -139,13 +160,19 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(15),
-        labelText: 'Password',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Constant.white),
+          borderSide: BorderSide(color: Constant.orange),
         ),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'ପାସୱର୍ଡ',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
       ),
     );
 
@@ -165,13 +192,19 @@ class _SignUpState extends State<SignUp> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(15),
-        labelText: 'Confirm Password',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Constant.orange,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Constant.white),
+          borderSide: BorderSide(color: Constant.orange),
         ),
+        contentPadding: const EdgeInsets.all(15),
+        labelText: 'କନଫର୍ମ ପାସୱର୍ଡ',
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
       ),
     );
     final signUpButton = ElevatedButton(
@@ -213,7 +246,7 @@ class _SignUpState extends State<SignUp> {
         }
       },
       child: Text(
-        "SignUp",
+        "ସାଇନ ଅପ",
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -222,6 +255,10 @@ class _SignUpState extends State<SignUp> {
 
     return Container(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('ସାଇନ ଅପ'),
+        ),
         body: Center(
           child: SingleChildScrollView(
             child: Container(
