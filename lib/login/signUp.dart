@@ -182,7 +182,8 @@ class _SignUpState extends State<SignUp> {
       controller: _confirmPasswordController,
       obscureText: true,
       validator: (value) {
-        if (_confirmPasswordController.text != _passwordController.text) {
+        if (_confirmPasswordController.text.trim() !=
+            _passwordController.text.trim()) {
           return "Password don't match";
         }
         return null;
@@ -212,10 +213,10 @@ class _SignUpState extends State<SignUp> {
       onPressed: () async {
         if (_formkey.currentState!.validate()) {
           final _appUser = await userAPI().signUp(
-              _emailController.text,
-              _passwordController.text,
-              _nameController.text,
-              _mobileController.text);
+              _emailController.text.trim(),
+              _passwordController.text.trim(),
+              _nameController.text.trim(),
+              _mobileController.text.trim());
 
           if (_appUser != null) {
             ScaffoldMessenger.of(context).showSnackBar(
