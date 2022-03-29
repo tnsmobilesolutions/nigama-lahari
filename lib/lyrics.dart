@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
 
 class LyricsViewer extends StatefulWidget {
   const LyricsViewer({Key? key, required this.lyrics, required this.fontSize})
@@ -23,7 +24,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
           overflow: TextOverflow.fade,
           softWrap: true,
           style: TextStyle(
-            color: Colors.white70,
+            color: Constant.white,
             fontSize: widget.fontSize,
           ),
         ),

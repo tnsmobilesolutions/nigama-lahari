@@ -430,8 +430,8 @@ class _AddSongState extends State<AddSong> {
 
                               SongAPI().createNewSong(songsModel);
                             }
-                            print(
-                                '********${widget.loggedInUser?.name}*********');
+                            // print(
+                            //     '********${widget.loggedInUser?.name}*********');
                             await ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 elevation: 6,
@@ -447,25 +447,6 @@ class _AddSongState extends State<AddSong> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           }
-
-                          // if (_formKey.currentState!.validate()) {
-                          //   Song songsModel = Song(
-                          //     isEditable: true,
-                          //     songCategory: _selectedOption,
-                          //     songAttribute: _attributeController.text,
-                          //     songTitle: _titleController.text,
-                          //     songTitleInEnglish: _titleEnglishController.text,
-                          //     singerName: _singerNameController.text,
-                          //     songText: _lyricsController.text,
-                          //     songURL: songUrl,
-                          //     songId: Uuid().v1(),
-                          //     songDuration:
-                          //         autoDuration.toString().split('.')[0],
-                          //     uploadedBy: widget.loggedInUser?.name,
-                          //   );
-
-                          //   SongAPI().createNewSong(songsModel);
-                          // }
                         },
                         child: Text(
                           'ଅପଲୋଡ଼ କରନ୍ତୁ',

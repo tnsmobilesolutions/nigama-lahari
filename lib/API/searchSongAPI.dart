@@ -144,15 +144,6 @@ class SearchSongAPI {
     var small = DateTime.parse('2000-01-01 00:05:00');
     var medium = DateTime.parse('2000-01-01 00:08:00');
 
-    // if (songDurationInDate == small || songDurationInDate.isBefore(small)) {
-    //   print('This is a small duration song');
-    // } else if (songDurationInDate.isAfter(small) &&
-    //     songDurationInDate.isBefore(medium)) {
-    //   print('This is a medium duration song');
-    // } else {
-    //   print('This is a large duration song');
-    // }
-
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
       (querySnapshot) {
