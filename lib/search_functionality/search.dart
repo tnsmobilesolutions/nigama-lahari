@@ -109,6 +109,12 @@ class _SearchState extends State<Search> {
                                 style: TextStyle(color: Constant.white),
                               ),
                               backgroundColor: Constant.orange,
+                              // action: SnackBarAction(
+                              //   label: 'Undo',
+                              //   onPressed: () {
+                              //     Navigator.pop(context);
+                              //   },
+                              // ),
                             ),
                           );
                         } else {
