@@ -88,7 +88,6 @@ class _SignInState extends State<SignIn> {
       },
       onSaved: (value) {
         passswordController.text = value!;
-        ;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -129,8 +128,8 @@ class _SignInState extends State<SignIn> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
-            _loggedInUser = await userAPI()
-                .signIn(emailController.text, passswordController.text);
+            _loggedInUser = await userAPI().signIn(
+                emailController.text.trim(), passswordController.text.trim());
 
             print("Name: ${_loggedInUser?.name}");
             if (_loggedInUser != null) {
@@ -148,25 +147,13 @@ class _SignInState extends State<SignIn> {
                   elevation: 6,
                   behavior: SnackBarBehavior.floating,
                   content: const Text(
-                    'Wrong user credential',
+                    'ଦୟା କରି  ନିଜ ଇ-ମେଲ କିମ୍ବା ପାସୱର୍ଡ ପୁନଃ ଯାଞ୍ଚ କରନ୍ତୁ',
                     style: TextStyle(color: Constant.white),
                   ),
                   backgroundColor: Constant.orange,
                 ),
               );
             }
-
-            // await ScaffoldMessenger.of(context).showSnackBar(
-            //   SnackBar(
-            //     elevation: 6,
-            //     behavior: SnackBarBehavior.floating,
-            //     content: const Text(
-            //       'ଜୟଗୁରୁ !  ନିଗମ ଲହରୀକୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ',
-            //       style: TextStyle(color: Constant.white),
-            //     ),
-            //     backgroundColor: Constant.orange,
-            //   ),
-            // );
           }
         },
         child: Text(

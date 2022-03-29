@@ -100,7 +100,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           elevation: 6,
                           behavior: SnackBarBehavior.floating,
                           content: const Text(
-                            'Wrong user credential',
+                            'ଦୟା କରି  ନିଜ ଇ-ମେଲ ପୁନଃ ଯାଞ୍ଚ କରନ୍ତୁ',
                             style: TextStyle(color: Constant.white),
                           ),
                           backgroundColor: Constant.orange,
