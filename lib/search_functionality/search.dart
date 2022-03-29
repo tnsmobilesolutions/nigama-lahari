@@ -163,7 +163,7 @@ class _SearchState extends State<Search> {
                               elevation: 6,
                               behavior: SnackBarBehavior.floating,
                               content: const Text(
-                                'ଦୟାକରି ଭାବ ନାମ ଲେଖନ୍ତୁ',
+                                'ଦୟାକରି ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
                                 style: TextStyle(color: Constant.white),
                               ),
                               backgroundColor: Constant.orange,
@@ -263,8 +263,8 @@ class _SearchState extends State<Search> {
               borderSide: BorderSide(color: Constant.orange),
             ),
             contentPadding: const EdgeInsets.all(15),
-            labelText: 'Type Song $selectedOption',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+            labelText: 'ଗୀତ ନାମ ଲେଖନ୍ତୁ',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
           ),
 
           validator: (value) {
@@ -313,8 +313,8 @@ class _SearchState extends State<Search> {
               borderSide: BorderSide(color: Constant.orange),
             ),
             contentPadding: const EdgeInsets.all(15),
-            labelText: 'Type $selectedOption Name',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+            labelText: 'ଗାୟକଙ୍କ ନାମ ଲେଖନ୍ତୁ',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
           ),
         ),
       );
@@ -374,8 +374,8 @@ class _SearchState extends State<Search> {
               borderSide: BorderSide(color: Constant.orange),
             ),
             contentPadding: const EdgeInsets.all(15),
-            labelText: 'Type Song $selectedOption',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+            labelText: 'ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
           ),
         ),
       );
@@ -412,8 +412,8 @@ class _SearchState extends State<Search> {
               borderSide: BorderSide(color: Constant.orange),
             ),
             contentPadding: const EdgeInsets.all(15),
-            labelText: 'Type Song $selectedOption',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+            labelText: 'ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
+            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
           ),
           // decoration: InputDecoration(
           //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
@@ -440,7 +440,7 @@ class _SearchState extends State<Search> {
             ListTile(
               title: Text(
                 'ଛୋଟ ଗୀତ',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Constant.white),
               ),
               leading: Radio<String>(
                 fillColor:
@@ -457,7 +457,7 @@ class _SearchState extends State<Search> {
             ListTile(
               title: Text(
                 'ମଧ୍ୟମ ଗୀତ',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Constant.white),
               ),
               leading: Radio<String>(
                 fillColor:
@@ -474,7 +474,7 @@ class _SearchState extends State<Search> {
             ListTile(
               title: Text(
                 'ଲମ୍ବା ଗୀତ',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Constant.white),
               ),
               leading: Radio<String>(
                 fillColor:

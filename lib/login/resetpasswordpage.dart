@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
 
@@ -51,7 +50,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ନିଜ ଇମେଲ ଲେଖନ୍ତୁ',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
       ),
     );
     return Scaffold(

@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ନାମ',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
         // border: OutlineInputBorder(
         //   borderRadius: BorderRadius.circular(15),
         // ),
@@ -95,7 +95,7 @@ class _SignUpState extends State<SignUp> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ଫୋନ ନମ୍ବର',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
       ),
     );
 
@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ଇମେଲ',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
       ),
     );
     final password = TextFormField(
@@ -172,7 +172,7 @@ class _SignUpState extends State<SignUp> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'ପାସୱର୍ଡ',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
       ),
     );
 
@@ -205,7 +205,7 @@ class _SignUpState extends State<SignUp> {
         ),
         contentPadding: const EdgeInsets.all(15),
         labelText: 'କନଫର୍ମ ପାସୱର୍ଡ',
-        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+        labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
       ),
     );
     final signUpButton = ElevatedButton(
@@ -250,7 +250,7 @@ class _SignUpState extends State<SignUp> {
         "ସାଇନ ଅପ",
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 20, color: Constant.white, fontWeight: FontWeight.bold),
       ),
     );
 
@@ -262,7 +262,6 @@ class _SignUpState extends State<SignUp> {
         ),
         body: Center(
           child: Container(
-            //color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Form(

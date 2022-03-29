@@ -38,28 +38,21 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: Constant.orange, size: 30),
         textTheme: TextTheme(button: TextStyle(color: Constant.white)),
-        primarySwatch: Colors.grey,
-        primaryColor: Colors.black,
         backgroundColor: const Color(0xFF212121),
-        //colorScheme: Colors.white,
 
-        dividerColor: Colors.black12,
         /* light theme settings */
       ),
       darkTheme: ThemeData(
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: Constant.orange,
         ),
-
         iconTheme: IconThemeData(color: Constant.orange),
         buttonTheme: ButtonThemeData(
             buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
-
         fontFamily: 'Roboto',
         primaryColor: Constant.orange,
         textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
         scaffoldBackgroundColor: Constant.darkBlue,
-        //primarySwatch: Colors.orange,
         appBarTheme: AppBarTheme(color: Constant.blue),
         brightness: Brightness.dark,
         textSelectionTheme:
@@ -76,7 +69,7 @@ class MyApp extends StatelessWidget {
             ),
             splashIconSize: 200,
             splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Constant.darkBlue,
             nextScreen: StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {

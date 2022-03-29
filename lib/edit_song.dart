@@ -267,7 +267,7 @@ class _Edit_SongState extends State<EditSong> {
                       children: [
                         Text(
                           'ବିଭାଗ',
-                          style: TextStyle(color: Constant.white12),
+                          style: TextStyle(color: Constant.white24),
                         ),
                         DropdownButtonHideUnderline(
                           // this widget hides the dropdown default underline
@@ -275,20 +275,12 @@ class _Edit_SongState extends State<EditSong> {
                             borderRadius: BorderRadius.circular(15),
                             style: TextStyle(color: Constant.white),
                             iconEnabledColor: Constant.orange,
-                            hint: Text(
-                              _catagoryController.text,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
                             value: _selectedOption,
                             dropdownColor: Constant.orange,
                             onChanged: (value) {
                               setState(
                                 () {
                                   _selectedOption = value as String?;
-                                  //print(_selectedOption.toString());
                                 },
                               );
                             },
@@ -330,7 +322,7 @@ class _Edit_SongState extends State<EditSong> {
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ନାମ',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                          TextStyle(fontSize: 15.0, color: Constant.white24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -358,7 +350,7 @@ class _Edit_SongState extends State<EditSong> {
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                          TextStyle(fontSize: 15.0, color: Constant.white24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -386,7 +378,7 @@ class _Edit_SongState extends State<EditSong> {
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗାୟକ',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                          TextStyle(fontSize: 15.0, color: Constant.white24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -414,7 +406,7 @@ class _Edit_SongState extends State<EditSong> {
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଭାବ',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                          TextStyle(fontSize: 15.0, color: Constant.white24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -443,7 +435,7 @@ class _Edit_SongState extends State<EditSong> {
                       contentPadding: const EdgeInsets.all(15),
                       labelText: 'ଗୀତ ଲେଖା',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white12),
+                          TextStyle(fontSize: 15.0, color: Constant.white24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -462,7 +454,6 @@ class _Edit_SongState extends State<EditSong> {
                             child: Icon(
                               Icons.attach_file_rounded,
                               size: 30,
-                              //color: Colors.white,
                             ),
                           ),
                           onTap: () => showDialog<String>(

@@ -154,9 +154,7 @@ class _SongDetailState extends State<SongDetail> {
           ],
         ),
         body: Container(
-          //width: double.maxFinite,
           height: double.infinity,
-          //color: Colors.transparent,
           child: SafeArea(
             child: Column(
               children: [

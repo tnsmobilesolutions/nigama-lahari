@@ -15,6 +15,6 @@ class InputFieldDecoration {
     ),
     contentPadding: const EdgeInsets.all(15),
     labelText: 'ନାମ',
-    labelStyle: TextStyle(fontSize: 15.0, color: Constant.white12),
+    labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
   );
 }
