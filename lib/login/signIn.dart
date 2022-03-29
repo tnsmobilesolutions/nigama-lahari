@@ -180,11 +180,9 @@ class _SignInState extends State<SignIn> {
 
     return SafeArea(
       child: Scaffold(
-        // backgroundColor: Colors.white,
         body: Center(
           child: SingleChildScrollView(
             child: Container(
-              // color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Form(
