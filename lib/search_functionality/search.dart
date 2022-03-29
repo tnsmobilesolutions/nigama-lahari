@@ -94,35 +94,139 @@ class _SearchState extends State<Search> {
                         ),
                       );
                     } else {
-                      final List<Song>? allSongs;
+                      List<Song>? allSongs;
 
                       final searchAPI = SearchSongAPI();
 
                       if (_selectedOption == "Name") {
+                        if (_nameController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByName(_nameController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
                         allSongs =
                             await searchAPI.getSongByName(_nameController.text);
                       } else if (_selectedOption == "Singer") {
-                        allSongs = await searchAPI
-                            .getSongBySingerName(_singerNameController.text);
+                        if (_singerNameController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଗାୟକଙ୍କ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongBySingerName(_singerNameController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
                       } else if (_selectedOption == "Attribute") {
-                        allSongs = await searchAPI
-                            .getSongByAttribute(_attributeController.text);
+                        if (_attributeController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଭାବ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByAttribute(_attributeController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
                       } else if (_selectedOption == "Category") {
-                        allSongs = await searchAPI
-                            .getSongByCategory(_categoryController.text);
+                        if (_categoryController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByCategory(_categoryController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
                       } else if (_selectedOption == "Duration") {
-                        allSongs = await searchAPI.getSongByDuration(_value);
+                        if (_value.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଦୀର୍ଘତା ଚୟନ କରନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI.getSongByDuration(_value);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
                       } else {
                         allSongs = [];
                       }
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ResultSong(
-                            songs: allSongs,
-                          ),
-                        ),
-                      );
                     }
                   },
                 ),
