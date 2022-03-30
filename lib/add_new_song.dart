@@ -184,7 +184,7 @@ class _AddSongState extends State<AddSong> {
                             hint: Text(
                               'ବିଭାଗ',
                               style: TextStyle(
-                                color: Colors.white24,
+                                color: Constant.white24,
                                 fontSize: 15,
                               ),
                             ),
@@ -232,7 +232,7 @@ class _AddSongState extends State<AddSong> {
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ନାମ',
                           labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
+                              fontSize: 15.0, color: Constant.white24),
                         ),
                       ),
                       SizedBox(
@@ -258,7 +258,7 @@ class _AddSongState extends State<AddSong> {
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗୀତର ନାମ ଇଂରାଜୀରେ',
                           labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
+                              fontSize: 15.0, color: Constant.white24),
                         ),
                       ),
                       SizedBox(
@@ -284,7 +284,7 @@ class _AddSongState extends State<AddSong> {
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗାୟକ',
                           labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
+                              fontSize: 15.0, color: Constant.white24),
                         ),
                       ),
                       SizedBox(
@@ -310,7 +310,7 @@ class _AddSongState extends State<AddSong> {
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଭାବ',
                           labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
+                              fontSize: 15.0, color: Constant.white24),
                         ),
                       ),
                       SizedBox(
@@ -337,7 +337,7 @@ class _AddSongState extends State<AddSong> {
                           contentPadding: const EdgeInsets.all(15),
                           labelText: 'ଗୀତ ଲେଖା',
                           labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white12),
+                              fontSize: 15.0, color: Constant.white24),
                         ),
                       ),
                       SizedBox(
@@ -345,8 +345,9 @@ class _AddSongState extends State<AddSong> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: Colors.transparent),
+                          border: Border.all(color: Constant.orange, width: 1),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                         padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -367,7 +368,7 @@ class _AddSongState extends State<AddSong> {
                               child: Text(
                                 fileName,
                                 style: TextStyle(
-                                    color: Constant.orange,
+                                    color: Constant.white24,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -430,8 +431,8 @@ class _AddSongState extends State<AddSong> {
 
                               SongAPI().createNewSong(songsModel);
                             }
-                            print(
-                                '********${widget.loggedInUser?.name}*********');
+                            // print(
+                            //     '********${widget.loggedInUser?.name}*********');
                             await ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 elevation: 6,
@@ -447,25 +448,6 @@ class _AddSongState extends State<AddSong> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           }
-
-                          // if (_formKey.currentState!.validate()) {
-                          //   Song songsModel = Song(
-                          //     isEditable: true,
-                          //     songCategory: _selectedOption,
-                          //     songAttribute: _attributeController.text,
-                          //     songTitle: _titleController.text,
-                          //     songTitleInEnglish: _titleEnglishController.text,
-                          //     singerName: _singerNameController.text,
-                          //     songText: _lyricsController.text,
-                          //     songURL: songUrl,
-                          //     songId: Uuid().v1(),
-                          //     songDuration:
-                          //         autoDuration.toString().split('.')[0],
-                          //     uploadedBy: widget.loggedInUser?.name,
-                          //   );
-
-                          //   SongAPI().createNewSong(songsModel);
-                          // }
                         },
                         child: Text(
                           'ଅପଲୋଡ଼ କରନ୍ତୁ',

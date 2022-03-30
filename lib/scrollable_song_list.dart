@@ -146,7 +146,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none),
                       hintStyle:
-                          TextStyle(fontSize: 18, color: Colors.grey.shade500),
+                          TextStyle(fontSize: 18, color: Constant.white24),
                       hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
                 ),
               ),
