@@ -160,13 +160,9 @@ class _SongDetailState extends State<SongDetail> {
               children: [
                 Expanded(
                   child: Center(
-                    child: Stack(
-                      children: [
-                        LyricsViewer(
-                          lyrics: _currentSong?.songText ?? "",
-                          fontSize: _fontSize,
-                        ),
-                      ],
+                    child: LyricsViewer(
+                      lyrics: _currentSong?.songText ?? "",
+                      fontSize: _fontSize,
                     ),
                   ),
                 ),
