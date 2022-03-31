@@ -60,45 +60,43 @@ class MyApp extends StatelessWidget {
         /* dark theme settings */
       ),
       themeMode: ThemeMode.dark,
-      home: Container(
-        child: Scaffold(
-          body: AnimatedSplashScreen(
-            splash: Image(
-              //image: AssetImage('assets/image/nsslogo(1).jpg'),
-              image: AssetImage('assets/image/nsslogo-2.png'),
-            ),
-            splashIconSize: 200,
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Constant.darkBlue,
-            nextScreen: StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.active) {
-                  final user = snapshot.data;
+      home: Scaffold(
+        body: AnimatedSplashScreen(
+          splash: Image(
+            //image: AssetImage('assets/image/nsslogo(1).jpg'),
+            image: AssetImage('assets/image/nsslogo-2.png'),
+          ),
+          splashIconSize: 200,
+          splashTransition: SplashTransition.fadeTransition,
+          backgroundColor: Constant.darkBlue,
+          nextScreen: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.active) {
+                final user = snapshot.data;
 
-                  if (user == null) {
-                    return SignIn();
-                  } else {
-                    return FutureBuilder<AppUser?>(
-                      future: userAPI().getAppUserFromUid(user.uid),
-                      builder: (_, snap) {
-                        if (snap.hasData) {
-                          return HomeScreen(loggedInUser: snap.data);
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  }
+                if (user == null) {
+                  return SignIn();
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return FutureBuilder<AppUser?>(
+                    future: userAPI().getAppUserFromUid(user.uid),
+                    builder: (_, snap) {
+                      if (snap.hasData) {
+                        return HomeScreen(loggedInUser: snap.data);
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   );
                 }
-              },
-            ),
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           ),
         ),
       ),
