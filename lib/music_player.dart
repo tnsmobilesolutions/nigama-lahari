@@ -71,7 +71,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
     audioPlayer?.onAudioPositionChanged.listen(
       (Duration p) {
         //print('Current position: ${p.inSeconds}');
-        setState(() => _position = p);
+        setState(() {
+          _position = p;
+          //_isLoading = false;
+        });
       },
     );
 
@@ -169,6 +172,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
                               playerState == PlayerState.PLAYING
                                   ? pauseMusic()
                                   : playMusic();
+                              setState(() {
+                                _isLoading = false;
+                              });
                             },
                           ),
                         ),
@@ -371,6 +377,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
     print(_currentSong?.songURL);
     if (_currentSong?.songURL != null) {
       await audioPlayer?.play(_currentSong!.songURL!);
+
       setState(() {
         _isLoading = true;
       });
