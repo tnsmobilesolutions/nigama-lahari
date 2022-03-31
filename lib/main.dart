@@ -21,11 +21,13 @@ Future<void> main() async {
 
   runApp(MyApp());
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Constant.darkBlue,
-    statusBarColor: Constant.blue,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Constant.darkBlue,
+      statusBarColor: Constant.blue,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,18 +36,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ନିଗମ ଲହରୀ',
+      //light theme
       theme: ThemeData(
         brightness: Brightness.light,
-        iconTheme: IconThemeData(color: Constant.orange, size: 30),
-        textTheme: TextTheme(button: TextStyle(color: Constant.white)),
-        backgroundColor: const Color(0xFF212121),
-
-        /* light theme settings */
+        cupertinoOverrideTheme: CupertinoThemeData(
+          primaryColor: Constant.orange,
+        ),
+        listTileTheme: ListTileThemeData(tileColor: Constant.yellow),
+        iconTheme: IconThemeData(color: Constant.purpleRed),
+        buttonTheme: ButtonThemeData(
+            buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
+        fontFamily: 'Roboto',
+        primaryColor: Constant.darkOrange,
+        textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
+        scaffoldBackgroundColor: Constant.lightYellow,
+        appBarTheme: AppBarTheme(color: Constant.yellow),
+        textSelectionTheme:
+            TextSelectionThemeData(cursorColor: Constant.orange),
       ),
+
       darkTheme: ThemeData(
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: Constant.orange,
         ),
+        listTileTheme: ListTileThemeData(tileColor: Constant.lightblue),
         iconTheme: IconThemeData(color: Constant.orange),
         buttonTheme: ButtonThemeData(
             buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
@@ -57,13 +71,11 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         textSelectionTheme:
             TextSelectionThemeData(cursorColor: Constant.orange),
-        /* dark theme settings */
       ),
       themeMode: ThemeMode.dark,
       home: Scaffold(
         body: AnimatedSplashScreen(
           splash: Image(
-            //image: AssetImage('assets/image/nsslogo(1).jpg'),
             image: AssetImage('assets/image/nsslogo-2.png'),
           ),
           splashIconSize: 200,
