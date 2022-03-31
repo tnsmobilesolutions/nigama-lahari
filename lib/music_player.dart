@@ -67,14 +67,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
     MaxDuration().then((value) => nextSong());
 
-    // //max duration of mp3 file
-    // audioPlayer?.onDurationChanged.listen(
-    //   (Duration d) {
-    //     print('Max duration: $d');
-    //     setState(() => _duration = d);
-    //   },
-    // );
-
     //current playtime of mp3 file
     audioPlayer?.onAudioPositionChanged.listen(
       (Duration p) {

@@ -18,16 +18,22 @@ class _LyricsViewerState extends State<LyricsViewer> {
     return SingleChildScrollView(
       // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
       // scrollDirection: Axis.vertical,
-      child: Flexible(
-        child: Text(
-          widget.lyrics,
-          overflow: TextOverflow.fade,
-          softWrap: true,
-          style: TextStyle(
-            color: Constant.white,
-            fontSize: widget.fontSize,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 1,
+            child: Text(
+              widget.lyrics,
+              overflow: TextOverflow.fade,
+              softWrap: true,
+              style: TextStyle(
+                color: Constant.white,
+                fontSize: widget.fontSize,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
