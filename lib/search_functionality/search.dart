@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/search_functionality/result_song.dart';
 
 import '../API/searchSongAPI.dart';
+import '../constant.dart';
 import '../models/songs_model.dart';
 
 class Search extends StatefulWidget {
@@ -13,14 +13,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
-  Map<String, String> _songsInOdia = {
-    'Name': 'ନାମ',
-    'Singer': 'ଗାୟକ',
-    'Attribute': 'ଭାବ',
-    'Category': 'ବିଭାଗ',
-    'Duration': "ଦୀର୍ଘତା"
-  };
+  final _attributeController = TextEditingController();
   List<String> _catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
@@ -30,233 +23,26 @@ class _SearchState extends State<Search> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
-  String? _selectedOption;
-  String? _option;
-  String _value = '';
+
+  List<String> _singer = [];
 
   final _nameController = TextEditingController();
+  String? _categoryOption;
+  String? _singerOption;
+  String? _selectedOption;
   final _singerNameController = TextEditingController();
-  final _attributeController = TextEditingController();
+  List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
+  Map<String, String> _songsInOdia = {
+    'Name': 'ନାମ',
+    'Singer': 'ଗାୟକ',
+    'Attribute': 'ଭାବ',
+    'Category': 'ବିଭାଗ',
+    'Duration': "ଦୀର୍ଘତା"
+  };
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: BackButton(color: Theme.of(context).iconTheme.color),
-            elevation: 0,
-            centerTitle: true,
-            title: Text('ଖୋଜନ୍ତୁ'),
-          ),
-          body: Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: _selectedOption == 'Category'
-                      ? MainAxisAlignment.spaceEvenly
-                      : MainAxisAlignment.center,
-                  children: [
-                    DropdownButton(
-                      borderRadius: BorderRadius.circular(15),
-                      iconEnabledColor: Theme.of(context).iconTheme.color,
-                      style: TextStyle(color: Constant.white),
-                      dropdownColor: Constant.orange,
-                      hint: Text(
-                        'ସଂଗୀତ ଖୋଜନ୍ତୁ',
-                        style: TextStyle(color: Constant.white),
-                      ),
-                      value: _selectedOption,
-                      onChanged: (newValue) {
-                        setState(
-                          () {
-                            _selectedOption = newValue as String?;
-                          },
-                        );
-                      },
-                      items: _songs.map(
-                        (song) {
-                          return DropdownMenuItem(
-                            child: new Text(_songsInOdia[song] ?? ''),
-                            value: song,
-                          );
-                        },
-                      ).toList(),
-                    ),
-                    getCategorySong(_selectedOption),
-                  ],
-                ),
-                //SizedBox(height: 30),
-                getNameWidget(_selectedOption),
-                getSingerNameWidget(_selectedOption),
-                getAttributeSong(_selectedOption),
-                getDurationWidget(_selectedOption),
-                SizedBox(height: 30),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Constant.orange),
-                  child: Text("ଖୋଜନ୍ତୁ"),
-                  onPressed: () async {
-                    print('search btn pressrd');
-                    if (_selectedOption == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          elevation: 6,
-                          behavior: SnackBarBehavior.floating,
-                          content: const Text(
-                            'କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ',
-                            style: TextStyle(color: Constant.white),
-                          ),
-                          backgroundColor: Constant.orange,
-                        ),
-                      );
-                    } else {
-                      List<Song>? allSongs;
+  String _value = '';
 
-                      final searchAPI = SearchSongAPI();
-
-                      if (_selectedOption == "Name") {
-                        if (_nameController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              elevation: 6,
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text(
-                                'ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ',
-                                style: TextStyle(color: Constant.white),
-                              ),
-                              backgroundColor: Constant.orange,
-                            ),
-                          );
-                        } else {
-                          allSongs = await searchAPI
-                              .getSongByName(_nameController.text);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                songs: allSongs,
-                              ),
-                            ),
-                          );
-                        }
-                        allSongs =
-                            await searchAPI.getSongByName(_nameController.text);
-                      } else if (_selectedOption == "Singer") {
-                        if (_singerNameController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              elevation: 6,
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text(
-                                'ଦୟାକରି ଗାୟକଙ୍କ ନାମ ଲେଖନ୍ତୁ',
-                                style: TextStyle(color: Constant.white),
-                              ),
-                              backgroundColor: Constant.orange,
-                            ),
-                          );
-                        } else {
-                          allSongs = await searchAPI
-                              .getSongBySingerName(_singerNameController.text);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                songs: allSongs,
-                              ),
-                            ),
-                          );
-                        }
-                      } else if (_selectedOption == "Attribute") {
-                        if (_attributeController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              elevation: 6,
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text(
-                                'ଦୟାକରି ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
-                                style: TextStyle(color: Constant.white),
-                              ),
-                              backgroundColor: Constant.orange,
-                            ),
-                          );
-                        } else {
-                          allSongs = await searchAPI
-                              .getSongByAttribute(_attributeController.text);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                songs: allSongs,
-                              ),
-                            ),
-                          );
-                        }
-                      } else if (_selectedOption == "Category") {
-                        if (_option!.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              elevation: 6,
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text(
-                                'ଦୟାକରି ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
-                                style: TextStyle(color: Constant.white),
-                              ),
-                              backgroundColor: Constant.orange,
-                            ),
-                          );
-                        } else {
-                          allSongs =
-                              await searchAPI.getSongByCategory(_option!);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                songs: allSongs,
-                              ),
-                            ),
-                          );
-                        }
-                      } else if (_selectedOption == "Duration") {
-                        if (_value.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              elevation: 6,
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text(
-                                'ଦୟାକରି ଦୀର୍ଘତା ଚୟନ କରନ୍ତୁ',
-                                style: TextStyle(color: Constant.white),
-                              ),
-                              backgroundColor: Constant.orange,
-                            ),
-                          );
-                        } else {
-                          allSongs = await searchAPI.getSongByDuration(_value);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultSong(
-                                songs: allSongs,
-                              ),
-                            ),
-                          );
-                        }
-                      } else {
-                        allSongs = [];
-                      }
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getNameWidget(String? selectedOption) {
+  Widget getSongNameWidget(String? selectedOption) {
     if (selectedOption == "Name") {
       return Padding(
         padding: const EdgeInsets.all(20.0),
@@ -295,6 +81,43 @@ class _SearchState extends State<Search> {
       return SizedBox(width: 0, height: 0);
     }
   }
+
+  // Widget getSingerNameWidget(String? selectedOption) {
+  //   if (selectedOption == "Singer") {
+  //     return DropdownButton(
+  //       borderRadius: BorderRadius.circular(15),
+  //       style: TextStyle(color: Constant.white),
+  //       iconEnabledColor: Theme.of(context).iconTheme.color,
+  //       hint: Text(
+  //         'ଚୟନ କରନ୍ତୁ',
+  //         style: TextStyle(
+  //           color: Constant.white24,
+  //           fontSize: 15,
+  //         ),
+  //       ),
+  //       value: _singerOption,
+  //       dropdownColor: Constant.orange,
+  //       onChanged: (value) {
+  //         setState(
+  //           () {
+  //             _singerOption = value as String?;
+  //             print(_singerOption.toString());
+  //           },
+  //         );
+  //       },
+  //       items: _singer.map(
+  //         (val) {
+  //           return DropdownMenuItem(
+  //             child: new Text(val),
+  //             value: val,
+  //           );
+  //         },
+  //       ).toList(),
+  //     );
+  //   } else {
+  //     return SizedBox(width: 0, height: 0);
+  //   }
+  // }
 
   Widget getSingerNameWidget(String? selectedOption) {
     if (selectedOption == "Singer") {
@@ -409,13 +232,13 @@ class _SearchState extends State<Search> {
             fontSize: 15,
           ),
         ),
-        value: _option,
+        value: _categoryOption,
         dropdownColor: Constant.orange,
         onChanged: (value) {
           setState(
             () {
-              _option = value as String?;
-              print(_option.toString());
+              _categoryOption = value as String?;
+              print(_categoryOption.toString());
             },
           );
         },
@@ -498,5 +321,224 @@ class _SearchState extends State<Search> {
     } else {
       return SizedBox(width: 0, height: 0);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        child: Scaffold(
+          appBar: AppBar(
+            leading: BackButton(color: Theme.of(context).iconTheme.color),
+            elevation: 0,
+            centerTitle: true,
+            title: Text('ଖୋଜନ୍ତୁ'),
+          ),
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: _selectedOption == 'Category' //||
+                      //_selectedOption == 'Singer'
+                      ? MainAxisAlignment.spaceEvenly
+                      : MainAxisAlignment.center,
+                  children: [
+                    DropdownButton(
+                      borderRadius: BorderRadius.circular(15),
+                      iconEnabledColor: Theme.of(context).iconTheme.color,
+                      style: TextStyle(color: Constant.white),
+                      dropdownColor: Constant.orange,
+                      hint: Text(
+                        'ସଂଗୀତ ଖୋଜନ୍ତୁ',
+                        style: TextStyle(color: Constant.white),
+                      ),
+                      value: _selectedOption,
+                      onChanged: (newValue) {
+                        setState(
+                          () {
+                            _selectedOption = newValue as String?;
+                          },
+                        );
+                      },
+                      items: _songs.map(
+                        (song) {
+                          return DropdownMenuItem(
+                            child: new Text(_songsInOdia[song] ?? ''),
+                            value: song,
+                          );
+                        },
+                      ).toList(),
+                    ),
+                    getCategorySong(_selectedOption),
+                  ],
+                ),
+                //SizedBox(height: 30),
+                getSongNameWidget(_selectedOption),
+                getSingerNameWidget(_selectedOption),
+                getAttributeSong(_selectedOption),
+                getDurationWidget(_selectedOption),
+                SizedBox(height: 30),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Constant.orange),
+                  child: Text("ଖୋଜନ୍ତୁ"),
+                  onPressed: () async {
+                    print('search btn pressrd');
+                    if (_selectedOption == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text(
+                            'କୌଣସି ଏକ ବିକଳ୍ପ ଚୟନ କରନ୍ତୁ',
+                            style: TextStyle(color: Constant.white),
+                          ),
+                          backgroundColor: Constant.orange,
+                        ),
+                      );
+                    } else {
+                      List<Song>? allSongs;
+
+                      final searchAPI = SearchSongAPI();
+
+                      if (_selectedOption == "Name") {
+                        if (_nameController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByName(_nameController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
+                        allSongs =
+                            await searchAPI.getSongByName(_nameController.text);
+                      } else if (_selectedOption == "Singer") {
+                        if (_singerNameController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଗାୟକଙ୍କ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongBySingerName(_singerNameController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
+                      } else if (_selectedOption == "Attribute") {
+                        if (_attributeController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByAttribute(_attributeController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
+                      } else if (_selectedOption == "Category") {
+                        if (_categoryOption!.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI
+                              .getSongByCategory(_categoryOption!);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
+                      } else if (_selectedOption == "Duration") {
+                        if (_value.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              elevation: 6,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'ଦୟାକରି ଦୀର୍ଘତା ଚୟନ କରନ୍ତୁ',
+                                style: TextStyle(color: Constant.white),
+                              ),
+                              backgroundColor: Constant.orange,
+                            ),
+                          );
+                        } else {
+                          allSongs = await searchAPI.getSongByDuration(_value);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultSong(
+                                songs: allSongs,
+                              ),
+                            ),
+                          );
+                        }
+                      } else {
+                        allSongs = [];
+                      }
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
