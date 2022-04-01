@@ -16,7 +16,6 @@ import 'models/usermodel.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
-
   final AppUser? loggedInUser;
 
   @override
@@ -151,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.light,
         leading: GestureDetector(
           onTap: () {
             Navigator.push(

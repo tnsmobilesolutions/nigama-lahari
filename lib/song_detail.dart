@@ -43,11 +43,12 @@ class _SongDetailState extends State<SongDetail> {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       final remoteConfig = await FirebaseRemoteConfig.instance;
       final defaultValue = <String, dynamic>{
-        'Edit': false,
+        'add': false,
       };
+
       try {
         await remoteConfig.setConfigSettings(RemoteConfigSettings(
-          fetchTimeout: const Duration(hours: 4), //cache refresh time
+          fetchTimeout: const Duration(hours: 24), //cache refresh time
           minimumFetchInterval: Duration.zero,
         ));
         await remoteConfig.setDefaults(defaultValue);
@@ -60,9 +61,12 @@ class _SongDetailState extends State<SongDetail> {
             'used');
         print("exception===>$exception");
       }
+
       setState(() {
-        Edit = remoteConfig.getBool("Edit");
-        _editvisible = !_editvisible;
+        Edit = remoteConfig.getBool('Edit');
+        if (Edit == true) {
+          _editvisible = !_editvisible;
+        }
       });
     });
   }
