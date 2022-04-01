@@ -260,7 +260,6 @@ class _SignUpState extends State<SignUp> {
           centerTitle: true,
           title: Text('ସାଇନ ଅପ'),
         ),
-<<<<<<< HEAD
         body: Center(
           child: Container(
             child: Padding(
@@ -268,15 +267,6 @@ class _SignUpState extends State<SignUp> {
               child: Form(
                   key: _formkey,
                   child: SingleChildScrollView(
-=======
-        body: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Form(
-                    key: _formkey,
->>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
                     child: Column(
                       children: <Widget>[
                         const SizedBox(height: 20),
@@ -292,13 +282,8 @@ class _SignUpState extends State<SignUp> {
                         const SizedBox(height: 20),
                         signUpButton
                       ],
-<<<<<<< HEAD
                     ),
                   )),
-=======
-                    )),
-              ),
->>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
             ),
           ),
         ),

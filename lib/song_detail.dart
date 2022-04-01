@@ -31,6 +31,8 @@ class _SongDetailState extends State<SongDetail> {
   int? _currentIndex;
   bool _lyricsExpanded = false;
   double _fontSize = 16;
+  bool Edit = false;
+  bool _editvisible = false;
 
   @override
   void initState() {
@@ -59,7 +61,8 @@ class _SongDetailState extends State<SongDetail> {
         print("exception===>$exception");
       }
       setState(() {
-        var edit = remoteConfig.getString("Edit");
+        Edit = remoteConfig.getBool("Edit");
+        _editvisible = !_editvisible;
       });
     });
   }
@@ -87,25 +90,6 @@ class _SongDetailState extends State<SongDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final edit = IconButton(
-      icon: Icon(
-        Icons.edit,
-        color: Theme.of(context).iconTheme.color,
-      ),
-      onPressed: () {
-        if (_currentSong != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditSong(
-                song: _currentSong!,
-                loggedInUser: widget.loggedInUser,
-              ),
-            ),
-          );
-        }
-      },
-    );
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
@@ -136,7 +120,29 @@ class _SongDetailState extends State<SongDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (!_lyricsExpanded) edit,
+                if (!_lyricsExpanded)
+                  Visibility(
+                    visible: _editvisible,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      onPressed: () {
+                        if (_currentSong != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditSong(
+                                song: _currentSong!,
+                                loggedInUser: widget.loggedInUser,
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 if (_lyricsExpanded)
                   IconButton(
                     icon: Icon(
