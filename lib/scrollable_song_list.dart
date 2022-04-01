@@ -11,9 +11,9 @@ class ScrollableSongList extends StatefulWidget {
       {Key? key, this.songCategory, this.songs, this.loggedInUser})
       : super(key: key);
 
+  final AppUser? loggedInUser;
   final String? songCategory;
   final List<Song>? songs;
-  final AppUser? loggedInUser;
 
   @override
   _ScrollableSongListState createState() => _ScrollableSongListState();
@@ -22,6 +22,14 @@ class ScrollableSongList extends StatefulWidget {
 class _ScrollableSongListState extends State<ScrollableSongList> {
   List<Song>? items;
   List<String>? songName;
+
+  @override
+  void initState() {
+    items = widget.songs;
+    super.initState();
+    print('${widget.loggedInUser?.name}');
+    Constant.isDarkMode = Constant.brightness == Brightness.dark;
+  }
 
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -66,14 +74,6 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    items = widget.songs;
-    //print(items!.length);
-    super.initState();
-    print('${widget.loggedInUser?.name}');
   }
 
   void _runFilter(String enteredKeyword) {
@@ -137,6 +137,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Constant.lightblue,
+                      // Constant.isDarkMode
+                      //     ? Constant.lightblue
+                      //     : Constant.purpleRed,
                       contentPadding: EdgeInsets.all(0),
                       prefixIcon: Icon(
                         Icons.search,
@@ -166,7 +169,12 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 textColor: Constant.white,
-                                tileColor: Constant.lightblue,
+                                // Constant.isDarkMode
+                                //     ? Constant.white
+                                //     : Constant.black,
+                                tileColor: Constant.isDarkMode
+                                    ? ListTileTheme.of(context).tileColor
+                                    : ListTileTheme.of(context).tileColor,
                                 title: Text(
                                   items![index].songTitle ?? "",
                                   style: TextStyle(
@@ -178,12 +186,6 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // Text(
-                                    //   items![index].songCategory ?? "",
-                                    //   style: TextStyle(
-                                    //     fontSize: 15,
-                                    //   ),
-                                    // ),
                                     Text(
                                       items![index].singerName ?? "",
                                       style: TextStyle(

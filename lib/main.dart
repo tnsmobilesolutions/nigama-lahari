@@ -30,7 +30,19 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  void initState() {
+    super.initState();
+    Constant.isDarkMode = Constant.brightness == Brightness.dark;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,14 +55,14 @@ class MyApp extends StatelessWidget {
           primaryColor: Constant.orange,
         ),
         listTileTheme: ListTileThemeData(tileColor: Constant.yellow),
-        iconTheme: IconThemeData(color: Constant.purpleRed),
+        iconTheme: IconThemeData(color: Constant.yellow),
         buttonTheme: ButtonThemeData(
             buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
         fontFamily: 'Roboto',
         primaryColor: Constant.darkOrange,
-        textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
-        scaffoldBackgroundColor: Constant.lightYellow,
-        appBarTheme: AppBarTheme(color: Constant.yellow),
+        textTheme: TextTheme(button: TextStyle(color: Constant.black)),
+        scaffoldBackgroundColor: Constant.white,
+        appBarTheme: AppBarTheme(color: Constant.darkOrange),
         textSelectionTheme:
             TextSelectionThemeData(cursorColor: Constant.orange),
       ),
