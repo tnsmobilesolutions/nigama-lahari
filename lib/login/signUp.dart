@@ -266,21 +266,23 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(30.0),
               child: Form(
                   key: _formkey,
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(height: 20),
-                      name,
-                      const SizedBox(height: 20),
-                      mobileNumber,
-                      const SizedBox(height: 20),
-                      email,
-                      const SizedBox(height: 20),
-                      password,
-                      const SizedBox(height: 20),
-                      confirmPassword,
-                      const SizedBox(height: 20),
-                      signUpButton
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(height: 20),
+                        name,
+                        const SizedBox(height: 20),
+                        mobileNumber,
+                        const SizedBox(height: 20),
+                        email,
+                        const SizedBox(height: 20),
+                        password,
+                        const SizedBox(height: 20),
+                        confirmPassword,
+                        const SizedBox(height: 20),
+                        signUpButton
+                      ],
+                    ),
                   )),
             ),
           ),

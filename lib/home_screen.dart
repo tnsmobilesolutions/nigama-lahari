@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
@@ -11,6 +13,8 @@ import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
 import 'models/songs_model.dart';
 import 'models/usermodel.dart';
+
+final bool add = false;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
@@ -24,6 +28,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final remoteConfig = await FirebaseRemoteConfig.instance;
+      final defaultValue = <String, dynamic>{
+        'add': false,
+      };
+
+      try {
+        await remoteConfig.setConfigSettings(RemoteConfigSettings(
+          fetchTimeout: const Duration(hours: 24), //cache refresh time
+          minimumFetchInterval: Duration.zero,
+        ));
+        await remoteConfig.setDefaults(defaultValue);
+        await remoteConfig.fetchAndActivate();
+      } on PlatformException catch (exception) {
+// Fetch exception.
+        print(exception);
+      } catch (exception) {
+        print('Unable to fetch remote config. Cached or default values will be '
+            'used');
+        print("exception===>$exception");
+      }
+      setState(() {
+        var add = remoteConfig.getString('add');
+      });
+    });
   }
 
 //pull to refresh
@@ -109,131 +138,132 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Add = FloatingActionButton(
+      backgroundColor: Constant.orange,
+      elevation: 0,
+      highlightElevation: 0,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddSong(
+              loggedInUser: widget.loggedInUser,
+            ),
+          ),
+        );
+      },
+      child: Icon(
+        Icons.add,
+        size: 30,
+      ),
+    );
     print('home screen loading...');
 
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Search(),
-                ),
-              );
-            },
-            child: Icon(
-              Icons.search_rounded,
-              color: Theme.of(context).iconTheme.color,
-              size: 30,
-            ),
-          ),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'ନିଗମ ଲହରୀ',
-          ),
-          actions: [
-            //SignOut implemented
-            Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: GestureDetector(
-                onTap: showMyDialog,
-                child: Icon(
-                  Icons.logout_rounded,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
-            )
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: FutureBuilder<List<String>?>(
-            future: SearchSongAPI().getAllCategories(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                case ConnectionState.done:
-                  if (snapshot.hasError) {
-                    return Text(snapshot.error.toString());
-                  } else
-                    return RefreshIndicator(
-                      color: Theme.of(context).iconTheme.color,
-                      backgroundColor: Constant.lightblue,
-                      onRefresh: () => getDataThroughRefresh(),
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            margin: EdgeInsets.only(
-                                left: 40, right: 40, top: 5, bottom: 5),
-                            decoration: BoxDecoration(
-                                color: Constant.lightblue,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: ListTile(
-                              textColor: Constant.white,
-                              title: Center(
-                                child: Text(
-                                  snapshot.data![
-                                      index], // gets all available catagories dynamically
-                                  style: TextStyle(
-                                      color: Constant.white,
-                                      fontSize: 30 * textScale),
-                                ),
-                              ),
-                              onTap: () async {
-                                final allSongsByCategory = await SearchSongAPI()
-                                    .getAllSongsInCategory(
-                                        snapshot.data![index]);
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ScrollableSongList(
-                                      songCategory: snapshot.data![index],
-                                      songs: allSongsByCategory,
-                                      loggedInUser: widget.loggedInUser,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    );
-
-                default:
-                  return Text('Unhandle State');
-              }
-            },
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Constant.orange,
-          elevation: 0,
-          highlightElevation: 0,
-          onPressed: () {
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddSong(
-                  loggedInUser: widget.loggedInUser,
-                ),
+                builder: (context) => Search(),
               ),
             );
           },
           child: Icon(
-            Icons.add,
+            Icons.search_rounded,
+            color: Theme.of(context).iconTheme.color,
             size: 30,
           ),
-        ));
+        ),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'ନିଗମ ଲହରୀ',
+        ),
+        actions: [
+          //SignOut implemented
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: showMyDialog,
+              child: Icon(
+                Icons.logout_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
+            ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: FutureBuilder<List<String>?>(
+          future: SearchSongAPI().getAllCategories(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ConnectionState.done:
+                if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                } else
+                  return RefreshIndicator(
+                    color: Theme.of(context).iconTheme.color,
+                    backgroundColor: Constant.lightblue,
+                    onRefresh: () => getDataThroughRefresh(),
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                              left: 40, right: 40, top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: Constant.lightblue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: ListTile(
+                            textColor: Constant.white,
+                            title: Center(
+                              child: Text(
+                                snapshot.data![
+                                    index], // gets all available catagories dynamically
+                                style: TextStyle(
+                                    color: Constant.white,
+                                    fontSize: 30 * textScale),
+                              ),
+                            ),
+                            onTap: () async {
+                              final allSongsByCategory = await SearchSongAPI()
+                                  .getAllSongsInCategory(snapshot.data![index]);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScrollableSongList(
+                                    songCategory: snapshot.data![index],
+                                    songs: allSongsByCategory,
+                                    loggedInUser: widget.loggedInUser,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  );
+
+              default:
+                return Text('Unhandle State');
+            }
+          },
+        ),
+      ),
+      floatingActionButton: Add,
+    );
   }
 }
