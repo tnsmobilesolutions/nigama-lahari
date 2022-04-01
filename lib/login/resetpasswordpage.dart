@@ -62,9 +62,10 @@ class _ResetPasswordState extends State<ResetPassword> {
         child: Form(
           key: _formkey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 30),
               notice,
               SizedBox(height: 20),
               Padding(
