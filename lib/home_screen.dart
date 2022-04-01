@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
@@ -15,6 +16,7 @@ import 'models/usermodel.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
+
   final AppUser? loggedInUser;
 
   @override
@@ -23,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isDarkMode = false;
+
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
@@ -120,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         leading: GestureDetector(
           onTap: () {
             Navigator.push(

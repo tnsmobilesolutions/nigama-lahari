@@ -50,7 +50,9 @@ class _ResultSongState extends State<ResultSong> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 textColor: Constant.white,
-                                tileColor: Constant.lightblue,
+                                tileColor: Constant.isDarkMode
+                                    ? ListTileTheme.of(context).tileColor
+                                    : ListTileTheme.of(context).tileColor,
                                 title: Text(
                                   widget.songs?[index].songTitle ?? '',
                                   style: TextStyle(
