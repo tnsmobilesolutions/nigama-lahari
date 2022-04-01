@@ -1,4 +1,6 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
@@ -36,6 +38,30 @@ class _SongDetailState extends State<SongDetail> {
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
     _currentIndex = widget.index;
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final remoteConfig = await FirebaseRemoteConfig.instance;
+      final defaultValue = <String, dynamic>{
+        'Edit': false,
+      };
+      try {
+        await remoteConfig.setConfigSettings(RemoteConfigSettings(
+          fetchTimeout: const Duration(hours: 4), //cache refresh time
+          minimumFetchInterval: Duration.zero,
+        ));
+        await remoteConfig.setDefaults(defaultValue);
+        await remoteConfig.fetchAndActivate();
+      } on PlatformException catch (exception) {
+// Fetch exception.
+        print(exception);
+      } catch (exception) {
+        print('Unable to fetch remote config. Cached or default values will be '
+            'used');
+        print("exception===>$exception");
+      }
+      setState(() {
+        var edit = remoteConfig.getString("Edit");
+      });
+    });
   }
 
   void onPrevPressed() {
@@ -61,6 +87,25 @@ class _SongDetailState extends State<SongDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final edit = IconButton(
+      icon: Icon(
+        Icons.edit,
+        color: Theme.of(context).iconTheme.color,
+      ),
+      onPressed: () {
+        if (_currentSong != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditSong(
+                song: _currentSong!,
+                loggedInUser: widget.loggedInUser,
+              ),
+            ),
+          );
+        }
+      },
+    );
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
@@ -91,26 +136,7 @@ class _SongDetailState extends State<SongDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (!_lyricsExpanded)
-                  IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                    onPressed: () {
-                      if (_currentSong != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditSong(
-                              song: _currentSong!,
-                              loggedInUser: widget.loggedInUser,
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                  ),
+                if (!_lyricsExpanded) edit,
                 if (_lyricsExpanded)
                   IconButton(
                     icon: Icon(

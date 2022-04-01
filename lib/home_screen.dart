@@ -1,8 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+<<<<<<< HEAD
 import 'package:flutter/services.dart';
+=======
+import 'package:flutter/scheduler.dart';
+<<<<<<< HEAD
+import 'package:flutter/services.dart';
+=======
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
+>>>>>>> cef8b39168c295e171f9c5d418b636a6520c1492
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
@@ -13,6 +21,8 @@ import 'API/searchSongAPI.dart';
 import 'add_new_song.dart';
 import 'models/songs_model.dart';
 import 'models/usermodel.dart';
+
+final bool add = false;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
@@ -29,9 +39,37 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
+<<<<<<< HEAD
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final remoteConfig = await FirebaseRemoteConfig.instance;
+      final defaultValue = <String, dynamic>{
+        'add': false,
+      };
+
+      try {
+        await remoteConfig.setConfigSettings(RemoteConfigSettings(
+          fetchTimeout: const Duration(hours: 24), //cache refresh time
+          minimumFetchInterval: Duration.zero,
+        ));
+        await remoteConfig.setDefaults(defaultValue);
+        await remoteConfig.fetchAndActivate();
+      } on PlatformException catch (exception) {
+// Fetch exception.
+        print(exception);
+      } catch (exception) {
+        print('Unable to fetch remote config. Cached or default values will be '
+            'used');
+        print("exception===>$exception");
+      }
+      setState(() {
+        var add = remoteConfig.getString('add');
+      });
+    });
+=======
 
     var brightness = SchedulerBinding.instance!.window.platformBrightness;
     isDarkMode = brightness == Brightness.dark;
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
   }
 
 //pull to refresh
@@ -117,6 +155,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Add = FloatingActionButton(
+      backgroundColor: Constant.orange,
+      elevation: 0,
+      highlightElevation: 0,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddSong(
+              loggedInUser: widget.loggedInUser,
+            ),
+          ),
+        );
+      },
+      child: Icon(
+        Icons.add,
+        size: 30,
+      ),
+    );
     print('home screen loading...');
 
     final textScale = MediaQuery.of(context).textScaleFactor;
@@ -182,6 +239,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           margin: EdgeInsets.only(
+<<<<<<< HEAD
+                              left: 40, right: 40, top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: Constant.lightblue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: ListTile(
+                            textColor: Constant.white,
+=======
                               left: 40, top: 5, right: 40, bottom: 5),
                           decoration: BoxDecoration(
                             color: isDarkMode
@@ -193,11 +258,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
                             title: Center(
                               child: Text(
                                 snapshot.data![
                                     index], // gets all available catagories dynamically
+<<<<<<< HEAD
+                                style: TextStyle(
+                                    color: Constant.white,
+                                    fontSize: 30 * textScale),
+=======
                                 style: TextStyle(fontSize: 30 * textScale),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
                               ),
                             ),
                             onTap: () async {
@@ -227,6 +299,9 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
+<<<<<<< HEAD
+      floatingActionButton: Add,
+=======
       floatingActionButton: FloatingActionButton(
         backgroundColor: Constant.orange,
         elevation: 0,
@@ -246,6 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
           size: 30,
         ),
       ),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
     );
   }
 }
