@@ -21,14 +21,22 @@ class _SearchState extends State<Search> {
     'Category': 'ବିଭାଗ',
     'Duration': "ଦୀର୍ଘତା"
   };
+  List<String> _catagory = [
+    'ଜାଗରଣ',
+    'ପ୍ରତୀକ୍ଷା',
+    'ଆବାହନ',
+    'ଆରତୀ',
+    'ବନ୍ଦନା',
+    'ପ୍ରାର୍ଥନା',
+    'ବିଦାୟ ପ୍ରାର୍ଥନା',
+  ];
   String? _selectedOption;
+  String? _option;
   String _value = '';
 
   final _nameController = TextEditingController();
   final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
-  final _categoryController = TextEditingController();
-  //final _durationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,38 +52,48 @@ class _SearchState extends State<Search> {
           body: Align(
             alignment: Alignment.topCenter,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                DropdownButton(
-                  borderRadius: BorderRadius.circular(15),
-                  iconEnabledColor: Theme.of(context).iconTheme.color,
-                  style: TextStyle(color: Constant.white),
-                  dropdownColor: Constant.orange,
-                  hint: Text(
-                    'ସଂଗୀତ ଖୋଜନ୍ତୁ',
-                    style: TextStyle(color: Constant.white),
-                  ),
-                  value: _selectedOption,
-                  onChanged: (newValue) {
-                    setState(
-                      () {
-                        _selectedOption = newValue as String?;
+                Row(
+                  mainAxisAlignment: _selectedOption == 'Category'
+                      ? MainAxisAlignment.spaceEvenly
+                      : MainAxisAlignment.center,
+                  children: [
+                    DropdownButton(
+                      borderRadius: BorderRadius.circular(15),
+                      iconEnabledColor: Theme.of(context).iconTheme.color,
+                      style: TextStyle(color: Constant.white),
+                      dropdownColor: Constant.orange,
+                      hint: Text(
+                        'ସଂଗୀତ ଖୋଜନ୍ତୁ',
+                        style: TextStyle(color: Constant.white),
+                      ),
+                      value: _selectedOption,
+                      onChanged: (newValue) {
+                        setState(
+                          () {
+                            _selectedOption = newValue as String?;
+                          },
+                        );
                       },
-                    );
-                  },
-                  items: _songs.map(
-                    (song) {
-                      return DropdownMenuItem(
-                        child: new Text(_songsInOdia[song] ?? ''),
-                        value: song,
-                      );
-                    },
-                  ).toList(),
+                      items: _songs.map(
+                        (song) {
+                          return DropdownMenuItem(
+                            child: new Text(_songsInOdia[song] ?? ''),
+                            value: song,
+                          );
+                        },
+                      ).toList(),
+                    ),
+                    getCategorySong(_selectedOption),
+                  ],
                 ),
+                //SizedBox(height: 30),
                 getNameWidget(_selectedOption),
                 getSingerNameWidget(_selectedOption),
                 getAttributeSong(_selectedOption),
-                getCategorySong(_selectedOption),
                 getDurationWidget(_selectedOption),
+                SizedBox(height: 30),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Constant.orange),
                   child: Text("ଖୋଜନ୍ତୁ"),
@@ -109,12 +127,6 @@ class _SearchState extends State<Search> {
                                 style: TextStyle(color: Constant.white),
                               ),
                               backgroundColor: Constant.orange,
-                              // action: SnackBarAction(
-                              //   label: 'Undo',
-                              //   onPressed: () {
-                              //     Navigator.pop(context);
-                              //   },
-                              // ),
                             ),
                           );
                         } else {
@@ -182,7 +194,7 @@ class _SearchState extends State<Search> {
                           );
                         }
                       } else if (_selectedOption == "Category") {
-                        if (_categoryController.text.isEmpty) {
+                        if (_option!.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               elevation: 6,
@@ -195,8 +207,8 @@ class _SearchState extends State<Search> {
                             ),
                           );
                         } else {
-                          allSongs = await searchAPI
-                              .getSongByCategory(_categoryController.text);
+                          allSongs =
+                              await searchAPI.getSongByCategory(_option!);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -386,43 +398,35 @@ class _SearchState extends State<Search> {
 
   Widget getCategorySong(String? selectedOption) {
     if (selectedOption == "Category") {
-      return Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: TextFormField(
-          keyboardType: TextInputType.name,
-          controller: _categoryController,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please Enter Your Name';
-            } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
-                .hasMatch(value)) {
-              return 'Please Enter Correct Name';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
-                color: Constant.orange,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Constant.orange),
-            ),
-            contentPadding: const EdgeInsets.all(15),
-            labelText: 'ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
+      return DropdownButton(
+        borderRadius: BorderRadius.circular(15),
+        style: TextStyle(color: Constant.white),
+        iconEnabledColor: Theme.of(context).iconTheme.color,
+        hint: Text(
+          'ଚୟନ କରନ୍ତୁ',
+          style: TextStyle(
+            color: Constant.white24,
+            fontSize: 15,
           ),
-          // decoration: InputDecoration(
-          //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-          //   labelText: 'Type Song $selectedOption',
-          //   hintStyle: TextStyle(
-          //     fontSize: 15.0,
-          //   ),
-          // ),
         ),
+        value: _option,
+        dropdownColor: Constant.orange,
+        onChanged: (value) {
+          setState(
+            () {
+              _option = value as String?;
+              print(_option.toString());
+            },
+          );
+        },
+        items: _catagory.map(
+          (val) {
+            return DropdownMenuItem(
+              child: new Text(val),
+              value: val,
+            );
+          },
+        ).toList(),
       );
     } else {
       return SizedBox(width: 0, height: 0);
@@ -449,7 +453,7 @@ class _SearchState extends State<Search> {
                 groupValue: _value,
                 onChanged: (value) {
                   setState(() {
-                    _value = value!; //'0:04:00 - 0:07:00';
+                    _value = value!; //'< 0:05:00';
                   });
                 },
               ),
@@ -466,7 +470,7 @@ class _SearchState extends State<Search> {
                 groupValue: _value,
                 onChanged: (value) {
                   setState(() {
-                    _value = value!; //'0:07:00 - 0:10:00';
+                    _value = value!; //'0:05:00 - 0:08:00';
                   });
                 },
               ),
@@ -483,7 +487,7 @@ class _SearchState extends State<Search> {
                 groupValue: _value,
                 onChanged: (value) {
                   setState(() {
-                    _value = value!; //'> 0:10:00';
+                    _value = value!; //'> 0:08:00';
                   });
                 },
               ),

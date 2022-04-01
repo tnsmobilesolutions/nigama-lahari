@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter/services.dart';
+=======
+import 'package:flutter/scheduler.dart';
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
@@ -25,9 +29,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isDarkMode = false;
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
+<<<<<<< HEAD
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       final remoteConfig = await FirebaseRemoteConfig.instance;
       final defaultValue = <String, dynamic>{
@@ -53,6 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
         var add = remoteConfig.getString('add');
       });
     });
+=======
+
+    var brightness = SchedulerBinding.instance!.window.platformBrightness;
+    isDarkMode = brightness == Brightness.dark;
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
   }
 
 //pull to refresh
@@ -221,19 +232,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           margin: EdgeInsets.only(
+<<<<<<< HEAD
                               left: 40, right: 40, top: 5, bottom: 5),
                           decoration: BoxDecoration(
                               color: Constant.lightblue,
                               borderRadius: BorderRadius.circular(20)),
                           child: ListTile(
                             textColor: Constant.white,
+=======
+                              left: 40, top: 5, right: 40, bottom: 5),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? ListTileTheme.of(context).tileColor
+                                : ListTileTheme.of(context).tileColor,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
                             title: Center(
                               child: Text(
                                 snapshot.data![
                                     index], // gets all available catagories dynamically
+<<<<<<< HEAD
                                 style: TextStyle(
                                     color: Constant.white,
                                     fontSize: 30 * textScale),
+=======
+                                style: TextStyle(fontSize: 30 * textScale),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
                               ),
                             ),
                             onTap: () async {
@@ -263,7 +292,29 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
+<<<<<<< HEAD
       floatingActionButton: Add,
+=======
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Constant.orange,
+        elevation: 0,
+        highlightElevation: 0,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddSong(
+                loggedInUser: widget.loggedInUser,
+              ),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
+>>>>>>> ed9a1d909d88163a9f21efe6bfab27142a9dc83b
     );
   }
 }
