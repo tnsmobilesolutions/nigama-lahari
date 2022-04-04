@@ -16,6 +16,7 @@ import 'models/usermodel.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.loggedInUser}) : super(key: key);
+
   final AppUser? loggedInUser;
 
   @override
@@ -23,9 +24,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isDarkMode = false;
-  bool _addVisible = false;
   bool add = false;
+  bool isDarkMode = false;
+
+  bool _addVisible = false;
+
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');

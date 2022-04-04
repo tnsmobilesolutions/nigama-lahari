@@ -16,33 +16,39 @@ class MusicPlayer extends StatefulWidget {
     this.onNextTappedCallback,
   }) : super(key: key);
 
+  final int index;
+  final VoidCallback? onNextTappedCallback;
+  final VoidCallback? onPreviousTappedCallback;
   final Song song;
   final List<Song>? songList;
-  final int index;
-  final VoidCallback? onPreviousTappedCallback;
-  final VoidCallback? onNextTappedCallback;
 
   @override
   State<MusicPlayer> createState() => _MusicPlayerState();
 }
 
 class _MusicPlayerState extends State<MusicPlayer> {
-  Song? _currentSong;
+  AudioCache? audioCache;
+  AudioPlayer? audioPlayer = AudioPlayer();
+  AudioService? audioService = AudioService();
+  Color color = Constant.orange;
+  bool haveDuration = false;
+  bool isRepeat = false;
+  bool nextDone = true;
+  PlayerState playerState = PlayerState.PAUSED;
+  bool prevDone = true;
+
   int? _currentIndex;
+  Song? _currentSong;
   Duration _duration = new Duration();
+  bool _isLoading = false;
   Duration _position = new Duration();
 
-  bool nextDone = true;
-  bool prevDone = true;
-  bool isRepeat = false;
-  bool haveDuration = false;
-  bool _isLoading = false;
-  Color color = Constant.orange;
-
-  AudioService? audioService = AudioService();
-  AudioPlayer? audioPlayer = AudioPlayer();
-  PlayerState playerState = PlayerState.PAUSED;
-  AudioCache? audioCache;
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayer?.release();
+    audioPlayer?.dispose();
+  }
 
   @override
   void initState() {
@@ -118,80 +124,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
     });
     // nextSongPressed();
     return maxDuration;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _isLoading
-        ? CircularProgressIndicator()
-        : Container(
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    slider(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25, right: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _position.toString().split('.')[0],
-                            style: TextStyle(
-                              color: Constant.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            _duration.toString().split('.')[0],
-                            style: TextStyle(
-                              color: Constant.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        //Expanded(child: buttonLoop()),
-                        Expanded(child: previousSong()),
-                        Expanded(
-                          child: IconButton(
-                            icon: Icon(
-                              playerState == PlayerState.PLAYING
-                                  ? Icons.pause_circle_filled_rounded
-                                  : Icons.play_circle_filled_rounded,
-                            ),
-                            iconSize: 60,
-                            color: Constant.orange,
-                            onPressed: () {
-                              playerState == PlayerState.PLAYING
-                                  ? pauseMusic()
-                                  : playMusic();
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(child: nextSong()),
-                        // Expanded(child: buttonShuffle()),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    )
-                  ],
-                ),
-
-                //AudioFile(advancedPlayer: advancedPlayer),
-              ],
-            ),
-          );
   }
 
   //slider implimentation
@@ -366,13 +298,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    audioPlayer?.release();
-    audioPlayer?.dispose();
-  }
-
   playMusic() async {
     print(_currentSong?.songURL);
     if (_currentSong?.songURL != null) {
@@ -386,5 +311,79 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   pauseMusic() async {
     await audioPlayer?.pause();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _isLoading
+        ? CircularProgressIndicator()
+        : Container(
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    slider(),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _position.toString().split('.')[0],
+                            style: TextStyle(
+                              color: Constant.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            _duration.toString().split('.')[0],
+                            style: TextStyle(
+                              color: Constant.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //Expanded(child: buttonLoop()),
+                        //Expanded(child: previousSong()),
+                        Expanded(
+                          child: IconButton(
+                            icon: Icon(
+                              playerState == PlayerState.PLAYING
+                                  ? Icons.pause_circle_filled_rounded
+                                  : Icons.play_circle_filled_rounded,
+                            ),
+                            iconSize: 60,
+                            color: Constant.orange,
+                            onPressed: () {
+                              playerState == PlayerState.PLAYING
+                                  ? pauseMusic()
+                                  : playMusic();
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            },
+                          ),
+                        ),
+                        //Expanded(child: nextSong()),
+                        //Expanded(child: buttonShuffle()),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    )
+                  ],
+                ),
+
+                //AudioFile(advancedPlayer: advancedPlayer),
+              ],
+            ),
+          );
   }
 }
