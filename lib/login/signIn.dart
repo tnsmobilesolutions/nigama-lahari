@@ -1,10 +1,14 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
+import 'package:flutter_application_1/login/signUp.dart';
+import 'package:flutter_application_1/login/signUp.dart';
 
 import '../models/usermodel.dart';
 
@@ -23,10 +27,42 @@ class _SignInState extends State<SignIn> {
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
-
-  //User? user = FirebaseAuth.instance.currentUser;
-
   String? currentUserName;
+  bool _signUpVisible = false;
+  bool signUp = false;
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final remoteConfig = await FirebaseRemoteConfig.instance;
+      final defaultValue = <String, dynamic>{
+        'signUp': false,
+      };
+
+      try {
+        await remoteConfig.setConfigSettings(RemoteConfigSettings(
+          fetchTimeout: const Duration(hours: 24), //cache refresh time
+          minimumFetchInterval: Duration.zero,
+        ));
+        await remoteConfig.setDefaults(defaultValue);
+        await remoteConfig.fetchAndActivate();
+      } on PlatformException catch (exception) {
+// Fetch exception.
+        print(exception);
+      } catch (exception) {
+        print('Unable to fetch remote config. Cached or default values will be '
+            'used');
+        print("exception===>$exception");
+      }
+
+      setState(() {
+        signUp = remoteConfig.getBool('signUp');
+        if (signUp == true) {
+          _signUpVisible = !_signUpVisible;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,32 +241,34 @@ class _SignInState extends State<SignIn> {
                         loginButton,
                         // const SizedBox(height: 10),
 
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const Text('ଆକାଉଣ୍ଟ ନାହିଁ ?'),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SignUp(),
+                        Visibility(
+                          visible: _signUpVisible,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                const Text('ଆକାଉଣ୍ଟ ନାହିଁ ?'),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUp()),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'ସାଇନ ଅପ',
+                                    style: TextStyle(
+                                      color: Constant.orange,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  );
-                                },
-                                child: const Text(
-                                  'ସାଇନ ଅପ',
-                                  style: TextStyle(
-                                    color: Constant.orange,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         )
                       ],
