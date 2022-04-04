@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class Constant {
+  static const black = Colors.black;
   static const blue = Color.fromARGB(207, 29, 20, 73);
   static Brightness brightness =
       SchedulerBinding.instance!.window.platformBrightness;
@@ -18,7 +19,6 @@ class Constant {
   static const white12 = Colors.white12;
   static const white24 = Colors.white24;
   static const yellow = Color.fromARGB(255, 252, 176, 69);
-  static const black = Colors.black;
 
   static List<String> _catagory = [
     'ଜାଗରଣ',

@@ -5,8 +5,8 @@ class LyricsViewer extends StatefulWidget {
   const LyricsViewer({Key? key, required this.lyrics, required this.fontSize})
       : super(key: key);
 
-  final String lyrics;
   final double? fontSize;
+  final String lyrics;
 
   @override
   State<LyricsViewer> createState() => _LyricsViewerState();

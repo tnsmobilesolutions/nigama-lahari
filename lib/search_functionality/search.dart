@@ -24,13 +24,12 @@ class _SearchState extends State<Search> {
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
 
-  List<String> _singer = [];
-
-  final _nameController = TextEditingController();
   String? _categoryOption;
-  String? _singerOption;
+  final _nameController = TextEditingController();
   String? _selectedOption;
+  List<String> _singer = [];
   final _singerNameController = TextEditingController();
+  String? _singerOption;
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
   Map<String, String> _songsInOdia = {
     'Name': 'ନାମ',

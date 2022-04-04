@@ -16,24 +16,27 @@ import 'models/usermodel.dart';
 
 class AddSong extends StatefulWidget {
   const AddSong({Key? key, required this.loggedInUser}) : super(key: key);
+
   final AppUser? loggedInUser;
+
   @override
   _AddSongState createState() => _AddSongState();
 }
 
 class _AddSongState extends State<AddSong> {
+  Duration? autoDuration;
+  String destination = '';
+  File? file;
+  var file1;
+  final height = 100;
+  double percentage = 0;
+  AudioPlayer player = AudioPlayer();
+  double? sizeInMb;
+  String? songUrl;
+  UploadTask? task;
   var val;
 
-  //final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
-
-  final _titleController = TextEditingController();
-  final _titleEnglishController = TextEditingController();
-  final _singerNameController = TextEditingController();
   final _attributeController = TextEditingController();
-  final _lyricsController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-
   List<String> _catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
@@ -44,23 +47,20 @@ class _AddSongState extends State<AddSong> {
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
 
-  UploadTask? task;
-  File? file;
+  final _formKey = GlobalKey<FormState>();
+  final _lyricsController = TextEditingController();
   String? _selectedOption;
-  final height = 100;
-  String destination = '';
-  double percentage = 0;
-  String? songUrl;
-  Duration? autoDuration;
-  double? sizeInMb;
-  var file1;
+  final _singerNameController = TextEditingController();
+  //final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
+
+  final _titleController = TextEditingController();
+
+  final _titleEnglishController = TextEditingController();
 
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
   }
-
-  AudioPlayer player = AudioPlayer();
 
   // select file from device
   Future selectFile() async {

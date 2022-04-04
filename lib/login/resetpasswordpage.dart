@@ -11,11 +11,11 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  var email = "";
+  final emailController = TextEditingController();
+
   //final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
-  var email = "";
-
-  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

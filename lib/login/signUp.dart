@@ -14,14 +14,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final _formkey = GlobalKey<FormState>();
-
+  final _confirmPasswordController = TextEditingController();
   // Create a text controller and use it to retrieve the current value of the TextField.
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  final _nameController = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
   final _mobileController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

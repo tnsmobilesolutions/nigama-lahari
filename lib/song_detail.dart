@@ -17,22 +17,23 @@ class SongDetail extends StatefulWidget {
       this.loggedInUser})
       : super(key: key);
 
-  final Song song;
-  final List<Song>? songList;
   final int index;
   final AppUser? loggedInUser;
+  final Song song;
+  final List<Song>? songList;
 
   @override
   _SongDetailState createState() => _SongDetailState();
 }
 
 class _SongDetailState extends State<SongDetail> {
-  Song? _currentSong;
-  int? _currentIndex;
-  bool _lyricsExpanded = false;
-  double _fontSize = 16;
   bool Edit = false;
+
+  int? _currentIndex;
+  Song? _currentSong;
   bool _editvisible = false;
+  double _fontSize = 16;
+  bool _lyricsExpanded = false;
 
   @override
   void initState() {

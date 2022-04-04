@@ -7,8 +7,6 @@ import 'package:flutter_application_1/login/resetpasswordpage.dart';
 
 import 'package:flutter_application_1/login/signUp.dart';
 import 'package:flutter_application_1/API/userAPI.dart';
-import 'package:flutter_application_1/login/signUp.dart';
-import 'package:flutter_application_1/login/signUp.dart';
 
 import '../models/usermodel.dart';
 
@@ -20,16 +18,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  AppUser? _loggedInUser;
-
-  bool _obscureText = true;
-
-  final _formkey = GlobalKey<FormState>();
+  String? currentUserName;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
-  String? currentUserName;
-  bool _signUpVisible = false;
   bool signUp = false;
+
+  final _formkey = GlobalKey<FormState>();
+  AppUser? _loggedInUser;
+  bool _obscureText = true;
+  bool _signUpVisible = false;
+
   void initState() {
     super.initState();
 

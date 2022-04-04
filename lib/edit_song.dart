@@ -14,13 +14,32 @@ import 'models/usermodel.dart';
 
 class EditSong extends StatefulWidget {
   EditSong({Key? key, required this.song, this.loggedInUser}) : super(key: key);
-  final Song song;
+
   final AppUser? loggedInUser;
+  final Song song;
+
   @override
   State<EditSong> createState() => _Edit_SongState();
 }
 
 class _Edit_SongState extends State<EditSong> {
+  Duration? autoDuration;
+  String destination = '';
+  String duration = '';
+  File? file;
+  var file1;
+  final height = 100;
+  double percentage = 0;
+  //var songDetails = '';
+
+  AudioPlayer player = AudioPlayer();
+
+  double? sizeInMb;
+  String? songUrl;
+  UploadTask? task;
+  var val;
+
+  final _attributeController = TextEditingController();
   //final _formKey = GlobalKey<FormState>();
   List<String> _catagory = [
     'ଜାଗରଣ',
@@ -33,11 +52,12 @@ class _Edit_SongState extends State<EditSong> {
   ];
 
   final _catagoryController = TextEditingController();
+  final _lyricsController = TextEditingController();
+  String? _selectedOption;
+  final _singerNameController = TextEditingController();
+  bool _songChangedByUser = false;
   final _titleController = TextEditingController();
   final _titleInEnglishController = TextEditingController();
-  final _singerNameController = TextEditingController();
-  final _attributeController = TextEditingController();
-  final _lyricsController = TextEditingController();
 
   @override
   void initState() {
@@ -52,23 +72,6 @@ class _Edit_SongState extends State<EditSong> {
     _lyricsController.text = widget.song.songText ?? "";
     _selectedOption = widget.song.songCategory ?? "";
   }
-
-  UploadTask? task;
-  File? file;
-  String? _selectedOption;
-  final height = 100;
-  String destination = '';
-  double percentage = 0;
-  String? songUrl;
-  String duration = '';
-  Duration? autoDuration;
-  double? sizeInMb;
-  var file1;
-  var val;
-  bool _songChangedByUser = false;
-  //var songDetails = '';
-
-  AudioPlayer player = AudioPlayer();
 
   // select file from device
   Future selectFile() async {
@@ -147,6 +150,7 @@ class _Edit_SongState extends State<EditSong> {
           }
         },
       );
+
   Future<void> delete(String songURL) async {
     await FirebaseStorage.instance.ref(songURL).delete;
     // Rebuild the UI
