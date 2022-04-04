@@ -28,7 +28,7 @@ class SongDetail extends StatefulWidget {
 
 class _SongDetailState extends State<SongDetail> {
   bool Edit = false;
-
+  bool _hasBeenPressed = false;
   int? _currentIndex;
   Song? _currentSong;
   bool _editvisible = false;
@@ -190,29 +190,53 @@ class _SongDetailState extends State<SongDetail> {
             )
           ],
         ),
-        body: Container(
-          height: double.infinity,
-          child: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: LyricsViewer(
-                      lyrics: _currentSong?.songText ?? "",
-                      fontSize: _fontSize,
-                    ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Stack(
+                    // alignment: Alignment.bottomRight,
+                    children: [
+                      Center(
+                        child: LyricsViewer(
+                          lyrics: _currentSong?.songText ?? "",
+                          fontSize: _fontSize,
+                        ),
+                      ),
+                      if (!_lyricsExpanded)
+                        Container(
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            icon: _hasBeenPressed
+                                ? Icon(
+                                    Icons.thumb_up,
+                                    color: Theme.of(context).iconTheme.color,
+                                  )
+                                : Icon(
+                                    Icons.thumb_up_off_alt,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                            onPressed: () {
+                              setState(() {
+                                _hasBeenPressed = !_hasBeenPressed;
+                              });
+                            },
+                          ),
+                        ),
+                    ],
                   ),
                 ),
-                if (!_lyricsExpanded)
-                  MusicPlayer(
-                    song: widget.song,
-                    songList: widget.songList,
-                    index: widget.index,
-                    onPreviousTappedCallback: onPrevPressed,
-                    onNextTappedCallback: onNextPressed,
-                  ),
-              ],
-            ),
+              ),
+              if (!_lyricsExpanded)
+                MusicPlayer(
+                  song: widget.song,
+                  songList: widget.songList,
+                  index: widget.index,
+                  onPreviousTappedCallback: onPrevPressed,
+                  onNextTappedCallback: onNextPressed,
+                ),
+            ],
           ),
         ),
       ),

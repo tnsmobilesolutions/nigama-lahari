@@ -174,17 +174,31 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           'ନିଗମ ଲହରୀ',
         ),
-        actions: [
+        actions: <Widget>[
           //SignOut implemented
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: GestureDetector(
-              onTap: showMyDialog,
-              child: Icon(
-                Icons.logout_rounded,
-                color: Theme.of(context).iconTheme.color,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.favorite,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: GestureDetector(
+                  onTap: showMyDialog,
+                  child: Icon(
+                    Icons.logout_rounded,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),
