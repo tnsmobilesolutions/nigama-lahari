@@ -14,22 +14,23 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final _attributeController = TextEditingController();
-  List<String> _catagory = [
-    'ଜାଗରଣ',
-    'ପ୍ରତୀକ୍ଷା',
-    'ଆବାହନ',
-    'ଆରତୀ',
-    'ବନ୍ଦନା',
-    'ପ୍ରାର୍ଥନା',
-    'ବିଦାୟ ପ୍ରାର୍ଥନା',
-  ];
+  // List<String> _catagory = [
+  //   'ଜାଗରଣ',
+  //   'ପ୍ରତୀକ୍ଷା',
+  //   'ଆବାହନ',
+  //   'ଆରତୀ',
+  //   'ବନ୍ଦନା',
+  //   'ପ୍ରାର୍ଥନା',
+  //   'ବିଦାୟ ପ୍ରାର୍ଥନା',
+  // ];
 
   String? _categoryOption;
+  String? _attributeOption;
   final _nameController = TextEditingController();
   String? _selectedOption;
-  List<String> _singer = [];
+  //List<String> _singer = [];
   final _singerNameController = TextEditingController();
-  String? _singerOption;
+  //String? _singerOption;
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
   Map<String, String> _songsInOdia = {
     'Name': 'ନାମ',
@@ -180,38 +181,75 @@ class _SearchState extends State<Search> {
   //   }
   // }
 
+  // Widget getAttributeSong(String? selectedOption) {
+  //   if (selectedOption == "Attribute") {
+  //     return Padding(
+  //       padding: const EdgeInsets.all(20.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.name,
+  //         controller: _attributeController,
+  //         validator: (value) {
+  //           if (value!.isEmpty) {
+  //             return 'Please Enter Your Name';
+  //           } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
+  //               .hasMatch(value)) {
+  //             return 'Please Enter Correct Name';
+  //           }
+  //           return null;
+  //         },
+  //         decoration: InputDecoration(
+  //           focusedBorder: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(15.0),
+  //             borderSide: BorderSide(
+  //               color: Constant.orange,
+  //             ),
+  //           ),
+  //           enabledBorder: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(15),
+  //             borderSide: BorderSide(color: Constant.orange),
+  //           ),
+  //           contentPadding: const EdgeInsets.all(15),
+  //           labelText: 'ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
+  //           labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     return SizedBox(width: 0, height: 0);
+  //   }
+  // }
+
   Widget getAttributeSong(String? selectedOption) {
     if (selectedOption == "Attribute") {
-      return Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: TextFormField(
-          keyboardType: TextInputType.name,
-          controller: _attributeController,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please Enter Your Name';
-            } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
-                .hasMatch(value)) {
-              return 'Please Enter Correct Name';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
-                color: Constant.orange,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Constant.orange),
-            ),
-            contentPadding: const EdgeInsets.all(15),
-            labelText: 'ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
-            labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
+      return DropdownButton(
+        borderRadius: BorderRadius.circular(15),
+        style: TextStyle(color: Constant.white),
+        iconEnabledColor: Theme.of(context).iconTheme.color,
+        hint: Text(
+          'ଚୟନ କରନ୍ତୁ',
+          style: TextStyle(
+            color: Constant.white24,
+            fontSize: 15,
           ),
         ),
+        value: _attributeOption,
+        dropdownColor: Constant.orange,
+        onChanged: (value) {
+          setState(
+            () {
+              _attributeOption = value as String?;
+              print(_attributeOption.toString());
+            },
+          );
+        },
+        items: Constant.attribute.map(
+          (val) {
+            return DropdownMenuItem(
+              child: new Text(val),
+              value: val,
+            );
+          },
+        ).toList(),
       );
     } else {
       return SizedBox(width: 0, height: 0);
@@ -241,7 +279,7 @@ class _SearchState extends State<Search> {
             },
           );
         },
-        items: _catagory.map(
+        items: Constant.catagory.map(
           (val) {
             return DropdownMenuItem(
               child: new Text(val),
@@ -339,8 +377,8 @@ class _SearchState extends State<Search> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment: _selectedOption == 'Category' //||
-                      //_selectedOption == 'Singer'
+                  mainAxisAlignment: _selectedOption == 'Category' ||
+                          _selectedOption == 'Attribute'
                       ? MainAxisAlignment.spaceEvenly
                       : MainAxisAlignment.center,
                   children: [
@@ -370,13 +408,15 @@ class _SearchState extends State<Search> {
                         },
                       ).toList(),
                     ),
-                    getCategorySong(_selectedOption),
+                    _selectedOption == 'Category'
+                        ? getCategorySong(_selectedOption)
+                        : getAttributeSong(_selectedOption),
                   ],
                 ),
                 //SizedBox(height: 30),
                 getSongNameWidget(_selectedOption),
                 getSingerNameWidget(_selectedOption),
-                getAttributeSong(_selectedOption),
+
                 getDurationWidget(_selectedOption),
                 SizedBox(height: 30),
                 ElevatedButton(
@@ -454,13 +494,13 @@ class _SearchState extends State<Search> {
                           );
                         }
                       } else if (_selectedOption == "Attribute") {
-                        if (_attributeController.text.isEmpty) {
+                        if (_attributeOption == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               elevation: 6,
                               behavior: SnackBarBehavior.floating,
                               content: const Text(
-                                'ଦୟାକରି ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
+                                'ଦୟାକରି ଗୀତର ଭାବ ବାଛନ୍ତୁ',
                                 style: TextStyle(color: Constant.white),
                               ),
                               backgroundColor: Constant.orange,
@@ -479,13 +519,13 @@ class _SearchState extends State<Search> {
                           );
                         }
                       } else if (_selectedOption == "Category") {
-                        if (_categoryOption!.isEmpty) {
+                        if (_categoryOption == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               elevation: 6,
                               behavior: SnackBarBehavior.floating,
                               content: const Text(
-                                'ଦୟାକରି ବିଭାଗ ନାମ ଲେଖନ୍ତୁ',
+                                'ଦୟାକରି ଗୀତର ବିଭାଗ ବାଛନ୍ତୁ',
                                 style: TextStyle(color: Constant.white),
                               ),
                               backgroundColor: Constant.orange,

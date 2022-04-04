@@ -46,10 +46,28 @@ class _AddSongState extends State<AddSong> {
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
   ];
+  List<String> _attribute = [
+    'ଅପେକ୍ଷା',
+    'ଉଦବୋଧନ',
+    'ପ୍ରଣତି',
+    'ଅଭିଳାଷ',
+    'ନିବେଦନ',
+    'ମିନତି',
+    'ନାମମାହାତ୍ମ୍ୟ',
+    'ଆତ୍ମଚିନ୍ତା',
+    'ଆତ୍ମାନୁଚିନ୍ତା',
+    'ମହିମାଗାନ',
+    'ମନଶିକ୍ଷା',
+    'ମାତୃଜଣାଣ',
+    'ଆକ୍ଷେପ',
+    'ସମର୍ପଣ',
+    'କ୍ଷମାପ୍ରାର୍ଥନା',
+  ];
 
   final _formKey = GlobalKey<FormState>();
   final _lyricsController = TextEditingController();
   String? _selectedOption;
+  String? _selectedAttribute;
   final _singerNameController = TextEditingController();
   //final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
 
@@ -207,6 +225,36 @@ class _AddSongState extends State<AddSong> {
                               },
                             ).toList(),
                           ),
+                          DropdownButton(
+                            borderRadius: BorderRadius.circular(15),
+                            style: TextStyle(color: Constant.white),
+                            iconEnabledColor: Theme.of(context).iconTheme.color,
+                            hint: Text(
+                              'ଭାବ',
+                              style: TextStyle(
+                                color: Constant.white24,
+                                fontSize: 15,
+                              ),
+                            ),
+                            value: _selectedAttribute,
+                            dropdownColor: Constant.orange,
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  _selectedAttribute = value as String?;
+                                  print(_selectedAttribute.toString());
+                                },
+                              );
+                            },
+                            items: _attribute.map(
+                              (val) {
+                                return DropdownMenuItem(
+                                  child: new Text(val),
+                                  value: val,
+                                );
+                              },
+                            ).toList(),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -290,32 +338,32 @@ class _AddSongState extends State<AddSong> {
                       SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: _attributeController,
-                        style: TextStyle(color: Constant.white),
-                        autofocus: false,
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Constant.orange,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Constant.orange),
-                          ),
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText: 'ଭାବ',
-                          labelStyle: TextStyle(
-                              fontSize: 15.0, color: Constant.white24),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      // TextFormField(
+                      //   controller: _attributeController,
+                      //   style: TextStyle(color: Constant.white),
+                      //   autofocus: false,
+                      //   keyboardType: TextInputType.name,
+                      //   textInputAction: TextInputAction.next,
+                      //   decoration: InputDecoration(
+                      //     focusedBorder: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(15.0),
+                      //       borderSide: BorderSide(
+                      //         color: Constant.orange,
+                      //       ),
+                      //     ),
+                      //     enabledBorder: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(15),
+                      //       borderSide: BorderSide(color: Constant.orange),
+                      //     ),
+                      //     contentPadding: const EdgeInsets.all(15),
+                      //     labelText: 'ଭାବ',
+                      //     labelStyle: TextStyle(
+                      //         fontSize: 15.0, color: Constant.white24),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
                       TextFormField(
                         controller: _lyricsController,
                         style: TextStyle(color: Constant.white),
@@ -416,7 +464,7 @@ class _AddSongState extends State<AddSong> {
                               Song songsModel = Song(
                                 isEditable: true,
                                 songCategory: _selectedOption,
-                                songAttribute: _attributeController.text,
+                                songAttribute: _selectedAttribute,
                                 songTitle: _titleController.text,
                                 songTitleInEnglish:
                                     _titleEnglishController.text,

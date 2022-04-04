@@ -20,7 +20,7 @@ class Constant {
   static const white24 = Colors.white24;
   static const yellow = Color.fromARGB(255, 252, 176, 69);
 
-  static List<String> _catagory = [
+  static List<String> catagory = [
     'ଜାଗରଣ',
     'ପ୍ରତୀକ୍ଷା',
     'ଆବାହନ',
@@ -28,5 +28,23 @@ class Constant {
     'ବନ୍ଦନା',
     'ପ୍ରାର୍ଥନା',
     'ବିଦାୟ ପ୍ରାର୍ଥନା',
+  ];
+
+  static List<String> attribute = [
+    'ଅପେକ୍ଷା',
+    'ଉଦବୋଧନ',
+    'ପ୍ରଣତି',
+    'ଅଭିଳାଷ',
+    'ନିବେଦନ',
+    'ମିନତି',
+    'ନାମମାହାତ୍ମ୍ୟ',
+    'ଆତ୍ମଚିନ୍ତା',
+    'ଆତ୍ମାନୁଚିନ୍ତା',
+    'ମହିମାଗାନ',
+    'ମନଶିକ୍ଷା',
+    'ମାତୃଜଣାଣ',
+    'ଆକ୍ଷେପ',
+    'ସମର୍ପଣ',
+    'କ୍ଷମାପ୍ରାର୍ଥନା',
   ];
 }
