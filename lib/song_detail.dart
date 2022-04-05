@@ -210,12 +210,14 @@ class _SongDetailState extends State<SongDetail> {
                           child: IconButton(
                             icon: _hasBeenPressed
                                 ? Icon(
-                                    Icons.thumb_up,
+                                    Icons.favorite,
                                     color: Theme.of(context).iconTheme.color,
+                                    size: 40,
                                   )
                                 : Icon(
-                                    Icons.thumb_up_off_alt,
+                                    Icons.favorite_outline_rounded,
                                     color: Theme.of(context).iconTheme.color,
+                                    size: 40,
                                   ),
                             onPressed: () {
                               setState(() {
