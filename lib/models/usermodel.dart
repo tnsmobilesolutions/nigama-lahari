@@ -6,6 +6,7 @@ class AppUser {
     this.email,
     this.mobile,
     this.name,
+    this.favouriteSong,
   });
 
   factory AppUser.fromJson(String source) =>
@@ -17,6 +18,7 @@ class AppUser {
       email: map['email'],
       mobile: map['mobile'],
       name: map['name'],
+      favouriteSong: map['favouriteSong'],
     );
   }
 
@@ -24,6 +26,7 @@ class AppUser {
   String? mobile;
   String? name;
   String? uid;
+  String? favouriteSong;
 
   @override
   bool operator ==(Object other) {
@@ -33,17 +36,22 @@ class AppUser {
         other.uid == uid &&
         other.email == email &&
         other.mobile == mobile &&
-        other.name == name;
+        other.name == name &&
+        other.favouriteSong == favouriteSong;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ email.hashCode ^ mobile.hashCode ^ name.hashCode;
+    return uid.hashCode ^
+        email.hashCode ^
+        mobile.hashCode ^
+        name.hashCode ^
+        favouriteSong.hashCode;
   }
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name)';
+    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, favouriteSong: $favouriteSong)';
   }
 
   AppUser copyWith({
@@ -51,12 +59,14 @@ class AppUser {
     String? email,
     String? mobile,
     String? name,
+    String? favouriteSong,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
       email: email ?? this.email,
       mobile: mobile ?? this.mobile,
       name: name ?? this.name,
+      favouriteSong: favouriteSong ?? this.favouriteSong,
     );
   }
 
@@ -66,6 +76,7 @@ class AppUser {
       'email': email,
       'mobile': mobile,
       'name': name,
+      'favouriteSong': favouriteSong,
     };
   }
 
