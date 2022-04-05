@@ -36,34 +36,6 @@ class _AddSongState extends State<AddSong> {
   UploadTask? task;
   var val;
 
-  final _attributeController = TextEditingController();
-  List<String> _catagory = [
-    'ଜାଗରଣ',
-    'ପ୍ରତୀକ୍ଷା',
-    'ଆବାହନ',
-    'ଆରତୀ',
-    'ବନ୍ଦନା',
-    'ପ୍ରାର୍ଥନା',
-    'ବିଦାୟ ପ୍ରାର୍ଥନା',
-  ];
-  List<String> _attribute = [
-    'ଅପେକ୍ଷା',
-    'ଉଦବୋଧନ',
-    'ପ୍ରଣତି',
-    'ଅଭିଳାଷ',
-    'ନିବେଦନ',
-    'ମିନତି',
-    'ନାମମାହାତ୍ମ୍ୟ',
-    'ଆତ୍ମଚିନ୍ତା',
-    'ଆତ୍ମାନୁଚିନ୍ତା',
-    'ମହିମାଗାନ',
-    'ମନଶିକ୍ଷା',
-    'ମାତୃଜଣାଣ',
-    'ଆକ୍ଷେପ',
-    'ସମର୍ପଣ',
-    'କ୍ଷମାପ୍ରାର୍ଥନା',
-  ];
-
   final _formKey = GlobalKey<FormState>();
   final _lyricsController = TextEditingController();
   String? _selectedOption;
@@ -216,7 +188,7 @@ class _AddSongState extends State<AddSong> {
                                 },
                               );
                             },
-                            items: _catagory.map(
+                            items: Constant.catagory.map(
                               (val) {
                                 return DropdownMenuItem(
                                   child: new Text(val),
@@ -246,7 +218,7 @@ class _AddSongState extends State<AddSong> {
                                 },
                               );
                             },
-                            items: _attribute.map(
+                            items: Constant.attribute.map(
                               (val) {
                                 return DropdownMenuItem(
                                   child: new Text(val),

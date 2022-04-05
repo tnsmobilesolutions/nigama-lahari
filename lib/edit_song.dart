@@ -30,7 +30,6 @@ class _Edit_SongState extends State<EditSong> {
   var file1;
   final height = 100;
   double percentage = 0;
-  //var songDetails = '';
 
   AudioPlayer player = AudioPlayer();
 
@@ -41,19 +40,10 @@ class _Edit_SongState extends State<EditSong> {
 
   final _attributeController = TextEditingController();
   //final _formKey = GlobalKey<FormState>();
-  List<String> _catagory = [
-    'ଜାଗରଣ',
-    'ପ୍ରତୀକ୍ଷା',
-    'ଆବାହନ',
-    'ଆରତୀ',
-    'ବନ୍ଦନା',
-    'ପ୍ରାର୍ଥନା',
-    'ବିଦାୟ ପ୍ରାର୍ଥନା',
-  ];
 
-  final _catagoryController = TextEditingController();
   final _lyricsController = TextEditingController();
   String? _selectedOption;
+  String? _selectedAttribute;
   final _singerNameController = TextEditingController();
   bool _songChangedByUser = false;
   final _titleController = TextEditingController();
@@ -64,11 +54,9 @@ class _Edit_SongState extends State<EditSong> {
     super.initState();
     print('${widget.loggedInUser?.name}');
 
-    _catagoryController.text = widget.song.songCategory ?? "";
     _titleController.text = widget.song.songTitle ?? "";
     _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
     _singerNameController.text = widget.song.singerName ?? "";
-    _attributeController.text = widget.song.songAttribute ?? "";
     _lyricsController.text = widget.song.songText ?? "";
     _selectedOption = widget.song.songCategory ?? "";
   }
@@ -288,7 +276,50 @@ class _Edit_SongState extends State<EditSong> {
                                 },
                               );
                             },
-                            items: _catagory.map(
+                            items: Constant.catagory.map(
+                              (val) {
+                                return DropdownMenuItem(
+                                  child: new Text(val),
+                                  value: val,
+                                );
+                              },
+                            ).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Constant.orange),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'ଭାବ',
+                          style: TextStyle(color: Constant.white24),
+                        ),
+                        DropdownButtonHideUnderline(
+                          // this widget hides the dropdown default underline
+                          child: DropdownButton(
+                            borderRadius: BorderRadius.circular(15),
+                            style: TextStyle(color: Constant.white),
+                            iconEnabledColor: Constant.orange,
+                            value: _selectedAttribute,
+                            dropdownColor: Constant.orange,
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  _selectedAttribute = value as String?;
+                                },
+                              );
+                            },
+                            items: Constant.attribute.map(
                               (val) {
                                 return DropdownMenuItem(
                                   child: new Text(val),
@@ -386,34 +417,34 @@ class _Edit_SongState extends State<EditSong> {
                     ),
                   ),
                   SizedBox(height: 15),
-                  TextFormField(
-                    style: TextStyle(color: Constant.white),
-                    keyboardType: TextInputType.name,
-                    controller: _attributeController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter  Attribute Name';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Constant.orange,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Constant.orange),
-                      ),
-                      contentPadding: const EdgeInsets.all(15),
-                      labelText: 'ଭାବ',
-                      labelStyle:
-                          TextStyle(fontSize: 15.0, color: Constant.white24),
-                    ),
-                  ),
-                  SizedBox(height: 15),
+                  // TextFormField(
+                  //   style: TextStyle(color: Constant.white),
+                  //   keyboardType: TextInputType.name,
+                  //   controller: _attributeController,
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please Enter  Attribute Name';
+                  //     }
+                  //     return null;
+                  //   },
+                  //   decoration: InputDecoration(
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(15.0),
+                  //       borderSide: BorderSide(
+                  //         color: Constant.orange,
+                  //       ),
+                  //     ),
+                  //     enabledBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(15),
+                  //       borderSide: BorderSide(color: Constant.orange),
+                  //     ),
+                  //     contentPadding: const EdgeInsets.all(15),
+                  //     labelText: 'ଭାବ',
+                  //     labelStyle:
+                  //         TextStyle(fontSize: 15.0, color: Constant.white24),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 15),
                   TextFormField(
                     style: TextStyle(color: Constant.white),
                     keyboardType: TextInputType.text,
