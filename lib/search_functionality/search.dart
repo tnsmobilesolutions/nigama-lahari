@@ -508,7 +508,7 @@ class _SearchState extends State<Search> {
                           );
                         } else {
                           allSongs = await searchAPI
-                              .getSongByAttribute(_attributeController.text);
+                              .getSongByAttribute(_attributeOption);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

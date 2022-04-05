@@ -130,7 +130,7 @@ class SearchSongAPI {
   //   return lstSingers;
   // }
 
-  Future<List<Song>?> getSongByAttribute(String attribute) {
+  Future<List<Song>?> getSongByAttribute(String? attribute) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstSongs = songs.get().then(
       (querySnapshot) {
@@ -141,7 +141,7 @@ class SearchSongAPI {
             final resultSongs = element.data() as Map<String, dynamic>;
             //print(resultSongs);
             final song = Song.fromMap(resultSongs);
-            if ((song.songAttribute ?? '').startsWith(attribute)) {
+            if ((song.songAttribute ?? '').startsWith(attribute!)) {
               lstSong.add(song);
             }
           },
