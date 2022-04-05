@@ -85,7 +85,11 @@ class userAPI {
 
   // SignUp
   Future<AppUser?> signUp(
-      String email, String password, String name, String mobile) async {
+    String email,
+    String password,
+    String name,
+    String mobile,
+  ) async {
     try {
       final userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -99,7 +103,9 @@ class userAPI {
               'email': email,
               'uid': value.user!.uid,
               'name': name,
-              'mobile': mobile
+              'mobile': mobile,
+              'favouriteSongs': '',
+              'allowEdit': false,
             },
           );
           return value;

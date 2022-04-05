@@ -29,6 +29,7 @@ class SongDetail extends StatefulWidget {
 class _SongDetailState extends State<SongDetail> {
   bool Edit = false;
   bool _hasBeenPressed = false;
+  bool _isFavourite = false;
   int? _currentIndex;
   Song? _currentSong;
   bool _editvisible = false;
@@ -205,25 +206,28 @@ class _SongDetailState extends State<SongDetail> {
                         ),
                       ),
                       if (!_lyricsExpanded)
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          child: IconButton(
-                            icon: _hasBeenPressed
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: Theme.of(context).iconTheme.color,
-                                    size: 40,
-                                  )
-                                : Icon(
-                                    Icons.favorite_outline_rounded,
-                                    color: Theme.of(context).iconTheme.color,
-                                    size: 40,
-                                  ),
-                            onPressed: () {
-                              setState(() {
-                                _hasBeenPressed = !_hasBeenPressed;
-                              });
-                            },
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Container(
+                            alignment: Alignment.bottomRight,
+                            child: IconButton(
+                              icon: _hasBeenPressed
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: Theme.of(context).iconTheme.color,
+                                      size: 40,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_outline_rounded,
+                                      color: Theme.of(context).iconTheme.color,
+                                      size: 40,
+                                    ),
+                              onPressed: () {
+                                setState(() {
+                                  _hasBeenPressed = !_hasBeenPressed;
+                                });
+                              },
+                            ),
                           ),
                         ),
                     ],

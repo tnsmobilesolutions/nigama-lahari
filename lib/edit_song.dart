@@ -42,7 +42,7 @@ class _Edit_SongState extends State<EditSong> {
   //final _formKey = GlobalKey<FormState>();
 
   final _lyricsController = TextEditingController();
-  String? _selectedOption;
+  String? _selectedCategory;
   String? _selectedAttribute;
   final _singerNameController = TextEditingController();
   bool _songChangedByUser = false;
@@ -57,8 +57,9 @@ class _Edit_SongState extends State<EditSong> {
     _titleController.text = widget.song.songTitle ?? "";
     _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
     _singerNameController.text = widget.song.singerName ?? "";
+    _selectedAttribute = widget.song.songAttribute ?? "";
     _lyricsController.text = widget.song.songText ?? "";
-    _selectedOption = widget.song.songCategory ?? "";
+    _selectedCategory = widget.song.songCategory ?? "";
   }
 
   // select file from device
@@ -94,7 +95,7 @@ class _Edit_SongState extends State<EditSong> {
       return;
     } else {}
     final fileName = path.basename(file!.path);
-    destination = '$_selectedOption/$fileName';
+    destination = '$_selectedCategory/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
@@ -267,12 +268,12 @@ class _Edit_SongState extends State<EditSong> {
                             borderRadius: BorderRadius.circular(15),
                             style: TextStyle(color: Constant.white),
                             iconEnabledColor: Constant.orange,
-                            value: _selectedOption,
+                            value: _selectedCategory,
                             dropdownColor: Constant.orange,
                             onChanged: (value) {
                               setState(
                                 () {
-                                  _selectedOption = value as String?;
+                                  _selectedCategory = value as String?;
                                 },
                               );
                             },
@@ -553,7 +554,7 @@ class _Edit_SongState extends State<EditSong> {
                         style:
                             ElevatedButton.styleFrom(primary: Constant.orange),
                         onPressed: () async {
-                          if (_selectedOption == null) {
+                          if (_selectedCategory == null) {
                             final snackBar = SnackBar(
                                 content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
@@ -590,7 +591,7 @@ class _Edit_SongState extends State<EditSong> {
 
                           Song songsModel = Song(
                             isEditable: true,
-                            songCategory: _selectedOption,
+                            songCategory: _selectedCategory,
                             songAttribute: _attributeController.text,
                             songTitle: _titleController.text,
                             songTitleInEnglish: _titleInEnglishController.text,
