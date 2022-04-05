@@ -66,7 +66,10 @@ class _ResetPasswordState extends State<ResetPassword> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 30),
-              notice,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: notice,
+              ),
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(20.0),
