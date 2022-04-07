@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
-import 'package:flutter_application_1/playlist.dart';
+
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
 
@@ -158,19 +158,13 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: GestureDetector(
-                    child: Icon(
-                      Icons.playlist_play_rounded,
-                      color: Theme.of(context).iconTheme.color,
-                      size: 30,
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Playlist(),
-                        ),
-                      );
-                    }),
+                  child: Icon(
+                    Icons.playlist_play_rounded,
+                    color: Theme.of(context).iconTheme.color,
+                    size: 30,
+                  ),
+                  onTap: () {},
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
