@@ -89,6 +89,7 @@ class userAPI {
     String password,
     String name,
     String mobile,
+    List<String>? favoriteSongs,
   ) async {
     try {
       final userCredential = await _auth
@@ -104,7 +105,7 @@ class userAPI {
               'uid': value.user!.uid,
               'name': name,
               'mobile': mobile,
-              'favouriteSongs': '',
+              'favoriteSongs': [],
               'allowEdit': false,
             },
           );
