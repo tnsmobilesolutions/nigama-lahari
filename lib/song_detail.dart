@@ -1,6 +1,5 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
@@ -27,9 +26,8 @@ class SongDetail extends StatefulWidget {
 }
 
 class _SongDetailState extends State<SongDetail> {
-  bool Edit = false;
   bool _hasBeenPressed = false;
-  bool _isFavourite = false;
+  // bool _isFavourite = false;
   int? _currentIndex;
   Song? _currentSong;
   bool _editvisible = false;
@@ -42,34 +40,10 @@ class _SongDetailState extends State<SongDetail> {
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
     _currentIndex = widget.index;
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      final remoteConfig = await FirebaseRemoteConfig.instance;
-      final defaultValue = <String, dynamic>{
-        'add': false,
-      };
-
-      try {
-        await remoteConfig.setConfigSettings(RemoteConfigSettings(
-          fetchTimeout: const Duration(hours: 24), //cache refresh time
-          minimumFetchInterval: Duration.zero,
-        ));
-        await remoteConfig.setDefaults(defaultValue);
-        await remoteConfig.fetchAndActivate();
-      } on PlatformException catch (exception) {
-// Fetch exception.
-        print(exception);
-      } catch (exception) {
-        print('Unable to fetch remote config. Cached or default values will be '
-            'used');
-        print("exception===>$exception");
+    setState(() {
+      if (widget.loggedInUser?.allowEdit == true) {
+        _editvisible = !_editvisible;
       }
-
-      setState(() {
-        Edit = remoteConfig.getBool('Edit');
-        if (Edit == true) {
-          _editvisible = !_editvisible;
-        }
-      });
     });
   }
 

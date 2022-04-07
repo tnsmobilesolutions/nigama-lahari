@@ -5,11 +5,13 @@ class AppUser {
   String? email;
   String? mobile;
   String? name;
+  bool? allowEdit;
   AppUser({
     this.uid,
     this.email,
     this.mobile,
     this.name,
+    this.allowEdit,
   });
   //List<String>? favouriteSongs;
 
@@ -18,12 +20,14 @@ class AppUser {
     String? email,
     String? mobile,
     String? name,
+    bool? allowEdit,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
       email: email ?? this.email,
       mobile: mobile ?? this.mobile,
       name: name ?? this.name,
+      allowEdit: allowEdit ?? this.allowEdit,
     );
   }
 
@@ -33,6 +37,7 @@ class AppUser {
       'email': email,
       'mobile': mobile,
       'name': name,
+      'allowEdit': allowEdit,
     };
   }
 
@@ -42,6 +47,7 @@ class AppUser {
       email: map['email'],
       mobile: map['mobile'],
       name: map['name'],
+      allowEdit: map['allowEdit'],
     );
   }
 
@@ -52,7 +58,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name)';
+    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, allowEdit: $allowEdit)';
   }
 
   @override
@@ -63,11 +69,16 @@ class AppUser {
         other.uid == uid &&
         other.email == email &&
         other.mobile == mobile &&
-        other.name == name;
+        other.name == name &&
+        other.allowEdit == allowEdit;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ email.hashCode ^ mobile.hashCode ^ name.hashCode;
+    return uid.hashCode ^
+        email.hashCode ^
+        mobile.hashCode ^
+        name.hashCode ^
+        allowEdit.hashCode;
   }
 }

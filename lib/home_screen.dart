@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter_application_1/login/signIn.dart';
@@ -25,7 +25,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool add = false;
   bool isDarkMode = false;
 
   bool _addVisible = false;
@@ -33,34 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      final remoteConfig = await FirebaseRemoteConfig.instance;
-      final defaultValue = <String, dynamic>{
-        'add': false,
-      };
-
-      try {
-        await remoteConfig.setConfigSettings(RemoteConfigSettings(
-          fetchTimeout: const Duration(hours: 24), //cache refresh time
-          minimumFetchInterval: Duration.zero,
-        ));
-        await remoteConfig.setDefaults(defaultValue);
-        await remoteConfig.fetchAndActivate();
-      } on PlatformException catch (exception) {
-// Fetch exception.
-        print(exception);
-      } catch (exception) {
-        print('Unable to fetch remote config. Cached or default values will be '
-            'used');
-        print("exception===>$exception");
+    setState(() {
+      if (widget.loggedInUser?.allowEdit == true) {
+        _addVisible = !_addVisible;
       }
-
-      setState(() {
-        add = remoteConfig.getBool('add');
-        if (add == true) {
-          _addVisible = !_addVisible;
-        }
-      });
     });
   }
 
