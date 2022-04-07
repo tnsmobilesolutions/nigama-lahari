@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/API/userAPI.dart';
+import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
 import 'package:flutter_application_1/music_player.dart';
-
 import 'lyrics.dart';
 import 'models/usermodel.dart';
 
@@ -33,10 +33,20 @@ class _SongDetailState extends State<SongDetail> {
   bool _editvisible = false;
   double _fontSize = 16;
   bool _lyricsExpanded = false;
+  Color color = Constant.lightblue;
+  bool _isFavorite = false;
 
   @override
   void initState() {
     super.initState();
+    //to set favorite button color based on the user's favorite song
+    if (widget.loggedInUser != null &&
+        widget.loggedInUser!.favoriteSongs != null) {
+      if (widget.loggedInUser!.favoriteSongs!.contains(widget.song.songId)) {
+        color = Constant.orange;
+      }
+    }
+
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
     _currentIndex = widget.index;
@@ -66,6 +76,35 @@ class _SongDetailState extends State<SongDetail> {
         _currentSong = widget.songList?[_currentIndex!];
       });
     }
+  }
+
+  Widget Favorite() {
+    return IconButton(
+      icon: Icon(
+        Icons.favorite,
+        size: 40,
+        color: color,
+      ),
+      onPressed: () {
+        if (_isFavorite == false) {
+          setState(
+            () {
+              userAPI().removeSongFromFavorite(widget.song.songId);
+              color = Constant.lightblue;
+              _isFavorite = true;
+            },
+          );
+        } else if (_isFavorite == true) {
+          setState(
+            () {
+              userAPI().addSongToFavorite(widget.song.songId);
+              color = Theme.of(context).iconTheme.color!;
+              _isFavorite = false;
+            },
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -183,26 +222,8 @@ class _SongDetailState extends State<SongDetail> {
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: Container(
-                            alignment: Alignment.bottomRight,
-                            child: IconButton(
-                              icon: _hasBeenPressed
-                                  ? Icon(
-                                      Icons.favorite,
-                                      color: Theme.of(context).iconTheme.color,
-                                      size: 40,
-                                    )
-                                  : Icon(
-                                      Icons.favorite_outline_rounded,
-                                      color: Theme.of(context).iconTheme.color,
-                                      size: 40,
-                                    ),
-                              onPressed: () {
-                                setState(() {
-                                  _hasBeenPressed = !_hasBeenPressed;
-                                });
-                              },
-                            ),
-                          ),
+                              alignment: Alignment.bottomRight,
+                              child: Favorite()),
                         ),
                     ],
                   ),

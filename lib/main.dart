@@ -116,9 +116,7 @@ class _MyAppState extends State<MyApp> {
                   );
                 }
               } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return SignIn();
               }
             },
           ),
