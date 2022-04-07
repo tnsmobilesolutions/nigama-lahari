@@ -163,4 +163,55 @@ class userAPI {
       print(e); // TODO: show dialog with error
     }
   }
+  // add song in favorite list
+
+  void addSongToFavorite(String? id) async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    var songIds;
+    await collection.doc(loggedInUser!.uid).get().then(
+      (DocumentSnapshot ds) {
+        songIds = ds['favoriteSongs'];
+
+        //print(songIds);
+      },
+    );
+    //print(songIds);
+
+    var favSongs = songIds as List<dynamic>?;
+    if (id != null && favSongs != null && !favSongs.contains(id)) {
+      favSongs.add(id);
+      //print(songIds);
+    }
+
+    collection
+        .doc(loggedInUser!.uid)
+        .update({'favoriteSongs': songIds})
+        .then((_) => print('Updated'))
+        .catchError((error) => print('Update failed: $error'));
+  }
+// remove song from favorite list
+
+  void removeSongFromFavorite(String? id) async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    var songIds;
+    await collection.doc(loggedInUser!.uid).get().then(
+      (DocumentSnapshot ds) {
+        songIds = ds['favoriteSongs'];
+
+        //print(songIds);
+      },
+    );
+    //print(songIds);
+    var favSongs = songIds as List<dynamic>?;
+    if (id != null && favSongs != null && favSongs.contains(id)) {
+      favSongs.remove(id);
+      //print(songIds);
+    }
+
+    collection
+        .doc(loggedInUser!.uid)
+        .update({'favoriteSongs': songIds})
+        .then((_) => print('Updated'))
+        .catchError((error) => print('Update failed: $error'));
+  }
 }

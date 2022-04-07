@@ -1,17 +1,21 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class AppUser {
   String? uid;
   String? email;
   String? mobile;
   String? name;
   bool? allowEdit;
+  List<String>? favoriteSongs;
   AppUser({
     this.uid,
     this.email,
     this.mobile,
     this.name,
     this.allowEdit,
+    this.favoriteSongs,
   });
   //List<String>? favouriteSongs;
 
@@ -21,6 +25,7 @@ class AppUser {
     String? mobile,
     String? name,
     bool? allowEdit,
+    List<String>? favoriteSongs,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -28,6 +33,7 @@ class AppUser {
       mobile: mobile ?? this.mobile,
       name: name ?? this.name,
       allowEdit: allowEdit ?? this.allowEdit,
+      favoriteSongs: favoriteSongs ?? this.favoriteSongs,
     );
   }
 
@@ -38,6 +44,7 @@ class AppUser {
       'mobile': mobile,
       'name': name,
       'allowEdit': allowEdit,
+      'favoriteSongs': favoriteSongs,
     };
   }
 
@@ -48,6 +55,7 @@ class AppUser {
       mobile: map['mobile'],
       name: map['name'],
       allowEdit: map['allowEdit'],
+      favoriteSongs: List<String>.from(map['favoriteSongs']),
     );
   }
 
@@ -58,7 +66,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, allowEdit: $allowEdit)';
+    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, allowEdit: $allowEdit, favoriteSongs: $favoriteSongs)';
   }
 
   @override
@@ -70,7 +78,8 @@ class AppUser {
         other.email == email &&
         other.mobile == mobile &&
         other.name == name &&
-        other.allowEdit == allowEdit;
+        other.allowEdit == allowEdit &&
+        listEquals(other.favoriteSongs, favoriteSongs);
   }
 
   @override
@@ -79,6 +88,7 @@ class AppUser {
         email.hashCode ^
         mobile.hashCode ^
         name.hashCode ^
-        allowEdit.hashCode;
+        allowEdit.hashCode ^
+        favoriteSongs.hashCode;
   }
 }
