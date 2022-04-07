@@ -215,4 +215,29 @@ class SearchSongAPI {
     );
     return lstSongs;
   }
+
+  Future<List<Song>?> getAllSongsByIds(List<String>? songIds) {
+    CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+    final lstResult = songs.get().then(
+      (querySnapshot) {
+        List<Song>? lstSongIds = [];
+        querySnapshot.docs.forEach(
+          (element) {
+            final songMap = element.data() as Map<String, dynamic>;
+
+            final song = Song.fromMap(songMap);
+            if (songIds != null && songIds.contains(song.songId)) {
+              lstSongIds.add(song);
+            }
+          },
+        );
+        lstSongIds
+            .sort((a, b) => (a.songTitle ?? "").compareTo(b.songTitle ?? ""));
+
+        return lstSongIds;
+      },
+    );
+
+    return lstResult;
+  }
 }

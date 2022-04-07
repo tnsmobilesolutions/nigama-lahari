@@ -26,7 +26,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isDarkMode = false;
-
   bool _addVisible = false;
 
   void initState() {
@@ -163,7 +162,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Theme.of(context).iconTheme.color,
                     size: 30,
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    final allFavoriteSongs = await SearchSongAPI()
+                        .getAllSongsByIds(widget.loggedInUser?.favoriteSongs);
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ScrollableSongList(
+                          songCategory: 'ଆପଣଙ୍କ ପସନ୍ଦର ଗୀତ',
+                          songs: allFavoriteSongs,
+                          loggedInUser: widget.loggedInUser,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               Padding(
