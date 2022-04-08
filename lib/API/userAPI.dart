@@ -181,7 +181,7 @@ class userAPI {
     var favSongs = songIds as List<dynamic>?;
     if (id != null && favSongs != null && !favSongs.contains(id)) {
       favSongs.add(id);
-      //print(songIds);
+      print(songIds);
     }
 
     collection
