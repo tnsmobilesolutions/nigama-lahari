@@ -13,7 +13,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final _attributeController = TextEditingController();
   // List<String> _catagory = [
   //   'ଜାଗରଣ',
   //   'ପ୍ରତୀକ୍ଷା',

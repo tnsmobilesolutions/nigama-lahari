@@ -26,8 +26,7 @@ class SongDetail extends StatefulWidget {
 }
 
 class _SongDetailState extends State<SongDetail> {
-  bool _hasBeenPressed = false;
-  // bool _isFavourite = false;
+  //bool _hasBeenPressed = false;
   int? _currentIndex;
   Song? _currentSong;
   bool _editvisible = false;

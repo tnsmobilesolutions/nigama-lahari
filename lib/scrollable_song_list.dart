@@ -107,22 +107,22 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
           elevation: 0,
           centerTitle: true,
           title: Text('${widget.songCategory}'),
-          actions: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: showMyDialog,
-                    child: Icon(
-                      Icons.logout_rounded,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+          // actions: [
+          //   Row(
+          //     children: [
+          //       Padding(
+          //         padding: EdgeInsets.only(right: 20),
+          //         child: GestureDetector(
+          //           onTap: showMyDialog,
+          //           child: Icon(
+          //             Icons.logout_rounded,
+          //             color: Theme.of(context).iconTheme.color,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   )
+          // ],
         ),
         body: SafeArea(
           child: Column(
