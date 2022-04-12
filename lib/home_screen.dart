@@ -25,15 +25,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isDarkMode = false;
-  bool _addVisible = false;
-
   void initState() {
     super.initState();
     print('${widget.loggedInUser?.name}');
     setState(() {
       if (widget.loggedInUser?.allowEdit == true) {
-        _addVisible = !_addVisible;
+        Constant.addVisible = !Constant.addVisible;
       }
     });
   }
@@ -122,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // final Add =
-    print('home screen loading...');
+    //print('home screen loading...');
 
     final textScale = MediaQuery.of(context).textScaleFactor;
 
@@ -259,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: Visibility(
-        visible: _addVisible,
+        visible: Constant.addVisible,
         child: FloatingActionButton(
           backgroundColor: Constant.orange,
           elevation: 0,

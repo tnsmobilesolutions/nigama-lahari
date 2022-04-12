@@ -20,12 +20,9 @@ class ScrollableSongList extends StatefulWidget {
 }
 
 class _ScrollableSongListState extends State<ScrollableSongList> {
-  List<Song>? items;
-  List<String>? songName;
-
   @override
   void initState() {
-    items = widget.songs;
+    Constant.items = widget.songs;
     super.initState();
     print('${widget.loggedInUser?.name}');
     Constant.isDarkMode = Constant.brightness == Brightness.dark;
@@ -93,7 +90,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
     }
     setState(
       () {
-        items = results;
+        Constant.items = results;
       },
     );
   }
@@ -155,11 +152,11 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               ),
               SizedBox(height: 20),
               Expanded(
-                child: items!.isNotEmpty
+                child: Constant.items!.isNotEmpty
                     ? ListView.builder(
                         keyboardDismissBehavior:
                             ScrollViewKeyboardDismissBehavior.onDrag,
-                        itemCount: items?.length ?? 0,
+                        itemCount: Constant.items?.length ?? 0,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: Padding(
@@ -176,7 +173,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                     ? ListTileTheme.of(context).tileColor
                                     : ListTileTheme.of(context).tileColor,
                                 title: Text(
-                                  items![index].songTitle ?? "",
+                                  Constant.items![index].songTitle ?? "",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25,
@@ -187,13 +184,13 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      items![index].singerName ?? "",
+                                      Constant.items![index].singerName ?? "",
                                       style: TextStyle(
                                         fontSize: 15,
                                       ),
                                     ),
                                     Text(
-                                      items![index].songDuration ?? "",
+                                      Constant.items![index].songDuration ?? "",
                                       style: TextStyle(
                                         fontSize: 15,
                                       ),
@@ -207,7 +204,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SongDetail(
-                                    song: items![index],
+                                    song: Constant.items![index],
                                     songList: widget.songs,
                                     index: index,
                                     loggedInUser: widget.loggedInUser,
