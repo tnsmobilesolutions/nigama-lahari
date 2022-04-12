@@ -240,4 +240,26 @@ class SearchSongAPI {
 
     return lstResult;
   }
+
+  // Future<List<String>?> getAllAvailableAttribute() {
+  //   CollectionReference songs = FirebaseFirestore.instance.collection('songs');
+  //   final lstAttributes = songs.get().then(
+  //     (querySnapshot) {
+  //       List<String>? lstAttribute = [];
+  //       var value;
+  //       querySnapshot.docs.forEach(
+  //         (element) {
+  //           final resultSongs = element.data() as Map<String, dynamic>;
+  //           final song = resultSongs.values.toList();
+  //           print('$song');
+  //           // if (song != null) {
+  //           //   lstAttribute.add(song);
+  //           // }
+  //         },
+  //       );
+  //       return lstAttribute;
+  //     },
+  //   );
+  //   return lstAttributes;
+  // }
 }

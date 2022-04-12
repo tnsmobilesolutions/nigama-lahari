@@ -13,23 +13,11 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  // List<String> _catagory = [
-  //   'ଜାଗରଣ',
-  //   'ପ୍ରତୀକ୍ଷା',
-  //   'ଆବାହନ',
-  //   'ଆରତୀ',
-  //   'ବନ୍ଦନା',
-  //   'ପ୍ରାର୍ଥନା',
-  //   'ବିଦାୟ ପ୍ରାର୍ଥନା',
-  // ];
-
-  String? _categoryOption;
   String? _attributeOption;
+  String? _categoryOption;
   final _nameController = TextEditingController();
   String? _selectedOption;
-  //List<String> _singer = [];
   final _singerNameController = TextEditingController();
-  //String? _singerOption;
   List<String> _songs = ["Name", "Singer", "Attribute", "Category", "Duration"];
   Map<String, String> _songsInOdia = {
     'Name': 'ନାମ',
@@ -218,6 +206,43 @@ class _SearchState extends State<Search> {
   //   }
   // }
 
+  // Widget getAttributeSong(String? selectedOption) {
+  //   if (selectedOption == "Attribute") {
+  //     return DropdownButton(
+  //       borderRadius: BorderRadius.circular(15),
+  //       style: TextStyle(color: Constant.white),
+  //       iconEnabledColor: Theme.of(context).iconTheme.color,
+  //       hint: Text(
+  //         'ଚୟନ କରନ୍ତୁ',
+  //         style: TextStyle(
+  //           color: Constant.white24,
+  //           fontSize: 15,
+  //         ),
+  //       ),
+  //       value: _attributeOption,
+  //       dropdownColor: Constant.orange,
+  //       onChanged: (value) {
+  //         setState(
+  //           () {
+  //             _attributeOption = value as String?;
+  //             print(_attributeOption.toString());
+  //           },
+  //         );
+  //       },
+  //       items: Constant.attribute.map(
+  //         (val) {
+  //           return DropdownMenuItem(
+  //             child: new Text(val),
+  //             value: val,
+  //           );
+  //         },
+  //       ).toList(),
+  //     );
+  //   } else {
+  //     return SizedBox(width: 0, height: 0);
+  //   }
+  // }
+
   Widget getAttributeSong(String? selectedOption) {
     if (selectedOption == "Attribute") {
       return DropdownButton(
@@ -237,7 +262,8 @@ class _SearchState extends State<Search> {
           setState(
             () {
               _attributeOption = value as String?;
-              print(_attributeOption.toString());
+              //print(_attributeOption.toString());
+              //SearchSongAPI().getAllAvailableAttribute();
             },
           );
         },
