@@ -11,6 +11,7 @@ import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
 
 import 'API/searchSongAPI.dart';
+import 'API/userAPI.dart';
 import 'add_new_song.dart';
 import 'models/songs_model.dart';
 import 'models/usermodel.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
-    print('${widget.loggedInUser?.name}');
+    //print('${widget.loggedInUser?.name}');
     setState(() {
       if (widget.loggedInUser?.allowEdit == true) {
         Constant.addVisible = !Constant.addVisible;
@@ -160,8 +161,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     size: 30,
                   ),
                   onTap: () async {
-                    final allFavoriteSongs = await SearchSongAPI()
-                        .getAllSongsByIds(widget.loggedInUser?.favoriteSongs);
+                    //print(
+                    // '******${widget.loggedInUser?.favoriteSongIds}******');
+                    //get updated favoriteSongIds
+                    List<String>? songIds = await userAPI()
+                        .getFavoriteSongIdsFromUid(
+                            widget.loggedInUser?.uid ?? '');
+                    //print('++++++++++++$songIds+++++++++++');
+                    final allFavoriteSongs =
+                        await SearchSongAPI().getAllSongsByIds(songIds);
 
                     Navigator.push(
                       context,

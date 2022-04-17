@@ -40,8 +40,8 @@ class _SongDetailState extends State<SongDetail> {
     super.initState();
     //to set favorite button color based on the user's favorite song
     if (widget.loggedInUser != null &&
-        widget.loggedInUser!.favoriteSongs != null) {
-      if (widget.loggedInUser!.favoriteSongs!.contains(widget.song.songId)) {
+        widget.loggedInUser!.favoriteSongIds != null) {
+      if (widget.loggedInUser!.favoriteSongIds!.contains(widget.song.songId)) {
         color = Constant.orange;
       }
     }

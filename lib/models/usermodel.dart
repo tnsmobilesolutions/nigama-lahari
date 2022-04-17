@@ -8,14 +8,14 @@ class AppUser {
   String? mobile;
   String? name;
   bool? allowEdit;
-  List<String>? favoriteSongs;
+  List<String>? favoriteSongIds;
   AppUser({
     this.uid,
     this.email,
     this.mobile,
     this.name,
     this.allowEdit,
-    this.favoriteSongs,
+    this.favoriteSongIds,
   });
   //List<String>? favouriteSongs;
 
@@ -25,7 +25,7 @@ class AppUser {
     String? mobile,
     String? name,
     bool? allowEdit,
-    List<String>? favoriteSongs,
+    List<String>? favoriteSongIds,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -33,7 +33,7 @@ class AppUser {
       mobile: mobile ?? this.mobile,
       name: name ?? this.name,
       allowEdit: allowEdit ?? this.allowEdit,
-      favoriteSongs: favoriteSongs ?? this.favoriteSongs,
+      favoriteSongIds: favoriteSongIds ?? this.favoriteSongIds,
     );
   }
 
@@ -44,7 +44,7 @@ class AppUser {
       'mobile': mobile,
       'name': name,
       'allowEdit': allowEdit,
-      'favoriteSongs': favoriteSongs,
+      'favoriteSongIds': favoriteSongIds,
     };
   }
 
@@ -55,7 +55,7 @@ class AppUser {
       mobile: map['mobile'],
       name: map['name'],
       allowEdit: map['allowEdit'],
-      favoriteSongs: List<String>.from(map['favoriteSongs']),
+      favoriteSongIds: List<String>.from(map['favoriteSongIds']),
     );
   }
 
@@ -66,7 +66,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, allowEdit: $allowEdit, favoriteSongs: $favoriteSongs)';
+    return 'AppUser(uid: $uid, email: $email, mobile: $mobile, name: $name, allowEdit: $allowEdit, favoriteSongIds: $favoriteSongIds)';
   }
 
   @override
@@ -79,7 +79,7 @@ class AppUser {
         other.mobile == mobile &&
         other.name == name &&
         other.allowEdit == allowEdit &&
-        listEquals(other.favoriteSongs, favoriteSongs);
+        listEquals(other.favoriteSongIds, favoriteSongIds);
   }
 
   @override
@@ -89,6 +89,6 @@ class AppUser {
         mobile.hashCode ^
         name.hashCode ^
         allowEdit.hashCode ^
-        favoriteSongs.hashCode;
+        favoriteSongIds.hashCode;
   }
 }

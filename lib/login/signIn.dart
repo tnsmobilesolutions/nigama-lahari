@@ -148,7 +148,7 @@ class _SignInState extends State<SignIn> {
                   elevation: 6,
                   behavior: SnackBarBehavior.floating,
                   content: const Text(
-                    'ଦୟା କରି  ନିଜ ଇ-ମେଲ କିମ୍ବା ପାସୱର୍ଡ ପୁନଃ ଯାଞ୍ଚ କରନ୍ତୁ',
+                    'ଦୟା କରି ନିଜ ଇ-ମେଲ କିମ୍ବା ପାସୱର୍ଡ ପୁନଃ ଯାଞ୍ଚ କରନ୍ତୁ',
                     style: TextStyle(color: Constant.white),
                   ),
                   backgroundColor: Constant.orange,

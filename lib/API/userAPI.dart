@@ -89,7 +89,7 @@ class userAPI {
     String password,
     String name,
     String mobile,
-    List<String>? favoriteSongs,
+    List<String>? favoriteSongIds,
   ) async {
     try {
       final userCredential = await _auth
@@ -105,7 +105,7 @@ class userAPI {
               'uid': value.user!.uid,
               'name': name,
               'mobile': mobile,
-              'favoriteSongs': [],
+              'favoriteSongIds': [],
               'allowEdit': false,
             },
           );
@@ -164,14 +164,14 @@ class userAPI {
       print(e); // TODO: show dialog with error
     }
   }
-  // add song in favorite list
+  // add favSongs in favorite list
 
   void addSongToFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
       (DocumentSnapshot ds) {
-        songIds = ds['favoriteSongs'];
+        songIds = ds['favoriteSongIds'];
 
         //print(songIds);
       },
@@ -186,18 +186,18 @@ class userAPI {
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongs': songIds})
+        .update({'favoriteSongIds': songIds})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }
-// remove song from favorite list
+// remove favSongs from favorite list
 
   void removeSongFromFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
       (DocumentSnapshot ds) {
-        songIds = ds['favoriteSongs'];
+        songIds = ds['favoriteSongIds'];
 
         //print(songIds);
       },
@@ -211,8 +211,20 @@ class userAPI {
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongs': songIds})
+        .update({'favoriteSongIds': songIds})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
+  }
+
+  Future<List<String>?> getFavoriteSongIdsFromUid(String uid) async {
+    List<String>? favSongIds;
+    var collection = FirebaseFirestore.instance.collection('users');
+    await collection.doc('uid').get().then(
+      (value) {
+        favSongIds = value.data()?['favoriteSongs'];
+      },
+    );
+    print('---------------$favSongIds-------------');
+    return favSongIds;
   }
 }
