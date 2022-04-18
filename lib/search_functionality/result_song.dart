@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/API/userAPI.dart';
 
 import 'package:flutter_application_1/models/songs_model.dart';
 
@@ -86,7 +87,9 @@ class _ResultSongState extends State<ResultSong> {
                                 ),
                               ),
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              final loggedInUser =
+                                  await userAPI().getLoggedInAppUser();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -94,6 +97,7 @@ class _ResultSongState extends State<ResultSong> {
                                     song: widget.songs![index],
                                     songList: widget.songs,
                                     index: index,
+                                    loggedInUser: loggedInUser,
                                   ),
                                 ),
                               );

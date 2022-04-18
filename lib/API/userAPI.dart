@@ -50,6 +50,10 @@ class userAPI {
     return null;
   }
 
+  Future<AppUser?> getLoggedInAppUser() {
+    return getAppUserFromUid(_loggedInUser?.uid ?? "");
+  }
+
   Future<AppUser?> getAppUserFromUid(String uid) async {
     try {
       CollectionReference users =

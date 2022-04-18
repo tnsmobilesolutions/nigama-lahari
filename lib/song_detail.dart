@@ -49,9 +49,7 @@ class _SongDetailState extends State<SongDetail> {
     _currentSong = widget.song;
     _currentIndex = widget.index;
     setState(() {
-      if (widget.loggedInUser?.allowEdit == true) {
-        _editvisible = !_editvisible;
-      }
+      _editvisible = widget.loggedInUser?.allowEdit ?? false;
     });
   }
 
