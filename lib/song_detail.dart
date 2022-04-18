@@ -32,7 +32,6 @@ class _SongDetailState extends State<SongDetail> {
   bool _editvisible = false;
   double _fontSize = 16;
   bool _lyricsExpanded = false;
-  Color color = Constant.lightblue;
   bool _isFavorite = false;
 
   @override
@@ -42,7 +41,7 @@ class _SongDetailState extends State<SongDetail> {
     if (widget.loggedInUser != null &&
         widget.loggedInUser!.favoriteSongIds != null) {
       if (widget.loggedInUser!.favoriteSongIds!.contains(widget.song.songId)) {
-        color = Constant.orange;
+        _isFavorite = true;
       }
     }
 
@@ -82,23 +81,23 @@ class _SongDetailState extends State<SongDetail> {
       icon: Icon(
         Icons.favorite,
         size: 40,
-        color: color,
+        color: _isFavorite
+            ? Theme.of(context).iconTheme.color!
+            : Constant.lightblue,
       ),
       onPressed: () {
         if (_isFavorite == false) {
           setState(
             () {
-              userAPI().removeSongFromFavorite(widget.song.songId);
-              color = Constant.lightblue;
               _isFavorite = true;
+              userAPI().addSongToFavorite(widget.song.songId);
             },
           );
-        } else if (_isFavorite == true) {
+        } else {
           setState(
             () {
-              userAPI().addSongToFavorite(widget.song.songId);
-              color = Theme.of(context).iconTheme.color!;
               _isFavorite = false;
+              userAPI().removeSongFromFavorite(widget.song.songId);
             },
           );
         }
