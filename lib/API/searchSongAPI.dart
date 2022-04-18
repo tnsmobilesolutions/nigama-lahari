@@ -216,7 +216,7 @@ class SearchSongAPI {
     return lstSongs;
   }
 
-  Future<List<Song>?> getAllSongsByIds(List<String>? songIds) {
+  Future<List<Song>?> getAllSongsByIds(List<dynamic>? songIds) {
     CollectionReference songs = FirebaseFirestore.instance.collection('songs');
     final lstResult = songs.get().then(
       (querySnapshot) {

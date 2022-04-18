@@ -164,9 +164,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     //print(
                     // '******${widget.loggedInUser?.favoriteSongIds}******');
                     //get updated favoriteSongIds
-                    List<String>? songIds = await userAPI()
-                        .getFavoriteSongIdsFromUid(
-                            widget.loggedInUser?.uid ?? '');
+                    List<dynamic>? songIds = await userAPI()
+                        .getFavoriteSongIdsFromUid(widget.loggedInUser?.uid);
                     //print('++++++++++++$songIds+++++++++++');
                     final allFavoriteSongs =
                         await SearchSongAPI().getAllSongsByIds(songIds);

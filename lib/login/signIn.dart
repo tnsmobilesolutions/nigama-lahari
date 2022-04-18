@@ -77,13 +77,13 @@ class _SignInState extends State<SignIn> {
 
       //keyboardType: TextInputType.phone,
       validator: (value) {
-        RegExp regex = RegExp(r'^.{6}$');
+        //RegExp regex = RegExp(r'^.{6}$');
         if (value!.isEmpty) {
           return "ନିଜ ପାସୱାଡ଼ ଲେଖନ୍ତୁ";
         }
-        if (!regex.hasMatch(value)) {
-          return "ଦୟା କରି ନିଜ ସଠିକ ପାସୱାଡ଼  ଲେଖନ୍ତୁ";
-        }
+        // if (!regex.hasMatch(value)) {
+        //   return "ଦୟା କରି ନିଜ ସଠିକ ପାସୱାଡ଼  ଲେଖନ୍ତୁ";
+        // }
 
         return null;
       },

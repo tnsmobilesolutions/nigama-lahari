@@ -85,12 +85,7 @@ class userAPI {
 
   // SignUp
   Future<AppUser?> signUp(
-    String email,
-    String password,
-    String name,
-    String mobile,
-    List<String>? favoriteSongIds,
-  ) async {
+      String email, String password, String name, String mobile) async {
     try {
       final userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -216,15 +211,22 @@ class userAPI {
         .catchError((error) => print('Update failed: $error'));
   }
 
-  Future<List<String>?> getFavoriteSongIdsFromUid(String uid) async {
-    List<String>? favSongIds;
+  Future<List<dynamic>> getFavoriteSongIdsFromUid(String? uid) async {
+    var songIds;
+    //var favSongs;
     var collection = FirebaseFirestore.instance.collection('users');
-    await collection.doc('uid').get().then(
-      (value) {
-        favSongIds = value.data()?['favoriteSongs'];
+    await collection.doc(uid).get().then(
+      (DocumentSnapshot ds) {
+        Map<String, dynamic> data = ds.data() as Map<String, dynamic>;
+        // You can then retrieve the value from the Map like this:
+        songIds = data['favoriteSongIds'];
+        // songIds = ds['favoriteSongs'];
+        print(songIds);
+        //favSongs = songIds as List<String>?;
+        //print(favSongs);
+        // return favSongs;
       },
     );
-    print('---------------$favSongIds-------------');
-    return favSongIds;
+    return songIds as List<dynamic>;
   }
 }

@@ -22,7 +22,6 @@ class _SignUpState extends State<SignUp> {
   final _mobileController = TextEditingController();
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
-  List<String>? favoriteSongs = [''];
 
   @override
   Widget build(BuildContext context) {
@@ -214,12 +213,10 @@ class _SignUpState extends State<SignUp> {
       onPressed: () async {
         if (_formkey.currentState!.validate()) {
           final _appUser = await userAPI().signUp(
-            _emailController.text.trim(),
-            _passwordController.text.trim(),
-            _nameController.text.trim(),
-            _mobileController.text.trim(),
-            favoriteSongs,
-          );
+              _emailController.text.trim(),
+              _passwordController.text.trim(),
+              _nameController.text.trim(),
+              _mobileController.text.trim());
 
           if (_appUser != null) {
             ScaffoldMessenger.of(context).showSnackBar(
