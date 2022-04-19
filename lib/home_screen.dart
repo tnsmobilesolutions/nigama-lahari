@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(
                     Icons.playlist_play_rounded,
                     color: Theme.of(context).iconTheme.color,
-                    size: 30,
+                    size: 35,
                   ),
                   onTap: () async {
                     //print(
@@ -214,16 +214,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   return RefreshIndicator(
                     color: Theme.of(context).iconTheme.color,
                     backgroundColor: Constant.lightblue,
-                    onRefresh: () => getDataThroughRefresh(),
+                    onRefresh: getDataThroughRefresh,
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          margin: EdgeInsets.only(
-                              left: 40, right: 40, top: 5, bottom: 5),
                           decoration: BoxDecoration(
-                              color: Constant.lightblue,
-                              borderRadius: BorderRadius.circular(20)),
+                              color: Theme.of(context).iconTheme.color,
+                              borderRadius: BorderRadius.circular(40)),
+                          margin: EdgeInsets.only(
+                              left: 130, right: 130, top: 5, bottom: 5),
                           child: ListTile(
                             textColor: Constant.white,
                             title: Center(
