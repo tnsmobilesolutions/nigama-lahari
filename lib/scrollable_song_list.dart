@@ -97,133 +97,134 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(color: Theme.of(context).iconTheme.color),
-          elevation: 0,
-          centerTitle: true,
-          title: Text('${widget.songCategory}'),
-          // actions: [
-          //   Row(
-          //     children: [
-          //       Padding(
-          //         padding: EdgeInsets.only(right: 20),
-          //         child: GestureDetector(
-          //           onTap: showMyDialog,
-          //           child: Icon(
-          //             Icons.logout_rounded,
-          //             color: Theme.of(context).iconTheme.color,
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   )
-          // ],
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 30),
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                height: 40,
-                child: TextField(
-                  onChanged: (value) => _runFilter(value),
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Constant.lightblue,
-                      // Constant.isDarkMode
-                      //     ? Constant.lightblue
-                      //     : Constant.purpleRed,
-                      contentPadding: EdgeInsets.all(0),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide.none),
-                      hintStyle:
-                          TextStyle(fontSize: 18, color: Constant.white24),
-                      hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+        automaticallyImplyLeading: false,
+        toolbarHeight: 150,
+        flexibleSpace: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context),
                 ),
+                SizedBox(
+                  width: 135,
+                ),
+                Text(
+                  '${widget.songCategory}',
+                  style: TextStyle(fontSize: 25),
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              height: 40,
+              child: TextField(
+                onChanged: (value) => _runFilter(value),
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Constant.darkBlue,
+                    contentPadding: EdgeInsets.all(0),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none),
+                    hintStyle: TextStyle(fontSize: 18, color: Constant.white24),
+                    hintText: "ଗୀତ ଖୋଜନ୍ତୁ"),
               ),
-              SizedBox(height: 20),
-              Expanded(
-                child: Constant.items!.isNotEmpty
-                    ? ListView.builder(
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        itemCount: Constant.items?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: ListTile(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                textColor: Constant.white,
-                                // Constant.isDarkMode
-                                //     ? Constant.white
-                                //     : Constant.black,
-                                tileColor: Constant.isDarkMode
-                                    ? ListTileTheme.of(context).tileColor
-                                    : ListTileTheme.of(context).tileColor,
-                                title: Text(
-                                  Constant.items![index].songTitle ?? "",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                                subtitle: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      Constant.items![index].singerName ?? "",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    Text(
-                                      Constant.items![index].songDuration ?? "",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
+            ),
+          ],
+        ),
+        //leading: BackButton(color: Theme.of(context).iconTheme.color),
+        elevation: 0,
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 20),
+            Expanded(
+              child: Constant.items!.isNotEmpty
+                  ? ListView.builder(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      itemCount: Constant.items?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              textColor: Constant.white,
+                              // Constant.isDarkMode
+                              //     ? Constant.white
+                              //     : Constant.black,
+                              tileColor: Constant.isDarkMode
+                                  ? ListTileTheme.of(context).tileColor
+                                  : ListTileTheme.of(context).tileColor,
+                              title: Text(
+                                Constant.items![index].songTitle ?? "",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
                                 ),
                               ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SongDetail(
-                                    song: Constant.items![index],
-                                    songList: widget.songs,
-                                    index: index,
-                                    loggedInUser: widget.loggedInUser,
+                              subtitle: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    Constant.items![index].singerName ?? "",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
                                   ),
+                                  Text(
+                                    Constant.items![index].songDuration ?? "",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SongDetail(
+                                  song: Constant.items![index],
+                                  songList: widget.songs,
+                                  index: index,
+                                  loggedInUser: widget.loggedInUser,
                                 ),
-                              );
-                            },
-                          );
-                        },
-                      )
-                    : Center(
-                        child: Text(
-                          'କ୍ଷମା କରିବେ !  ଏହି ବିଭାଗରେ କୌଣସି ଗୀତ ନାହିଁ',
-                          style: TextStyle(fontSize: 24),
-                        ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Text(
+                        'କ୍ଷମା କରିବେ !  ଏହି ବିଭାଗରେ କୌଣସି ଗୀତ ନାହିଁ',
+                        style: TextStyle(fontSize: 24),
                       ),
-              )
-            ],
-          ),
+                    ),
+            )
+          ],
         ),
       ),
     );
