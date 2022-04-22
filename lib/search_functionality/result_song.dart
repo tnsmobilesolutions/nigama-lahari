@@ -22,11 +22,17 @@ class _ResultSongState extends State<ResultSong> {
       child: Scaffold(
         appBar: widget.songs!.isNotEmpty
             ? AppBar(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                toolbarHeight: 90,
                 elevation: 0,
                 title: Text('ଆପଣ ଖୋଜୁଥିବା ଗୀତ'),
                 centerTitle: true,
               )
             : AppBar(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                toolbarHeight: 90,
                 backgroundColor: Constant.darkBlue,
                 elevation: 0,
                 title: Text(''),

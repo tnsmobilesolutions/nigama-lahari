@@ -236,6 +236,9 @@ class _Edit_SongState extends State<EditSong> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+          toolbarHeight: 90,
           leading: BackButton(color: Theme.of(context).iconTheme.color),
           centerTitle: true,
           title: Text(widget.song.songTitle ?? ""),

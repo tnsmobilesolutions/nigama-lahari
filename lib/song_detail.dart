@@ -110,6 +110,9 @@ class _SongDetailState extends State<SongDetail> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+          toolbarHeight: 90,
           leading: BackButton(color: Theme.of(context).iconTheme.color),
           automaticallyImplyLeading: _lyricsExpanded ? false : true,
           title: Center(

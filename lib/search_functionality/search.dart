@@ -254,6 +254,11 @@ class _SearchState extends State<Search> {
       child: Container(
         child: Scaffold(
           appBar: AppBar(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(35),
+                    bottomRight: Radius.circular(35))),
+            toolbarHeight: 90,
             leading: BackButton(color: Theme.of(context).iconTheme.color),
             elevation: 0,
             centerTitle: true,

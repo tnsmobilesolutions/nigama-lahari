@@ -44,6 +44,7 @@ class Constant {
   static const lightOrange = Color.fromARGB(219, 248, 175, 97);
   static const lightYellow = Color.fromARGB(255, 255, 219, 128);
   static const lightblue = Color.fromARGB(180, 36, 29, 85);
+  static const lightblue_2 = Color.fromARGB(180, 64, 51, 148);
   static const orange = Color.fromRGBO(219, 106, 2, 1);
   static const purpleRed = Color.fromARGB(255, 225, 48, 107);
   static const white = Color(0xFFffffff);

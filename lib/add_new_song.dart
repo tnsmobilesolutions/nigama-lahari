@@ -149,10 +149,13 @@ class _AddSongState extends State<AddSong> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+          toolbarHeight: 90,
           leading: BackButton(color: Theme.of(context).iconTheme.color),
-          elevation: 0,
+          //elevation: 0,
           centerTitle: true,
-          title: Text('ନୂଆ ଗୀତ', style: TextStyle(color: Constant.orange)),
+          title: Text('ନୂଆ ଗୀତ'),
         ),
         body: SingleChildScrollView(
           child: Form(

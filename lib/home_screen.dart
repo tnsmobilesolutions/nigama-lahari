@@ -121,6 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+        toolbarHeight: 90,
         leading: GestureDetector(
           onTap: () {
             Navigator.push(
