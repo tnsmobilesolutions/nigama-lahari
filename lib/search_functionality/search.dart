@@ -69,43 +69,6 @@ class _SearchState extends State<Search> {
     }
   }
 
-  // Widget getSingerNameWidget(String? selectedOption) {
-  //   if (selectedOption == "Singer") {
-  //     return DropdownButton(
-  //       borderRadius: BorderRadius.circular(15),
-  //       style: TextStyle(color: Constant.white),
-  //       iconEnabledColor: Theme.of(context).iconTheme.color,
-  //       hint: Text(
-  //         'ଚୟନ କରନ୍ତୁ',
-  //         style: TextStyle(
-  //           color: Constant.white24,
-  //           fontSize: 15,
-  //         ),
-  //       ),
-  //       value: _singerOption,
-  //       dropdownColor: Constant.orange,
-  //       onChanged: (value) {
-  //         setState(
-  //           () {
-  //             _singerOption = value as String?;
-  //             print(_singerOption.toString());
-  //           },
-  //         );
-  //       },
-  //       items: _singer.map(
-  //         (val) {
-  //           return DropdownMenuItem(
-  //             child: new Text(val),
-  //             value: val,
-  //           );
-  //         },
-  //       ).toList(),
-  //     );
-  //   } else {
-  //     return SizedBox(width: 0, height: 0);
-  //   }
-  // }
-
   Widget getSingerNameWidget(String? selectedOption) {
     if (selectedOption == "Singer") {
       return Padding(
@@ -145,104 +108,6 @@ class _SearchState extends State<Search> {
     }
   }
 
-  // Widget getAttributeSong(String? selectedOption) {
-  //   bool _isSelected = false;
-  //   if (selectedOption == "Attribute") {
-  //     return Padding(
-  //         padding: const EdgeInsets.all(20.0),
-  //         child: Wrap(
-  //           children: [
-  //             ChoiceChip(
-  //               label: Text('ନାମ'),
-  //               disabledColor: Constant.lightblue,
-  //               selectedColor: Constant.orange,
-  //               selected: _isSelected,
-  //               onSelected: (value) {
-  //                 _isSelected = value;
-  //               },
-  //             )
-  //           ],
-  //         ));
-  //   } else {
-  //     return SizedBox(width: 0, height: 0);
-  //   }
-  // }
-
-  // Widget getAttributeSong(String? selectedOption) {
-  //   if (selectedOption == "Attribute") {
-  //     return Padding(
-  //       padding: const EdgeInsets.all(20.0),
-  //       child: TextFormField(
-  //         keyboardType: TextInputType.name,
-  //         controller: _attributeController,
-  //         validator: (value) {
-  //           if (value!.isEmpty) {
-  //             return 'Please Enter Your Name';
-  //           } else if (!RegExp(r'^[a-zA-Z0-9]+(?:[\w -]*[a-zA-Z0-9]+)*$')
-  //               .hasMatch(value)) {
-  //             return 'Please Enter Correct Name';
-  //           }
-  //           return null;
-  //         },
-  //         decoration: InputDecoration(
-  //           focusedBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(15.0),
-  //             borderSide: BorderSide(
-  //               color: Constant.orange,
-  //             ),
-  //           ),
-  //           enabledBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(15),
-  //             borderSide: BorderSide(color: Constant.orange),
-  //           ),
-  //           contentPadding: const EdgeInsets.all(15),
-  //           labelText: 'ଗୀତର ଭାବ ଲେଖନ୍ତୁ',
-  //           labelStyle: TextStyle(fontSize: 15.0, color: Constant.white24),
-  //         ),
-  //       ),
-  //     );
-  //   } else {
-  //     return SizedBox(width: 0, height: 0);
-  //   }
-  // }
-
-  // Widget getAttributeSong(String? selectedOption) {
-  //   if (selectedOption == "Attribute") {
-  //     return DropdownButton(
-  //       borderRadius: BorderRadius.circular(15),
-  //       style: TextStyle(color: Constant.white),
-  //       iconEnabledColor: Theme.of(context).iconTheme.color,
-  //       hint: Text(
-  //         'ଚୟନ କରନ୍ତୁ',
-  //         style: TextStyle(
-  //           color: Constant.white24,
-  //           fontSize: 15,
-  //         ),
-  //       ),
-  //       value: _attributeOption,
-  //       dropdownColor: Constant.orange,
-  //       onChanged: (value) {
-  //         setState(
-  //           () {
-  //             _attributeOption = value as String?;
-  //             print(_attributeOption.toString());
-  //           },
-  //         );
-  //       },
-  //       items: Constant.attribute.map(
-  //         (val) {
-  //           return DropdownMenuItem(
-  //             child: new Text(val),
-  //             value: val,
-  //           );
-  //         },
-  //       ).toList(),
-  //     );
-  //   } else {
-  //     return SizedBox(width: 0, height: 0);
-  //   }
-  // }
-
   Widget getAttributeSong(String? selectedOption) {
     if (selectedOption == "Attribute") {
       return DropdownButton(
@@ -262,8 +127,6 @@ class _SearchState extends State<Search> {
           setState(
             () {
               _attributeOption = value as String?;
-              //print(_attributeOption.toString());
-              //SearchSongAPI().getAllAvailableAttribute();
             },
           );
         },

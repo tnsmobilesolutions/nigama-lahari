@@ -1,15 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/constant.dart';
-
 import 'package:flutter_application_1/login/signIn.dart';
-
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
-
 import 'API/searchSongAPI.dart';
 import 'API/userAPI.dart';
 import 'add_new_song.dart';
@@ -228,8 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             textColor: Constant.white,
                             title: Center(
                               child: Text(
-                                snapshot.data![
-                                    index], // gets all available catagories dynamically
+                                // gets all available catagories dynamically
+                                snapshot.data![index],
                                 style: TextStyle(
                                     color: Constant.white,
                                     fontSize: 30 * textScale),
