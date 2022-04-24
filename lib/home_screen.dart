@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Theme.of(context).iconTheme.color,
                               borderRadius: BorderRadius.circular(40)),
                           margin: EdgeInsets.only(
-                              left: 130, right: 130, top: 5, bottom: 5),
+                              left: 70, right: 70, top: 5, bottom: 5),
                           child: ListTile(
                             textColor: Constant.white,
                             title: Center(
