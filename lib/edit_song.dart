@@ -38,7 +38,7 @@ class _Edit_SongState extends State<EditSong> {
   UploadTask? task;
   var val;
 
-  final _attributeController = TextEditingController();
+  //final _attributeController = TextEditingController();
   //final _formKey = GlobalKey<FormState>();
 
   final _lyricsController = TextEditingController();
@@ -54,12 +54,14 @@ class _Edit_SongState extends State<EditSong> {
     super.initState();
     print('${widget.loggedInUser?.name}');
 
-    _titleController.text = widget.song.songTitle ?? "";
-    _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
-    _singerNameController.text = widget.song.singerName ?? "";
-    _selectedAttribute = widget.song.songAttribute ?? "";
-    _lyricsController.text = widget.song.songText ?? "";
-    _selectedCategory = widget.song.songCategory ?? "";
+    setState(() {
+      _titleController.text = widget.song.songTitle ?? "";
+      _titleInEnglishController.text = widget.song.songTitleInEnglish ?? "";
+      _singerNameController.text = widget.song.singerName ?? "";
+      _selectedAttribute = widget.song.songAttribute ?? "";
+      _lyricsController.text = widget.song.songText ?? "";
+      _selectedCategory = widget.song.songCategory ?? "";
+    });
   }
 
   // select file from device
@@ -595,7 +597,7 @@ class _Edit_SongState extends State<EditSong> {
                           Song songsModel = Song(
                             isEditable: true,
                             songCategory: _selectedCategory,
-                            songAttribute: _attributeController.text,
+                            songAttribute: _selectedAttribute,
                             songTitle: _titleController.text,
                             songTitleInEnglish: _titleInEnglishController.text,
                             singerName: _singerNameController.text,
