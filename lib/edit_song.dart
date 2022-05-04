@@ -501,9 +501,9 @@ class _Edit_SongState extends State<EditSong> {
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               backgroundColor: Constant.lightblue,
-                              title: Center(child: const Text('Replace Song')),
+                              title: Center(child: const Text('ଗୀତ ବଦଳାନ୍ତୁ')),
                               content: const Text(
-                                  'This will replace the existing song. Do you want to continue ?'),
+                                  'ପୁରୁଣା ଗୀତ ବଦଳି ନୂଆ ଗୀତ ରହିବ | ଆପଣ ଜାରି ରଖିବାକୁ ଚାହୁଁଛନ୍ତି କି ?'),
                               actions: <Widget>[
                                 Row(
                                   mainAxisAlignment:

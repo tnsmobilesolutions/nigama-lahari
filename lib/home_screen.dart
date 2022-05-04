@@ -152,10 +152,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: GestureDetector(
-                  child: Icon(
-                    Icons.playlist_play_rounded,
-                    color: Theme.of(context).iconTheme.color,
-                    size: 35,
+                  child: Image(
+                    image: AssetImage('assets/image/favoritelist 2.png'),
+                    height: 20,
+                    width: 20,
                   ),
                   onTap: () async {
                     //print(

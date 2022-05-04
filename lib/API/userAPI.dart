@@ -163,8 +163,8 @@ class userAPI {
       print(e); // TODO: show dialog with error
     }
   }
-  // add favSongs in favorite list
 
+  // add favSongs in favorite list
   void addSongToFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
@@ -189,8 +189,8 @@ class userAPI {
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }
-// remove favSongs from favorite list
 
+// remove favSongs from favorite list
   void removeSongFromFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
