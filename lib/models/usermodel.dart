@@ -1,8 +1,19 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+import '../API/userAPI.dart';
 
-class AppUser {
+class AppUser extends ChangeNotifier {
+  addSongIdToFavoriteSongIds(String? songId) {
+    userAPI().addSongToFavorite(songId);
+    // fetch and update list of updated favSongIds
+    notifyListeners();
+  }
+
+  removeSongIdToFavoriteSongIds(String? songId) {
+    userAPI().removeSongFromFavorite(songId);
+    notifyListeners();
+  }
+
   String? uid;
   String? email;
   String? mobile;

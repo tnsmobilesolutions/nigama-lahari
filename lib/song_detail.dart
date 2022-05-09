@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/API/userAPI.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
@@ -88,14 +87,16 @@ class _SongDetailState extends State<SongDetail> {
           setState(
             () {
               _isFavorite = true;
-              userAPI().addSongToFavorite(widget.song.songId);
+              widget.loggedInUser
+                  ?.addSongIdToFavoriteSongIds(widget.song.songId);
             },
           );
         } else {
           setState(
             () {
               _isFavorite = false;
-              userAPI().removeSongFromFavorite(widget.song.songId);
+              widget.loggedInUser
+                  ?.removeSongIdToFavoriteSongIds(widget.song.songId);
             },
           );
         }
