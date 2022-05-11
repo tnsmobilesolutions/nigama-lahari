@@ -165,7 +165,7 @@ class userAPI {
   }
 
   // add favSongs in favorite list
-  void addSongToFavorite(String? id) async {
+  Future<void> addSongToFavorite(String? songId) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
@@ -178,8 +178,8 @@ class userAPI {
     //print(songIds);
 
     var favSongs = songIds as List<dynamic>?;
-    if (id != null && favSongs != null && !favSongs.contains(id)) {
-      favSongs.add(id);
+    if (songId != null && favSongs != null && !favSongs.contains(songId)) {
+      favSongs.add(songId);
       print(songIds);
     }
 
@@ -191,7 +191,7 @@ class userAPI {
   }
 
 // remove favSongs from favorite list
-  void removeSongFromFavorite(String? id) async {
+  Future<void> removeSongFromFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
@@ -232,5 +232,9 @@ class userAPI {
       },
     );
     return songIds as List<dynamic>;
+  }
+
+  Future<List<dynamic>> getFavoriteSongIdsOfCurrentUser() async {
+    return getFavoriteSongIdsFromUid(_auth.currentUser?.uid);
   }
 }

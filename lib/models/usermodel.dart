@@ -3,14 +3,23 @@ import 'package:flutter/foundation.dart';
 import '../API/userAPI.dart';
 
 class AppUser extends ChangeNotifier {
-  addSongIdToFavoriteSongIds(String? songId) {
-    userAPI().addSongToFavorite(songId);
+  List<String>? get getFavoriteSongIdsFromUid {
+    return favoriteSongIds;
+  }
+
+  addSongIdToFavoriteSongIds(String? songId) async {
+    await userAPI().addSongToFavorite(songId);
     // fetch and update list of updated favSongIds
+    favoriteSongIds =
+        (await userAPI().getFavoriteSongIdsOfCurrentUser()).cast<String>();
     notifyListeners();
   }
 
-  removeSongIdToFavoriteSongIds(String? songId) {
-    userAPI().removeSongFromFavorite(songId);
+  removeSongIdFromFavoriteSongIds(String? songId) async {
+    await userAPI().removeSongFromFavorite(songId);
+    // fetch and update list of updated favSongIds
+    favoriteSongIds =
+        (await userAPI().getFavoriteSongIdsOfCurrentUser()).cast<String>();
     notifyListeners();
   }
 

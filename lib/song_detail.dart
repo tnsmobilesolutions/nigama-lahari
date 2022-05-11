@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/edit_song.dart';
 import 'package:flutter_application_1/models/songs_model.dart';
-import 'package:flutter_application_1/music_player.dart';
+import 'package:provider/provider.dart';
 import 'lyrics.dart';
 import 'models/usermodel.dart';
+import 'music_player.dart';
 
 class SongDetail extends StatefulWidget {
   SongDetail(
@@ -73,36 +74,38 @@ class _SongDetailState extends State<SongDetail> {
     }
   }
 
-  Widget Favorite() {
-    return IconButton(
-      icon: Icon(
-        Icons.favorite,
-        size: 40,
-        color: _isFavorite
-            ? Theme.of(context).iconTheme.color!
-            : Constant.lightblue,
-      ),
-      onPressed: () {
-        if (_isFavorite == false) {
-          setState(
-            () {
-              _isFavorite = true;
-              widget.loggedInUser
-                  ?.addSongIdToFavoriteSongIds(widget.song.songId);
-            },
-          );
-        } else {
-          setState(
-            () {
-              _isFavorite = false;
-              widget.loggedInUser
-                  ?.removeSongIdToFavoriteSongIds(widget.song.songId);
-            },
-          );
-        }
-      },
-    );
-  }
+  // Widget Favorite() {
+  //   return IconButton(
+  //     icon: Icon(
+  //       Icons.favorite,
+  //       size: 40,
+  //       color: _isFavorite
+  //           ? Theme.of(context).iconTheme.color!
+  //           : Constant.lightblue,
+  //     ),
+  //     onPressed: () {
+  //       if (_isFavorite == false) {
+  //         setState(
+  //           () {
+  //             _isFavorite = true;
+  //             Provider.of<AppUser>(context, listen: false)
+  //                 .addSongIdToFavoriteSongIds(widget.song.songId);
+  //           },
+  //         );
+  //       } else {
+  //         setState(
+  //           () {
+  //             _isFavorite = false;
+  //             Provider.of<AppUser>(context, listen: false)
+  //                 .removeSongIdFromFavoriteSongIds(widget.song.songId);
+  //             // widget.loggedInUser
+  //             //     ?.removeSongIdFromFavoriteSongIds(widget.song.songId);
+  //           },
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -204,41 +207,82 @@ class _SongDetailState extends State<SongDetail> {
             )
           ],
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Center(
-                  child: Stack(
-                    // alignment: Alignment.bottomRight,
-                    children: [
-                      Center(
-                        child: LyricsViewer(
-                          lyrics: _currentSong?.songText ?? "",
-                          fontSize: _fontSize,
-                        ),
+        body: Consumer<AppUser>(
+          builder: (context, provider, child) {
+            return SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: LyricsViewer(
+                              lyrics: _currentSong?.songText ?? "",
+                              fontSize: _fontSize,
+                            ),
+                          ),
+                          if (!_lyricsExpanded)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Container(
+                                alignment: Alignment.bottomRight,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    size: 40,
+                                    color: _isFavorite
+                                        ? Theme.of(context).iconTheme.color!
+                                        : Constant.lightblue,
+                                  ),
+                                  onPressed: () {
+                                    if (_isFavorite == false) {
+                                      setState(
+                                        () {
+                                          _isFavorite = true;
+                                          widget.loggedInUser
+                                              ?.addSongIdToFavoriteSongIds(
+                                                  widget.song.songId);
+                                          // Provider.of<AppUser>(
+                                          //   context,
+                                          // ).addSongIdToFavoriteSongIds(
+                                          //     widget.song.songId);
+                                        },
+                                      );
+                                    } else {
+                                      setState(
+                                        () {
+                                          _isFavorite = false;
+                                          // Provider.of<AppUser>(
+                                          //   context,
+                                          // ).removeSongIdFromFavoriteSongIds(
+                                          //     widget.song.songId);
+                                          widget.loggedInUser
+                                              ?.removeSongIdFromFavoriteSongIds(
+                                                  widget.song.songId);
+                                        },
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                      if (!_lyricsExpanded)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Container(
-                              alignment: Alignment.bottomRight,
-                              child: Favorite()),
-                        ),
-                    ],
+                    ),
                   ),
-                ),
+                  if (!_lyricsExpanded)
+                    MusicPlayer(
+                      song: widget.song,
+                      songList: widget.songList,
+                      index: widget.index,
+                      onPreviousTappedCallback: onPrevPressed,
+                      onNextTappedCallback: onNextPressed,
+                    ),
+                ],
               ),
-              if (!_lyricsExpanded)
-                MusicPlayer(
-                  song: widget.song,
-                  songList: widget.songList,
-                  index: widget.index,
-                  onPreviousTappedCallback: onPrevPressed,
-                  onNextTappedCallback: onNextPressed,
-                ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
