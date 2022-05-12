@@ -193,6 +193,15 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 20),
+                  Text(
+                    '${Constant.items?.length} Songs',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Constant.orange,
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Expanded(
                     child: Constant.items!.isNotEmpty
                         ? ListView.builder(
