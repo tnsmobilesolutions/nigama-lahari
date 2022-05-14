@@ -185,7 +185,7 @@ class userAPI {
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongIds': songIds})
+        .update({'favoriteSongIds': favSongs})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }
@@ -210,7 +210,7 @@ class userAPI {
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongIds': songIds})
+        .update({'favoriteSongIds': favSongs})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }

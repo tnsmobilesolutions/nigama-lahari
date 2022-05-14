@@ -110,15 +110,14 @@ class _MyAppState extends State<MyApp> {
                       future: userAPI().getAppUserFromUid(user.uid),
                       builder: (_, snap) {
                         if (snap.hasData) {
-                          return HomeScreen(loggedInUser: snap.data);
-                          // ChangeNotifierProvider(
-                          //   create: (_) => AppUser(),
-                          //   //value: snap.data,
-                          //   builder: (context, Widget) {
-                          //     // No longer throws
-                          //     return HomeScreen(loggedInUser: snap.data);
-                          //   },
-                          // );
+                          return ChangeNotifierProvider.value(
+                            //create: (_) => AppUser(),
+                            value: snap.data,
+                            builder: (context, Widget) {
+                              // No longer throws
+                              return HomeScreen(loggedInUser: snap.data);
+                            },
+                          );
                         } else {
                           return Center(
                             child: CircularProgressIndicator(),

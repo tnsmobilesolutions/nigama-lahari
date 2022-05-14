@@ -38,12 +38,12 @@ class _SongDetailState extends State<SongDetail> {
   void initState() {
     super.initState();
     //to set favorite button color based on the user's favorite song
-    if (widget.loggedInUser != null &&
-        widget.loggedInUser!.favoriteSongIds != null) {
-      if (widget.loggedInUser!.favoriteSongIds!.contains(widget.song.songId)) {
-        _isFavorite = true;
-      }
-    }
+    // if (widget.loggedInUser != null &&
+    //     widget.loggedInUser!.favoriteSongIds != null) {
+    //   if (widget.loggedInUser!.favoriteSongIds!.contains(widget.song.songId)) {
+    //     _isFavorite = true;
+    //   }
+    // }
 
     // Set the song passed from scrollableSongList as the currect song initially
     _currentSong = widget.song;
@@ -74,43 +74,49 @@ class _SongDetailState extends State<SongDetail> {
     }
   }
 
-  // Widget Favorite() {
-  //   return IconButton(
-  //     icon: Icon(
-  //       Icons.favorite,
-  //       size: 40,
-  //       color: _isFavorite
-  //           ? Theme.of(context).iconTheme.color!
-  //           : Constant.lightblue,
-  //     ),
-  //     onPressed: () {
-  //       if (_isFavorite == false) {
-  //         setState(
-  //           () {
-  //             _isFavorite = true;
-  //             Provider.of<AppUser>(context, listen: false)
-  //                 .addSongIdToFavoriteSongIds(widget.song.songId);
-  //           },
-  //         );
-  //       } else {
-  //         setState(
-  //           () {
-  //             _isFavorite = false;
-  //             Provider.of<AppUser>(context, listen: false)
-  //                 .removeSongIdFromFavoriteSongIds(widget.song.songId);
-  //             // widget.loggedInUser
-  //             //     ?.removeSongIdFromFavoriteSongIds(widget.song.songId);
-  //           },
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
+  Widget Favorite() {
+    return IconButton(
+      icon: Icon(
+        Icons.favorite,
+        size: 40,
+        color: _isFavorite
+            ? Theme.of(context).iconTheme.color!
+            : Constant.lightblue,
+      ),
+      onPressed: () async {
+        if (_isFavorite == false) {
+          await Provider.of<AppUser>(context, listen: false)
+              .addSongIdToFavoriteSongIds(widget.song.songId);
+          setState(
+            () {
+              _isFavorite = true;
+            },
+          );
+        } else {
+          await Provider.of<AppUser>(context, listen: false)
+              .removeSongIdFromFavoriteSongIds(widget.song.songId);
+          setState(
+            () {
+              _isFavorite = false;
+            },
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
+    final favSongIds =
+        Provider.of<AppUser>(context, listen: true).favoriteSongIds;
+
+    if (favSongIds != null && favSongIds.contains(widget.song.songId)) {
+      setState(() {
+        _isFavorite = true;
+      });
+    }
+    print('*********$favSongIds*********');
+    print(_isFavorite);
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -226,46 +232,8 @@ class _SongDetailState extends State<SongDetail> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
                               child: Container(
-                                alignment: Alignment.bottomRight,
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.favorite,
-                                    size: 40,
-                                    color: _isFavorite
-                                        ? Theme.of(context).iconTheme.color!
-                                        : Constant.lightblue,
-                                  ),
-                                  onPressed: () {
-                                    if (_isFavorite == false) {
-                                      setState(
-                                        () {
-                                          _isFavorite = true;
-                                          widget.loggedInUser
-                                              ?.addSongIdToFavoriteSongIds(
-                                                  widget.song.songId);
-                                          // Provider.of<AppUser>(
-                                          //   context,
-                                          // ).addSongIdToFavoriteSongIds(
-                                          //     widget.song.songId);
-                                        },
-                                      );
-                                    } else {
-                                      setState(
-                                        () {
-                                          _isFavorite = false;
-                                          // Provider.of<AppUser>(
-                                          //   context,
-                                          // ).removeSongIdFromFavoriteSongIds(
-                                          //     widget.song.songId);
-                                          widget.loggedInUser
-                                              ?.removeSongIdFromFavoriteSongIds(
-                                                  widget.song.songId);
-                                        },
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
+                                  alignment: Alignment.bottomRight,
+                                  child: Favorite()),
                             ),
                         ],
                       ),
