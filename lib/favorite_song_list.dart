@@ -7,9 +7,8 @@ import 'login/signIn.dart';
 import 'models/usermodel.dart';
 import 'song_detail.dart';
 
-class ScrollableSongList extends StatefulWidget {
-  ScrollableSongList(
-      {Key? key, this.songCategory, this.songs, this.loggedInUser})
+class FavoriteSongList extends StatefulWidget {
+  FavoriteSongList({Key? key, this.songCategory, this.songs, this.loggedInUser})
       : super(key: key);
 
   final AppUser? loggedInUser;
@@ -17,11 +16,13 @@ class ScrollableSongList extends StatefulWidget {
   final List<Song>? songs;
 
   @override
-  _ScrollableSongListState createState() => _ScrollableSongListState();
+  _FavoriteSongListState createState() => _FavoriteSongListState();
 }
 
-class _ScrollableSongListState extends State<ScrollableSongList> {
+class _FavoriteSongListState extends State<FavoriteSongList> {
+  var result;
   List<Song>? _items;
+
   @override
   void initState() {
     _items = widget.songs;
@@ -98,7 +99,21 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
   }
 
   bool _folded = true;
-  var result;
+
+  void _changeData(List<String>? updatedSongIds) {
+    List<Song>? filteredItems;
+
+    _items?.forEach((element) {
+      if (updatedSongIds != null && updatedSongIds.contains(element.songId)) {
+        filteredItems?.add(element);
+      }
+    });
+
+    setState(() {
+      _items = filteredItems;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,7 +207,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  '${_items?.length} Songs',
+                  '${_items?.length ?? 0} Songs',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -201,7 +216,7 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                 ),
                 SizedBox(height: 10),
                 Expanded(
-                  child: _items!.isNotEmpty
+                  child: _items != null && _items!.isNotEmpty
                       ? ListView.builder(
                           keyboardDismissBehavior:
                               ScrollViewKeyboardDismissBehavior.onDrag,
@@ -258,11 +273,9 @@ class _ScrollableSongListState extends State<ScrollableSongList> {
                                   ),
                                 );
 
-                                if (true) {
-                                  setState(() {});
-                                }
+                                _changeData(result);
 
-                                print('####$result####');
+                                //print('####$result####');
                               },
                             );
                           },

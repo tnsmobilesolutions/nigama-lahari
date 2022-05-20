@@ -238,6 +238,7 @@ class _Edit_SongState extends State<EditSong> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
           toolbarHeight: 90,
