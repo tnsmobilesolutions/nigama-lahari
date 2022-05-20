@@ -165,7 +165,7 @@ class userAPI {
   }
 
   // add favSongs in favorite list
-  void addSongToFavorite(String? id) async {
+  Future<void> addSongToFavorite(String? songId) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
@@ -178,20 +178,20 @@ class userAPI {
     //print(songIds);
 
     var favSongs = songIds as List<dynamic>?;
-    if (id != null && favSongs != null && !favSongs.contains(id)) {
-      favSongs.add(id);
+    if (songId != null && favSongs != null && !favSongs.contains(songId)) {
+      favSongs.add(songId);
       print(songIds);
     }
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongIds': songIds})
+        .update({'favoriteSongIds': favSongs})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }
 
 // remove favSongs from favorite list
-  void removeSongFromFavorite(String? id) async {
+  Future<void> removeSongFromFavorite(String? id) async {
     var collection = FirebaseFirestore.instance.collection('users');
     var songIds;
     await collection.doc(loggedInUser!.uid).get().then(
@@ -210,7 +210,7 @@ class userAPI {
 
     collection
         .doc(loggedInUser!.uid)
-        .update({'favoriteSongIds': songIds})
+        .update({'favoriteSongIds': favSongs})
         .then((_) => print('Updated'))
         .catchError((error) => print('Update failed: $error'));
   }
@@ -232,5 +232,9 @@ class userAPI {
       },
     );
     return songIds as List<dynamic>;
+  }
+
+  Future<List<dynamic>> getFavoriteSongIdsOfCurrentUser() async {
+    return getFavoriteSongIdsFromUid(_auth.currentUser?.uid);
   }
 }

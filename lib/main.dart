@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/models/data_store.dart';
+import 'package:provider/provider.dart';
 import 'API/userAPI.dart';
 import 'home_screen.dart';
 import 'login/signIn.dart';
@@ -45,80 +46,91 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ନିଗମ ଲହରୀ',
-      //light theme
-      theme: ThemeData(
-        brightness: Brightness.light,
-        cupertinoOverrideTheme: CupertinoThemeData(
-          primaryColor: Constant.orange,
-        ),
-        listTileTheme: ListTileThemeData(tileColor: Constant.yellow),
-        iconTheme: IconThemeData(color: Constant.yellow),
-        buttonTheme: ButtonThemeData(
-            buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
-        fontFamily: 'Roboto',
-        primaryColor: Constant.darkOrange,
-        textTheme: TextTheme(button: TextStyle(color: Constant.black)),
-        scaffoldBackgroundColor: Constant.white,
-        appBarTheme: AppBarTheme(color: Constant.darkOrange),
-        textSelectionTheme:
-            TextSelectionThemeData(cursorColor: Constant.orange),
-      ),
-
-      darkTheme: ThemeData(
-        cupertinoOverrideTheme: CupertinoThemeData(
-          primaryColor: Constant.orange,
-        ),
-        listTileTheme: ListTileThemeData(tileColor: Constant.lightblue),
-        iconTheme: IconThemeData(color: Constant.orange),
-        buttonTheme: ButtonThemeData(
-            buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
-        fontFamily: 'Roboto',
-        primaryColor: Constant.orange,
-        textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
-        scaffoldBackgroundColor: Constant.darkBlue,
-        appBarTheme: AppBarTheme(color: Constant.blue),
-        brightness: Brightness.dark,
-        textSelectionTheme:
-            TextSelectionThemeData(cursorColor: Constant.orange),
-      ),
-      themeMode: ThemeMode.dark,
-      home: Scaffold(
-        body: AnimatedSplashScreen(
-          splash: Image(
-            image: AssetImage('assets/image/nsslogo-2.png'),
+    return ChangeNotifierProvider(
+      create: (context) => AppUser(),
+      //value: Counter(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'ନିଗମ ଲହରୀ',
+        //light theme
+        theme: ThemeData(
+          brightness: Brightness.light,
+          cupertinoOverrideTheme: CupertinoThemeData(
+            primaryColor: Constant.orange,
           ),
-          splashIconSize: 200,
-          splashTransition: SplashTransition.fadeTransition,
-          backgroundColor: Constant.darkBlue,
-          nextScreen: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                final user = snapshot.data;
+          listTileTheme: ListTileThemeData(tileColor: Constant.yellow),
+          iconTheme: IconThemeData(color: Constant.yellow),
+          buttonTheme: ButtonThemeData(
+              buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
+          fontFamily: 'Roboto',
+          primaryColor: Constant.darkOrange,
+          textTheme: TextTheme(button: TextStyle(color: Constant.black)),
+          scaffoldBackgroundColor: Constant.white,
+          appBarTheme: AppBarTheme(color: Constant.darkOrange),
+          textSelectionTheme:
+              TextSelectionThemeData(cursorColor: Constant.orange),
+        ),
 
-                if (user == null) {
-                  return SignIn();
+        darkTheme: ThemeData(
+          cupertinoOverrideTheme: CupertinoThemeData(
+            primaryColor: Constant.orange,
+          ),
+          listTileTheme: ListTileThemeData(tileColor: Constant.lightblue),
+          iconTheme: IconThemeData(color: Constant.orange),
+          buttonTheme: ButtonThemeData(
+              buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
+          fontFamily: 'Roboto',
+          primaryColor: Constant.orange,
+          textTheme: TextTheme(button: TextStyle(color: Constant.orange)),
+          scaffoldBackgroundColor: Constant.darkBlue,
+          appBarTheme: AppBarTheme(color: Constant.blue),
+          brightness: Brightness.dark,
+          textSelectionTheme:
+              TextSelectionThemeData(cursorColor: Constant.orange),
+        ),
+        themeMode: ThemeMode.dark,
+        home: Scaffold(
+          body: AnimatedSplashScreen(
+            splash: Image(
+              image: AssetImage('assets/image/nsslogo-2.png'),
+            ),
+            splashIconSize: 200,
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Constant.darkBlue,
+            nextScreen: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  final user = snapshot.data;
+
+                  if (user == null) {
+                    return SignIn();
+                  } else {
+                    return FutureBuilder<AppUser?>(
+                      future: userAPI().getAppUserFromUid(user.uid),
+                      builder: (_, snap) {
+                        if (snap.hasData) {
+                          return ChangeNotifierProvider.value(
+                            //create: (_) => AppUser(),
+                            value: snap.data,
+                            builder: (context, Widget) {
+                              // No longer throws
+                              return HomeScreen(loggedInUser: snap.data);
+                            },
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    );
+                  }
                 } else {
-                  return FutureBuilder<AppUser?>(
-                    future: userAPI().getAppUserFromUid(user.uid),
-                    builder: (_, snap) {
-                      if (snap.hasData) {
-                        return HomeScreen(loggedInUser: snap.data);
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  );
+                  return SignIn();
                 }
-              } else {
-                return SignIn();
-              }
-            },
+              },
+            ),
           ),
         ),
       ),

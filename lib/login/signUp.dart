@@ -221,6 +221,7 @@ class _SignUpState extends State<SignUp> {
           if (_appUser != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 6,
                 backgroundColor: Theme.of(context).iconTheme.color,
                 behavior: SnackBarBehavior.floating,
                 content: const Text('Account created successfully'),
@@ -238,6 +239,7 @@ class _SignUpState extends State<SignUp> {
             print('AppUser is null');
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 6,
                 backgroundColor: Theme.of(context).iconTheme.color,
                 behavior: SnackBarBehavior.floating,
                 content: const Text('Account already exists'),

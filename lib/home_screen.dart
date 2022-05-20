@@ -194,7 +194,28 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: Padding(
+      body:
+          //  Consumer<Counter>(
+          //   builder: (context, provider, child) {
+          //     return
+          //     Padding(
+          //       padding: const EdgeInsets.all(15.0),
+          //       child: Container(
+          //         height: 100,
+          //         width: 100,
+          //         decoration: BoxDecoration(
+          //           color: Constant.orange,
+          //           borderRadius: BorderRadius.circular(20),
+          //         ),
+          //         child: Center(
+          //           child: Text(
+          //             '${provider.getCounter}',
+          //             style: TextStyle(fontSize: 50),
+          //           ),
+          //         ),
+          //       ),
+          //     );
+          Padding(
         padding: const EdgeInsets.only(top: 5),
         child: FutureBuilder<List<String>?>(
           future: SearchSongAPI().getAllCategories(),
@@ -259,7 +280,38 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      floatingActionButton: Visibility(
+      floatingActionButton:
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     SizedBox(width: 30),
+          //     FloatingActionButton(
+          //         backgroundColor: Constant.orange,
+          //         heroTag: 'button 1',
+          //         onPressed: () {
+          //           Provider.of<Counter>(context, listen: false).incrementCounter();
+          //         },
+          //         child: Icon(Icons.add)),
+          //     SizedBox(width: 10),
+          //     FloatingActionButton(
+          //         backgroundColor: Constant.orange,
+          //         heroTag: 'button 2',
+          //         onPressed: () {
+          //           Provider.of<Counter>(context, listen: false).decrementCounter();
+          //         },
+          //         child: Icon(Icons.remove)),
+          //     SizedBox(width: 10),
+          //     FloatingActionButton(
+          //         backgroundColor: Constant.orange,
+          //         heroTag: 'button 3',
+          //         onPressed: () {
+          //           Provider.of<Counter>(context, listen: false).resetCounter();
+          //         },
+          //         child: Icon(Icons.refresh)),
+          //     SizedBox(width: 10),
+          //   ],
+          // ),
+          Visibility(
         visible: Constant.addVisible,
         child: FloatingActionButton(
           backgroundColor: Constant.orange,

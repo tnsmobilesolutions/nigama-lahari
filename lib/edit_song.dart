@@ -561,28 +561,43 @@ class _Edit_SongState extends State<EditSong> {
                         onPressed: () async {
                           if (_selectedCategory == null) {
                             final snackBar = SnackBar(
+                                backgroundColor: Constant.orange,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
                                 content: const Text('ଦୟାକରି ବିଭାଗ ଚୟନ କରନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (_titleController.text.isEmpty) {
                             final snackBar = SnackBar(
+                                backgroundColor: Constant.orange,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
                                 content: const Text('ଦୟାକରି ଗୀତ ନାମ ଲେଖନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (_lyricsController.text.isEmpty) {
                             final snackBar = SnackBar(
+                                backgroundColor: Constant.orange,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
                                 content:
                                     const Text('ଦୟାକରି ଗୀତର ଲେଖା ଦିଅନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (_songChangedByUser && file1 == null) {
                             final snackBar = SnackBar(
+                                backgroundColor: Constant.orange,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
                                 content:
                                     const Text('ଅପଲୋଡ଼ ପାଇଁ ଗୀତ ଚୟନ କରନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (_songChangedByUser && sizeInMb! > 10) {
                             final snackBar = SnackBar(
+                                backgroundColor: Constant.orange,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
                                 content: const Text(
                                     'ସର୍ବାଧିକ ୧୦ MB ର ଗୀତ ଚୟନ କରନ୍ତୁ'));
                             await ScaffoldMessenger.of(context)
