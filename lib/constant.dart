@@ -26,7 +26,7 @@ class Constant {
   static const black = Colors.black;
   static const blue = Color.fromARGB(207, 29, 20, 73);
   static Brightness brightness =
-      SchedulerBinding.instance!.window.platformBrightness;
+      SchedulerBinding.instance.window.platformBrightness;
 
   static List<String> catagory = [
     'ଜାଗରଣ',
