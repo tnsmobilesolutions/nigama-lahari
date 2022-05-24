@@ -123,7 +123,12 @@ class _SongDetailState extends State<SongDetail> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
           toolbarHeight: 90,
-          leading: BackButton(color: Theme.of(context).iconTheme.color),
+          leading: BackButton(
+            color: Theme.of(context).iconTheme.color,
+            onPressed: () {
+              Navigator.of(context).pop(favSongIds);
+            },
+          ),
           automaticallyImplyLeading: _lyricsExpanded ? false : true,
           title: Center(
             child: Column(
@@ -137,7 +142,7 @@ class _SongDetailState extends State<SongDetail> {
                 Text(
                   '${_currentSong?.singerName}',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                   ),
                 ),
               ],

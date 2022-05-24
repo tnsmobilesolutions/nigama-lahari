@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/favorite_song_list.dart';
 import 'package:flutter_application_1/login/signIn.dart';
 import 'package:flutter_application_1/scrollable_song_list.dart';
 import 'package:flutter_application_1/search_functionality/search.dart';
@@ -23,7 +24,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
-    //print('${widget.loggedInUser?.name}');
     setState(() {
       if (widget.loggedInUser?.allowEdit == true) {
         Constant.addVisible = !Constant.addVisible;
@@ -114,9 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final Add =
-    //print('home screen loading...');
-
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
@@ -158,19 +155,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 20,
                   ),
                   onTap: () async {
-                    //print(
-                    // '******${widget.loggedInUser?.favoriteSongIds}******');
-                    //get updated favoriteSongIds
                     List<dynamic>? songIds = await userAPI()
                         .getFavoriteSongIdsFromUid(widget.loggedInUser?.uid);
-                    //print('++++++++++++$songIds+++++++++++');
+
                     final allFavoriteSongs =
                         await SearchSongAPI().getAllSongsByIds(songIds);
 
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ScrollableSongList(
+                        builder: (context) => FavoriteSongList(
                           songCategory: 'ଆପଣଙ୍କ ପସନ୍ଦର ଗୀତ',
                           songs: allFavoriteSongs,
                           loggedInUser: widget.loggedInUser,
@@ -194,28 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body:
-          //  Consumer<Counter>(
-          //   builder: (context, provider, child) {
-          //     return
-          //     Padding(
-          //       padding: const EdgeInsets.all(15.0),
-          //       child: Container(
-          //         height: 100,
-          //         width: 100,
-          //         decoration: BoxDecoration(
-          //           color: Constant.orange,
-          //           borderRadius: BorderRadius.circular(20),
-          //         ),
-          //         child: Center(
-          //           child: Text(
-          //             '${provider.getCounter}',
-          //             style: TextStyle(fontSize: 50),
-          //           ),
-          //         ),
-          //       ),
-          //     );
-          Padding(
+      body: Padding(
         padding: const EdgeInsets.only(top: 5),
         child: FutureBuilder<List<String>?>(
           future: SearchSongAPI().getAllCategories(),
@@ -280,38 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      floatingActionButton:
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     SizedBox(width: 30),
-          //     FloatingActionButton(
-          //         backgroundColor: Constant.orange,
-          //         heroTag: 'button 1',
-          //         onPressed: () {
-          //           Provider.of<Counter>(context, listen: false).incrementCounter();
-          //         },
-          //         child: Icon(Icons.add)),
-          //     SizedBox(width: 10),
-          //     FloatingActionButton(
-          //         backgroundColor: Constant.orange,
-          //         heroTag: 'button 2',
-          //         onPressed: () {
-          //           Provider.of<Counter>(context, listen: false).decrementCounter();
-          //         },
-          //         child: Icon(Icons.remove)),
-          //     SizedBox(width: 10),
-          //     FloatingActionButton(
-          //         backgroundColor: Constant.orange,
-          //         heroTag: 'button 3',
-          //         onPressed: () {
-          //           Provider.of<Counter>(context, listen: false).resetCounter();
-          //         },
-          //         child: Icon(Icons.refresh)),
-          //     SizedBox(width: 10),
-          //   ],
-          // ),
-          Visibility(
+      floatingActionButton: Visibility(
         visible: Constant.addVisible,
         child: FloatingActionButton(
           backgroundColor: Constant.orange,

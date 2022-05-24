@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'models/songs_model.dart';
-
 class Constant {
   static bool addVisible = false;
   static List<String> attribute = [
@@ -51,5 +49,4 @@ class Constant {
   static const white12 = Colors.white12;
   static const white24 = Colors.white24;
   static const yellow = Color.fromARGB(255, 252, 176, 69);
-  static List<Song>? items;
 }
