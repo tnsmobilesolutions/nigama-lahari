@@ -209,14 +209,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).iconTheme.color,
-                              borderRadius: BorderRadius.circular(40)),
-                          margin: EdgeInsets.only(
-                              left: 70, right: 70, top: 5, bottom: 5),
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 80, right: 80, top: 20, bottom: 2),
                           child: ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             textColor: Constant.white,
+                            tileColor: Constant.orange,
                             title: Center(
                               child: Text(
                                 // gets all available catagories dynamically

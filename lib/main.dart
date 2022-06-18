@@ -48,7 +48,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => AppUser(),
-      //value: Counter(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ନିଗମ ଲହରୀ',
@@ -62,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           iconTheme: IconThemeData(color: Constant.yellow),
           buttonTheme: ButtonThemeData(
               buttonColor: Constant.orange, textTheme: ButtonTextTheme.primary),
-          fontFamily: 'Roboto',
+          //fontFamily: 'Roboto',
           primaryColor: Constant.darkOrange,
           textTheme: TextTheme(button: TextStyle(color: Constant.black)),
           scaffoldBackgroundColor: Constant.white,
